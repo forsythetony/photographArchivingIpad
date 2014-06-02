@@ -11,7 +11,8 @@
 typedef NS_ENUM(NSInteger, sDateType) {
     sDateTypeSimple,
     sDateTypPretty,
-    sDateTypeWithTime
+    sDateTypeWithTime,
+    sDateTypeMonthAndYear
 };
 
 @interface NSDate (timelineStuff)

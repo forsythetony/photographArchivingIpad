@@ -79,6 +79,10 @@
         case sDateTypeWithTime:
             dateFormat = @"M/dd/yyyy h:mm a";
             break;
+        case sDateTypeMonthAndYear:
+            dateFormat = @"MM yyyy";
+            break;
+            
         default:
             break;
     }
