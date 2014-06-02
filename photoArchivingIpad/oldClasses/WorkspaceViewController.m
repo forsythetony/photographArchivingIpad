@@ -530,44 +530,6 @@
 }
 -(void)handlePanFrom:(id) sender
 {
-    /*
-     
-     CGPoint velocity = [(UIPanGestureRecognizer*)sender velocityInView:TLManager.TLView];
-     CGPoint transPoint = [(UIPanGestureRecognizer*)sender translationInView:mainScrollView];
-     
-     NSLog(@"\nVelocity: %@\nTranslation: %@\nIn view: %@\nSender Center: %@", NSStringFromCGPoint(velocity), NSStringFromCGPoint(transPoint), NSStringFromCGRect(TLManager.TLView.frame), NSStringFromCGPoint([[sender view] center]));
-     
-     UIView *senderView = [sender view];
-     
-     switch ([(UIPanGestureRecognizer*)sender state]) {
-     case UIGestureRecognizerStateBegan:
-     xDelta = 0.0;
-     yDelta = 0.0;
-     
-     //Somehting
-     startingPoint = [[sender view] center];
-     
-     break;
-     case UIGestureRecognizerStateChanged:
-     //[senderView setCenter:CGPointMake(startingPoint.x + transPoint.x, startingPoint.y + transPoint.y)];
-     yDelta += transPoint.y;
-     xDelta += transPoint.x;
-     
-     NSLog(@"Y Delta: %f\nX Delta: %f", yDelta, xDelta);
-     
-     startingPoint = [senderView center];
-     
-     //Something else
-     break;
-     case UIGestureRecognizerStateEnded:
-     //  Ended
-     break;
-     
-     default:
-     break;
-     }
-     
-     */
     [self.view bringSubviewToFront:[(UIPanGestureRecognizer*)sender view]];
     CGPoint translatedPoint = [(UIPanGestureRecognizer*)sender translationInView:self.view];
     
