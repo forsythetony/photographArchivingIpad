@@ -8,11 +8,15 @@
 
 #import "AppDelegate.h"
 
+#define TABBARFONT @"DINAlternate-Bold"
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    [self setAppearance];
     return YES;
 }
 							
@@ -43,4 +47,21 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+-(void)setAppearance
+{
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blackColor]];
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          [UIColor whiteColor], NSForegroundColorAttributeName,
+                                                          [UIFont fontWithName:TABBARFONT size:20.0], NSFontAttributeName,
+                                                          nil]];
+    
+    
+    
+    
+    [[UITabBar appearance] setBarTintColor:[UIColor blackColor]];
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                       [UIColor whiteColor], NSForegroundColorAttributeName,
+                                                       [UIFont fontWithName:TABBARFONT size:12.0], NSFontAttributeName,
+                                                       nil] forState:UIControlStateNormal];
+}
 @end
