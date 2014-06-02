@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1338B06FDE54485BAF55439A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61ECDBD286AB45A0BA37A749 /* libPods.a */; };
 		BA67F1AC193666210056DD00 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA67F1AB193666210056DD00 /* Foundation.framework */; };
 		BA67F1AE193666210056DD00 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA67F1AD193666210056DD00 /* CoreGraphics.framework */; };
 		BA67F1B0193666210056DD00 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA67F1AF193666210056DD00 /* UIKit.framework */; };
@@ -21,6 +22,32 @@
 		BA67F1CD193666210056DD00 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA67F1AF193666210056DD00 /* UIKit.framework */; };
 		BA67F1D5193666210056DD00 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA67F1D3193666210056DD00 /* InfoPlist.strings */; };
 		BA67F1D7193666210056DD00 /* photoArchivingIpadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA67F1D6193666210056DD00 /* photoArchivingIpadTests.m */; };
+		BA67F1FB193667140056DD00 /* christmas.JPG in Resources */ = {isa = PBXBuildFile; fileRef = BA67F1E2193667140056DD00 /* christmas.JPG */; };
+		BA67F1FC193667140056DD00 /* fredAndFreddie.JPG in Resources */ = {isa = PBXBuildFile; fileRef = BA67F1E3193667140056DD00 /* fredAndFreddie.JPG */; };
+		BA67F1FD193667140056DD00 /* freddie.JPG in Resources */ = {isa = PBXBuildFile; fileRef = BA67F1E4193667140056DD00 /* freddie.JPG */; };
+		BA67F1FE193667140056DD00 /* garden.JPG in Resources */ = {isa = PBXBuildFile; fileRef = BA67F1E5193667140056DD00 /* garden.JPG */; };
+		BA67F1FF193667140056DD00 /* martin.JPG in Resources */ = {isa = PBXBuildFile; fileRef = BA67F1E6193667140056DD00 /* martin.JPG */; };
+		BA67F200193667140056DD00 /* christmas_tn.png in Resources */ = {isa = PBXBuildFile; fileRef = BA67F1E8193667140056DD00 /* christmas_tn.png */; };
+		BA67F201193667140056DD00 /* fredAndFreddie_tn.png in Resources */ = {isa = PBXBuildFile; fileRef = BA67F1E9193667140056DD00 /* fredAndFreddie_tn.png */; };
+		BA67F202193667140056DD00 /* freddie_tn.png in Resources */ = {isa = PBXBuildFile; fileRef = BA67F1EA193667140056DD00 /* freddie_tn.png */; };
+		BA67F203193667140056DD00 /* garden_tn.png in Resources */ = {isa = PBXBuildFile; fileRef = BA67F1EB193667140056DD00 /* garden_tn.png */; };
+		BA67F204193667140056DD00 /* martin_tn.png in Resources */ = {isa = PBXBuildFile; fileRef = BA67F1EC193667140056DD00 /* martin_tn.png */; };
+		BA67F205193667140056DD00 /* unknown_tn.png in Resources */ = {isa = PBXBuildFile; fileRef = BA67F1ED193667140056DD00 /* unknown_tn.png */; };
+		BA67F206193667140056DD00 /* unknown.JPG in Resources */ = {isa = PBXBuildFile; fileRef = BA67F1EE193667140056DD00 /* unknown.JPG */; };
+		BA67F207193667140056DD00 /* tweed.png in Resources */ = {isa = PBXBuildFile; fileRef = BA67F1F0193667140056DD00 /* tweed.png */; };
+		BA67F208193667140056DD00 /* tweed_@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = BA67F1F1193667140056DD00 /* tweed_@2X.png */; };
+		BA67F209193667140056DD00 /* dummyDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = BA67F1F4193667140056DD00 /* dummyDataProvider.m */; };
+		BA67F20A193667140056DD00 /* imageObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BA67F1F6193667140056DD00 /* imageObject.m */; };
+		BA67F20B193667140056DD00 /* pictureFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = BA67F1F8193667140056DD00 /* pictureFrame.m */; };
+		BA67F20C193667140056DD00 /* WorkspaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA67F1FA193667140056DD00 /* WorkspaceViewController.m */; };
+		BA67F20E193667460056DD00 /* testing.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA67F20D193667460056DD00 /* testing.xib */; };
+		BA67F211193670D60056DD00 /* timelineLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA67F210193670D60056DD00 /* timelineLabelView.m */; };
+		BA67F2141937B5470056DD00 /* textured_paper_@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = BA67F2121937B5470056DD00 /* textured_paper_@2X.png */; };
+		BA67F2151937B5470056DD00 /* textured_paper.png in Resources */ = {isa = PBXBuildFile; fileRef = BA67F2131937B5470056DD00 /* textured_paper.png */; };
+		BA67F2181937B9D80056DD00 /* subtle_carbon_@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = BA67F2161937B9D80056DD00 /* subtle_carbon_@2X.png */; };
+		BA67F2191937B9D80056DD00 /* subtle_carbon.png in Resources */ = {isa = PBXBuildFile; fileRef = BA67F2171937B9D80056DD00 /* subtle_carbon.png */; };
+		BA67F21C193BC4AA0056DD00 /* NSDate+timelineStuff.m in Sources */ = {isa = PBXBuildFile; fileRef = BA67F21B193BC4AA0056DD00 /* NSDate+timelineStuff.m */; };
+		BA67F21F193BCC3A0056DD00 /* timelineManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA67F21E193BCC3A0056DD00 /* timelineManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		61ECDBD286AB45A0BA37A749 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA67F1A8193666210056DD00 /* photoArchivingIpad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photoArchivingIpad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA67F1AB193666210056DD00 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BA67F1AD193666210056DD00 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -53,6 +81,40 @@
 		BA67F1D2193666210056DD00 /* photoArchivingIpadTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "photoArchivingIpadTests-Info.plist"; sourceTree = "<group>"; };
 		BA67F1D4193666210056DD00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BA67F1D6193666210056DD00 /* photoArchivingIpadTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = photoArchivingIpadTests.m; sourceTree = "<group>"; };
+		BA67F1E2193667140056DD00 /* christmas.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = christmas.JPG; sourceTree = "<group>"; };
+		BA67F1E3193667140056DD00 /* fredAndFreddie.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fredAndFreddie.JPG; sourceTree = "<group>"; };
+		BA67F1E4193667140056DD00 /* freddie.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = freddie.JPG; sourceTree = "<group>"; };
+		BA67F1E5193667140056DD00 /* garden.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = garden.JPG; sourceTree = "<group>"; };
+		BA67F1E6193667140056DD00 /* martin.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = martin.JPG; sourceTree = "<group>"; };
+		BA67F1E8193667140056DD00 /* christmas_tn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = christmas_tn.png; sourceTree = "<group>"; };
+		BA67F1E9193667140056DD00 /* fredAndFreddie_tn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fredAndFreddie_tn.png; sourceTree = "<group>"; };
+		BA67F1EA193667140056DD00 /* freddie_tn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = freddie_tn.png; sourceTree = "<group>"; };
+		BA67F1EB193667140056DD00 /* garden_tn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = garden_tn.png; sourceTree = "<group>"; };
+		BA67F1EC193667140056DD00 /* martin_tn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = martin_tn.png; sourceTree = "<group>"; };
+		BA67F1ED193667140056DD00 /* unknown_tn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unknown_tn.png; sourceTree = "<group>"; };
+		BA67F1EE193667140056DD00 /* unknown.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = unknown.JPG; sourceTree = "<group>"; };
+		BA67F1F0193667140056DD00 /* tweed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tweed.png; sourceTree = "<group>"; };
+		BA67F1F1193667140056DD00 /* tweed_@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tweed_@2X.png"; sourceTree = "<group>"; };
+		BA67F1F3193667140056DD00 /* dummyDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dummyDataProvider.h; sourceTree = "<group>"; };
+		BA67F1F4193667140056DD00 /* dummyDataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dummyDataProvider.m; sourceTree = "<group>"; };
+		BA67F1F5193667140056DD00 /* imageObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imageObject.h; sourceTree = "<group>"; };
+		BA67F1F6193667140056DD00 /* imageObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = imageObject.m; sourceTree = "<group>"; };
+		BA67F1F7193667140056DD00 /* pictureFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pictureFrame.h; sourceTree = "<group>"; };
+		BA67F1F8193667140056DD00 /* pictureFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pictureFrame.m; sourceTree = "<group>"; };
+		BA67F1F9193667140056DD00 /* WorkspaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceViewController.h; sourceTree = "<group>"; };
+		BA67F1FA193667140056DD00 /* WorkspaceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkspaceViewController.m; sourceTree = "<group>"; };
+		BA67F20D193667460056DD00 /* testing.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = testing.xib; sourceTree = "<group>"; };
+		BA67F20F193670D60056DD00 /* timelineLabelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = timelineLabelView.h; path = photoArchivingIpad/timelineLabelView.h; sourceTree = SOURCE_ROOT; };
+		BA67F210193670D60056DD00 /* timelineLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = timelineLabelView.m; path = photoArchivingIpad/timelineLabelView.m; sourceTree = SOURCE_ROOT; };
+		BA67F2121937B5470056DD00 /* textured_paper_@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "textured_paper_@2X.png"; sourceTree = "<group>"; };
+		BA67F2131937B5470056DD00 /* textured_paper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = textured_paper.png; sourceTree = "<group>"; };
+		BA67F2161937B9D80056DD00 /* subtle_carbon_@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "subtle_carbon_@2X.png"; sourceTree = "<group>"; };
+		BA67F2171937B9D80056DD00 /* subtle_carbon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = subtle_carbon.png; sourceTree = "<group>"; };
+		BA67F21A193BC4AA0056DD00 /* NSDate+timelineStuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+timelineStuff.h"; sourceTree = "<group>"; };
+		BA67F21B193BC4AA0056DD00 /* NSDate+timelineStuff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+timelineStuff.m"; sourceTree = "<group>"; };
+		BA67F21D193BCC3A0056DD00 /* timelineManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timelineManager.h; sourceTree = "<group>"; };
+		BA67F21E193BCC3A0056DD00 /* timelineManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = timelineManager.m; sourceTree = "<group>"; };
+		D480C1DDB6EC466E8C8C3EAD /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +125,7 @@
 				BA67F1AE193666210056DD00 /* CoreGraphics.framework in Frameworks */,
 				BA67F1B0193666210056DD00 /* UIKit.framework in Frameworks */,
 				BA67F1AC193666210056DD00 /* Foundation.framework in Frameworks */,
+				1338B06FDE54485BAF55439A /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +149,7 @@
 				BA67F1D0193666210056DD00 /* photoArchivingIpadTests */,
 				BA67F1AA193666210056DD00 /* Frameworks */,
 				BA67F1A9193666210056DD00 /* Products */,
+				D480C1DDB6EC466E8C8C3EAD /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -105,6 +169,7 @@
 				BA67F1AD193666210056DD00 /* CoreGraphics.framework */,
 				BA67F1AF193666210056DD00 /* UIKit.framework */,
 				BA67F1CA193666210056DD00 /* XCTest.framework */,
+				61ECDBD286AB45A0BA37A749 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -112,6 +177,8 @@
 		BA67F1B1193666210056DD00 /* photoArchivingIpad */ = {
 			isa = PBXGroup;
 			children = (
+				BA67F1E0193667140056DD00 /* images */,
+				BA67F1F2193667140056DD00 /* oldClasses */,
 				BA67F1BA193666210056DD00 /* AppDelegate.h */,
 				BA67F1BB193666210056DD00 /* AppDelegate.m */,
 				BA67F1BD193666210056DD00 /* Main.storyboard */,
@@ -119,6 +186,8 @@
 				BA67F1C1193666210056DD00 /* ViewController.m */,
 				BA67F1C3193666210056DD00 /* Images.xcassets */,
 				BA67F1B2193666210056DD00 /* Supporting Files */,
+				BA67F21A193BC4AA0056DD00 /* NSDate+timelineStuff.h */,
+				BA67F21B193BC4AA0056DD00 /* NSDate+timelineStuff.m */,
 			);
 			path = photoArchivingIpad;
 			sourceTree = "<group>";
@@ -152,6 +221,75 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		BA67F1E0193667140056DD00 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				BA67F1E1193667140056DD00 /* oldPhotos */,
+				BA67F1EF193667140056DD00 /* textures */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		BA67F1E1193667140056DD00 /* oldPhotos */ = {
+			isa = PBXGroup;
+			children = (
+				BA67F1E2193667140056DD00 /* christmas.JPG */,
+				BA67F1E3193667140056DD00 /* fredAndFreddie.JPG */,
+				BA67F1E4193667140056DD00 /* freddie.JPG */,
+				BA67F1E5193667140056DD00 /* garden.JPG */,
+				BA67F1E6193667140056DD00 /* martin.JPG */,
+				BA67F1E7193667140056DD00 /* thumbs */,
+				BA67F1EE193667140056DD00 /* unknown.JPG */,
+			);
+			path = oldPhotos;
+			sourceTree = "<group>";
+		};
+		BA67F1E7193667140056DD00 /* thumbs */ = {
+			isa = PBXGroup;
+			children = (
+				BA67F1E8193667140056DD00 /* christmas_tn.png */,
+				BA67F1E9193667140056DD00 /* fredAndFreddie_tn.png */,
+				BA67F1EA193667140056DD00 /* freddie_tn.png */,
+				BA67F1EB193667140056DD00 /* garden_tn.png */,
+				BA67F1EC193667140056DD00 /* martin_tn.png */,
+				BA67F1ED193667140056DD00 /* unknown_tn.png */,
+			);
+			path = thumbs;
+			sourceTree = "<group>";
+		};
+		BA67F1EF193667140056DD00 /* textures */ = {
+			isa = PBXGroup;
+			children = (
+				BA67F2161937B9D80056DD00 /* subtle_carbon_@2X.png */,
+				BA67F2171937B9D80056DD00 /* subtle_carbon.png */,
+				BA67F2121937B5470056DD00 /* textured_paper_@2X.png */,
+				BA67F2131937B5470056DD00 /* textured_paper.png */,
+				BA67F1F0193667140056DD00 /* tweed.png */,
+				BA67F1F1193667140056DD00 /* tweed_@2X.png */,
+			);
+			path = textures;
+			sourceTree = "<group>";
+		};
+		BA67F1F2193667140056DD00 /* oldClasses */ = {
+			isa = PBXGroup;
+			children = (
+				BA67F1F9193667140056DD00 /* WorkspaceViewController.h */,
+				BA67F1FA193667140056DD00 /* WorkspaceViewController.m */,
+				BA67F1F3193667140056DD00 /* dummyDataProvider.h */,
+				BA67F1F4193667140056DD00 /* dummyDataProvider.m */,
+				BA67F1F5193667140056DD00 /* imageObject.h */,
+				BA67F1F6193667140056DD00 /* imageObject.m */,
+				BA67F20D193667460056DD00 /* testing.xib */,
+				BA67F1F7193667140056DD00 /* pictureFrame.h */,
+				BA67F1F8193667140056DD00 /* pictureFrame.m */,
+				BA67F20F193670D60056DD00 /* timelineLabelView.h */,
+				BA67F210193670D60056DD00 /* timelineLabelView.m */,
+				BA67F21D193BCC3A0056DD00 /* timelineManager.h */,
+				BA67F21E193BCC3A0056DD00 /* timelineManager.m */,
+			);
+			path = oldClasses;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -159,9 +297,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BA67F1DA193666210056DD00 /* Build configuration list for PBXNativeTarget "photoArchivingIpad" */;
 			buildPhases = (
+				D01A0B0529F241618BD4B3E3 /* Check Pods Manifest.lock */,
 				BA67F1A4193666200056DD00 /* Sources */,
 				BA67F1A5193666200056DD00 /* Frameworks */,
 				BA67F1A6193666200056DD00 /* Resources */,
+				10E2776E197745289B2C8126 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -228,9 +368,28 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA67F208193667140056DD00 /* tweed_@2X.png in Resources */,
+				BA67F206193667140056DD00 /* unknown.JPG in Resources */,
+				BA67F20E193667460056DD00 /* testing.xib in Resources */,
+				BA67F200193667140056DD00 /* christmas_tn.png in Resources */,
+				BA67F1FC193667140056DD00 /* fredAndFreddie.JPG in Resources */,
+				BA67F2151937B5470056DD00 /* textured_paper.png in Resources */,
+				BA67F203193667140056DD00 /* garden_tn.png in Resources */,
+				BA67F201193667140056DD00 /* fredAndFreddie_tn.png in Resources */,
+				BA67F2181937B9D80056DD00 /* subtle_carbon_@2X.png in Resources */,
+				BA67F207193667140056DD00 /* tweed.png in Resources */,
 				BA67F1C4193666210056DD00 /* Images.xcassets in Resources */,
 				BA67F1B6193666210056DD00 /* InfoPlist.strings in Resources */,
+				BA67F1FD193667140056DD00 /* freddie.JPG in Resources */,
+				BA67F1FF193667140056DD00 /* martin.JPG in Resources */,
+				BA67F202193667140056DD00 /* freddie_tn.png in Resources */,
+				BA67F1FE193667140056DD00 /* garden.JPG in Resources */,
+				BA67F205193667140056DD00 /* unknown_tn.png in Resources */,
+				BA67F1FB193667140056DD00 /* christmas.JPG in Resources */,
 				BA67F1BF193666210056DD00 /* Main.storyboard in Resources */,
+				BA67F2141937B5470056DD00 /* textured_paper_@2X.png in Resources */,
+				BA67F204193667140056DD00 /* martin_tn.png in Resources */,
+				BA67F2191937B9D80056DD00 /* subtle_carbon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,14 +403,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		10E2776E197745289B2C8126 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D01A0B0529F241618BD4B3E3 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		BA67F1A4193666200056DD00 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA67F21F193BCC3A0056DD00 /* timelineManager.m in Sources */,
+				BA67F211193670D60056DD00 /* timelineLabelView.m in Sources */,
+				BA67F20C193667140056DD00 /* WorkspaceViewController.m in Sources */,
+				BA67F20B193667140056DD00 /* pictureFrame.m in Sources */,
+				BA67F20A193667140056DD00 /* imageObject.m in Sources */,
 				BA67F1C2193666210056DD00 /* ViewController.m in Sources */,
 				BA67F1BC193666210056DD00 /* AppDelegate.m in Sources */,
 				BA67F1B8193666210056DD00 /* main.m in Sources */,
+				BA67F209193667140056DD00 /* dummyDataProvider.m in Sources */,
+				BA67F21C193BC4AA0056DD00 /* NSDate+timelineStuff.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,6 +574,7 @@
 		};
 		BA67F1DB193666210056DD00 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D480C1DDB6EC466E8C8C3EAD /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -388,6 +588,7 @@
 		};
 		BA67F1DC193666210056DD00 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D480C1DDB6EC466E8C8C3EAD /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -458,6 +659,7 @@
 				BA67F1DC193666210056DD00 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BA67F1DD193666210056DD00 /* Build configuration list for PBXNativeTarget "photoArchivingIpadTests" */ = {
 			isa = XCConfigurationList;
@@ -466,6 +668,7 @@
 				BA67F1DF193666210056DD00 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
