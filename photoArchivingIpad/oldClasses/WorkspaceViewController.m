@@ -497,6 +497,8 @@
                               kCRToastTextKey : notificationString,
                               kCRToastTextAlignmentKey : @(NSTextAlignmentCenter),
                               kCRToastBackgroundColorKey : [UIColor charcoalColor],
+                              kCRToastNotificationTypeKey : @(CRToastTypeNavigationBar),
+                              kCRToastFontKey : [UIFont fontWithName:@"DINAlternate-Bold" size:20.0],
                               kCRToastAnimationInTypeKey : @(CRToastAnimationTypeGravity),
                               kCRToastAnimationOutTypeKey : @(CRToastAnimationTypeGravity),
                               kCRToastAnimationInDirectionKey : @(CRToastAnimationDirectionTop),

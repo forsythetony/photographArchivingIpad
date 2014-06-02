@@ -305,7 +305,7 @@
     [theViews addObject:dateLabel];
     
     [dateLabel setTextAlignment:NSTextAlignmentLeft];
-    [dateLabel setText:[[self.imageObject date] getDisplayDate]];
+    [dateLabel setText:[[self.imageObject date] displayDateOfType:sDateTypeWithTime]];
     [dateLabel setTextColor:[UIColor warmGrayColor]];
     [dateLabel setFont:[self fontForLabelType:pLabelTypeBasic]];
     [dateLabel setAlpha:0.0];
