@@ -67,25 +67,25 @@
     
     
 }
--(void)mainAestheticsConfiguration
+-(void)initialSetup
 {
     UIColor *MVBackground = [UIColor colorWithPatternImage:[UIImage imageNamed:@"subtle_carbon.png"]];
     
     [self.view setBackgroundColor:MVBackground];
+    
+    self.title = @"Timeline";
+    
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    [self mainAestheticsConfiguration];
+    [self initialSetup];
     
     dataProvider = [dummyDataProvider new];
     
     _photographs = [dataProvider getImageObjects];
     [self addGestureRecognizers];
-    
-    //[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(testMove) userInfo:nil repeats:NO];
-    
     
 }
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
