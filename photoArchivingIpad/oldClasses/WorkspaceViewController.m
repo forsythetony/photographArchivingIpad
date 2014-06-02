@@ -154,54 +154,6 @@
     
     [self createTimelineWithValues];
     
-    /*
-    mainScrollView = [UIScrollView new];
-    mainScrollView.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    [self.view addSubview:mainScrollView];
-    
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[mainScrollView]|"
-                                                                      options:0
-                                                                      metrics:nil
-                                                                        views:@{@"mainScrollView": mainScrollView}]];
-    
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[mainScrollView]"
-                                                                      options:0
-                                                                      metrics:nil
-                                                                        views:@{@"mainScrollView": mainScrollView}]];
-    
-    UILabel *previousLabel = nil;
-    
-    for (int i = 0; i < 30; i++) {
-        UILabel *lab = [UILabel new];
-        lab.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        lab.text = [NSString stringWithFormat:@"This is label %i", i+1];
-        [mainScrollView addSubview:lab];
-        
-        [mainScrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(10)-[lab]"
-                                                                               options:0
-                                                                               metrics:nil
-                                                                                 views:@{@"lab": lab}]];
-        if (!previousLabel)
-        {
-            [mainScrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(10)-[lab]" options:0 metrics:nil views:@{@"lab": lab}]];
-            
-        }
-        else
-        {
-            [mainScrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[prev]-(10)-[lab]" options:0 metrics:nil views:@{@"lab": lab, @"prev" : previousLabel}]];
-            
-        }
-        
-        previousLabel = lab;
-        
-    }
-    
-    [mainScrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[lab]-(10)-|" options:0 metrics:nil views:@{@"lab": previousLabel}]];
-    [mainScrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[lab]-(10)-|" options:0 metrics:nil views:@{@"lab": previousLabel}]];
-    
-     */
 }
 -(void)createTimelineWithValues
 {
