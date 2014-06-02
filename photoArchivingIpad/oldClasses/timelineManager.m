@@ -36,15 +36,6 @@
     
     centerPoint.x = _xOffset + ((pureDate - _pureStart) * specNumber) - HORIZONTALMOD;
     
-    NSLog(@"The mod value is: %f", specNumber);
-    
-    NSLog(@"\nThe point that I created is %@\n", NSStringFromCGPoint(centerPoint));
-    
-    
-    
-    //NSLog(@"\nTime since beginning is: %f", pureDate - _pureStart);
-    
-    
     return centerPoint;
 }
 -(void)setStartDate:(NSDate *)startDate andEndDate:(NSDate *)endDate andView:(UIView *)tlview andXOffsert:(float)offset
@@ -61,8 +52,6 @@
     _viewSpan = tlview.frame.size.width - (offset * 2.0);
     _xOffset = offset;
     
-    NSLog(@"The duration is %f", _duration);
-    NSLog(@"The width is %f", _viewSpan);
 }
 -(void)setInitialPhotographs:(NSArray *)thePhotographs
 {
@@ -84,7 +73,6 @@
         
         [theFrame setCenter:theCenter];
         [_TLView addSubview:theFrame];
-       // [theFrame subtleBounce];
         
         
     }
@@ -111,7 +99,6 @@
     
     NSString *dateAsString = [newDate getDisplayDate];
     
-    NSLog(@"%@", dateAsString);
     
 }
 @end
