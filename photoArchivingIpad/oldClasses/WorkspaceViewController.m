@@ -88,18 +88,6 @@
     [self addGestureRecognizers];
     
 }
--(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    
-    CGRect mainBounds = self.view.bounds;
-    CGRect mainFrame = self.view.frame;
-    
-    NSLog(@"Screen Bounds: %@", NSStringFromCGRect(mainBounds));
-    NSLog(@"Frame: %@", NSStringFromCGRect(mainFrame));
-    
-    [self createScrollView];
-    
-}
 -(void)createSmallViewsWithImages:(NSArray*) images
 {
     CGPoint centerOfView = self.view.center;
@@ -201,7 +189,7 @@
     
 }
 -(UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 -(void)addTimelineLine
 {
@@ -600,10 +588,7 @@
 -(void)handleTapFrom:(UIGestureRecognizer*) recognizer
 {
     pictureFrame *frame = (pictureFrame*)recognizer.view;
-    
-    
+
     [frame resize];
-    
-    
 }
 @end
