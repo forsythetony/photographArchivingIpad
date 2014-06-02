@@ -24,13 +24,13 @@
                               @"thumbName" : @"christmas_tn.png",
                               @"title" : @"Christmas with the family",
                               @"offset" : [NSNumber numberWithFloat:0.0],
-                              @"date"       : [formatter dateFromString:@"6/22/1954"]},
+                              @"date"       : [formatter dateFromString:@"6/22/1992"]},
                             
                             @{@"imageName"  : @"fredAndFreddie.JPG",
                               @"thumbName"  : @"fredAndFreddie_tn.png",
                               @"title"      : @"Freddie and his Father",
                               @"offset"     : [NSNumber numberWithFloat:300.0],
-                              @"date"       : [formatter dateFromString:@"5/22/1957"]}
+                              @"date"       : [formatter dateFromString:@"5/22/1994"]}
                             ];
     
     

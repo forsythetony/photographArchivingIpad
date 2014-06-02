@@ -51,8 +51,6 @@
 }
 -(void)viewDidAppear:(BOOL)animated
 {
-   // [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeRight animated:YES];
-    
     CGRect mainBounds = self.view.bounds;
     CGRect mainFrame = self.view.frame;
     
@@ -60,9 +58,7 @@
     NSLog(@"Frame: %@", NSStringFromCGRect(mainFrame));
     
     [self createScrollView];
-    
-   // NSArray *images = [dataProvider getImageObjects];
-    
+ 
     [TLManager setInitialPhotographs:_photographs];
     
     
@@ -80,9 +76,13 @@
     _photographs = [dataProvider getImageObjects];
     
     [self addGestureRecognizers];
+    
     if (!self.rangeInformation) {
         self.rangeInformation = [dataProvider getDummyRange];
+        
     }
+    
+
     
 }
 - (void)viewDidLoad
@@ -150,11 +150,17 @@
 }
 -(void)createTimelineWithValues
 {
-    NSNumber *startYear = [NSNumber numberWithInt:1950];
-    NSNumber *endYear = [NSNumber numberWithInt:2014];
+    NSDictionary *rangeInfo = _rangeInformation;
     
-    startDate = [NSDate dateWithYear:startYear];
-    endDate = [NSDate dateWithYear:endYear];
+    
+    
+    
+    startDate = [self.rangeInformation objectForKey:@"startDate"];
+    endDate = [self.rangeInformation objectForKey:@"endDate"];
+    
+    NSNumber *startYear = [startDate yearAsNumber];
+    NSNumber *endYear = [endDate yearAsNumber];
+    
     
     //NSArray *years = [self createYearsArrayWithStart:startYear andEnd:endYear];
     
@@ -176,7 +182,8 @@
     
     [TLManager setStartDate:startDate andEndDate:endDate andView:timelineView andXOffsert:TLWALLSPACING];
     
-    NSDate *testDate = [NSDate dateWithv1String:@"01/01/1975"];
+    /*
+    NSDate *testDate = [NSDate dateWithv1String:@"01/01/1980"];
     
     CGPoint somePoint = [TLManager createPointWithDate:testDate];
     
@@ -187,6 +194,8 @@
     [timelineView addSubview:testView];
     
     [testView setCenter:somePoint];
+     */
+    
     [self addTimelineLine];
     
     
@@ -227,8 +236,8 @@
 -(void)createYearPointsWithYearData:(NSDictionary*) yearData andContentSize:(CGSize) contentSize toView:(UIView*) timelineView
 {
     
-    NSInteger startYear = [yearData[@"startYear"] integerValue];
-    NSInteger endYear = [yearData[@"endYear"] integerValue];
+    NSInteger startYear = [[self.rangeInformation[@"startDate"] yearAsNumber] integerValue];
+    NSInteger endYear = [[self.rangeInformation[@"endDate"] yearAsNumber] integerValue];
     
     
     float sizeOfTL = contentSize.width - (TLWALLSPACING * 2.0);
@@ -450,7 +459,7 @@
 #pragma mark Delegate Methods
 -(void)finishedUpdatedFrame:(pictureFrame *)frame withNewInformation:(NSDictionary *)info
 {
-    NSString *notificationString = [NSString stringWithFormat:@"The date for the frame has been updated to %@", [info[@"newDate"] displayDateOfType:sDateTypPretty]];
+    NSString *notificationString = [NSString stringWithFormat:@"The date for the frame has been updated to %@", [info[@"newDate"] displayDateOfType:sDateTypeMonthAndYear]];
     
     NSDictionary *options = @{
                               kCRToastTextKey : notificationString,

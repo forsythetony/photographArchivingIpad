@@ -74,9 +74,9 @@
         grow.springBounciness = generalSpringBounciness;
         grow.springSpeed = generalSpringSpeed;
         
-        grow.name = @"growAnimation";
+        //grow.name = @"growAnimation";
         
-        [grow setDelegate:self];
+        //[grow setDelegate:self];
         
         //  Move the image
         
@@ -99,6 +99,12 @@
         imageCorners.toValue = @(5.0);
         
         imageCorners.springBounciness = generalSpringBounciness;
+        
+        imageCorners.name = @"imageCorners";
+        
+        imageCorners.delegate = self;
+        
+        
         imageMove.springSpeed = generalSpringSpeed;
         
         [self.theImage.layer pop_addAnimation:imageMove forKey:@"moveImage"];
@@ -194,7 +200,7 @@
 }
 -(void)pop_animationDidStop:(POPAnimation *)anim finished:(BOOL)finished
 {
-    if ([anim.name isEqualToString:@"growAnimation"]) {
+    if ([anim.name isEqualToString:@"imageCorners"]) {
         [self showImageInformation];
     }
 }
@@ -242,10 +248,7 @@
     [titleLabel setNumberOfLines:0];
     [titleLabel setAlpha:0.0];
     
-    
-    
-//
-     POPBasicAnimation *alphaAni = [self alphaAnimation];
+    POPBasicAnimation *alphaAni = [self alphaAnimation];
     
     POPSpringAnimation *titleSpring = [POPSpringAnimation animation];
     
@@ -316,21 +319,6 @@
     
     [dateLabel pop_addAnimation:alphaAni forKey:@"dateStringAlphaAni"];
     [dateLabelCat pop_addAnimation:alphaAni forKey:@"dateAlphaAni"];
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     containerViews = [NSArray arrayWithArray:theViews];
