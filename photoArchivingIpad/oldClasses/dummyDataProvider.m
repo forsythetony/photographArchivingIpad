@@ -30,7 +30,13 @@
                               @"thumbName"  : @"fredAndFreddie_tn.png",
                               @"title"      : @"Freddie and his Father",
                               @"offset"     : [NSNumber numberWithFloat:300.0],
-                              @"date"       : [formatter dateFromString:@"5/22/1994"]}
+                              @"date"       : [formatter dateFromString:@"5/22/1994"]},
+                            
+                            @{@"imageName": @"freddie.JPG",
+                              @"thumbName": @"freddie_tn.PNG",
+                              @"title" : @"Freddie Menendez",
+                              @"offset" : [NSNumber numberWithFloat:0.0],
+                              @"date" : [formatter dateFromString:@"6/21/1995"]}
                             ];
     
     

@@ -362,9 +362,16 @@
         [theFrame addGestureRecognizer:panRecog];
          
         UITapGestureRecognizer *tapRecog = [UITapGestureRecognizer new];
-        
+        [tapRecog setNumberOfTapsRequired:1];
         [tapRecog addTarget:self action:@selector(handleTapFrom:)];
         
+        UITapGestureRecognizer *doubleTap = [UITapGestureRecognizer new];
+        [doubleTap setNumberOfTapsRequired:2];
+        [doubleTap addTarget:self action:@selector(handleDoubleTap:)];
+        
+        [tapRecog requireGestureRecognizerToFail:doubleTap];
+        
+        [theFrame addGestureRecognizer:doubleTap];
         [theFrame addGestureRecognizer:tapRecog];
     }
 }
@@ -437,9 +444,26 @@
 
 -(void)handleTapFrom:(UIGestureRecognizer*) recognizer
 {
+    
+    UITapGestureRecognizer *gestRecog = (UITapGestureRecognizer*)recognizer;
+    
+    NSInteger touchNum = [gestRecog numberOfTouches];
+    
+    NSLog(@"\nNumber of touches: %d", touchNum);
+    
+    
+    
     pictureFrame *frame = (pictureFrame*)recognizer.view;
 
     [frame resize];
+}
+-(void)handleDoubleTap:(UITapGestureRecognizer*) recognizer
+{
+    NSLog(@"I fired!");
+    
+    pictureFrame *frame = [recognizer view];
+    
+    
 }
 
 #pragma mark Delegate Methods
