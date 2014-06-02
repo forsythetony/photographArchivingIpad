@@ -471,9 +471,9 @@
                               kCRToastAnimationOutTypeKey : @(CRToastAnimationTypeGravity),
                               kCRToastAnimationInDirectionKey : @(CRToastAnimationDirectionTop),
                               kCRToastAnimationOutDirectionKey : @(CRToastAnimationDirectionBottom),
-                              kCRToastAnimationInTimeIntervalKey    :  @(4.0),
+                              kCRToastAnimationInTimeIntervalKey    :  @(2.0),
                               kCRToastAnimationOutTimeIntervalKey   :     @(1.0),
-                              kCRToastTimeIntervalKey :   @(5.0)
+                              kCRToastTimeIntervalKey :   @(2.0)
                               };
     
     [CRToastManager showNotificationWithOptions:options

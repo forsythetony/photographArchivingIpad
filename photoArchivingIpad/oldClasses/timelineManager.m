@@ -57,14 +57,6 @@
 {
     _theImages = thePhotographs;
     
-    UIView *testview = [[UIView alloc] initWithFrame:CGRectMake(_TLView.center.x, _TLView.center.y, 40.0, 40.0)];
-    
-    [testview setBackgroundColor:[UIColor yellowColor]];
-    
-    [_TLView addSubview:testview];
-    
-    
-    
     for(pictureFrame* theFrame in _theImages)
     {
         imageObject *img = theFrame.imageObject;
