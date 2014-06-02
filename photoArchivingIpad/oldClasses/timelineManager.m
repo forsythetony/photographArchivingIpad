@@ -32,7 +32,7 @@
     
     float specNumber = _viewSpan / _duration;
     
-    centerPoint.y = _TLView.center.y - 100.0;
+    centerPoint.y = _TLView.center.y - 140.0;
     
     centerPoint.x = _xOffset + ((pureDate - _pureStart) * specNumber) - HORIZONTALMOD;
     

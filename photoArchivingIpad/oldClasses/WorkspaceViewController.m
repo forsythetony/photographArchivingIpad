@@ -491,33 +491,23 @@
 }
 -(void)finishedUpdatedFrame:(pictureFrame *)frame withNewInformation:(NSDictionary *)info
 {
-    
-    
-    
-    
-    
-    NSString *notificationString = [NSString stringWithFormat:@"The date for the frame has been updated to %@", info[@"newDate"]];
-    
-    
-    
-    
-    
-    
-    
-    
+    NSString *notificationString = [NSString stringWithFormat:@"The date for the frame has been updated to %@", [info[@"newDate"] getDisplayDate]];
+
     NSDictionary *options = @{
                               kCRToastTextKey : notificationString,
                               kCRToastTextAlignmentKey : @(NSTextAlignmentCenter),
                               kCRToastBackgroundColorKey : [UIColor charcoalColor],
                               kCRToastAnimationInTypeKey : @(CRToastAnimationTypeGravity),
                               kCRToastAnimationOutTypeKey : @(CRToastAnimationTypeGravity),
-                              kCRToastAnimationInDirectionKey : @(CRToastAnimationDirectionLeft),
-                              kCRToastAnimationOutDirectionKey : @(CRToastAnimationDirectionRight)
+                              kCRToastAnimationInDirectionKey : @(CRToastAnimationDirectionTop),
+                              kCRToastAnimationOutDirectionKey : @(CRToastAnimationDirectionBottom),
+                              kCRToastAnimationInTimeIntervalKey    :  @(4.0),
+                              kCRToastAnimationOutTimeIntervalKey   :     @(1.0),
+                              kCRToastTimeIntervalKey :   @(5.0)
                               };
+    
     [CRToastManager showNotificationWithOptions:options
-                                completionBlock:^{
-                                    NSLog(@"Completed");
-                                }];
+                                completionBlock:nil];
 }
 #pragma mark Gesture Recognizer Methods -
 -(void)addGestureRecognizers
