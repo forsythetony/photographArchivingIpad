@@ -461,9 +461,9 @@
 {
     NSLog(@"I fired!");
     
-    //pictureFrame *frame = [recognizer view];
+    pictureFrame *frame = (pictureFrame*)[recognizer view];
     
-    
+    [frame largeResize];
 }
 
 #pragma mark Delegate Methods

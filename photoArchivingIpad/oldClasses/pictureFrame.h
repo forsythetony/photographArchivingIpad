@@ -35,5 +35,6 @@ typedef NS_ENUM(NSInteger, pLabelType) {
 -(void)bounceInFromPoint:(CGFloat) startPoint toPoint:(CGFloat) endPoint;
 -(void)subtleBounce;
 -(void)setImageObject:(imageObject *)imageObject;
+-(void)largeResize;
 
 @end

@@ -398,6 +398,32 @@
     
     return [UIFont fontWithName:fontFamily size:fontSize];
 }
+-(void)largeResize
+{
+    if (!_expanded) {
+        POPSpringAnimation *resize = [POPSpringAnimation animation];
+        
+        resize.property = [POPAnimatableProperty propertyWithName:kPOPLayerSize];
+        
+        resize.toValue = [NSValue valueWithCGSize:CGSizeMake(500.0, 500.0)];
+        
+        [self.containerView.layer pop_addAnimation:resize forKey:@"resize"];
+        
+        POPBasicAnimation *imageFade = [POPBasicAnimation animation];
+        
+        imageFade.property = [POPAnimatableProperty propertyWithName:kPOPViewAlpha];
+        
+        imageFade.toValue = @(0.0);
+        
+        [self.theImage pop_addAnimation:imageFade forKey:@"fadeImage"];
+        
+        _expanded = YES;
+    }
+    
+    
+    
+    
+}
 -(POPSpringAnimation*)fromLeftAnimation
 {
     
