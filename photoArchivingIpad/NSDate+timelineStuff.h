@@ -20,9 +20,7 @@ typedef NS_ENUM(NSInteger, sDateType) {
 +(NSDate*)dateWithv1String:(NSString*) v1String;
 +(NSDate*)dateWithYear:(NSNumber*) year;
 
--(NSString*)simpleDateString;
 -(NSTimeInterval)timeIntervalSinceBeginning;
--(NSString*)getDisplayDate;
 -(NSString*)displayDateOfType:(sDateType) dateType;
 
 +(NSDate*)dateWithTimeIntervalSinceUserReferencePoint:(NSTimeInterval) interval;

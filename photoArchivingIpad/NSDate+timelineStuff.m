@@ -40,16 +40,6 @@
     
     return [fm dateFromString:dateString];
 }
--(NSString *)simpleDateString
-{
-    
-    NSString *formatString = @"MM/dd/yyyy";
-    
-    NSDateFormatter *fm = [NSDateFormatter new];
-    [fm setDateFormat:formatString];
-    
-    return [fm stringFromDate:self];
-}
 -(NSTimeInterval)timeIntervalSinceBeginning
 {
     NSString* formatString = @"M/dd/yyyy";
