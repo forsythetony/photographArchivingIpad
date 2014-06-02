@@ -169,7 +169,6 @@
     UIColor *TLbackground = [UIColor midnightBlueColor];
     CGRect scrollViewRect = mainScrollView.frame;
     CGSize scrollViewContentSize = mainScrollView.contentSize;
-    CGPoint scrollCenter = mainScrollView.center;
     
     UIView *timelineView = [[UIView alloc] initWithFrame:CGRectMake(scrollViewRect.origin.x,
                                                                     scrollViewRect.origin.y,
@@ -234,11 +233,6 @@
 }
 -(void)createYearPointsWithYearData:(NSDictionary*) yearData andContentSize:(CGSize) contentSize toView:(UIView*) timelineView
 {
-    float labelFontSize = 13.0;
-    NSString *labelFontFamily = @"DINAlternateBold-Bold";
-    UIFont *labelFont = [UIFont fontWithName:labelFontFamily size:labelFontSize];
-    
-    UIColor *labelTextColor = [UIColor warmGrayColor];
     
     NSInteger startYear = [yearData[@"startYear"] integerValue];
     NSInteger endYear = [yearData[@"endYear"] integerValue];
@@ -260,7 +254,6 @@
     NSInteger yr = startYear;
     
     float labelYOffset = 15.0;
-    float fiveModifier = 30.0;
     float animationDuration = 0.2;
     
     for (int i = 0; i <= yearDiff; i++) {
