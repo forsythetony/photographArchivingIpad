@@ -75,6 +75,15 @@
     
     self.title = @"Timeline";
     
+    dataProvider = [dummyDataProvider new];
+    
+    _photographs = [dataProvider getImageObjects];
+    
+    [self addGestureRecognizers];
+    if (!self.rangeInformation) {
+        self.rangeInformation = [dataProvider getDummyRange];
+    }
+    
 }
 - (void)viewDidLoad
 {
@@ -82,12 +91,9 @@
     
     [self initialSetup];
     
-    dataProvider = [dummyDataProvider new];
-    
-    _photographs = [dataProvider getImageObjects];
-    [self addGestureRecognizers];
     
 }
+#pragma mark Create Views
 -(void)createSmallViewsWithImages:(NSArray*) images
 {
     CGPoint centerOfView = self.view.center;
@@ -118,7 +124,6 @@
         
     }
 }
-
 -(void)createScrollView
 {
     
@@ -334,6 +339,147 @@
     }
 
 }
+-(void)testMove
+{
+    NSLog(@"I fired!");
+    
+    pictureFrame *theFrame = [_photographs objectAtIndex:0];
+    
+    CGPoint oldCenter = [theFrame center];
+    
+    CGPoint trans = CGPointMake(50.0, 50.0);
+    
+    CGPoint newCenter = CGPointMake(oldCenter.x + trans.x, oldCenter.y + trans.y);
+    
+    [theFrame setCenter:newCenter];
+}
+
+#pragma mark Gesture Recognizer Methods -
+-(void)addGestureRecognizers
+{
+    for (pictureFrame* theFrame in _photographs)
+    {
+        
+        UIPanGestureRecognizer *panRecog = [UIPanGestureRecognizer new];
+        
+        [panRecog addTarget:self action:@selector(handlePanFrom:)];
+        
+        [theFrame addGestureRecognizer:panRecog];
+         
+        UITapGestureRecognizer *tapRecog = [UITapGestureRecognizer new];
+        
+        [tapRecog addTarget:self action:@selector(handleTapFrom:)];
+        
+        [theFrame addGestureRecognizer:tapRecog];
+    }
+}
+-(void)handlePanFrom:(id) sender
+{
+    [self.view bringSubviewToFront:[(UIPanGestureRecognizer*)sender view]];
+    CGPoint translatedPoint = [(UIPanGestureRecognizer*)sender translationInView:self.view];
+    
+    if ([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateBegan) {
+        firstX = [[sender view] center].x;
+        firstY = [[sender view] center].y;
+    }
+    
+    translatedPoint = CGPointMake(firstX+translatedPoint.x, firstY + translatedPoint.y);
+    
+    [[sender view] setCenter:translatedPoint];
+    
+    if ([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateEnded)
+    {
+        CGFloat velocityX = (0.2*[(UIPanGestureRecognizer*)sender velocityInView:self.view].x);
+        
+        
+        CGFloat finalX = translatedPoint.x;// + velocityX;
+        CGFloat finalY = translatedPoint.y;// + (.35*[(UIPanGestureRecognizer*)sender velocityInView:self.view].y);
+        
+        if (UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation])) {
+            if (finalX < 0) {
+                //finalX = 0;
+            } else if (finalX > 768) {
+                //finalX = 768;
+            }
+            
+            if (finalY < 0) {
+                finalY = 0;
+            } else if (finalY > 1024) {
+                finalY = 1024;
+            }
+        } else {
+            if (finalX < 0) {
+                //finalX = 0;
+            } else if (finalX > 1024) {
+                //finalX = 768;
+            }
+            
+            if (finalY < 0) {
+                finalY = 0;
+            } else if (finalY > 768) {
+                finalY = 1024;
+            }
+        }
+        
+        CGFloat animationDuration = (ABS(velocityX)*.0002)+.2;
+        
+        NSLog(@"the duration is: %f", animationDuration);
+        
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:animationDuration];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+        [UIView setAnimationDelegate:self];
+        //[UIView setAnimationDidStopSelector:@selector(animationDidFinish)];
+        [[sender view] setCenter:CGPointMake(finalX, finalY)];
+        [UIView commitAnimations];
+        
+        pictureFrame *frame = (pictureFrame*)[sender view];
+        
+        [TLManager updateDateForPicture:frame];
+    }
+    
+}
+
+-(void)handleTapFrom:(UIGestureRecognizer*) recognizer
+{
+    pictureFrame *frame = (pictureFrame*)recognizer.view;
+
+    [frame resize];
+}
+
+#pragma mark Delegate Methods
+-(void)finishedUpdatedFrame:(pictureFrame *)frame withNewInformation:(NSDictionary *)info
+{
+    NSString *notificationString = [NSString stringWithFormat:@"The date for the frame has been updated to %@", [info[@"newDate"] displayDateOfType:sDateTypPretty]];
+    
+    NSDictionary *options = @{
+                              kCRToastTextKey : notificationString,
+                              kCRToastTextAlignmentKey : @(NSTextAlignmentCenter),
+                              kCRToastBackgroundColorKey : [UIColor charcoalColor],
+                              kCRToastNotificationTypeKey : @(CRToastTypeNavigationBar),
+                              kCRToastFontKey : [UIFont fontWithName:@"DINAlternate-Bold" size:20.0],
+                              kCRToastAnimationInTypeKey : @(CRToastAnimationTypeGravity),
+                              kCRToastAnimationOutTypeKey : @(CRToastAnimationTypeGravity),
+                              kCRToastAnimationInDirectionKey : @(CRToastAnimationDirectionTop),
+                              kCRToastAnimationOutDirectionKey : @(CRToastAnimationDirectionBottom),
+                              kCRToastAnimationInTimeIntervalKey    :  @(4.0),
+                              kCRToastAnimationOutTimeIntervalKey   :     @(1.0),
+                              kCRToastTimeIntervalKey :   @(5.0)
+                              };
+    
+    [CRToastManager showNotificationWithOptions:options
+                                completionBlock:nil];
+}
+#pragma mark Utility Methods -
+-(NSTimeInterval)getTimeIntervalWithDate:(NSDate*) date
+{
+    NSTimeInterval interval = [date timeIntervalSinceDate:[NSDate referenceDate]];
+    
+    NSLog(@"\nThe time interval is: %f\n", interval);
+    
+    return interval;
+}
+
 -(NSDictionary*)getTextAttributesWithYear:(NSInteger) year withInfo:(NSDictionary*) info
 {
     UIColor *textColor, *backgroundColor;
@@ -454,141 +600,5 @@
     }
     
     return [NSArray arrayWithArray:years];
-}
--(NSTimeInterval)getTimeIntervalWithDate:(NSDate*) date
-{
-    NSTimeInterval interval = [date timeIntervalSinceDate:[NSDate referenceDate]];
-    
-    NSLog(@"\nThe time interval is: %f\n", interval);
-    
-    return interval;
-}
--(void)testMove
-{
-    NSLog(@"I fired!");
-    
-    pictureFrame *theFrame = [_photographs objectAtIndex:0];
-    
-    CGPoint oldCenter = [theFrame center];
-    
-    CGPoint trans = CGPointMake(50.0, 50.0);
-    
-    CGPoint newCenter = CGPointMake(oldCenter.x + trans.x, oldCenter.y + trans.y);
-    
-    [theFrame setCenter:newCenter];
-}
--(void)finishedUpdatedFrame:(pictureFrame *)frame withNewInformation:(NSDictionary *)info
-{
-    NSString *notificationString = [NSString stringWithFormat:@"The date for the frame has been updated to %@", [info[@"newDate"] displayDateOfType:sDateTypPretty]];
-
-    NSDictionary *options = @{
-                              kCRToastTextKey : notificationString,
-                              kCRToastTextAlignmentKey : @(NSTextAlignmentCenter),
-                              kCRToastBackgroundColorKey : [UIColor charcoalColor],
-                              kCRToastNotificationTypeKey : @(CRToastTypeNavigationBar),
-                              kCRToastFontKey : [UIFont fontWithName:@"DINAlternate-Bold" size:20.0],
-                              kCRToastAnimationInTypeKey : @(CRToastAnimationTypeGravity),
-                              kCRToastAnimationOutTypeKey : @(CRToastAnimationTypeGravity),
-                              kCRToastAnimationInDirectionKey : @(CRToastAnimationDirectionTop),
-                              kCRToastAnimationOutDirectionKey : @(CRToastAnimationDirectionBottom),
-                              kCRToastAnimationInTimeIntervalKey    :  @(4.0),
-                              kCRToastAnimationOutTimeIntervalKey   :     @(1.0),
-                              kCRToastTimeIntervalKey :   @(5.0)
-                              };
-    
-    [CRToastManager showNotificationWithOptions:options
-                                completionBlock:nil];
-}
-#pragma mark Gesture Recognizer Methods -
--(void)addGestureRecognizers
-{
-    for (pictureFrame* theFrame in _photographs)
-    {
-        
-        UIPanGestureRecognizer *panRecog = [UIPanGestureRecognizer new];
-        
-        [panRecog addTarget:self action:@selector(handlePanFrom:)];
-        
-        [theFrame addGestureRecognizer:panRecog];
-         
-        UITapGestureRecognizer *tapRecog = [UITapGestureRecognizer new];
-        
-        [tapRecog addTarget:self action:@selector(handleTapFrom:)];
-        
-        [theFrame addGestureRecognizer:tapRecog];
-    }
-}
--(void)handlePanFrom:(id) sender
-{
-    [self.view bringSubviewToFront:[(UIPanGestureRecognizer*)sender view]];
-    CGPoint translatedPoint = [(UIPanGestureRecognizer*)sender translationInView:self.view];
-    
-    if ([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateBegan) {
-        firstX = [[sender view] center].x;
-        firstY = [[sender view] center].y;
-    }
-    
-    translatedPoint = CGPointMake(firstX+translatedPoint.x, firstY + translatedPoint.y);
-    
-    [[sender view] setCenter:translatedPoint];
-    
-    if ([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateEnded)
-    {
-        CGFloat velocityX = (0.2*[(UIPanGestureRecognizer*)sender velocityInView:self.view].x);
-        
-        
-        CGFloat finalX = translatedPoint.x;// + velocityX;
-        CGFloat finalY = translatedPoint.y;// + (.35*[(UIPanGestureRecognizer*)sender velocityInView:self.view].y);
-        
-        if (UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation])) {
-            if (finalX < 0) {
-                //finalX = 0;
-            } else if (finalX > 768) {
-                //finalX = 768;
-            }
-            
-            if (finalY < 0) {
-                finalY = 0;
-            } else if (finalY > 1024) {
-                finalY = 1024;
-            }
-        } else {
-            if (finalX < 0) {
-                //finalX = 0;
-            } else if (finalX > 1024) {
-                //finalX = 768;
-            }
-            
-            if (finalY < 0) {
-                finalY = 0;
-            } else if (finalY > 768) {
-                finalY = 1024;
-            }
-        }
-        
-        CGFloat animationDuration = (ABS(velocityX)*.0002)+.2;
-        
-        NSLog(@"the duration is: %f", animationDuration);
-        
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:animationDuration];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-        [UIView setAnimationDelegate:self];
-        //[UIView setAnimationDidStopSelector:@selector(animationDidFinish)];
-        [[sender view] setCenter:CGPointMake(finalX, finalY)];
-        [UIView commitAnimations];
-        
-        pictureFrame *frame = (pictureFrame*)[sender view];
-        
-        [TLManager updateDateForPicture:frame];
-    }
-    
-}
-
--(void)handleTapFrom:(UIGestureRecognizer*) recognizer
-{
-    pictureFrame *frame = (pictureFrame*)recognizer.view;
-
-    [frame resize];
 }
 @end

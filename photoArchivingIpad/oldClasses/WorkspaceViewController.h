@@ -22,6 +22,7 @@ typedef NS_ENUM(NSInteger, labelRotationType) {
 
 @interface WorkspaceViewController : UIViewController <UIGestureRecognizerDelegate, timelineManagerDelegate>
 
+@property (strong, nonatomic) NSDictionary* rangeInformation;
 
 
 @end

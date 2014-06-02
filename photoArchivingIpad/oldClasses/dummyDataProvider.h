@@ -9,10 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "imageObject.h"
 #import "pictureFrame.h"
+#import "NSDate+timelineStuff.h"
 
 @interface dummyDataProvider : NSObject
 
 
 -(NSArray*)getImageObjects;
+-(NSDictionary*)getDummyRange;
 
 @end

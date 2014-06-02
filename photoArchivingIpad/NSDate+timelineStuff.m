@@ -93,4 +93,19 @@
     
     return [fm stringFromDate:self];
 }
+-(NSNumber *)yearAsNumber
+{
+    NSString *dateFormat = @"yyyy";
+    
+    NSDateFormatter *fm = [NSDateFormatter new];
+    
+    [fm setDateFormat:dateFormat];
+    
+    NSString *yearString = [fm stringFromDate:self];
+    
+    NSInteger year = [yearString integerValue];
+    
+    return [NSNumber numberWithInteger:year];
+    
+}
 @end
