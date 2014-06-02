@@ -81,11 +81,13 @@
 {
     CGPoint newCenter = [picture center];
     
-    [self createDateObjectFromPoint:newCenter];
+    NSDate *pointDate = [self createDateObjectFromPoint:newCenter];
     
-    [self.delegate finishedUpdatedFrame:picture withNewInformation:@{@"newDate": NSStringFromCGPoint(newCenter), @"otherInfo" : @"hahaha"}];
+    picture.imageObject.date = pointDate;
+    
+    [self.delegate finishedUpdatedFrame:picture withNewInformation:@{@"newDate": pointDate}];
 }
--(void)createDateObjectFromPoint:(CGPoint) point
+-(NSDate*)createDateObjectFromPoint:(CGPoint) point
 {
     double modifier = _duration / _viewSpan;
     
@@ -97,8 +99,6 @@
     
     NSDate *newDate = [NSDate dateWithTimeInterval:pointAsPureDate sinceDate:_startDate];
     
-    NSString *dateAsString = [newDate getDisplayDate];
-    
-    
+    return newDate;
 }
 @end
