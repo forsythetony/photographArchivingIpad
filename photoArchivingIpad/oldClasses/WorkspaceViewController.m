@@ -446,7 +446,7 @@
 {
     
     UITapGestureRecognizer *gestRecog = (UITapGestureRecognizer*)recognizer;
-    
+
     NSInteger touchNum = [gestRecog numberOfTouches];
     
     NSLog(@"\nNumber of touches: %d", touchNum);
@@ -461,7 +461,7 @@
 {
     NSLog(@"I fired!");
     
-    pictureFrame *frame = [recognizer view];
+    //pictureFrame *frame = [recognizer view];
     
     
 }
@@ -472,15 +472,15 @@
     NSString *notificationString = [NSString stringWithFormat:@"The date for the frame has been updated to %@", [info[@"newDate"] displayDateOfType:sDateTypeMonthAndYear]];
     
     NSDictionary *options = @{
-                              kCRToastTextKey : notificationString,
-                              kCRToastTextAlignmentKey : @(NSTextAlignmentCenter),
-                              kCRToastBackgroundColorKey : [UIColor charcoalColor],
-                              kCRToastNotificationTypeKey : @(CRToastTypeNavigationBar),
-                              kCRToastFontKey : [UIFont fontWithName:@"DINAlternate-Bold" size:20.0],
-                              kCRToastAnimationInTypeKey : @(CRToastAnimationTypeGravity),
-                              kCRToastAnimationOutTypeKey : @(CRToastAnimationTypeGravity),
-                              kCRToastAnimationInDirectionKey : @(CRToastAnimationDirectionTop),
-                              kCRToastAnimationOutDirectionKey : @(CRToastAnimationDirectionBottom),
+                              kCRToastTextKey                       : notificationString,
+                              kCRToastTextAlignmentKey              : @(NSTextAlignmentCenter),
+                              kCRToastBackgroundColorKey            : [UIColor charcoalColor],
+                              kCRToastNotificationTypeKey           : @(CRToastTypeNavigationBar),
+                              kCRToastFontKey                       : [UIFont fontWithName:@"DINAlternate-Bold" size:20.0],
+                              kCRToastAnimationInTypeKey            : @(CRToastAnimationTypeGravity),
+                              kCRToastAnimationOutTypeKey           : @(CRToastAnimationTypeGravity),
+                              kCRToastAnimationInDirectionKey       : @(CRToastAnimationDirectionTop),
+                              kCRToastAnimationOutDirectionKey      : @(CRToastAnimationDirectionBottom),
                               kCRToastAnimationInTimeIntervalKey    :  @(2.0),
                               kCRToastAnimationOutTimeIntervalKey   :     @(1.0),
                               kCRToastTimeIntervalKey :   @(2.0)
@@ -489,6 +489,7 @@
     [CRToastManager showNotificationWithOptions:options
                                 completionBlock:nil];
 }
+
 #pragma mark Utility Methods -
 -(NSTimeInterval)getTimeIntervalWithDate:(NSDate*) date
 {
@@ -504,31 +505,33 @@
     UIColor *textColor, *backgroundColor;
     NSNumber *fontSize, *heightMod, *finalAlpha, *xOffSet, *rotation, *lineHeight;
     NSString *yearString;
-    
+
     NSInteger startYear = [[info valueForKey:@"startYear"] integerValue];
-    NSInteger endYear = [[info valueForKey:@"endYear"] integerValue];
+    NSInteger endYear   = [[info valueForKey:@"endYear"] integerValue];
     
     float lineHeightPrim = 0.0;
     
     if (year == startYear || year == endYear)
     {
-        lineHeightPrim = 0.0;
-        
-        textColor = [UIColor warmGrayColor];
-        fontSize = [NSNumber numberWithFloat:75.0];
-        heightMod = [NSNumber numberWithFloat:0.0];
-        yearString = [NSString stringWithFormat:@"%i", year];
-        finalAlpha = [NSNumber numberWithFloat:0.3];
+        lineHeightPrim  = 0.0;
+
+        textColor       = [UIColor warmGrayColor];
+        fontSize        = [NSNumber numberWithFloat:75.0];
+        heightMod       = [NSNumber numberWithFloat:0.0];
+        yearString      = [NSString stringWithFormat:@"%i", year];
+        finalAlpha      = [NSNumber numberWithFloat:0.3];
         backgroundColor = [UIColor clearColor];
-        lineHeight = [NSNumber numberWithFloat:lineHeightPrim];
+        lineHeight      = [NSNumber numberWithFloat:lineHeightPrim];
         
-        if (year ==  startYear) {
-            xOffSet = [NSNumber numberWithFloat:-60.0];
+        if (year ==  startYear)
+        {
+            xOffSet  = [NSNumber numberWithFloat:-60.0];
             rotation = [NSNumber numberWithInteger:labelRotationTypeLeft];
         }
-        else{
-            xOffSet = [NSNumber numberWithFloat:80.0];
-            rotation = [NSNumber numberWithInteger:labelRotationTypeRight];
+        else
+        {
+            xOffSet   = [NSNumber numberWithFloat:80.0];
+            rotation  = [NSNumber numberWithInteger:labelRotationTypeRight];
             heightMod = [NSNumber numberWithFloat:-10.0];
         }
     }
@@ -538,22 +541,22 @@
             
             if (year % 10 == 0) {
                 lineHeightPrim = 70.0;
-                
-                textColor = [UIColor warmGrayColor];
-                fontSize = [NSNumber numberWithFloat:30.0];
-                heightMod = [NSNumber numberWithFloat:lineHeightPrim];
-                lineHeight = [NSNumber numberWithFloat:lineHeightPrim - 10.0];
-                yearString = [NSString stringWithFormat:@"%i", year];
+
+                textColor      = [UIColor warmGrayColor];
+                fontSize       = [NSNumber numberWithFloat:30.0];
+                heightMod      = [NSNumber numberWithFloat:lineHeightPrim];
+                lineHeight     = [NSNumber numberWithFloat:lineHeightPrim - 10.0];
+                yearString     = [NSString stringWithFormat:@"%i", year];
             }
             else
             {
                 lineHeightPrim = 30.0;
-                
-                textColor = [UIColor warmGrayColor];
-                fontSize = [NSNumber numberWithFloat:lineHeightPrim - 5.0];
-                heightMod = [NSNumber numberWithFloat:lineHeightPrim];
-                yearString = [NSString stringWithFormat:@"%i", year];
-                lineHeight = [NSNumber numberWithFloat:lineHeightPrim - 7.5];
+
+                textColor      = [UIColor warmGrayColor];
+                fontSize       = [NSNumber numberWithFloat:lineHeightPrim - 5.0];
+                heightMod      = [NSNumber numberWithFloat:lineHeightPrim];
+                yearString     = [NSString stringWithFormat:@"%i", year];
+                lineHeight     = [NSNumber numberWithFloat:lineHeightPrim - 7.5];
             }
             
             finalAlpha = [NSNumber numberWithFloat:1.0];
@@ -562,7 +565,7 @@
         else
         {
             textColor = [UIColor warmGrayColor];
-            fontSize = [NSNumber numberWithFloat:15.0];
+            fontSize  = [NSNumber numberWithFloat:15.0];
             heightMod = [NSNumber numberWithFloat:0];
             
             if(year < 2000)
@@ -587,8 +590,8 @@
             
         }
         
-        xOffSet = [NSNumber numberWithFloat:0.0];
-        rotation = [NSNumber numberWithInteger:labelRotationTypeNone];
+        xOffSet         = [NSNumber numberWithFloat:0.0];
+        rotation        = [NSNumber numberWithInteger:labelRotationTypeNone];
         backgroundColor = [UIColor clearColor];
         
         
@@ -601,15 +604,15 @@
              @"yearString"  : yearString,
              @"finalAlpha"  : finalAlpha,
              @"xOffset"     : xOffSet,
-             @"rotation"      : rotation,
+             @"rotation"    : rotation,
              @"background"  : backgroundColor,
              @"lineHeight"  : lineHeight};
 }
 -(NSArray*)createYearsArrayWithStart:(NSNumber*) start andEnd:(NSNumber*) end
 {
-    int startInt = [start intValue];
-    int endInt = [end intValue];
-    
+    int startInt          = [start intValue];
+    int endInt            = [end intValue];
+
     NSMutableArray *years = [NSMutableArray array];
     
     for (int i = startInt; i <= endInt; i++) {
