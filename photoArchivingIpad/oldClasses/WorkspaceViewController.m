@@ -182,20 +182,6 @@
     
     [TLManager setStartDate:startDate andEndDate:endDate andView:timelineView andXOffsert:TLWALLSPACING];
     
-    /*
-    NSDate *testDate = [NSDate dateWithv1String:@"01/01/1980"];
-    
-    CGPoint somePoint = [TLManager createPointWithDate:testDate];
-    
-    UIView *testView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 20.0, 20.0)];
-    
-    [testView setBackgroundColor:[UIColor yellowColor]];
-    
-    [timelineView addSubview:testView];
-    
-    [testView setCenter:somePoint];
-     */
-    
     [self addTimelineLine];
     
     

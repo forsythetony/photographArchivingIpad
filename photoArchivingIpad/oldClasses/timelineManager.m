@@ -32,7 +32,7 @@
     
     float specNumber = _viewSpan / _duration;
     
-    centerPoint.y = _TLView.center.y - 140.0;
+    centerPoint.y = [self randomFloatBetween:(_TLView.center.y - 140.0) and:100.0];
     
     centerPoint.x = _xOffset + ((pureDate - _pureStart) * specNumber) - HORIZONTALMOD;
     
@@ -65,8 +65,6 @@
         
         [theFrame setCenter:theCenter];
         [_TLView addSubview:theFrame];
-        
-        
     }
 }
 -(void)updateDateForPicture:(pictureFrame *)picture
@@ -92,5 +90,9 @@
     NSDate *newDate = [NSDate dateWithTimeInterval:pointAsPureDate sinceDate:_startDate];
     
     return newDate;
+}
+- (float)randomFloatBetween:(float)smallNumber and:(float)bigNumber {
+    float diff = bigNumber - smallNumber;
+    return (((float) (arc4random() % ((unsigned)RAND_MAX + 1)) / RAND_MAX) * diff) + smallNumber;
 }
 @end
