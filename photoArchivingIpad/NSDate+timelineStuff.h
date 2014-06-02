@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, sDateType) {
+    sDateTypeSimple,
+    sDateTypPretty,
+    sDateTypeWithTime
+};
+
 @interface NSDate (timelineStuff)
 
 +(NSDate*)referenceDate;
@@ -17,6 +23,7 @@
 -(NSString*)simpleDateString;
 -(NSTimeInterval)timeIntervalSinceBeginning;
 -(NSString*)getDisplayDate;
+-(NSString*)displayDateOfType:(sDateType) dateType;
 
 +(NSDate*)dateWithTimeIntervalSinceUserReferencePoint:(NSTimeInterval) interval;
 

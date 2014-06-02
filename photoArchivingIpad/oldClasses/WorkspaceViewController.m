@@ -491,7 +491,7 @@
 }
 -(void)finishedUpdatedFrame:(pictureFrame *)frame withNewInformation:(NSDictionary *)info
 {
-    NSString *notificationString = [NSString stringWithFormat:@"The date for the frame has been updated to %@", [info[@"newDate"] getDisplayDate]];
+    NSString *notificationString = [NSString stringWithFormat:@"The date for the frame has been updated to %@", [info[@"newDate"] displayDateOfType:sDateTypPretty]];
 
     NSDictionary *options = @{
                               kCRToastTextKey : notificationString,

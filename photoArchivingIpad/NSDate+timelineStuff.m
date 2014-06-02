@@ -63,15 +63,6 @@
     return [self timeIntervalSinceDate:refDate];
 
 }
--(NSString *)getDisplayDate
-{
-    NSString *formatString = @"MM/dd/yyyy h:mm a";
-    
-    NSDateFormatter *fm = [NSDateFormatter new];
-    [fm setDateFormat:formatString];
-    
-    return [fm stringFromDate:self];
-}
 +(NSDate *)dateWithTimeIntervalSinceUserReferencePoint:(NSTimeInterval)interval
 {
     NSString* formatString = @"M/dd/yyyy";
@@ -83,5 +74,29 @@
     NSDate *refDate = [fm dateFromString:dateString];
     
     return [NSDate dateWithTimeInterval:interval sinceDate:refDate];
+}
+-(NSString*)displayDateOfType:(sDateType) dateType
+{
+    NSString *dateFormat;
+    
+    switch (dateType) {
+        case sDateTypeSimple:
+            dateFormat = @"M/dd/yyyy";
+            break;
+        case sDateTypPretty:
+            dateFormat = @"EEE, MMM d yyyy";
+            break;
+        case sDateTypeWithTime:
+            dateFormat = @"M/dd/yyyy h:mm a";
+            break;
+        default:
+            break;
+    }
+    
+    NSDateFormatter *fm = [NSDateFormatter new];
+    
+    [fm setDateFormat:dateFormat];
+    
+    return [fm stringFromDate:self];
 }
 @end
