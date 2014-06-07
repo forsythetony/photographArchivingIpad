@@ -13,6 +13,7 @@
 #import "NSDate+timelineStuff.h"
 #import "timelineManager.h"
 #import <CRToast.h>
+#import "workspaceAuxView.h"
 
 typedef NS_ENUM(NSInteger, labelRotationType) {
     labelRotationTypeLeft,

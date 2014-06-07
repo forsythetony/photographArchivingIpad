@@ -58,7 +58,8 @@
     NSLog(@"Frame: %@", NSStringFromCGRect(mainFrame));
     
     [self createScrollView];
- 
+    [self createAuxViews];
+    
     [TLManager setInitialPhotographs:_photographs];
     
     
@@ -81,9 +82,6 @@
         self.rangeInformation = [dataProvider getDummyRange];
         
     }
-    
-
-    
 }
 - (void)viewDidLoad
 {
@@ -94,6 +92,21 @@
     
 }
 #pragma mark Create Views
+-(void)createAuxViews
+{
+    float auxViewHeight = self.view.bounds.size.height * 0.4;
+    float auxViewYOrg = self.view.bounds.size.height * 0.6;
+    float auxViewWidth = self.view.bounds.size.width;
+    
+    CGRect auxViewFrame = CGRectMake(0.0,
+                                     auxViewYOrg,
+                                     auxViewWidth,
+                                     auxViewHeight);
+    
+    workspaceAuxView* auxView = [[workspaceAuxView alloc] initWithFrame:auxViewFrame];
+    
+    [self.view addSubview:auxView];
+}
 -(void)createSmallViewsWithImages:(NSArray*) images
 {
     CGPoint centerOfView = self.view.center;
@@ -126,17 +139,18 @@
 }
 -(void)createScrollView
 {
+    float scrollViewHeight = (self.view.bounds.size.height * .6);
     
     CGRect scrollViewFrame;
     
     scrollViewFrame.origin = CGPointMake(0.0, 0.0);
     
     scrollViewFrame.size.width = MAINSCROLLVIEWSIZE;
-    scrollViewFrame.size.height = self.view.bounds.size.height;
+    scrollViewFrame.size.height = scrollViewHeight;
     
     CGRect screenRect = self.view.bounds;
     
-    mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0, 0.0, screenRect.size.width, screenRect.size.height)];
+    mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0, 0.0, screenRect.size.width, scrollViewHeight)];
     
     [mainScrollView setContentSize:scrollViewFrame.size];
     [mainScrollView setScrollEnabled:YES];
@@ -431,7 +445,6 @@
         [UIView setAnimationDuration:animationDuration];
         [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
         [UIView setAnimationDelegate:self];
-        //[UIView setAnimationDidStopSelector:@selector(animationDidFinish)];
         [[sender view] setCenter:CGPointMake(finalX, finalY)];
         [UIView commitAnimations];
         

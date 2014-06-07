@@ -74,10 +74,6 @@
         grow.springBounciness = generalSpringBounciness;
         grow.springSpeed = generalSpringSpeed;
         
-        //grow.name = @"growAnimation";
-        
-        //[grow setDelegate:self];
-        
         //  Move the image
         
         POPSpringAnimation *imageMove = [POPSpringAnimation animation];
@@ -87,9 +83,7 @@
         imageMove.toValue = [NSValue valueWithCGPoint:CGPointMake(imageXChange, imageYChange)];
         imageMove.springBounciness = generalSpringBounciness;
         imageMove.springSpeed = generalSpringSpeed;
-        
-        
-        
+
         //  Fix the images corner radius
         
         POPSpringAnimation *imageCorners = [POPSpringAnimation animation];
@@ -112,8 +106,6 @@
         
         [self.containerView.layer pop_addAnimation:grow forKey:@"layerGrow"];
         [self.containerView.layer pop_addAnimation:cornerChange forKey:@"cornerChange"];
-        
-       // [self showImageInformation];
         
         
         _expanded = YES;
