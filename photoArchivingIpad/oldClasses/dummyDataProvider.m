@@ -55,6 +55,7 @@
         
         [frame setFrame:CGRectMake(0.0, 0.0, 75.0, 75.0)];
         [imageFrames addObject:frame];
+        
     }
     
     
