@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		1338B06FDE54485BAF55439A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61ECDBD286AB45A0BA37A749 /* libPods.a */; };
 		BA0BE0B81943B3E40054F7C7 /* workspaceAuxView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0BE0B71943B3E40054F7C7 /* workspaceAuxView.m */; };
+		BA32997319489A730002EBFD /* landingPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA32997219489A730002EBFD /* landingPageViewController.m */; };
+		BA3299761948B91E0002EBFD /* showServerData.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3299751948B91E0002EBFD /* showServerData.m */; };
+		BA3299A51948BA430002EBFD /* TFDataCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3299A21948BA430002EBFD /* TFDataCommunicator.m */; };
+		BA3299A61948BA430002EBFD /* TFPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3299A41948BA430002EBFD /* TFPerson.m */; };
+		BA3299A81948DE850002EBFD /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA3299A71948DE850002EBFD /* SDWebImage.framework */; };
+		BA3299AA1948DF430002EBFD /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA3299A91948DF430002EBFD /* ImageIO.framework */; };
 		BA67F1AC193666210056DD00 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA67F1AB193666210056DD00 /* Foundation.framework */; };
 		BA67F1AE193666210056DD00 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA67F1AD193666210056DD00 /* CoreGraphics.framework */; };
 		BA67F1B0193666210056DD00 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA67F1AF193666210056DD00 /* UIKit.framework */; };
@@ -65,6 +71,16 @@
 		61ECDBD286AB45A0BA37A749 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA0BE0B61943B3E40054F7C7 /* workspaceAuxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = workspaceAuxView.h; sourceTree = "<group>"; };
 		BA0BE0B71943B3E40054F7C7 /* workspaceAuxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = workspaceAuxView.m; sourceTree = "<group>"; };
+		BA32997119489A730002EBFD /* landingPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = landingPageViewController.h; sourceTree = "<group>"; };
+		BA32997219489A730002EBFD /* landingPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = landingPageViewController.m; sourceTree = "<group>"; };
+		BA3299741948B91E0002EBFD /* showServerData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = showServerData.h; sourceTree = "<group>"; };
+		BA3299751948B91E0002EBFD /* showServerData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = showServerData.m; sourceTree = "<group>"; };
+		BA3299A11948BA430002EBFD /* TFDataCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFDataCommunicator.h; sourceTree = "<group>"; };
+		BA3299A21948BA430002EBFD /* TFDataCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFDataCommunicator.m; sourceTree = "<group>"; };
+		BA3299A31948BA430002EBFD /* TFPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFPerson.h; sourceTree = "<group>"; };
+		BA3299A41948BA430002EBFD /* TFPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFPerson.m; sourceTree = "<group>"; };
+		BA3299A71948DE850002EBFD /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = "<group>"; };
+		BA3299A91948DF430002EBFD /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		BA67F1A8193666210056DD00 /* photoArchivingIpad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photoArchivingIpad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA67F1AB193666210056DD00 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BA67F1AD193666210056DD00 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -125,6 +141,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA3299AA1948DF430002EBFD /* ImageIO.framework in Frameworks */,
+				BA3299A81948DE850002EBFD /* SDWebImage.framework in Frameworks */,
 				BA67F1AE193666210056DD00 /* CoreGraphics.framework in Frameworks */,
 				BA67F1B0193666210056DD00 /* UIKit.framework in Frameworks */,
 				BA67F1AC193666210056DD00 /* Foundation.framework in Frameworks */,
@@ -168,6 +186,7 @@
 		BA67F1AA193666210056DD00 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BA3299A91948DF430002EBFD /* ImageIO.framework */,
 				BA67F1AB193666210056DD00 /* Foundation.framework */,
 				BA67F1AD193666210056DD00 /* CoreGraphics.framework */,
 				BA67F1AF193666210056DD00 /* UIKit.framework */,
@@ -180,6 +199,11 @@
 		BA67F1B1193666210056DD00 /* photoArchivingIpad */ = {
 			isa = PBXGroup;
 			children = (
+				BA3299A71948DE850002EBFD /* SDWebImage.framework */,
+				BA3299A11948BA430002EBFD /* TFDataCommunicator.h */,
+				BA3299A21948BA430002EBFD /* TFDataCommunicator.m */,
+				BA3299A31948BA430002EBFD /* TFPerson.h */,
+				BA3299A41948BA430002EBFD /* TFPerson.m */,
 				BA67F1E0193667140056DD00 /* images */,
 				BA67F1F2193667140056DD00 /* oldClasses */,
 				BA67F1BA193666210056DD00 /* AppDelegate.h */,
@@ -191,6 +215,10 @@
 				BA67F1B2193666210056DD00 /* Supporting Files */,
 				BA67F21A193BC4AA0056DD00 /* NSDate+timelineStuff.h */,
 				BA67F21B193BC4AA0056DD00 /* NSDate+timelineStuff.m */,
+				BA32997119489A730002EBFD /* landingPageViewController.h */,
+				BA32997219489A730002EBFD /* landingPageViewController.m */,
+				BA3299741948B91E0002EBFD /* showServerData.h */,
+				BA3299751948B91E0002EBFD /* showServerData.m */,
 			);
 			path = photoArchivingIpad;
 			sourceTree = "<group>";
@@ -447,15 +475,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA0BE0B81943B3E40054F7C7 /* workspaceAuxView.m in Sources */,
+				BA3299A61948BA430002EBFD /* TFPerson.m in Sources */,
 				BA67F21F193BCC3A0056DD00 /* timelineManager.m in Sources */,
 				BA67F211193670D60056DD00 /* timelineLabelView.m in Sources */,
 				BA67F20C193667140056DD00 /* WorkspaceViewController.m in Sources */,
 				BA67F20B193667140056DD00 /* pictureFrame.m in Sources */,
 				BA67F20A193667140056DD00 /* imageObject.m in Sources */,
 				BA67F1C2193666210056DD00 /* ViewController.m in Sources */,
+				BA32997319489A730002EBFD /* landingPageViewController.m in Sources */,
+				BA3299761948B91E0002EBFD /* showServerData.m in Sources */,
 				BA67F1BC193666210056DD00 /* AppDelegate.m in Sources */,
 				BA67F1B8193666210056DD00 /* main.m in Sources */,
 				BA67F209193667140056DD00 /* dummyDataProvider.m in Sources */,
+				BA3299A51948BA430002EBFD /* TFDataCommunicator.m in Sources */,
 				BA67F21C193BC4AA0056DD00 /* NSDate+timelineStuff.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -584,6 +616,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/Tonyf/Desktop/Coding/PhotoArchivingV4/PhotoArchivingV4,
+					"$(PROJECT_DIR)/photoArchivingIpad",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "photoArchivingIpad/photoArchivingIpad-Prefix.pch";
 				INFOPLIST_FILE = "photoArchivingIpad/photoArchivingIpad-Info.plist";
@@ -598,6 +635,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/Tonyf/Desktop/Coding/PhotoArchivingV4/PhotoArchivingV4,
+					"$(PROJECT_DIR)/photoArchivingIpad",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "photoArchivingIpad/photoArchivingIpad-Prefix.pch";
 				INFOPLIST_FILE = "photoArchivingIpad/photoArchivingIpad-Info.plist";

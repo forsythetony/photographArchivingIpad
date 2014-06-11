@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>4BCC72D7-9E69-4559-820B-040819A8B937</string>
+	<key>IDESourceControlProjectName</key>
+	<string>photoArchivingIpad</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>DD7C7071-0E47-482E-8551-79D13B88DF27</key>
+		<string>https://github.com/forsythetony/photographArchivingIpad.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>photoArchivingIpad.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>DD7C7071-0E47-482E-8551-79D13B88DF27</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/forsythetony/photographArchivingIpad.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>DD7C7071-0E47-482E-8551-79D13B88DF27</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>DD7C7071-0E47-482E-8551-79D13B88DF27</string>
+			<key>IDESourceControlWCCName</key>
+			<string>photoArchivingIpad</string>
+		</dict>
+	</array>
+</dict>
+</plist>

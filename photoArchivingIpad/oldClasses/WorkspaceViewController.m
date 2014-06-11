@@ -24,7 +24,8 @@
     timelineManager *TLManager;
     float xDelta, yDelta, firstX, firstY;
     CGPoint startingPoint;
-    
+    TFDataCommunicator* mainDataCom;
+    NSArray* photoList;
     
 }
 
@@ -82,6 +83,15 @@
         self.rangeInformation = [dataProvider getDummyRange];
         
     }
+    
+    photoList = [NSArray new];
+    mainDataCom = [TFDataCommunicator new];
+    [mainDataCom setDelegate:self];
+    [mainDataCom getPhotosForUser:@"forsythetony"];
+}
+-(void)finishedPullingPhotoList:(NSArray *)list
+{
+    
 }
 - (void)viewDidLoad
 {
@@ -343,8 +353,6 @@
         labelYOffset *= -1;
         
         yr++;
-        
-        
     }
 
 }

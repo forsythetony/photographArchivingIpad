@@ -14,6 +14,7 @@
 #import "timelineManager.h"
 #import <CRToast.h>
 #import "workspaceAuxView.h"
+#import "TFDataCommunicator.h"
 
 typedef NS_ENUM(NSInteger, labelRotationType) {
     labelRotationTypeLeft,
@@ -21,7 +22,7 @@ typedef NS_ENUM(NSInteger, labelRotationType) {
     labelRotationTypeNone
 };
 
-@interface WorkspaceViewController : UIViewController <UIGestureRecognizerDelegate, timelineManagerDelegate>
+@interface WorkspaceViewController : UIViewController <UIGestureRecognizerDelegate, timelineManagerDelegate, TFCommunicatorDelegate>
 
 @property (strong, nonatomic) NSDictionary* rangeInformation;
 

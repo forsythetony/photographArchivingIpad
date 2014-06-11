@@ -23,6 +23,7 @@ typedef NS_ENUM(NSInteger, pLabelType) {
 @property (nonatomic, strong) IBOutlet UIImageView *theImage;
 
 @property (nonatomic, strong) imageObject* imageObject;
+@property (nonatomic, strong) NSDictionary* imageInformation;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 
 @property (nonatomic, assign) BOOL expanded;
