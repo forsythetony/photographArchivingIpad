@@ -9,10 +9,12 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSInteger, sDateType) {
+    
     sDateTypeSimple,
     sDateTypPretty,
     sDateTypeWithTime,
     sDateTypeMonthAndYear
+    
 };
 
 @interface NSDate (timelineStuff)
@@ -20,11 +22,13 @@ typedef NS_ENUM(NSInteger, sDateType) {
 +(NSDate*)referenceDate;
 +(NSDate*)dateWithv1String:(NSString*) v1String;
 +(NSDate*)dateWithYear:(NSNumber*) year;
++(NSDate*)dateWithTimeIntervalSinceUserReferencePoint:(NSTimeInterval) interval;
 
 -(NSTimeInterval)timeIntervalSinceBeginning;
+
 -(NSString*)displayDateOfType:(sDateType) dateType;
+
 -(NSNumber*)yearAsNumber;
 
-+(NSDate*)dateWithTimeIntervalSinceUserReferencePoint:(NSTimeInterval) interval;
 
 @end

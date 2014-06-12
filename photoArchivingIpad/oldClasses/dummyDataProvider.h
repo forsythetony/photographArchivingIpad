@@ -7,9 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "imageObject.h"
-#import "pictureFrame.h"
-#import "NSDate+timelineStuff.h"
+#import "imageHandling.h"
 
 @interface dummyDataProvider : NSObject
 

@@ -63,7 +63,9 @@
  */
 -(NSDictionary*)getDummyRange
 {
-    return @{@"startDate": [NSDate dateWithYear:@1980], @"endDate" : [NSDate dateWithYear:@2014]};
+    return @{   @"startDate": [NSDate dateWithYear:@1980],
+                @"endDate" : [NSDate dateWithYear:@2014]
+            };
 }
 
 @end

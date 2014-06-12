@@ -11,10 +11,10 @@
 
 @interface TFPerson : NSObject
 
-@property (nonatomic, weak) NSString *username;
-@property (nonatomic, weak) NSString *firstName;
-@property (nonatomic, weak) NSString *lastName;
-@property (nonatomic, weak) NSString *photoUrl;
-@property (nonatomic, weak) UIImage *profileImage;
+@property (nonatomic, weak) NSString    *username;
+@property (nonatomic, weak) NSString    *firstName;
+@property (nonatomic, weak) NSString    *lastName;
+@property (nonatomic, weak) NSString    *photoUrl;
+@property (nonatomic, weak) UIImage     *profileImage;
 
 @end

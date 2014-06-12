@@ -6,14 +6,10 @@
 //  Copyright (c) 2014 Appcoda. All rights reserved.
 //
 #import "WorkspaceViewController.h"
-#import "pictureFrame.h"
-#import "imageObject.h"
 #import <objc/message.h>
-#import "timelineLabelView.h"
 
 #define TLWALLSPACING 100.0
 #define MAINSCROLLVIEWSIZE 4000.0
-
 
 @interface WorkspaceViewController () {
     

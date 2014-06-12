@@ -134,6 +134,7 @@
 		BA67F21D193BCC3A0056DD00 /* timelineManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timelineManager.h; sourceTree = "<group>"; };
 		BA67F21E193BCC3A0056DD00 /* timelineManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = timelineManager.m; sourceTree = "<group>"; };
 		BAD162FD1949617E008144A0 /* imageHandling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imageHandling.h; sourceTree = "<group>"; };
+		BAD162FE194978AA008144A0 /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		D480C1DDB6EC466E8C8C3EAD /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -221,6 +222,7 @@
 				BA3299741948B91E0002EBFD /* showServerData.h */,
 				BA3299751948B91E0002EBFD /* showServerData.m */,
 				BAD162FD1949617E008144A0 /* imageHandling.h */,
+				BAD162FE194978AA008144A0 /* constants.h */,
 			);
 			path = photoArchivingIpad;
 			sourceTree = "<group>";

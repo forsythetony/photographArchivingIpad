@@ -8,8 +8,10 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSUInteger, photoType) {
+    
     tPNG,
     tJPG
+    
 };
 
 @class TFDataCommunicator;
@@ -22,12 +24,14 @@ typedef NS_ENUM(NSUInteger, photoType) {
 -(void)finishedPullingImageFromUrl:(UIImage*) image;
 -(void)finishedPullingPhotoList:(NSArray*) list;
 
-
 @end
+
 
 @interface TFDataCommunicator : NSObject
 
+
 @property (nonatomic, weak) id <TFCommunicatorDelegate> delegate;
+
 
 -(void)getUserWithUsername:(NSString*) username;
 -(void)retrieveImageWithURL:(NSString*) url;

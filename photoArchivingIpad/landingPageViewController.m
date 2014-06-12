@@ -9,7 +9,9 @@
 #import "landingPageViewController.h"
 
 @interface landingPageViewController () {
+    
     BOOL btnTimelineDidSpring;
+    
 }
 
 @end
@@ -28,7 +30,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     [self initialSetup];
     
@@ -43,8 +44,9 @@
     
     //  Set the button to be invisible
     
-    [self.buttonTimeline setAlpha:0.0];
-    [self.buttonServer setAlpha:0.0];
+    self.buttonTimeline.alpha   = 0.0;
+    self.buttonServer.alpha     = 0.0;
+    
 }
 - (void)aestheticsConfiguration
 {
@@ -52,54 +54,63 @@
     
     UIColor *btnTimelineTextColor = [UIColor indigoColor];
     
-    [self.buttonTimeline setTitleColor:btnTimelineTextColor forState:UIControlStateNormal];
+    [self.buttonTimeline setTitleColor:btnTimelineTextColor
+                              forState:UIControlStateNormal];
+    
     if (btnTimelineDidSpring == NO) {
-
-        //  Add spring animation to button
         
         float buttonToValue = 200.0;
         
+        
         POPSpringAnimation *springFromBelow = [POPSpringAnimation animation];
         
-        springFromBelow.property = [POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
+        springFromBelow.property    = [POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
         
-        springFromBelow.fromValue = @(1000);
-        springFromBelow.toValue = @(buttonToValue);
+        springFromBelow.fromValue   = @(1000);
+        springFromBelow.toValue     = @(buttonToValue);
+        
         springFromBelow.springSpeed = 10.0;
         
-        [self.buttonTimeline.layer pop_addAnimation:springFromBelow forKey:@"springFromBelow"];
+        [self.buttonTimeline.layer pop_addAnimation:springFromBelow
+                                             forKey:@"springFromBelow"];
         
-        //  Add alpha animation to button
+        
+        
         
         POPSpringAnimation *alphaSpring = [POPSpringAnimation animation];
         
-        alphaSpring.property = [POPAnimatableProperty propertyWithName:kPOPViewAlpha];
+        alphaSpring.property    = [POPAnimatableProperty propertyWithName:kPOPViewAlpha];
         
-        alphaSpring.toValue = @(1.0);
+        alphaSpring.toValue     = @(1.0);
         
-        [self.buttonTimeline pop_addAnimation:alphaSpring forKey:@"alphaSpring"];
+        [self.buttonTimeline pop_addAnimation:alphaSpring
+                                       forKey:@"alphaSpring"];
         
-        //  Add animations to server button
+        
+        
         
         buttonToValue += 50.0;
         
         POPSpringAnimation *springFromBelowServer = [POPSpringAnimation animation];
         
-        springFromBelowServer.property = [POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
+        springFromBelowServer.property      = [POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
         
-        springFromBelowServer.fromValue = @(1000);
-        springFromBelowServer.toValue = @(buttonToValue);
-        springFromBelowServer.springSpeed = 7.0;
+        springFromBelowServer.fromValue     = @(1000);
+        springFromBelowServer.toValue       = @(buttonToValue);
+        
+        springFromBelowServer.springSpeed   = 7.0;
+        
+        [self.buttonServer.layer pop_addAnimation:springFromBelowServer
+                                           forKey:@"springFromBelowServer"];
+        
+        [self.buttonServer pop_addAnimation:alphaSpring
+                                     forKey:@"alphaSpringServer"];
         
         
-        [self.buttonServer.layer pop_addAnimation:springFromBelowServer forKey:@"springFromBelowServer"];
-        
-        [self.buttonServer pop_addAnimation:alphaSpring forKey:@"alphaSpringServer"];
         
         
-        //  Change color of server button
-        
-        [self.buttonServer setTitleColor:btnTimelineTextColor forState:UIControlStateNormal];
+        [self.buttonServer setTitleColor:btnTimelineTextColor
+                                forState:UIControlStateNormal];
         
         btnTimelineDidSpring = YES;
     }
@@ -114,16 +125,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

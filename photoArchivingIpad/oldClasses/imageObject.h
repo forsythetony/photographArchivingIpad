@@ -11,9 +11,9 @@
 @interface imageObject : NSObject
 
 @property (nonatomic, strong) NSString *id;
-//@property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSDate* date;
+
 @property (nonatomic, strong) NSURL* photoURL;
 @property (nonatomic, strong) NSURL* thumbNailURL;
 

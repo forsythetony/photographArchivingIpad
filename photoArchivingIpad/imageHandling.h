@@ -14,6 +14,7 @@
 #import "NSDate+timelineStuff.h"
 #import <CRToast.h>
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <FontAwesomeKit.h>
 
 #import "imageObject.h"
 #import "pictureFrame.h"

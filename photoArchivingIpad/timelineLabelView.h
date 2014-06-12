@@ -10,7 +10,7 @@
 
 @interface timelineLabelView : UIView
 
-@property (nonatomic, assign) CGPoint center;
-@property (nonatomic, strong) NSDate *date;
+@property (nonatomic, assign)   CGPoint center;
+@property (nonatomic, strong)   NSDate  *date;
 
 @end

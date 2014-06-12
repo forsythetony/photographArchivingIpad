@@ -31,38 +31,30 @@
 {
     //  Configure the label for the photos table
     
-    UIColor* lblPhotosBackground = [UIColor icebergColor];
-    UIColor* lblText = [UIColor indigoColor];
+    NSString *lblTitle              = @"User's Photographs";
+    UIColor *lblPhotosBackground    = [UIColor icebergColor];
+    UIColor *lblText                = [UIColor indigoColor];
 
-    NSString* lblTitle = @"User's Photographs";
+    float photosLblFontSize         = 18.0;
+    UIFont *lblFont = [UIFont fontWithName:@"DINAlternate-Bold"
+                                      size:photosLblFontSize];
     
-    float photosLblFontSize = 18.0;
-    
-    UIFont *lblFont = [UIFont fontWithName:@"DINAlternate-Bold" size:photosLblFontSize];
-    
-    [self.lblPhotosForUsers setBackgroundColor:lblPhotosBackground];
-    [self.lblPhotosForUsers setTextColor:lblText];
-    
-    [self.lblPhotosForUsers setText:lblTitle];
-    [self.lblPhotosForUsers setTextAlignment:NSTextAlignmentCenter];
-    [self.lblPhotosForUsers setFont:lblFont];
+    self.lblPhotosForUsers.backgroundColor  = lblPhotosBackground;
+    self.lblPhotosForUsers.textColor        = lblText;
+    self.lblPhotosForUsers.text             = lblTitle;
+    self.lblPhotosForUsers.textAlignment    = NSTextAlignmentCenter;
+    self.lblPhotosForUsers.font             = lblFont;
     
     //  Configure the image view
     
-    [self.mainImageView.layer setCornerRadius:8.0];
-    
-    //  Configure the text view
-    
-    [self.mainTextView setFont:[UIFont fontWithName:@"CourierNewPSMT" size:13.0]];
-    [self.mainTextView setBackgroundColor:[UIColor clearColor]];
-    [self.mainTextView setTextColor:[UIColor ghostWhiteColor]];
-    [self.mainTextView.layer setCornerRadius:4.0];
-    [self.mainTextView setText:@""];
-    [self.mainTextView setEditable:NO];
+    self.mainImageView.layer.cornerRadius   = 8.0;
+    self.mainTextView.font                  = [UIFont fontWithName:@"CourierNewPSMT" size:13.0];
+    self.mainTextView.textColor             = [UIColor ghostWhiteColor];
+    self.mainTextView.layer.cornerRadius    = 4.0;
+    self.mainTextView.text                  = @"";
+    self.mainTextView.editable              = NO;
     
     textFieldHasColor = NO;
-    
-    
     
 }
 - (void)viewDidLoad
@@ -70,20 +62,22 @@
     [super viewDidLoad];
     
     [self initialSetup];
+    
     mainDataCom = [TFDataCommunicator new];
     [mainDataCom setDelegate:self];
+    
     [mainDataCom getPhotosForUser:@"forsythetony"];
     
     photosList = [NSArray new];
     
-    
-    // Do any additional setup after loading the view.
 }
 -(void)finishedPullingPhotoList:(NSArray *)list
 {
+    
     photosList = list;
 
     [self.photosForUser reloadData];
+    
 }
 - (void)didReceiveMemoryWarning
 {
@@ -107,83 +101,88 @@
 
         NSLog(@"The photos list array is %i big.", [photosList count]);
         
-        
         NSLog(@"%@", photograph);
         
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"
+                                                                forIndexPath:indexPath];
         
-        cell.textLabel.text = [[photograph objectForKey:@"imageInformation"] objectForKey:@"title"];
-        
+        cell.textLabel.text = photograph[@"imageInformation"][@"title"];
+    
         return cell;
+    
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     if (indexPath.section == 0) {
         
-        NSDictionary *photoDict = [photosList objectAtIndex:indexPath.row];
+        NSDictionary *photoDict     = [photosList objectAtIndex:indexPath.row];
         
-        NSString *imageDetailText = [NSString stringWithFormat:@"%@", photoDict];
+        NSString *imageDetailText   = [NSString stringWithFormat:@"%@", photoDict];
         
-        [self.mainTextView setText:imageDetailText];
-        
-        //[self.mainImageView setImageWithURL:[NSURL URLWithString:[photoDict objectForKey:@"imageURL"]]];
+        self.mainTextView.text      = imageDetailText;
         
         [self.mainImageView setImageWithURL:[NSURL URLWithString:[photoDict objectForKey:@"imageURL"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            
+            
             POPSpringAnimation* photoSpring = [POPSpringAnimation animation];
             
-            photoSpring.property = [POPAnimatableProperty propertyWithName:kPOPLayerSize];
+            photoSpring.property    = [POPAnimatableProperty propertyWithName:kPOPLayerSize];
             
-            photoSpring.toValue = [NSValue valueWithCGSize:CGSizeMake(350.0, 350.0)];
-            photoSpring.fromValue = [NSValue valueWithCGSize:CGSizeMake(325.0, 325.0)];
+            photoSpring.toValue     = [NSValue valueWithCGSize:CGSizeMake(350.0, 350.0)];
+            photoSpring.fromValue   = [NSValue valueWithCGSize:CGSizeMake(325.0, 325.0)];
             
             photoSpring.springSpeed = 10.0;
             
-            [self.mainImageView.layer pop_addAnimation:photoSpring forKey:@"photoSpringDownload"];
+            [self.mainImageView.layer pop_addAnimation:photoSpring
+                                                forKey:@"photoSpringDownload"];
+            
+            
         }];
+        
+        
         
         POPSpringAnimation* photoSpring = [POPSpringAnimation animation];
         
-        photoSpring.property = [POPAnimatableProperty propertyWithName:kPOPLayerSize];
+        photoSpring.property    = [POPAnimatableProperty propertyWithName:kPOPLayerSize];
         
-        photoSpring.toValue = [NSValue valueWithCGSize:CGSizeMake(350.0, 350.0)];
-        photoSpring.fromValue = [NSValue valueWithCGSize:CGSizeMake(325.0, 325.0)];
+        photoSpring.toValue     = [NSValue valueWithCGSize:CGSizeMake(350.0, 350.0)];
+        photoSpring.fromValue   = [NSValue valueWithCGSize:CGSizeMake(325.0, 325.0)];
         
         photoSpring.springSpeed = 10.0;
         
-        //  Create corner radius animation
+
+        
         
         POPSpringAnimation* cornerRadiusSpring = [POPSpringAnimation animation];
         
-        cornerRadiusSpring.property = [POPAnimatableProperty propertyWithName:kPOPLayerCornerRadius];
+        cornerRadiusSpring.property     = [POPAnimatableProperty propertyWithName:kPOPLayerCornerRadius];
         
-        cornerRadiusSpring.fromValue = @(0.0);
-        cornerRadiusSpring.toValue = @(30.0);
+        cornerRadiusSpring.fromValue    = @(0.0);
+        cornerRadiusSpring.toValue      = @(30.0);
         
+        [self.mainImageView.layer pop_addAnimation:cornerRadiusSpring
+                                            forKey:@"cornerRadSpring"];
         
-        [self.mainImageView.layer pop_addAnimation:cornerRadiusSpring forKey:@"cornerRadSpring"];
-        //[self.mainImageView.layer pop_addAnimation:photoSpring forKey:@"photoSpring"];
         
         if (textFieldHasColor == NO) {
+            
+            
+            
             POPSpringAnimation* colorChange = [POPSpringAnimation animation];
             
-            colorChange.property = [POPAnimatableProperty propertyWithName:kPOPLayerBackgroundColor];
+            colorChange.property    = [POPAnimatableProperty propertyWithName:kPOPLayerBackgroundColor];
             
-            colorChange.fromValue = [UIColor clearColor];
-            colorChange.toValue = [UIColor midnightBlueColor];
+            colorChange.fromValue   = [UIColor clearColor];
+            colorChange.toValue     = [UIColor midnightBlueColor];
             
             
-            [self.mainTextView.layer pop_addAnimation:colorChange forKey:@"changingColors"];
+            [self.mainTextView.layer pop_addAnimation:colorChange
+                                               forKey:@"changingColors"];
             
             textFieldHasColor = YES;
 
         }
-        
-        
-        
     }
 }
-
-
-
-
 @end

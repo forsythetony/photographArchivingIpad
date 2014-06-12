@@ -13,9 +13,9 @@
 
 @interface showServerData : UIViewController <UITableViewDataSource, UITableViewDelegate, TFCommunicatorDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *photosForUser;
-@property (weak, nonatomic) IBOutlet UILabel *lblPhotosForUsers;
-@property (weak, nonatomic) IBOutlet UITextView *mainTextView;
-@property (weak, nonatomic) IBOutlet UIImageView *mainImageView;
+@property (weak, nonatomic) IBOutlet UITableView    *photosForUser;
+@property (weak, nonatomic) IBOutlet UILabel        *lblPhotosForUsers;
+@property (weak, nonatomic) IBOutlet UITextView     *mainTextView;
+@property (weak, nonatomic) IBOutlet UIImageView    *mainImageView;
 
 @end
