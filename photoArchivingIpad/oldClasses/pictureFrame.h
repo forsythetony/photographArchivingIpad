@@ -11,6 +11,8 @@
 #import <Colours.h>
 #import "imageObject.h"
 #import "NSDate+timelineStuff.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import <FontAwesomeKit.h>
 
 typedef NS_ENUM(NSInteger, pLabelType) {
     pLabelTypeTitle,

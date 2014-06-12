@@ -9,7 +9,7 @@
 #import "dummyDataProvider.h"
 
 @implementation dummyDataProvider
-
+/*
 -(NSArray *)getImageObjects
 {
     NSMutableArray *imageObjects = [NSMutableArray new];
@@ -51,7 +51,6 @@
         obj.date = [dataEntry objectForKey:@"date"];
         
         [frame setImageObject:obj];
-        [frame.theImage setImage:obj.image];
         
         [frame setFrame:CGRectMake(0.0, 0.0, 75.0, 75.0)];
         [imageFrames addObject:frame];
@@ -61,8 +60,10 @@
     
     return [NSArray arrayWithArray:imageFrames];
 }
+ */
 -(NSDictionary*)getDummyRange
 {
     return @{@"startDate": [NSDate dateWithYear:@1980], @"endDate" : [NSDate dateWithYear:@2014]};
 }
+
 @end

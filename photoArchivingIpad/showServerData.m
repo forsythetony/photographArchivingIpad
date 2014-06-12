@@ -126,7 +126,7 @@
         
         [self.mainTextView setText:imageDetailText];
         
-        [self.mainImageView setImageWithURL:[NSURL URLWithString:[photoDict objectForKey:@"imageURL"]]];
+        //[self.mainImageView setImageWithURL:[NSURL URLWithString:[photoDict objectForKey:@"imageURL"]]];
         
         [self.mainImageView setImageWithURL:[NSURL URLWithString:[photoDict objectForKey:@"imageURL"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
             POPSpringAnimation* photoSpring = [POPSpringAnimation animation];
@@ -161,7 +161,7 @@
         
         
         [self.mainImageView.layer pop_addAnimation:cornerRadiusSpring forKey:@"cornerRadSpring"];
-        [self.mainImageView.layer pop_addAnimation:photoSpring forKey:@"photoSpring"];
+        //[self.mainImageView.layer pop_addAnimation:photoSpring forKey:@"photoSpring"];
         
         if (textFieldHasColor == NO) {
             POPSpringAnimation* colorChange = [POPSpringAnimation animation];

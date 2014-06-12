@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+
 #import "dummyDataProvider.h"
-#import <pop/POP.h>
-#import <Colours.h>
-#import "NSDate+timelineStuff.h"
 #import "timelineManager.h"
-#import <CRToast.h>
 #import "workspaceAuxView.h"
 #import "TFDataCommunicator.h"
+
+#import "imageHandling.h"
+
 
 typedef NS_ENUM(NSInteger, labelRotationType) {
     labelRotationTypeLeft,

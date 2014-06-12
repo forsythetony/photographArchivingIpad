@@ -64,7 +64,11 @@
         CGPoint theCenter = [self createPointWithDate:[img date]];
         
         [theFrame setCenter:theCenter];
+        
+        [theFrame.theImage setImageWithURL:img.thumbNailURL];
+        
         [_TLView addSubview:theFrame];
+        
     }
 }
 -(void)updateDateForPicture:(pictureFrame *)picture

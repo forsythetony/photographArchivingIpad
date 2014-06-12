@@ -8,7 +8,7 @@
 
 #import "pictureFrame.h"
 
-#define CORNERRAD 30.0
+#define CORNERRAD 4.0
 
 
 @implementation pictureFrame {
@@ -361,7 +361,20 @@
 {
     _imageObject = imageObject;
     
-    [self.theImage setImage:imageObject.image];
+    
+    [self performSelectorOnMainThread:@selector(updateImage) withObject:nil waitUntilDone:NO];
+    
+    
+}
+-(void)updateImage
+{
+    
+    FAKFontAwesome *picture = [FAKFontAwesome pictureOIconWithSize:30.0];
+
+    UIImage *picImage = [picture imageWithSize:CGSizeMake(30.0, 30.0)];
+    
+    [self.theImage setImageWithURL:[_imageObject thumbNailURL]];
+    
 }
 #pragma mark Utility Functions -
 -(UIFont*)fontForLabelType:(pLabelType) labelType

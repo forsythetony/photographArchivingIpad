@@ -137,7 +137,7 @@
 }
 -(void)getPhotosForUser:(NSString *)username
 {
-    NSString *urlString = [NSString stringWithFormat:@"%@/photos?username=%@", APIADDRESS, username];
+    NSString *urlString = [NSString stringWithFormat:@"%@/photos?forUser=%@", APIADDRESS, username];
     
     
     NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];

@@ -16,20 +16,29 @@
 
 
 @interface WorkspaceViewController () {
-    dummyDataProvider *dataProvider;
-    UIScrollView *mainScrollView;
-    float TLSpacing;
-    double pureStartDate, pureEndDate;
-    NSDate *startDate, *endDate;
-    timelineManager *TLManager;
-    float xDelta, yDelta, firstX, firstY;
+    
+    float   TLSpacing;
+    
+    float   xDelta, yDelta,
+            firstX, firstY;
+    
+    double  pureStartDate,
+            pureEndDate;
+    
     CGPoint startingPoint;
-    TFDataCommunicator* mainDataCom;
-    NSArray* photoList;
+    
+    dummyDataProvider   *dataProvider;
+    timelineManager     *TLManager;
+    TFDataCommunicator  *mainDataCom;
+
+    UIScrollView    *mainScrollView;
+    
+    NSDate  *startDate,
+            *endDate;
+    
+    NSArray *photoList;
     
 }
-
-@property (strong, nonatomic) NSArray* photographs;
 
 @end
 
@@ -38,134 +47,190 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    
     if (self) {
-        // Custom initialization
+        
     }
     return self;
 }
+/*
 - (void)createImagesArray
 {
+    
     NSBundle *theBundle = [NSBundle mainBundle];
     
     NSLog(@"Bundle path is: %@", theBundle.resourcePath);
     
 }
+*/
 -(void)viewDidAppear:(BOOL)animated
 {
-    CGRect mainBounds = self.view.bounds;
-    CGRect mainFrame = self.view.frame;
-    
-    NSLog(@"Screen Bounds: %@", NSStringFromCGRect(mainBounds));
-    NSLog(@"Frame: %@", NSStringFromCGRect(mainFrame));
     
     [self createScrollView];
     [self createAuxViews];
     
-    [TLManager setInitialPhotographs:_photographs];
-    
+    [mainDataCom getPhotosForUser:@"forsythetony"];
     
 }
 -(void)initialSetup
 {
+    
     UIColor *MVBackground = [UIColor colorWithPatternImage:[UIImage imageNamed:@"subtle_carbon.png"]];
     
-    [self.view setBackgroundColor:MVBackground];
     
-    self.title = @"Timeline";
+    self.view.backgroundColor   = MVBackground;
+    self.title                  = @"Timeline";
+    
     
     dataProvider = [dummyDataProvider new];
     
-    _photographs = [dataProvider getImageObjects];
-    
-    [self addGestureRecognizers];
-    
     if (!self.rangeInformation) {
+        
         self.rangeInformation = [dataProvider getDummyRange];
         
     }
     
     photoList = [NSArray new];
+    
     mainDataCom = [TFDataCommunicator new];
-    [mainDataCom setDelegate:self];
-    [mainDataCom getPhotosForUser:@"forsythetony"];
+    mainDataCom.delegate    = self;
+    
 }
 -(void)finishedPullingPhotoList:(NSArray *)list
 {
     
+    if (list.count > 0) {
+        
+        NSMutableArray *framez = [NSMutableArray new];
+        
+        for (NSDictionary* dict in list)
+        {
+            
+            NSLog(@"%@", dict);
+            
+            imageObject *obj = [imageObject new];
+            
+            pictureFrame *frame = [pictureFrame createFrame];
+            
+            
+            obj.photoURL        = [NSURL URLWithString:[dict objectForKey:@"imageURL"]];
+            obj.thumbNailURL    = [NSURL URLWithString:[dict objectForKey:@"thumbnailURL"]];
+            obj.date            = [NSDate dateWithv1String:dict[@"imageInformation"][@"dateTaken"][@"dateString"]];
+            obj.title           = [[dict objectForKey:@"imageInformation"] objectForKey:@"title"];
+            obj.centerXoffset   = @0.0;
+            
+            [frame setImageObject:obj];
+            
+            [frame setFrame:CGRectMake(
+                                       0.0  , 0.0,
+                                       70.0 , 70.0
+                                       )];
+            
+            [framez addObject:frame];
+            
+        }
+        
+        photoList = [NSArray arrayWithArray:framez];
+        
+        [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+        
+    }
+    
+}
+-(void)updateUI
+{
+    
+    [TLManager setInitialPhotographs:photoList];
+    
 }
 - (void)viewDidLoad
 {
+    
     [super viewDidLoad];
     
     [self initialSetup];
-    
     
 }
 #pragma mark Create Views
 -(void)createAuxViews
 {
-    float auxViewHeight = self.view.bounds.size.height * 0.4;
-    float auxViewYOrg = self.view.bounds.size.height * 0.6;
-    float auxViewWidth = self.view.bounds.size.width;
+    float auxViewHeight     = self.view.bounds.size.height * 0.4;
+    float auxViewYOrg       = self.view.bounds.size.height * 0.6;
+    float auxViewWidth      = self.view.bounds.size.width;
     
-    CGRect auxViewFrame = CGRectMake(0.0,
-                                     auxViewYOrg,
-                                     auxViewWidth,
-                                     auxViewHeight);
+    CGRect auxViewFrame = CGRectMake(
+                                     0.0            , auxViewYOrg,
+                                     auxViewWidth   , auxViewHeight
+                                     );
     
     workspaceAuxView* auxView = [[workspaceAuxView alloc] initWithFrame:auxViewFrame];
     
     [self.view addSubview:auxView];
+    
 }
 -(void)createSmallViewsWithImages:(NSArray*) images
 {
+    
     CGPoint centerOfView = self.view.center;
     
-    
     for (imageObject* obj in images) {
+        
         pictureFrame *frame = [pictureFrame createFrame];
-        [frame.theImage setImage:[obj image]];
+        
         
         CGPoint frameCenter = centerOfView;
-        frameCenter.x += [[obj centerXoffset] floatValue];
-        frameCenter.y = mainScrollView.bounds.size.height + 100.0;
-        frame.center = frameCenter;
         
-        UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanFrom:)];
-        [panRecognizer setDelegate:self];
+        frameCenter.x       += [[obj centerXoffset] floatValue];
+        frameCenter.y       =   mainScrollView.bounds.size.height + 100.0;
         
-        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapFrom:)];
+        frame.center        = frameCenter;
         
-        [tapRecognizer setDelegate:self];
+        
+        UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                                                                        action:@selector(handlePanFrom:)];
+        
+        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                        action:@selector(handleTapFrom:)];
+        
+        panRecognizer.delegate = self;
+        tapRecognizer.delegate = self;
         
         [frame addGestureRecognizer:panRecognizer];
         [frame addGestureRecognizer:tapRecognizer];
         
-        [frame bounceInFromPoint:mainScrollView.bounds.size.height toPoint:mainScrollView.center.y];
+        [frame bounceInFromPoint:mainScrollView.bounds.size.height
+                         toPoint:mainScrollView.center.y];
         
         [mainScrollView addSubview:frame];
         
     }
+    
 }
+
 -(void)createScrollView
 {
     float scrollViewHeight = (self.view.bounds.size.height * .6);
     
-    CGRect scrollViewFrame;
+    CGRect scrollViewFrame = CGRectMake(
+                                        0.0                 , 0.0,
+                                        MAINSCROLLVIEWSIZE  , scrollViewHeight
+                                        );
     
-    scrollViewFrame.origin = CGPointMake(0.0, 0.0);
     
-    scrollViewFrame.size.width = MAINSCROLLVIEWSIZE;
-    scrollViewFrame.size.height = scrollViewHeight;
+    CGRect screenRect   = CGRectMake(
+                                     0.0                          , 0.0,
+                                     self.view.bounds.size.width  , scrollViewHeight
+                                     );
     
-    CGRect screenRect = self.view.bounds;
     
-    mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0, 0.0, screenRect.size.width, scrollViewHeight)];
+    mainScrollView  = [[UIScrollView alloc] initWithFrame:screenRect];
     
-    [mainScrollView setContentSize:scrollViewFrame.size];
-    [mainScrollView setScrollEnabled:YES];
     
-    [mainScrollView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"subtle_carbon.png"]]];
+    mainScrollView.contentSize      = scrollViewFrame.size;
+    mainScrollView.scrollEnabled    = YES;
+    mainScrollView.backgroundColor  = [UIColor colorWithPatternImage:[UIImage imageNamed:@"subtle_carbon.png"]];
+    mainScrollView.showsHorizontalScrollIndicator  = NO;
+
     
     [self.view addSubview:mainScrollView];
     
@@ -174,72 +239,81 @@
 }
 -(void)createTimelineWithValues
 {
-    NSDictionary *rangeInfo = _rangeInformation;
-    
-    
-    
-    
-    startDate = [self.rangeInformation objectForKey:@"startDate"];
-    endDate = [self.rangeInformation objectForKey:@"endDate"];
+    startDate   = [self.rangeInformation objectForKey:@"startDate"];
+    endDate     = [self.rangeInformation objectForKey:@"endDate"];
     
     NSNumber *startYear = [startDate yearAsNumber];
-    NSNumber *endYear = [endDate yearAsNumber];
-    
-    
-    //NSArray *years = [self createYearsArrayWithStart:startYear andEnd:endYear];
-    
+    NSNumber *endYear   = [endDate yearAsNumber];
     
     UIColor *TLbackground = [UIColor midnightBlueColor];
-    CGRect scrollViewRect = mainScrollView.frame;
-    CGSize scrollViewContentSize = mainScrollView.contentSize;
     
-    UIView *timelineView = [[UIView alloc] initWithFrame:CGRectMake(scrollViewRect.origin.x,
-                                                                    scrollViewRect.origin.y,
-                                                                    scrollViewContentSize.width,
-                                                                    scrollViewContentSize.height)];
-    [timelineView setBackgroundColor:TLbackground];
+    CGRect scrollViewRect           = mainScrollView.frame;
+    CGSize scrollViewContentSize    = mainScrollView.contentSize;
+    
+    
+    CGRect timelineViewFrame    = CGRectMake(
+                                             scrollViewRect.origin.x     ,  scrollViewRect.origin.y,
+                                             scrollViewContentSize.width ,  scrollViewContentSize.height
+                                             );
+    
+    UIView *timelineView = [[UIView alloc] initWithFrame:timelineViewFrame];
+    
+    
+    timelineView.backgroundColor    = TLbackground;
     
     [mainScrollView addSubview:timelineView];
+    
     TLManager = [timelineManager new];
-
     TLManager.delegate = self;
     
-    [TLManager setStartDate:startDate andEndDate:endDate andView:timelineView andXOffsert:TLWALLSPACING];
+    [TLManager setStartDate:startDate
+                 andEndDate:endDate
+                    andView:timelineView
+                andXOffsert:TLWALLSPACING ];
+    
     
     [self addTimelineLine];
     
-    
-    [self createYearPointsWithYearData:@{@"startYear": startYear,@"endYear" : endYear} andContentSize:mainScrollView.contentSize toView:timelineView];
+    [self createYearPointsWithYearData:@{@"startYear": startYear,@"endYear" : endYear}
+                        andContentSize:mainScrollView.contentSize
+                                toView:timelineView];
     
 }
+
 -(UIStatusBarStyle)preferredStatusBarStyle{
+    
     return UIStatusBarStyleDefault;
+    
 }
 -(void)addTimelineLine
 {
-
-    float animationDuration = 1.5;
     
-    CGRect TLStartFrame = CGRectMake(TLWALLSPACING,
-                                           mainScrollView.center.y,
-                                           1.0,
-                                           2.0);
+    float animationDuration     = 1.5;
     
-    CGRect TLFinalFrame = CGRectMake(TLWALLSPACING,
-                                           mainScrollView.center.y,
-                                           mainScrollView.contentSize.width - (TLWALLSPACING * 2.0),
-                                           2.0);
+    
+    CGRect TLStartFrame = CGRectMake(
+                                     TLWALLSPACING  , mainScrollView.center.y,
+                                     1.0            , 2.0
+                                     );
+    
+    CGRect TLFinalFrame = CGRectMake(
+                                     TLWALLSPACING                                              , mainScrollView.center.y,
+                                     mainScrollView.contentSize.width - (TLWALLSPACING * 2.0)   ,  2.0
+                                     );
     
     UIColor *TLLineColor = [UIColor black25PercentColor];
     
     UIView *TLLine = [[UIView alloc] initWithFrame:TLStartFrame];
     
-    [TLLine setBackgroundColor:TLLineColor];
+    TLLine.backgroundColor = TLLineColor;
+    
     
     [mainScrollView addSubview:TLLine];
     
     [UIView animateWithDuration:animationDuration animations:^{
+        
         [TLLine setFrame:TLFinalFrame];
+        
     }];
     
 }
@@ -247,8 +321,7 @@
 {
     
     NSInteger startYear = [[self.rangeInformation[@"startDate"] yearAsNumber] integerValue];
-    NSInteger endYear = [[self.rangeInformation[@"endDate"] yearAsNumber] integerValue];
-    
+    NSInteger endYear   = [[self.rangeInformation[@"endDate"] yearAsNumber] integerValue];
     
     float sizeOfTL = contentSize.width - (TLWALLSPACING * 2.0);
     
@@ -258,35 +331,30 @@
     
     NSInteger frameDiff = (NSInteger)sizeOfTL / yearDiff;
     
-    NSLog(@"\nFrameDiff = %d", frameDiff);
+    CGRect labelFrame = CGRectMake(
+                                   0.0  , 0.0,
+                                   50.0 , 30.0
+                                   );
     
-    CGRect labelFrame = CGRectMake(0.0, 0.0, 50.0, 30.0);
     CGPoint labelCenter = CGPointMake(TLWALLSPACING, timelineView.center.y);
     
     NSInteger yr = startYear;
     
-    float labelYOffset = 15.0;
+    float labelYOffset      = 15.0;
     float animationDuration = 0.2;
     
     for (int i = 0; i <= yearDiff; i++) {
         
-        
         NSDictionary *labelAttributes = [self getTextAttributesWithYear:yr withInfo:yearData];
-        
-        
-        //  Create labelstring
-        
-        //  Create label
         
         UILabel *yrLabel = [[UILabel alloc] initWithFrame:labelFrame];
         
-        [yrLabel setText:labelAttributes[@"yearString"]];
-        [yrLabel setTextAlignment:NSTextAlignmentCenter];
+        yrLabel.text            = labelAttributes[@"yearString"];
+        yrLabel.textAlignment   = NSTextAlignmentCenter;
+        yrLabel.font            = [UIFont fontWithName:labelAttributes[@"fontFamily"]
+                                                  size:[labelAttributes[@"fontSize"] floatValue]];
+        yrLabel.textColor       = labelAttributes[@"textColor"];
         
-        [yrLabel setFont:[UIFont fontWithName:labelAttributes[@"fontFamily"]
-                                         size:[labelAttributes[@"fontSize"] floatValue]]];
-        
-        [yrLabel setTextColor:labelAttributes[@"textColor"]];
         [yrLabel sizeToFit];
 
         [timelineView addSubview:yrLabel];
@@ -294,68 +362,90 @@
         float heightMod = [labelAttributes[@"heightMod"] floatValue];
         
         if (labelYOffset < 0) {
+            
             heightMod *= -1;
+            
         }
         
-        [yrLabel setCenter:CGPointMake(labelCenter.x + [labelAttributes[@"xOffset"] floatValue], labelCenter.y + labelYOffset + heightMod)];
+        CGPoint yrLabelCenter;
+        
+        yrLabelCenter.x =   labelCenter.x + [labelAttributes[@"xOffset"] floatValue];
+        yrLabelCenter.y =   labelCenter.y + labelYOffset + heightMod;
+        
+        [yrLabel setCenter:yrLabelCenter];
         
         [yrLabel setAlpha:0.0];
         
         [UIView animateWithDuration:animationDuration animations:^{
+            
             [yrLabel setAlpha:[labelAttributes[@"finalAlpha"] floatValue]];
+            
         }];
         
         animationDuration += 0.1;
-        
-        
+    
         switch ([labelAttributes[@"rotation"] integerValue]) {
+                
+                
             case labelRotationTypeRight:
+                
                 yrLabel.transform = CGAffineTransformMakeRotation(M_PI/2);
                 break;
+                
+                
             case labelRotationTypeLeft:
+                
                 yrLabel.transform = CGAffineTransformMakeRotation((M_PI*3)/2);
                 break;
+                
+                
             default:
                 break;
         }
         
         //  Create line
         
-        float lineHeight = [labelAttributes[@"lineHeight"] floatValue];
-        float startingLineHeight = 1.0;
+        float lineHeight            = [labelAttributes[@"lineHeight"] floatValue];
+        float startingLineHeight    = 1.0;
         
         if (labelYOffset < 0) {
-            lineHeight *= -1;
-            startingLineHeight *= -1;
+            
+            lineHeight          *= -1;
+            startingLineHeight  *= -1;
+            
         }
         
-        CGRect lineFrame = CGRectMake(labelCenter.x, timelineView.center.y, 1.0, startingLineHeight);
+        CGRect lineFrame = CGRectMake(
+                                          labelCenter.x , timelineView.center.y,
+                                          1.0           , startingLineHeight
+                                      );
         
         UIView *labelLine = [[UIView alloc] initWithFrame:lineFrame];
-        [labelLine setBackgroundColor:[UIColor black25PercentColor]];
-        lineFrame.size.height = lineHeight;
+        
+        labelLine.backgroundColor   = [UIColor black25PercentColor];
+        lineFrame.size.height       = lineHeight;
         
         [UIView animateWithDuration:animationDuration animations:^{
+            
             [labelLine setFrame:lineFrame];
+            
         }];
     
         [timelineView addSubview:labelLine];
         
-        [yrLabel setBackgroundColor:labelAttributes[@"background"]];
         
-        
-        
-        
+        yrLabel.backgroundColor     = labelAttributes[@"background"];
         
         //  Update values
         
-        labelCenter.x += frameDiff;
-        labelYOffset *= -1;
-        
+        labelCenter.x   += frameDiff;
+        labelYOffset    *= -1;
         yr++;
+        
     }
 
 }
+/*
 -(void)testMove
 {
     NSLog(@"I fired!");
@@ -370,41 +460,60 @@
     
     [theFrame setCenter:newCenter];
 }
-
+*/
 #pragma mark Gesture Recognizer Methods -
 -(void)addGestureRecognizers
 {
-    for (pictureFrame* theFrame in _photographs)
+    
+    for (pictureFrame* theFrame in photoList)
     {
         
         UIPanGestureRecognizer *panRecog = [UIPanGestureRecognizer new];
         
-        [panRecog addTarget:self action:@selector(handlePanFrom:)];
+        [panRecog addTarget:self
+                     action:@selector(handlePanFrom:)];
         
         [theFrame addGestureRecognizer:panRecog];
-         
+        
+        
+        
         UITapGestureRecognizer *tapRecog = [UITapGestureRecognizer new];
-        [tapRecog setNumberOfTapsRequired:1];
-        [tapRecog addTarget:self action:@selector(handleTapFrom:)];
+        
+        tapRecog.numberOfTapsRequired = 1;
+        
+        [tapRecog addTarget:self
+                     action:@selector(handleTapFrom:)];
+        
+        
         
         UITapGestureRecognizer *doubleTap = [UITapGestureRecognizer new];
-        [doubleTap setNumberOfTapsRequired:2];
-        [doubleTap addTarget:self action:@selector(handleDoubleTap:)];
+        
+        doubleTap.numberOfTapsRequired = 1;
+        
+        [doubleTap addTarget:self
+                      action:@selector(handleDoubleTap:)];
         
         [tapRecog requireGestureRecognizerToFail:doubleTap];
         
         [theFrame addGestureRecognizer:doubleTap];
         [theFrame addGestureRecognizer:tapRecog];
+        
+        
     }
+    
 }
 -(void)handlePanFrom:(id) sender
 {
+    
     [self.view bringSubviewToFront:[(UIPanGestureRecognizer*)sender view]];
+    
     CGPoint translatedPoint = [(UIPanGestureRecognizer*)sender translationInView:self.view];
     
     if ([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateBegan) {
+        
         firstX = [[sender view] center].x;
         firstY = [[sender view] center].y;
+        
     }
     
     translatedPoint = CGPointMake(firstX+translatedPoint.x, firstY + translatedPoint.y);
@@ -413,39 +522,54 @@
     
     if ([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateEnded)
     {
-        CGFloat velocityX = (0.2*[(UIPanGestureRecognizer*)sender velocityInView:self.view].x);
         
+        CGFloat velocityX   = (0.2*[(UIPanGestureRecognizer*)sender velocityInView:self.view].x);
         
-        CGFloat finalX = translatedPoint.x;// + velocityX;
-        CGFloat finalY = translatedPoint.y;// + (.35*[(UIPanGestureRecognizer*)sender velocityInView:self.view].y);
+        CGFloat finalX      = translatedPoint.x;// + velocityX;
+        CGFloat finalY      = translatedPoint.y;// + (.35*[(UIPanGestureRecognizer*)sender velocityInView:self.view].y);
         
         if (UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation])) {
+            
             if (finalX < 0) {
+                
                 //finalX = 0;
+                
             } else if (finalX > 768) {
+                
                 //finalX = 768;
             }
             
             if (finalY < 0) {
+                
                 finalY = 0;
+                
             } else if (finalY > 1024) {
+                
                 finalY = 1024;
             }
+            
         } else {
+            
             if (finalX < 0) {
+                
                 //finalX = 0;
+                
             } else if (finalX > 1024) {
+                
                 //finalX = 768;
             }
             
             if (finalY < 0) {
+                
                 finalY = 0;
+                
             } else if (finalY > 768) {
+                
                 finalY = 1024;
             }
         }
         
-        CGFloat animationDuration = (ABS(velocityX)*.0002)+.2;
+        CGFloat animationDuration = (ABS(velocityX) * .0002) + .2;
         
         NSLog(@"the duration is: %f", animationDuration);
         
@@ -459,6 +583,7 @@
         pictureFrame *frame = (pictureFrame*)[sender view];
         
         [TLManager updateDateForPicture:frame];
+        
     }
     
 }
@@ -473,24 +598,26 @@
     NSLog(@"\nNumber of touches: %d", touchNum);
     
     
-    
     pictureFrame *frame = (pictureFrame*)recognizer.view;
 
     [frame resize];
+    
 }
 -(void)handleDoubleTap:(UITapGestureRecognizer*) recognizer
 {
-    NSLog(@"I fired!");
     
     pictureFrame *frame = (pictureFrame*)[recognizer view];
     
     [frame largeResize];
+    
 }
 
 #pragma mark Delegate Methods
 -(void)finishedUpdatedFrame:(pictureFrame *)frame withNewInformation:(NSDictionary *)info
 {
+    
     NSString *notificationString = [NSString stringWithFormat:@"The date for the frame has been updated to %@", [info[@"newDate"] displayDateOfType:sDateTypeMonthAndYear]];
+    
     
     NSDictionary *options = @{
                               kCRToastTextKey                       : notificationString,
@@ -502,38 +629,50 @@
                               kCRToastAnimationOutTypeKey           : @(CRToastAnimationTypeGravity),
                               kCRToastAnimationInDirectionKey       : @(CRToastAnimationDirectionTop),
                               kCRToastAnimationOutDirectionKey      : @(CRToastAnimationDirectionBottom),
-                              kCRToastAnimationInTimeIntervalKey    :  @(2.0),
-                              kCRToastAnimationOutTimeIntervalKey   :     @(1.0),
-                              kCRToastTimeIntervalKey :   @(2.0)
+                              kCRToastAnimationInTimeIntervalKey    : @(2.0),
+                              kCRToastAnimationOutTimeIntervalKey   : @(1.0),
+                              kCRToastTimeIntervalKey               : @(2.0)
                               };
     
     [CRToastManager showNotificationWithOptions:options
                                 completionBlock:nil];
+    
 }
 
 #pragma mark Utility Methods -
+
 -(NSTimeInterval)getTimeIntervalWithDate:(NSDate*) date
 {
+    
     NSTimeInterval interval = [date timeIntervalSinceDate:[NSDate referenceDate]];
     
     NSLog(@"\nThe time interval is: %f\n", interval);
     
     return interval;
+    
 }
 
 -(NSDictionary*)getTextAttributesWithYear:(NSInteger) year withInfo:(NSDictionary*) info
 {
-    UIColor *textColor, *backgroundColor;
-    NSNumber *fontSize, *heightMod, *finalAlpha, *xOffSet, *rotation, *lineHeight;
-    NSString *yearString;
+    UIColor     *textColor,
+                *backgroundColor;
+    
+    NSNumber    *fontSize,
+                *heightMod,
+                *finalAlpha,
+                *xOffSet,
+                *rotation,
+                *lineHeight;
+    
+    NSString    *yearString;
 
     NSInteger startYear = [[info valueForKey:@"startYear"] integerValue];
     NSInteger endYear   = [[info valueForKey:@"endYear"] integerValue];
     
     float lineHeightPrim = 0.0;
     
-    if (year == startYear || year == endYear)
-    {
+    if (year == startYear || year == endYear) {
+        
         lineHeightPrim  = 0.0;
 
         textColor       = [UIColor warmGrayColor];
@@ -544,23 +683,26 @@
         backgroundColor = [UIColor clearColor];
         lineHeight      = [NSNumber numberWithFloat:lineHeightPrim];
         
-        if (year ==  startYear)
-        {
+        if (year ==  startYear) {
+            
             xOffSet  = [NSNumber numberWithFloat:-60.0];
             rotation = [NSNumber numberWithInteger:labelRotationTypeLeft];
+            
         }
-        else
-        {
+        else {
+            
             xOffSet   = [NSNumber numberWithFloat:80.0];
             rotation  = [NSNumber numberWithInteger:labelRotationTypeRight];
             heightMod = [NSNumber numberWithFloat:-10.0];
+            
         }
+        
     }
-    else
-    {
+    else {
         if (year % 5 == 0) {
             
             if (year % 10 == 0) {
+                
                 lineHeightPrim = 70.0;
 
                 textColor      = [UIColor warmGrayColor];
@@ -568,9 +710,10 @@
                 heightMod      = [NSNumber numberWithFloat:lineHeightPrim];
                 lineHeight     = [NSNumber numberWithFloat:lineHeightPrim - 10.0];
                 yearString     = [NSString stringWithFormat:@"%i", year];
+                
             }
-            else
-            {
+            else {
+                
                 lineHeightPrim = 30.0;
 
                 textColor      = [UIColor warmGrayColor];
@@ -578,31 +721,33 @@
                 heightMod      = [NSNumber numberWithFloat:lineHeightPrim];
                 yearString     = [NSString stringWithFormat:@"%i", year];
                 lineHeight     = [NSNumber numberWithFloat:lineHeightPrim - 7.5];
+                
             }
             
             finalAlpha = [NSNumber numberWithFloat:1.0];
             
         }
-        else
-        {
+        else {
+            
             textColor = [UIColor warmGrayColor];
             fontSize  = [NSNumber numberWithFloat:15.0];
             heightMod = [NSNumber numberWithFloat:0];
             
-            if(year < 2000)
-            {
+            if(year < 2000) {
+                
                 year -= 1900;
             }
-            else if(year >= 2000)
-            {
+            else if(year >= 2000) {
+                
                 year -= 2000;
             }
             
             if (year >= 10) {
+                
                 yearString = [NSString stringWithFormat:@"'%i", year];
             }
-            else
-            {
+            else {
+                
                 yearString = [NSString stringWithFormat:@"'0%i", year];
             }
             
@@ -637,8 +782,11 @@
     NSMutableArray *years = [NSMutableArray array];
     
     for (int i = startInt; i <= endInt; i++) {
+        
         if (i % 5 == 0) {
+            
             [years addObject:[NSNumber numberWithInt:i]];
+            
         }
     }
     
