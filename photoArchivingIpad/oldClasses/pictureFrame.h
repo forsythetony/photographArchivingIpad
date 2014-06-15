@@ -41,4 +41,7 @@ typedef NS_ENUM(NSInteger, pLabelType) {
 
 -(void)largeResize;
 
+-(void)stopAllTheGlowing;
+
+
 @end

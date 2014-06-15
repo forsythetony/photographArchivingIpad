@@ -55,6 +55,7 @@
 		BA67F2191937B9D80056DD00 /* subtle_carbon.png in Resources */ = {isa = PBXBuildFile; fileRef = BA67F2171937B9D80056DD00 /* subtle_carbon.png */; };
 		BA67F21C193BC4AA0056DD00 /* NSDate+timelineStuff.m in Sources */ = {isa = PBXBuildFile; fileRef = BA67F21B193BC4AA0056DD00 /* NSDate+timelineStuff.m */; };
 		BA67F21F193BCC3A0056DD00 /* timelineManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA67F21E193BCC3A0056DD00 /* timelineManager.m */; };
+		BAD16301194A581A008144A0 /* UIView+Glow.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD16300194A581A008144A0 /* UIView+Glow.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +136,8 @@
 		BA67F21E193BCC3A0056DD00 /* timelineManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = timelineManager.m; sourceTree = "<group>"; };
 		BAD162FD1949617E008144A0 /* imageHandling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imageHandling.h; sourceTree = "<group>"; };
 		BAD162FE194978AA008144A0 /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
+		BAD162FF194A581A008144A0 /* UIView+Glow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Glow.h"; sourceTree = "<group>"; };
+		BAD16300194A581A008144A0 /* UIView+Glow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Glow.m"; sourceTree = "<group>"; };
 		D480C1DDB6EC466E8C8C3EAD /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -201,6 +204,8 @@
 		BA67F1B1193666210056DD00 /* photoArchivingIpad */ = {
 			isa = PBXGroup;
 			children = (
+				BAD162FF194A581A008144A0 /* UIView+Glow.h */,
+				BAD16300194A581A008144A0 /* UIView+Glow.m */,
 				BA3299A71948DE850002EBFD /* SDWebImage.framework */,
 				BA3299A11948BA430002EBFD /* TFDataCommunicator.h */,
 				BA3299A21948BA430002EBFD /* TFDataCommunicator.m */,
@@ -483,6 +488,7 @@
 				BA67F21F193BCC3A0056DD00 /* timelineManager.m in Sources */,
 				BA67F211193670D60056DD00 /* timelineLabelView.m in Sources */,
 				BA67F20C193667140056DD00 /* WorkspaceViewController.m in Sources */,
+				BAD16301194A581A008144A0 /* UIView+Glow.m in Sources */,
 				BA67F20B193667140056DD00 /* pictureFrame.m in Sources */,
 				BA67F20A193667140056DD00 /* imageObject.m in Sources */,
 				BA67F1C2193666210056DD00 /* ViewController.m in Sources */,

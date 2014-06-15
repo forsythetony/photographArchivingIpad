@@ -114,6 +114,8 @@
             obj.date            = [NSDate dateWithv1String:dict[@"imageInformation"][@"dateTaken"][@"dateString"]];
             obj.title           = [[dict objectForKey:@"imageInformation"] objectForKey:@"title"];
             obj.centerXoffset   = @0.0;
+            obj.imageInformation = [NSDictionary dictionaryWithDictionary:dict];
+            
             
             [frame setImageObject:obj];
             
@@ -137,6 +139,7 @@
 {
     
     [TLManager setInitialPhotographs:photoList];
+    [self addGestureRecognizers];
     
 }
 - (void)viewDidLoad
@@ -163,7 +166,288 @@
     
     [self.view addSubview:auxView];
     
+    float imageContainerViewWidth = auxViewWidth / 3.0;
+    
+    CGRect  imageContainerFrame =   CGRectMake(
+                                               0.0                      , 0.0,
+                                               imageContainerViewWidth  , auxViewHeight
+                                               );
+    
+    UIView *imageContainerView = [[UIView alloc] initWithFrame:imageContainerFrame];
+    
+    imageContainerView.backgroundColor  = [UIColor colorWithPatternImage:[UIImage imageNamed:@"suble_carbon.png"]];
+    
+    [auxView addSubview:imageContainerView];
+    
+    float sideSpacing = 10.0;
+    
+    CGRect imageViewFrame;
+    
+    imageViewFrame.origin.x = sideSpacing;
+    imageViewFrame.origin.y = sideSpacing;
+    imageViewFrame.size.width = imageContainerFrame.size.width - (sideSpacing * 2.0);
+    imageViewFrame.size.height = imageContainerFrame.size.height - (sideSpacing * 2.0);
+    
+    
+    _displayedImage = [[UIImageView alloc] initWithFrame:imageViewFrame];
+    
+    [imageContainerView addSubview:_displayedImage];
+    
+    float addContentContainerWidth = 200.0;
+    
+    CGRect infoViewContainerFrame;
+    
+    infoViewContainerFrame.origin.x = imageViewFrame.size.width;
+    infoViewContainerFrame.origin.y = 0.0;
+    infoViewContainerFrame.size.width = (auxViewWidth - imageContainerViewWidth) - addContentContainerWidth;
+    infoViewContainerFrame.size.height = imageContainerFrame.size.height;
+    
+    UIView *infoViewContainer = [[UIView alloc] initWithFrame:infoViewContainerFrame];
+    
+    infoViewContainer.backgroundColor = [UIColor clearColor];
+    
+    [auxView addSubview:infoViewContainer];
+    
+    
+    float textViewWallSpacing = 15.0;
+    
+    CGRect imageInfoTextFrame;
+    
+    imageInfoTextFrame.origin.x = textViewWallSpacing;
+    imageInfoTextFrame.origin.y = textViewWallSpacing;
+    imageInfoTextFrame.size.width = infoViewContainerFrame.size.width - (textViewWallSpacing * 2.0);
+    imageInfoTextFrame.size.height = infoViewContainerFrame.size.height - (textViewWallSpacing * 2.0);
+    
+    _imageInfoDisplay = [[UITextView alloc] initWithFrame:imageInfoTextFrame];
+    
+    _imageInfoDisplay.text              = @"";
+    _imageInfoDisplay.backgroundColor   = [UIColor clearColor];
+    _imageInfoDisplay.font              = [UIFont fontWithName:@"CourierNewPSMT" size:13.0];
+    _imageInfoDisplay.textColor         = [UIColor ghostWhiteColor];
+    _imageInfoDisplay.editable          = NO;
+    _imageInfoDisplay.layer.cornerRadius= 8.0;
+    
+    [infoViewContainer addSubview:_imageInfoDisplay];
+    
+    float addContentWallSpacing = 10.0;
+    
+    CGRect addContentViewContainerFrame;
+    
+    addContentViewContainerFrame.origin.x = infoViewContainerFrame.origin.x + infoViewContainerFrame.size.width;
+    addContentViewContainerFrame.origin.y = addContentWallSpacing;
+    addContentViewContainerFrame.size.width = addContentContainerWidth - addContentWallSpacing;
+    addContentViewContainerFrame.size.height = infoViewContainerFrame.size.height - (addContentWallSpacing * 2);
+
+    UIView *addcontentViewContainer = [[UIView alloc] initWithFrame:addContentViewContainerFrame];
+    
+    addcontentViewContainer.backgroundColor = [UIColor clearColor];//[UIColor colorWithPatternImage:[UIImage imageNamed:@"tweed.png"]];
+    
+    addcontentViewContainer.layer.cornerRadius = 4.0;
+    
+    [auxView addSubview:addcontentViewContainer];
+    
+    float buttonStartHeight = 10.0;
+    float buttonWidth = addContentContainerWidth - 30.0;
+    CGSize buttonSize;
+    buttonSize.width    = buttonWidth;
+    buttonSize.height   = 40.0;
+    
+    
+    UIColor *buttonBackgroundColor = [UIColor whiteColor];
+    UIColor *buttonTextColor = [UIColor black25PercentColor];
+    
+    UIFont *buttonFont = [UIFont fontWithName:@"DINAlternate-Bold" size:18.0];
+    
+    float buttonIconSize = buttonSize.height * .8;
+    
+    CGRect buttonIconRect = CGRectMake(10.0, 0.0, buttonIconSize, buttonIconSize);
+    
+    
+    
+    
+    
+    CGRect addStoryButtonFrame;
+    
+    addStoryButtonFrame.origin.x = (addContentViewContainerFrame.size.width - buttonSize.width) / 2.0;
+    addStoryButtonFrame.origin.y = buttonStartHeight;
+    addStoryButtonFrame.size = buttonSize;
+    
+    _addStoryButton = [[UIButton alloc] initWithFrame:addStoryButtonFrame];
+    
+    [_addStoryButton addTarget:self action:@selector(handleStoryButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    _addStoryButton.backgroundColor = buttonBackgroundColor;
+    _addStoryButton.layer.cornerRadius = 8.0;
+    _addStoryButton.alpha = 0.0;
+    
+        FAKFontAwesome *storyIcon = [FAKFontAwesome bookIconWithSize:buttonIconSize];
+    
+    
+    UIImageView *addStoryButtonImageView = [[UIImageView alloc] initWithFrame:buttonIconRect];
+    
+    [addStoryButtonImageView setImage:[storyIcon imageWithSize:CGSizeMake(buttonIconSize, buttonIconSize)]];
+    
+    
+    CGSize buttonLabelSize;
+    
+    buttonLabelSize.width = buttonSize.width * 0.75;
+    buttonLabelSize.height = buttonSize.height;
+    
+    CGRect buttonLabelFrame;
+    
+    buttonLabelFrame.size = buttonLabelSize;
+    
+    buttonLabelFrame.origin.x = addStoryButtonImageView.frame.origin.x + addStoryButtonImageView.frame.size.width + 7.0;
+    
+    buttonLabelFrame.origin.y = 0.0;
+
+    
+    UILabel *addStoryText = [[UILabel alloc] initWithFrame:buttonLabelFrame];
+    
+    addStoryText.font = buttonFont;
+    addStoryText.backgroundColor = [UIColor clearColor];
+    addStoryText.textColor = buttonTextColor;
+    addStoryText.text = @"Add Story";
+    
+    CGRect iconRect = CGRectMake(10.0, 4.0, buttonIconSize, buttonIconSize);
+    
+    UIImageView *iconImage = [[UIImageView alloc] initWithFrame:iconRect];
+    
+    [iconImage setBackgroundColor:[UIColor clearColor]];
+    [iconImage setImage:[self getImageViewForStoryType:buttonIconTypeStory withButtonHeight:buttonIconSize]];
+    
+    
+    CGRect addRecordingButtonFrame = addStoryButtonFrame;
+    
+    addRecordingButtonFrame.origin.y += 20.0;
+    
+    _addRecording = [[UIButton alloc ]initWithFrame:addRecordingButtonFrame];
+    
+    _addRecording.backgroundColor = [UIColor whiteColor];
+    _addRecording.alpha = 0.0;
+    _addRecording.layer.cornerRadius = 8.0;
+    
+
+    [_addRecording addSubview:addStoryText];
+    
+    UIImageView *recordingIcon = [[UIImageView alloc] initWithFrame:iconRect];
+    
+    [recordingIcon setImage:[self getImageViewForStoryType:buttonIconTypeRecording withButtonHeight:buttonIconSize]];
+    
+    [_addRecording addSubview:recordingIcon];
+    
+    
+    UILabel *addRecordingText = [self labelCopy:addStoryText];
+    
+    addRecordingText.text = @"Add Recording";
+    
+    [_addRecording addSubview:addRecordingText];
+    
+    [_addStoryButton addSubview:iconImage];
+    
+    [_addStoryButton addSubview:addStoryText];
+    
+    
+    CGRect addOtherInfoRect = addRecordingButtonFrame;
+    
+    addRecordingButtonFrame.origin.y += 20.0;
+    
+    _addOtherInfo = [[UIButton alloc ] initWithFrame:addOtherInfoRect];
+    
+    _addOtherInfo.backgroundColor = [UIColor whiteColor];
+    
+    _addOtherInfo.layer.cornerRadius = 8.0;
+    _addOtherInfo.alpha = 0.0;
+    
+    UIImageView *addOtherIcon = [[UIImageView alloc] initWithFrame:iconRect];
+    
+    [addOtherIcon setImage:[self getImageViewForStoryType:buttonIconTypeOther withButtonHeight:buttonIconSize]];
+    
+    UILabel *addOtherText = [self labelCopy:addRecordingText];
+    
+    addOtherText.text = @"Add Other";
+    
+    [_addOtherInfo addSubview:addOtherText];
+    [_addOtherInfo addSubview:addOtherIcon];
+    
+    
+    
+    
+    [addcontentViewContainer addSubview:_addOtherInfo];
+    
+    
+    [addcontentViewContainer addSubview:_addStoryButton];
+    
+    [addcontentViewContainer addSubview:_addRecording];
+    
+    
+    
+    
 }
+-(UIImage*)getImageViewForStoryType:(buttonIconType) storyType withButtonHeight:(float) buttonHeight
+{
+    
+
+    float buttonIconSize = buttonHeight;
+    float mainIconSize = buttonIconSize * 0.7;
+    float plusIconSize = buttonIconSize * 0.3;
+    
+    
+    CGRect plusRect = CGRectMake(2.0, (buttonIconSize / 2.0) - (plusIconSize / 2.0) - 3.0, plusIconSize, plusIconSize);
+    CGRect iconRect = CGRectMake(plusRect.origin.x + plusRect.size.width - 2.0, (buttonIconSize / 2.0) - (mainIconSize / 2.0), mainIconSize, mainIconSize);
+ 
+    CGRect buttonIconRect = CGRectMake(0.0, 0.0, buttonIconSize, buttonIconSize);
+    
+    UIView *mainView = [[UIView alloc] initWithFrame:buttonIconRect];
+    
+    FAKFontAwesome *mainIcon;
+    
+    FAKFontAwesome *plusIcon = [FAKFontAwesome plusIconWithSize:plusIconSize];
+    [plusIcon addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor]];
+    
+    switch (storyType) {
+        case buttonIconTypeStory:
+            
+            mainIcon = [FAKFontAwesome bookIconWithSize:mainIconSize];
+            
+            [mainIcon addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor]];
+            
+            break;
+            case buttonIconTypeRecording:
+            
+            mainIcon = [FAKFontAwesome volumeDownIconWithSize:mainIconSize];
+            
+            break;
+            case buttonIconTypeOther:
+            mainIcon = [FAKFontAwesome infoIconWithSize:mainIconSize];
+            break;
+        default:
+            break;
+    }
+    
+    UIImageView *plusImage = [[UIImageView alloc] initWithFrame:plusRect];
+    UIImageView *mainImage = [[UIImageView alloc] initWithFrame:iconRect];
+    
+    [plusImage setImage:[plusIcon imageWithSize:CGSizeMake(plusIconSize, plusIconSize)]  ];
+    [mainImage setImage:[mainIcon imageWithSize:CGSizeMake(mainIconSize, mainIconSize)]];
+    
+    [mainView addSubview:plusImage];
+    [mainView addSubview:mainImage];
+    
+    UIGraphicsBeginImageContextWithOptions(mainView.bounds.size, NO, 0.0);
+    [    mainView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return img;
+}
+-(void)handleStoryButtonClick:(id) sender
+{
+    
+}
+
 -(void)createSmallViewsWithImages:(NSArray*) images
 {
     
@@ -311,6 +595,24 @@
         [TLLine setFrame:TLFinalFrame];
         
     }];
+    
+    
+    /*
+    
+    //  Add test views
+    
+    CGRect testViewFrame    =   CGRectMake(
+                                               50.0 , 300,
+                                               70.0 , 70.0
+                                           );
+    
+    UIView *testView = [[UIView alloc] initWithFrame:testViewFrame];
+    
+    testView.backgroundColor    =   [UIColor yellowColor];
+    
+    [mainScrollView addSubview:testView];
+    */
+    
     
 }
 -(void)createYearPointsWithYearData:(NSDictionary*) yearData andContentSize:(CGSize) contentSize toView:(UIView*) timelineView
@@ -604,10 +906,148 @@
     
     pictureFrame *frame = (pictureFrame*)[recognizer view];
     
-    [frame largeResize];
+    [TLManager.TLView bringSubviewToFront:frame];
+    
+    
+    imageObject *obj = frame.imageObject;
+    
+    NSURL *fullSizeURL = obj.photoURL;
+    
+    [_displayedImage setImageWithURL:fullSizeURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+        
+        float sizeDelta = 10.0;
+        
+        
+        POPSpringAnimation *imageSizeChange = [POPSpringAnimation animation];
+        
+        imageSizeChange.property = [POPAnimatableProperty propertyWithName:kPOPViewSize];
+        
+        imageSizeChange.fromValue = [NSValue valueWithCGSize:CGSizeMake(self.displayedImage.frame.size.width - sizeDelta, self.displayedImage.frame.size.height - sizeDelta)];
+        
+        imageSizeChange.toValue = [NSValue valueWithCGSize:CGSizeMake(self.displayedImage.frame.size.width, self.displayedImage.frame.size.height)];
+        
+        [self.displayedImage pop_addAnimation:imageSizeChange forKey:@"imageResizeLarger"];
+        
+        POPSpringAnimation *alphaChange = [POPSpringAnimation animation];
+        
+        alphaChange.property = [POPAnimatableProperty propertyWithName:kPOPViewAlpha];
+        
+        alphaChange.fromValue = @(0.0);
+        alphaChange.toValue = @(1.0);
+        
+        [self.displayedImage pop_addAnimation:alphaChange forKey:@"alphaChange"];
+        
+        
+        
+        
+        
+    }];
+    
+    for (pictureFrame* frm in photoList) {
+        
+        if (frm != frame) {
+            [frm stopAllTheGlowing];
+        }
+        else
+        {
+            [frm largeResize];
+        }
+    }
+    
+    [self displayInformationForImage:frame.imageObject];
     
 }
+-(void)displayInformationForImage:(imageObject*) obj
+{
+    NSString *displayString = [NSString stringWithFormat:@"%@", obj.imageInformation];
+    
+    _imageInfoDisplay.text = displayString;
+    _displayImageInformation = obj;
+    
+    POPSpringAnimation *alphaChange = [POPSpringAnimation animation];
+    
+    alphaChange.property = [POPAnimatableProperty propertyWithName:kPOPViewAlpha];
+    
+    alphaChange.fromValue = @(0.0);
+    alphaChange.toValue = @(1.0);
+    
+    [_imageInfoDisplay pop_addAnimation:alphaChange
+                                 forKey:@"alphaChangeToOne"];
+    
+    float   slideDelta      = 300.0,
+            slideInTo       = slideDelta - (slideDelta / 2.0),
+            slideInFrom     = slideDelta;
 
+    
+    POPSpringAnimation *verticalSlideIn = [POPSpringAnimation animation];
+    
+    verticalSlideIn.property = [POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
+    
+    verticalSlideIn.fromValue = @(slideInFrom);
+    verticalSlideIn.toValue = @(slideInTo);
+    
+    verticalSlideIn.springBounciness = 6.0;
+    verticalSlideIn.springSpeed = 8.0;
+    
+    [_imageInfoDisplay.layer pop_addAnimation:verticalSlideIn forKey:@"slideInFromBottom"];
+    
+    POPSpringAnimation *buttonOneSlide = [POPSpringAnimation animation];
+    
+    //buttonOneSlide.property = [POPAnimatableProperty propertyWithName:kPOPViewCenter];
+//    
+//    buttonOneSlide.fromValue = [NSValue valueWithCGPoint:CGPointMake(_addStoryButton.center.x, 500.0)];
+//    buttonOneSlide.toValue = [NSValue valueWithCGPoint:_addStoryButton.center];
+//
+    buttonOneSlide.property = [POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
+    
+    float buttonOneSlideToValue = _addStoryButton.frame.origin.y + (_addStoryButton.frame.size.height / 2);
+    
+    buttonOneSlide.fromValue = @(slideInFrom);
+    buttonOneSlide.toValue = @(buttonOneSlideToValue);
+    
+    POPSpringAnimation *btn2Slide = [POPSpringAnimation animation];
+    
+    btn2Slide.property = [POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
+    
+    buttonOneSlideToValue += 60.0;
+    
+    btn2Slide.fromValue = @(slideInFrom);
+    btn2Slide.toValue = @(buttonOneSlideToValue);
+    
+    
+    
+    POPSpringAnimation *btn3Slide = [POPSpringAnimation animation];
+    
+    btn3Slide.property = [POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
+    
+    btn3Slide.fromValue = @(slideInFrom);
+    btn3Slide.toValue = @(slideInTo);
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    [_addRecording.layer pop_addAnimation:btn2Slide forKey:@"buttonTwoSlideUp"];
+    [_addRecording pop_addAnimation:alphaChange forKey:@"buttonTwoAlphaChange"];
+    
+    [_addStoryButton.layer pop_addAnimation:buttonOneSlide forKey:@"buttonOneSlideUp"];
+    [_addStoryButton pop_addAnimation:alphaChange forKey:@"buttonOneAlphaChange"];
+    
+    [_addOtherInfo pop_addAnimation:alphaChange forKey:@"otherInfoButtonAlpha"];
+    [_addOtherInfo pop_addAnimation:btn3Slide forKey:@"btn3slide"];
+    
+    
+}
 #pragma mark Delegate Methods
 -(void)finishedUpdatedFrame:(pictureFrame *)frame withNewInformation:(NSDictionary *)info
 {
@@ -787,5 +1227,17 @@
     }
     
     return [NSArray arrayWithArray:years];
+}
+-(UILabel*)labelCopy:(UILabel*) orgLabel
+{
+    UILabel *newLabel = [[UILabel alloc] initWithFrame:orgLabel.frame];
+    
+    newLabel.font = orgLabel.font;
+    newLabel.textColor = orgLabel.textColor;
+    newLabel.backgroundColor = orgLabel.backgroundColor;
+    
+    
+    return newLabel;
+    
 }
 @end

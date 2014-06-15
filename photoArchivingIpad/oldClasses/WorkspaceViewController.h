@@ -25,9 +25,22 @@ typedef NS_ENUM(NSInteger, labelRotationType) {
     
 };
 
+typedef NS_ENUM(NSInteger, buttonIconType) {
+    buttonIconTypeStory,
+    buttonIconTypeRecording,
+    buttonIconTypeOther
+};
+
 @interface WorkspaceViewController : UIViewController < UIGestureRecognizerDelegate, timelineManagerDelegate, TFCommunicatorDelegate >
 
 @property (strong, nonatomic) NSDictionary* rangeInformation;
 
+@property (strong, nonatomic) UIImageView*  displayedImage;
+@property (strong, nonatomic) imageObject* displayImageInformation;
+@property (strong, nonatomic) UITextView* imageInfoDisplay;
+
+@property (strong, nonatomic) UIButton* addStoryButton;
+@property (strong, nonatomic) UIButton* addRecording;
+@property (strong, nonatomic) UIButton* addOtherInfo;
 
 @end

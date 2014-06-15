@@ -7,6 +7,7 @@
 //
 
 #import "timelineManager.h"
+#import <math.h>
 
 #define HORIZONTALMOD 8.0
 
@@ -37,8 +38,14 @@
     
     float specNumber    = _viewSpan / _duration;
     
-    centerPoint.y = [self randomFloatBetween:( _TLView.center.y - 140.0 ) and:100.0];
+    float   lowerYBound     =   _TLView.center.y - 100.0,
+            upperYBound     =   75.0;
+    
+    centerPoint.y = [self randomFloatBetween:lowerYBound and:upperYBound];
+    
     centerPoint.x = _xOffset + (( pureDate - _pureStart ) * specNumber) - HORIZONTALMOD;
+    
+    float attempt = [self getRandomFloatWithDate:date];
     
     return centerPoint;
     
@@ -113,5 +120,15 @@
     
     return (((float) (arc4random() % ((unsigned)RAND_MAX + 1)) / RAND_MAX) * diff) + smallNumber;
     
+}
+-(float)getRandomFloatWithDate:(NSDate*) theDate
+{
+    float timeInt = (float)[theDate timeIntervalSinceBeginning];
+    
+    float result = fmod(timeInt, 2.0);
+    
+    NSLog(@"THE FLOAT IS %f", result);
+    
+    return result;
 }
 @end
