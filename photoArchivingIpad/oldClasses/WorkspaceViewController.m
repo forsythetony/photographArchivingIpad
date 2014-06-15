@@ -248,13 +248,24 @@
     
     [self addChildViewController:_infoPager];
     
-    [infoViewContainer addSubview:_infoPager.view];
+    //[infoViewContainer addSubview:_infoPager.view];
 
     
     _infoPager.view.frame = imageInfoTextFrame;
     
     [_infoPager didMoveToParentViewController:self];
     
+    
+    
+    _infPager = [[imageInfoPagerVC alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
+    
+    [self addChildViewController:_infPager];
+    
+    [infoViewContainer addSubview:_infPager.view];
+    
+    _infPager.view.frame = imageInfoTextFrame;
+    
+    [_infPager didMoveToParentViewController:self];
     
     
     
@@ -940,6 +951,7 @@
 
     [frame resize];
     
+    
 }
 -(void)handleDoubleTap:(UITapGestureRecognizer*) recognizer
 {
@@ -995,6 +1007,8 @@
     }
     
     [self displayInformationForImage:frame.imageObject];
+    [_infPager updateImageInformation:frame.imageObject];
+
     
 }
 -(void)displayInformationForImage:(imageObject*) obj

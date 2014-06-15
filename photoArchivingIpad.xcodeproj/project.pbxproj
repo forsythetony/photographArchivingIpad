@@ -57,6 +57,9 @@
 		BA67F21F193BCC3A0056DD00 /* timelineManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA67F21E193BCC3A0056DD00 /* timelineManager.m */; };
 		BA9531AD194E2CC6005E0F10 /* pagerInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9531AC194E2CC6005E0F10 /* pagerInformationVC.m */; };
 		BA9531B0194E2E28005E0F10 /* pagerSocialVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9531AF194E2E28005E0F10 /* pagerSocialVC.m */; };
+		BA9531B3194E4A27005E0F10 /* imageInfoPagerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9531B2194E4A27005E0F10 /* imageInfoPagerVC.m */; };
+		BA9531B7194E4E2B005E0F10 /* imageInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9531B6194E4E2B005E0F10 /* imageInformationVC.m */; };
+		BA9531BB194E51BB005E0F10 /* socialInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9531BA194E51BB005E0F10 /* socialInformationVC.m */; };
 		BAD16301194A581A008144A0 /* UIView+Glow.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD16300194A581A008144A0 /* UIView+Glow.m */; };
 /* End PBXBuildFile section */
 
@@ -140,6 +143,13 @@
 		BA9531AC194E2CC6005E0F10 /* pagerInformationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pagerInformationVC.m; sourceTree = "<group>"; };
 		BA9531AE194E2E28005E0F10 /* pagerSocialVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pagerSocialVC.h; sourceTree = "<group>"; };
 		BA9531AF194E2E28005E0F10 /* pagerSocialVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pagerSocialVC.m; sourceTree = "<group>"; };
+		BA9531B1194E4A27005E0F10 /* imageInfoPagerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imageInfoPagerVC.h; sourceTree = "<group>"; };
+		BA9531B2194E4A27005E0F10 /* imageInfoPagerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = imageInfoPagerVC.m; sourceTree = "<group>"; };
+		BA9531B5194E4E2B005E0F10 /* imageInformationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imageInformationVC.h; sourceTree = "<group>"; };
+		BA9531B6194E4E2B005E0F10 /* imageInformationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = imageInformationVC.m; sourceTree = "<group>"; };
+		BA9531B8194E4E43005E0F10 /* pageViewControllers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pageViewControllers.h; sourceTree = "<group>"; };
+		BA9531B9194E51BB005E0F10 /* socialInformationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = socialInformationVC.h; sourceTree = "<group>"; };
+		BA9531BA194E51BB005E0F10 /* socialInformationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = socialInformationVC.m; sourceTree = "<group>"; };
 		BAD162FD1949617E008144A0 /* imageHandling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imageHandling.h; sourceTree = "<group>"; };
 		BAD162FE194978AA008144A0 /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		BAD162FF194A581A008144A0 /* UIView+Glow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Glow.h"; sourceTree = "<group>"; };
@@ -323,6 +333,7 @@
 		BA67F1F2193667140056DD00 /* oldClasses */ = {
 			isa = PBXGroup;
 			children = (
+				BA9531B4194E4DF9005E0F10 /* Page View Controller */,
 				BA67F1F9193667140056DD00 /* WorkspaceViewController.h */,
 				BA67F1FA193667140056DD00 /* WorkspaceViewController.m */,
 				BA0BE0B61943B3E40054F7C7 /* workspaceAuxView.h */,
@@ -340,6 +351,21 @@
 				BA67F21E193BCC3A0056DD00 /* timelineManager.m */,
 			);
 			path = oldClasses;
+			sourceTree = "<group>";
+		};
+		BA9531B4194E4DF9005E0F10 /* Page View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				BA9531B8194E4E43005E0F10 /* pageViewControllers.h */,
+				BA9531B1194E4A27005E0F10 /* imageInfoPagerVC.h */,
+				BA9531B2194E4A27005E0F10 /* imageInfoPagerVC.m */,
+				BA9531B5194E4E2B005E0F10 /* imageInformationVC.h */,
+				BA9531B6194E4E2B005E0F10 /* imageInformationVC.m */,
+				BA9531B9194E51BB005E0F10 /* socialInformationVC.h */,
+				BA9531BA194E51BB005E0F10 /* socialInformationVC.m */,
+			);
+			name = "Page View Controller";
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -502,13 +528,16 @@
 				BA67F20B193667140056DD00 /* pictureFrame.m in Sources */,
 				BA67F20A193667140056DD00 /* imageObject.m in Sources */,
 				BA67F1C2193666210056DD00 /* ViewController.m in Sources */,
+				BA9531BB194E51BB005E0F10 /* socialInformationVC.m in Sources */,
 				BA9531AD194E2CC6005E0F10 /* pagerInformationVC.m in Sources */,
 				BA32997319489A730002EBFD /* landingPageViewController.m in Sources */,
 				BA3299761948B91E0002EBFD /* showServerData.m in Sources */,
 				BA67F1BC193666210056DD00 /* AppDelegate.m in Sources */,
+				BA9531B7194E4E2B005E0F10 /* imageInformationVC.m in Sources */,
 				BA67F1B8193666210056DD00 /* main.m in Sources */,
 				BA67F209193667140056DD00 /* dummyDataProvider.m in Sources */,
 				BA9531B0194E2E28005E0F10 /* pagerSocialVC.m in Sources */,
+				BA9531B3194E4A27005E0F10 /* imageInfoPagerVC.m in Sources */,
 				BA3299A51948BA430002EBFD /* TFDataCommunicator.m in Sources */,
 				BA67F21C193BC4AA0056DD00 /* NSDate+timelineStuff.m in Sources */,
 			);
