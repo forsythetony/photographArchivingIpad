@@ -55,6 +55,8 @@
 		BA67F2191937B9D80056DD00 /* subtle_carbon.png in Resources */ = {isa = PBXBuildFile; fileRef = BA67F2171937B9D80056DD00 /* subtle_carbon.png */; };
 		BA67F21C193BC4AA0056DD00 /* NSDate+timelineStuff.m in Sources */ = {isa = PBXBuildFile; fileRef = BA67F21B193BC4AA0056DD00 /* NSDate+timelineStuff.m */; };
 		BA67F21F193BCC3A0056DD00 /* timelineManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA67F21E193BCC3A0056DD00 /* timelineManager.m */; };
+		BA9531AD194E2CC6005E0F10 /* pagerInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9531AC194E2CC6005E0F10 /* pagerInformationVC.m */; };
+		BA9531B0194E2E28005E0F10 /* pagerSocialVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9531AF194E2E28005E0F10 /* pagerSocialVC.m */; };
 		BAD16301194A581A008144A0 /* UIView+Glow.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD16300194A581A008144A0 /* UIView+Glow.m */; };
 /* End PBXBuildFile section */
 
@@ -134,6 +136,10 @@
 		BA67F21B193BC4AA0056DD00 /* NSDate+timelineStuff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+timelineStuff.m"; sourceTree = "<group>"; };
 		BA67F21D193BCC3A0056DD00 /* timelineManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timelineManager.h; sourceTree = "<group>"; };
 		BA67F21E193BCC3A0056DD00 /* timelineManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = timelineManager.m; sourceTree = "<group>"; };
+		BA9531AB194E2CC6005E0F10 /* pagerInformationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pagerInformationVC.h; sourceTree = "<group>"; };
+		BA9531AC194E2CC6005E0F10 /* pagerInformationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pagerInformationVC.m; sourceTree = "<group>"; };
+		BA9531AE194E2E28005E0F10 /* pagerSocialVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pagerSocialVC.h; sourceTree = "<group>"; };
+		BA9531AF194E2E28005E0F10 /* pagerSocialVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pagerSocialVC.m; sourceTree = "<group>"; };
 		BAD162FD1949617E008144A0 /* imageHandling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imageHandling.h; sourceTree = "<group>"; };
 		BAD162FE194978AA008144A0 /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		BAD162FF194A581A008144A0 /* UIView+Glow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Glow.h"; sourceTree = "<group>"; };
@@ -228,6 +234,10 @@
 				BA3299751948B91E0002EBFD /* showServerData.m */,
 				BAD162FD1949617E008144A0 /* imageHandling.h */,
 				BAD162FE194978AA008144A0 /* constants.h */,
+				BA9531AB194E2CC6005E0F10 /* pagerInformationVC.h */,
+				BA9531AC194E2CC6005E0F10 /* pagerInformationVC.m */,
+				BA9531AE194E2E28005E0F10 /* pagerSocialVC.h */,
+				BA9531AF194E2E28005E0F10 /* pagerSocialVC.m */,
 			);
 			path = photoArchivingIpad;
 			sourceTree = "<group>";
@@ -492,11 +502,13 @@
 				BA67F20B193667140056DD00 /* pictureFrame.m in Sources */,
 				BA67F20A193667140056DD00 /* imageObject.m in Sources */,
 				BA67F1C2193666210056DD00 /* ViewController.m in Sources */,
+				BA9531AD194E2CC6005E0F10 /* pagerInformationVC.m in Sources */,
 				BA32997319489A730002EBFD /* landingPageViewController.m in Sources */,
 				BA3299761948B91E0002EBFD /* showServerData.m in Sources */,
 				BA67F1BC193666210056DD00 /* AppDelegate.m in Sources */,
 				BA67F1B8193666210056DD00 /* main.m in Sources */,
 				BA67F209193667140056DD00 /* dummyDataProvider.m in Sources */,
+				BA9531B0194E2E28005E0F10 /* pagerSocialVC.m in Sources */,
 				BA3299A51948BA430002EBFD /* TFDataCommunicator.m in Sources */,
 				BA67F21C193BC4AA0056DD00 /* NSDate+timelineStuff.m in Sources */,
 			);

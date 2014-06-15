@@ -14,6 +14,9 @@
 #import "TFDataCommunicator.h"
 #import "timelineLabelView.h"
 
+#import "pagerInformationVC.h"
+#import "pagerSocialVC.h"
+
 #import "imageHandling.h"
 
 
@@ -31,7 +34,7 @@ typedef NS_ENUM(NSInteger, buttonIconType) {
     buttonIconTypeOther
 };
 
-@interface WorkspaceViewController : UIViewController < UIGestureRecognizerDelegate, timelineManagerDelegate, TFCommunicatorDelegate >
+@interface WorkspaceViewController : UIViewController < UIGestureRecognizerDelegate, timelineManagerDelegate, TFCommunicatorDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate >
 
 @property (strong, nonatomic) NSDictionary* rangeInformation;
 
@@ -42,5 +45,7 @@ typedef NS_ENUM(NSInteger, buttonIconType) {
 @property (strong, nonatomic) UIButton* addStoryButton;
 @property (strong, nonatomic) UIButton* addRecording;
 @property (strong, nonatomic) UIButton* addOtherInfo;
+
+@property (strong, nonatomic) UIPageViewController* infoPager;
 
 @end

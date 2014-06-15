@@ -33,6 +33,7 @@
             *endDate;
     
     NSArray *photoList;
+    NSArray *imageInformationVClist;
     
 }
 
@@ -66,6 +67,7 @@
     [self createAuxViews];
     
     [mainDataCom getPhotosForUser:@"forsythetony"];
+    
     
 }
 -(void)initialSetup
@@ -218,6 +220,44 @@
     imageInfoTextFrame.size.width = infoViewContainerFrame.size.width - (textViewWallSpacing * 2.0);
     imageInfoTextFrame.size.height = infoViewContainerFrame.size.height - (textViewWallSpacing * 2.0);
     
+    
+    
+    _infoPager = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
+                                                     navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
+                                                                   options:nil];
+    
+    
+    _infoPager.delegate = self;
+    _infoPager.dataSource = self;
+    
+    NSMutableArray *pagerVCs = [NSMutableArray new];
+    
+    pagerInformationVC *imageInformation = [pagerInformationVC new];
+    
+    [pagerVCs addObject:imageInformation];
+    
+    pagerSocialVC *socialInfo = [pagerSocialVC new];
+    
+    [pagerVCs addObject:socialInfo];
+
+    imageInformationVClist = [NSArray arrayWithArray:pagerVCs];
+    
+    NSArray *initialVCs = [NSArray arrayWithObject:imageInformation];
+    
+    [_infoPager setViewControllers:initialVCs direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+    
+    [self addChildViewController:_infoPager];
+    
+    [infoViewContainer addSubview:_infoPager.view];
+
+    
+    _infoPager.view.frame = imageInfoTextFrame;
+    
+    [_infoPager didMoveToParentViewController:self];
+    
+    
+    
+    
     _imageInfoDisplay = [[UITextView alloc] initWithFrame:imageInfoTextFrame];
     
     _imageInfoDisplay.text              = @"";
@@ -227,7 +267,7 @@
     _imageInfoDisplay.editable          = NO;
     _imageInfoDisplay.layer.cornerRadius= 8.0;
     
-    [infoViewContainer addSubview:_imageInfoDisplay];
+    //[infoViewContainer addSubview:_imageInfoDisplay];
     
     float addContentWallSpacing = 10.0;
     
@@ -1240,4 +1280,30 @@
     return newLabel;
     
 }
+-(UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
+{
+    NSUInteger index = [imageInformationVClist indexOfObject:viewController];
+    
+    if (index >= [imageInformationVClist count] - 1) {
+        return nil;
+    }
+    else
+    {
+        
+        return [imageInformationVClist objectAtIndex:index + 1];
+        
+    }
+}
+-(UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
+{
+    NSUInteger index = [imageInformationVClist indexOfObject:viewController];
+    
+    if (index == 0) {
+        return nil;
+    }
+    else{
+        return [imageInformationVClist objectAtIndex:index - 1];
+    }
+}
+
 @end
