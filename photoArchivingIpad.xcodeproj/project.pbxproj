@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1338B06FDE54485BAF55439A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61ECDBD286AB45A0BA37A749 /* libPods.a */; };
+		7F03D0D3194E805C00558278 /* basicInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F03D0D2194E805C00558278 /* basicInfoCell.m */; };
+		7F03D0D5194E808600558278 /* basicDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F03D0D4194E808600558278 /* basicDetailCell.xib */; };
 		BA0BE0B81943B3E40054F7C7 /* workspaceAuxView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0BE0B71943B3E40054F7C7 /* workspaceAuxView.m */; };
 		BA32997319489A730002EBFD /* landingPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA32997219489A730002EBFD /* landingPageViewController.m */; };
 		BA3299761948B91E0002EBFD /* showServerData.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3299751948B91E0002EBFD /* showServerData.m */; };
@@ -75,6 +77,9 @@
 
 /* Begin PBXFileReference section */
 		61ECDBD286AB45A0BA37A749 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F03D0D1194E805C00558278 /* basicInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = basicInfoCell.h; sourceTree = "<group>"; };
+		7F03D0D2194E805C00558278 /* basicInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = basicInfoCell.m; sourceTree = "<group>"; };
+		7F03D0D4194E808600558278 /* basicDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = basicDetailCell.xib; sourceTree = "<group>"; };
 		BA0BE0B61943B3E40054F7C7 /* workspaceAuxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = workspaceAuxView.h; sourceTree = "<group>"; };
 		BA0BE0B71943B3E40054F7C7 /* workspaceAuxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = workspaceAuxView.m; sourceTree = "<group>"; };
 		BA32997119489A730002EBFD /* landingPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = landingPageViewController.h; sourceTree = "<group>"; };
@@ -363,6 +368,9 @@
 				BA9531B6194E4E2B005E0F10 /* imageInformationVC.m */,
 				BA9531B9194E51BB005E0F10 /* socialInformationVC.h */,
 				BA9531BA194E51BB005E0F10 /* socialInformationVC.m */,
+				7F03D0D1194E805C00558278 /* basicInfoCell.h */,
+				7F03D0D2194E805C00558278 /* basicInfoCell.m */,
+				7F03D0D4194E808600558278 /* basicDetailCell.xib */,
 			);
 			name = "Page View Controller";
 			path = ..;
@@ -449,6 +457,7 @@
 				BA67F208193667140056DD00 /* tweed_@2X.png in Resources */,
 				BA67F206193667140056DD00 /* unknown.JPG in Resources */,
 				BA67F20E193667460056DD00 /* testing.xib in Resources */,
+				7F03D0D5194E808600558278 /* basicDetailCell.xib in Resources */,
 				BA67F200193667140056DD00 /* christmas_tn.png in Resources */,
 				BA67F1FC193667140056DD00 /* fredAndFreddie.JPG in Resources */,
 				BA67F2151937B5470056DD00 /* textured_paper.png in Resources */,
@@ -539,6 +548,7 @@
 				BA9531B0194E2E28005E0F10 /* pagerSocialVC.m in Sources */,
 				BA9531B3194E4A27005E0F10 /* imageInfoPagerVC.m in Sources */,
 				BA3299A51948BA430002EBFD /* TFDataCommunicator.m in Sources */,
+				7F03D0D3194E805C00558278 /* basicInfoCell.m in Sources */,
 				BA67F21C193BC4AA0056DD00 /* NSDate+timelineStuff.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
