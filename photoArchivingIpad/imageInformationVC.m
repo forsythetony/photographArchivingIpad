@@ -179,12 +179,12 @@
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [_imageSections count];
+    return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    NSInteger rowCount = [[[_imageSections objectAtIndex:section] objectForKey:@"value"] count];
+    NSInteger rowCount = [_imageSections count];
     
     return rowCount;
 }
@@ -195,7 +195,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    NSInteger sectionNum = indexPath.section;
+    NSInteger sectionNum = indexPath.row;
     
     NSDictionary *sectionDict = [_imageSections objectAtIndex:sectionNum];
     
@@ -258,5 +258,18 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return HEADERHEIGHT;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (indexPath.section) {
+        case 0:
+            return 200.0;
+            
+            break;
+            
+        default:
+            return 100.0;
+            break;
+    }
 }
 @end
