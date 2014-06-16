@@ -134,9 +134,9 @@
                                                                                            @"value" : [NSArray new]}];
     
     
-
-    [secs addObject:datesSection];
     [secs addObject:titleSection];
+    [secs addObject:datesSection];
+
     [secs addObject:uploaderSection];
     _imageSections = [NSArray arrayWithArray:secs];
     
