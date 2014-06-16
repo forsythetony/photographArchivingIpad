@@ -21,6 +21,8 @@
     double  pureStartDate,
             pureEndDate;
     
+    BOOL    useDummyData;
+    
     CGPoint startingPoint;
     
     dummyDataProvider   *dataProvider;
@@ -66,7 +68,14 @@
     [self createScrollView];
     [self createAuxViews];
     
-    [mainDataCom getPhotosForUser:@"forsythetony"];
+    if (useDummyData == NO) {
+        
+        [mainDataCom getPhotosForUser:@"forsythetony"];
+    }
+    else
+    {
+        [self dummyDataGenerator];
+    }
     
     
 }
@@ -89,6 +98,9 @@
     }
     
     photoList = [NSArray new];
+    
+    useDummyData = YES;
+    
     
     mainDataCom = [TFDataCommunicator new];
     mainDataCom.delegate    = self;
@@ -137,6 +149,26 @@
         
     }
     
+}
+-(void)dummyDataGenerator
+{
+    
+    NSMutableArray *objsArr = [NSMutableArray new];
+    
+    imageObject *obj1 = [imageObject new];
+    
+    obj1.photoURL = [NSURL URLWithString:@"https://s3-us-west-2.amazonaws.com/node-photo-archive/mainPhotos/Lazy_Sunday2014-06-13T18-54%3A50-701Z"];
+    obj1.thumbNailURL = [NSURL URLWithString:@"https://s3-us-west-2.amazonaws.com/node-photo-archive/mainPhotos/Lazy_Sunday2014-06-13T18-54%3A50-701Z-thumbnail"];
+    obj1.date = [NSDate dateWithv1String:@"06/22/1912"];
+    obj1.title = @"Girls Towm";
+    obj1.centerXoffset = @(0.0);
+    obj1.uploader = @"forsythetony";
+    
+    [objsArr addObject:obj1];
+    
+    photoList = [NSArray arrayWithArray:objsArr];
+    
+    [self updateUI];
 }
 -(void)updateUI
 {
