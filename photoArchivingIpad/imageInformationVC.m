@@ -65,6 +65,7 @@
     [self.view addSubview:_tableView];
     
     _tableView.frame = self.view.frame;
+    _tableView.backgroundColor = [UIColor clearColor];
     
 
     [_tableView reloadData];
@@ -204,6 +205,10 @@
         UITableViewCell *cell = [UITableViewCell new];
         
         cell.textLabel.text = [sectionDict[@"value"] objectAtIndex:indexPath.row];
+        cell.backgroundColor = [UIColor clearColor];
+        cell.textLabel.backgroundColor = [UIColor clearColor];
+        cell.contentView.backgroundColor = [UIColor clearColor];
+        
         
         return cell;
     }
@@ -212,6 +217,7 @@
         UITableViewCell *cell = [UITableViewCell new];
         
         cell.textLabel.text = [sectionDict[@"value"] objectAtIndex:indexPath.row];
+        cell.backgroundColor = [UIColor clearColor];
         
         return cell;
     }
