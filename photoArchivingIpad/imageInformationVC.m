@@ -45,7 +45,7 @@
 -(void)viewSetup
 {
     
-    self.view.backgroundColor = [UIColor icebergColor];
+
     self.view.layer.cornerRadius = 8.0;
     
     UIFont *fontForLabelKeys = [UIFont fontWithName:@"DINAlternate-Bold" size:15.0];
@@ -208,7 +208,7 @@
         cell.backgroundColor = [UIColor clearColor];
         cell.textLabel.backgroundColor = [UIColor clearColor];
         cell.contentView.backgroundColor = [UIColor clearColor];
-        
+        https://s3-us-west-2.amazonaws.com/node-photo-archive/mainPhotos/Lazy_Sunday2014-06-13T18-54%3A50-701Z-thumbnail
         
         return cell;
     }
