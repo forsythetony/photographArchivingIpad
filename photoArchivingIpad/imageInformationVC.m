@@ -8,6 +8,8 @@
 
 #import "imageInformationVC.h"
 
+#define HEADERHEIGHT 30.0
+
 @interface imageInformationVC ()
 
 @property (nonatomic, strong) UILabel* imageTitle;
@@ -237,5 +239,26 @@
         
         return cell;
     }
+}
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    NSString *sectionTitle = [[_imageSections objectAtIndex:section] objectForKey:@"sectionName"];
+    
+    CGRect headerFrame = CGRectMake(0.0, 0.0, self.tableView.frame.size.width, HEADERHEIGHT);
+    
+    UILabel *headerLabel = [[UILabel alloc] initWithFrame:headerFrame];
+    
+    headerLabel.font = [UIFont fontWithName:@"DINAlternate-Bold" size:15.0];
+    
+    headerLabel.textColor = [UIColor blackColor];
+    headerLabel.backgroundColor = [UIColor warmGrayColor];
+    
+    headerLabel.text = sectionTitle;
+    
+    return headerLabel;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return HEADERHEIGHT;
 }
 @end
