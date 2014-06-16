@@ -254,8 +254,8 @@
     
     headerLabel.font = [UIFont fontWithName:@"DINAlternate-Bold" size:20.0];
     
-    headerLabel.textColor = [UIColor whiteColor];
-    headerLabel.backgroundColor = [UIColor clearColor];
+    headerLabel.textColor = [UIColor black25PercentColor];
+    headerLabel.backgroundColor = [UIColor ghostWhiteColor];
     headerLabel.layer.cornerRadius = 8.0;
     
     headerLabel.text = sectionTitle;
