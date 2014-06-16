@@ -248,10 +248,11 @@
     
     UILabel *headerLabel = [[UILabel alloc] initWithFrame:headerFrame];
     
-    headerLabel.font = [UIFont fontWithName:@"DINAlternate-Bold" size:15.0];
+    headerLabel.font = [UIFont fontWithName:@"DINAlternate-Bold" size:20.0];
     
-    headerLabel.textColor = [UIColor blackColor];
-    headerLabel.backgroundColor = [UIColor warmGrayColor];
+    headerLabel.textColor = [UIColor whiteColor];
+    headerLabel.backgroundColor = [UIColor clearColor];
+    headerLabel.layer.cornerRadius = 8.0;
     
     headerLabel.text = sectionTitle;
     
