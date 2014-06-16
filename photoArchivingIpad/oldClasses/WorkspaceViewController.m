@@ -117,6 +117,7 @@
             obj.title           = [[dict objectForKey:@"imageInformation"] objectForKey:@"title"];
             obj.centerXoffset   = @0.0;
             obj.imageInformation = [NSDictionary dictionaryWithDictionary:dict];
+            obj.uploader        =   [[dict objectForKey:@"uploadInformation"] objectForKey:@"uploader"];
             
             
             [frame setImageObject:obj];

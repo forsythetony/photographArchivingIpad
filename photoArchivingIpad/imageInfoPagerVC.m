@@ -60,7 +60,7 @@
     socialInformationVC* socialInfo = [socialInformationVC new];
     
     socialInfo.view.frame = self.view.frame;
-    socialInfo.view.alpha = 0.0;
+    socialInfo.view.alpha = 1.0;
     
     [VCs addObject:imageInfo];
     [VCs addObject:socialInfo];

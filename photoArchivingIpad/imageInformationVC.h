@@ -10,7 +10,7 @@
 
 #import "imageHandling.h"
 
-@interface imageInformationVC : UIViewController
+@interface imageInformationVC : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) imageObject *information;
 
