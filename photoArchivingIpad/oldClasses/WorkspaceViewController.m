@@ -99,7 +99,7 @@
     
     photoList = [NSArray new];
     
-    useDummyData = YES;
+    useDummyData = NO;
     
     
     mainDataCom = [TFDataCommunicator new];
