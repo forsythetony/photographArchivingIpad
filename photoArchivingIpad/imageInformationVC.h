@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "imageHandling.h"
-
+#import "basicInfoCell.h"
 @interface imageInformationVC : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) imageObject *information;

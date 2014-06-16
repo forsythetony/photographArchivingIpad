@@ -204,13 +204,17 @@
     
     
     if ([sectionTitle isEqualToString:@"Title"]) {
-        UITableViewCell *cell = [UITableViewCell new];
         
-        cell.textLabel.text = [sectionDict[@"value"] objectAtIndex:indexPath.row];
-        cell.backgroundColor = [UIColor clearColor];
-        cell.textLabel.backgroundColor = [UIColor clearColor];
-        cell.contentView.backgroundColor = [UIColor clearColor];
-        https://s3-us-west-2.amazonaws.com/node-photo-archive/mainPhotos/Lazy_Sunday2014-06-13T18-54%3A50-701Z-thumbnail
+        basicInfoCell *cell = [basicInfoCell new];
+        
+        cell.valueLabel.text = @"Things";
+        
+//        cell.textLabel.text = [sectionDict[@"value"] objectAtIndex:indexPath.row];
+//        cell.backgroundColor = [UIColor clearColor];
+//        cell.textLabel.backgroundColor = [UIColor clearColor];
+//        cell.contentView.backgroundColor = [UIColor clearColor];
+
+        
         
         return cell;
     }
