@@ -43,12 +43,21 @@
     NSString *fontName = @"DINAlternate-Bold";
     
     UIFont *titleFont = [UIFont fontWithName:fontName size:titleFontSize];
-    UIFont *infoFont = [UIFont fontWithName:fontName size:infoFontSize];
-    
     UIColor *titleFontColor = [UIColor blackColor];
+    float titleXOffset = 20.0;
+    
+    UIFont *infoFont = [UIFont fontWithName:fontName size:infoFontSize];
     UIColor *infoFontColor = [UIColor blackColor];
+    NSTextAlignment infoAlign = NSTextAlignmentLeft;
+    float infoXOffset = 20.0;
+    
     UIColor *backgroundColor = [UIColor whiteColor];
-    NSTextAlignment infoAlign = NSTextAlignmentRight;
+
+    CGRect infoRect = CGRectMake(
+                                 infoXOffset, 0.0,
+                                 self.contentView.frame.size.width - infoXOffset , self.contentView.frame.size.height
+                                 );
+    
     
     
     
@@ -57,7 +66,8 @@
     
     infoStyle = @{@"font": infoFont,
                   @"textColor": infoFontColor,
-                  @"textAlignment" : [NSNumber numberWithInt:infoAlign]};
+                  @"textAlignment" : [NSNumber numberWithInt:infoAlign],
+                  @"frame" : [NSValue valueWithCGRect:infoRect]};
     
     mainStyle = @{@"background": backgroundColor};
     
@@ -65,9 +75,9 @@
 }
 -(void)setupViews
 {
-    CGRect valueRect = CGRectMake(10.0, 10.0, self.frame.size.width - 10.0, self.frame.size.height - 10.0);
+
     
-    _valueLabel = [[UILabel alloc] initWithFrame:valueRect];
+    _valueLabel = [[UILabel alloc] initWithFrame:[infoStyle[@"frame"] CGRectValue]];
     
     _valueLabel.text = @"";
     _valueLabel.font = infoStyle[@"font"];

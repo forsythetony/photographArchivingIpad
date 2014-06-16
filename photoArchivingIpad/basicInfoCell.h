@@ -12,5 +12,6 @@
 
 @property (strong, nonatomic) NSString *value;
 @property (strong, nonatomic) UILabel *valueLabel;
+@property (strong, nonatomic) UILabel *titleLabel;
 
 @end
