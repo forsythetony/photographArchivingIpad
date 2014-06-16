@@ -208,14 +208,7 @@
         basicInfoCell *cell = [basicInfoCell new];
         
         cell.valueLabel.text = @"Things";
-        
-//        cell.textLabel.text = [sectionDict[@"value"] objectAtIndex:indexPath.row];
-//        cell.backgroundColor = [UIColor clearColor];
-//        cell.textLabel.backgroundColor = [UIColor clearColor];
-//        cell.contentView.backgroundColor = [UIColor clearColor];
 
-        
-        
         return cell;
     }
     else if ([sectionTitle isEqualToString:@"Dates"])
@@ -248,7 +241,7 @@
 {
     NSString *sectionTitle = [[_imageSections objectAtIndex:section] objectForKey:@"sectionName"];
     
-    CGRect headerFrame = CGRectMake(0.0, 0.0, self.tableView.frame.size.width, HEADERHEIGHT);
+    CGRect headerFrame = CGRectMake(10.0, 0.0, self.tableView.frame.size.width - 10.0, HEADERHEIGHT);
     
     UILabel *headerLabel = [[UILabel alloc] initWithFrame:headerFrame];
     
