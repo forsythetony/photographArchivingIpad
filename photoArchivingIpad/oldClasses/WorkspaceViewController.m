@@ -21,7 +21,8 @@
     double  pureStartDate,
             pureEndDate;
     
-    BOOL    useDummyData;
+    BOOL    useDummyData,
+            shouldLoadAgain;
     
     CGPoint startingPoint;
     
@@ -65,17 +66,23 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     
-    [self createScrollView];
-    [self createAuxViews];
-    
-    if (useDummyData == NO) {
+    if (shouldLoadAgain == YES) {
+        [self createScrollView];
+        [self createAuxViews];
+
         
-        [mainDataCom getPhotosForUser:@"forsythetony"];
+        if (useDummyData == NO) {
+            
+            [mainDataCom getPhotosForUser:@"forsythetony"];
+        }
+        else
+        {
+            [self dummyDataGenerator];
+        }
+        
+        shouldLoadAgain = NO;
     }
-    else
-    {
-        [self dummyDataGenerator];
-    }
+    
     
     
 }
@@ -84,8 +91,9 @@
     
     UIColor *MVBackground = [UIColor colorWithPatternImage:[UIImage imageNamed:@"subtle_carbon.png"]];
     
+    self.modalPresentationStyle = UIModalTransitionStylePartialCurl;
     
-    self.view.backgroundColor   = MVBackground;
+    self.view.backgroundColor   =[UIColor clearColor];// MVBackground;
     self.title                  = @"Timeline";
     
     
@@ -130,6 +138,7 @@
             obj.centerXoffset   = @0.0;
             obj.imageInformation = [NSDictionary dictionaryWithDictionary:dict];
             obj.uploader        =   [[dict objectForKey:@"uploadInformation"] objectForKey:@"uploader"];
+            obj.confidence      =   [NSString stringWithFormat:@"%@", [[[dict objectForKey:@"imageInformation"] objectForKey:@"dateTaken"] objectForKey:@"confidence"]];
             
             
             [frame setImageObject:obj];
@@ -163,7 +172,6 @@
     obj1.title = @"Girls Towm";
     obj1.centerXoffset = @(0.0);
     obj1.uploader = @"forsythetony";
-    
     [objsArr addObject:obj1];
     
     photoList = [NSArray arrayWithArray:objsArr];
@@ -174,11 +182,13 @@
 {
     
     [TLManager setInitialPhotographs:photoList];
+            [TLManager bringSubyearsToFront];
     [self addGestureRecognizers];
     
 }
 - (void)viewDidLoad
 {
+    shouldLoadAgain = YES;
     
     [super viewDidLoad];
     
@@ -226,6 +236,11 @@
     
     _displayedImage = [[UIImageView alloc] initWithFrame:imageViewFrame];
     
+    UITapGestureRecognizer *imagetap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleImageSectionFrom:)];
+    
+    imagetap.numberOfTapsRequired =  2.0;
+    
+    [imageContainerView addGestureRecognizer:imagetap];
     [imageContainerView addSubview:_displayedImage];
     
     float addContentContainerWidth = 200.0;
@@ -594,11 +609,23 @@
     mainScrollView.scrollEnabled    = YES;
     mainScrollView.backgroundColor  = [UIColor colorWithPatternImage:[UIImage imageNamed:@"subtle_carbon.png"]];
     mainScrollView.showsHorizontalScrollIndicator  = NO;
-
+    mainScrollView.maximumZoomScale = 4.0;
+    mainScrollView.minimumZoomScale = 1.0;
+    mainScrollView.delegate = self;
+    
     
     [self.view addSubview:mainScrollView];
     
     [self createTimelineWithValues];
+    
+}
+-(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    return TLManager.TLView;
+    
+}
+-(void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale
+{
     
 }
 -(void)createTimelineWithValues
@@ -636,7 +663,7 @@
                 andXOffsert:TLWALLSPACING ];
     
     
-    [self addTimelineLine];
+    [self addTimelineLineToView:timelineView];
     
     [self createYearPointsWithYearData:@{@"startYear": startYear,@"endYear" : endYear}
                         andContentSize:mainScrollView.contentSize
@@ -649,7 +676,7 @@
     return UIStatusBarStyleDefault;
     
 }
--(void)addTimelineLine
+-(void)addTimelineLineToView:(UIView*) TLVIEW
 {
     
     float animationDuration     = 1.5;
@@ -671,8 +698,9 @@
     
     TLLine.backgroundColor = TLLineColor;
     
+    TLManager.lineCenter = [NSValue valueWithCGPoint:TLLine.center];
     
-    [mainScrollView addSubview:TLLine];
+    [TLVIEW addSubview:TLLine];
     
     [UIView animateWithDuration:animationDuration animations:^{
         
@@ -701,6 +729,8 @@
 }
 -(void)createYearPointsWithYearData:(NSDictionary*) yearData andContentSize:(CGSize) contentSize toView:(UIView*) timelineView
 {
+    NSMutableArray *savedPoints = [NSMutableArray new];
+    NSMutableArray *savedYears = [NSMutableArray new];
     
     NSInteger startYear = [[self.rangeInformation[@"startDate"] yearAsNumber] integerValue];
     NSInteger endYear   = [[self.rangeInformation[@"endDate"] yearAsNumber] integerValue];
@@ -818,6 +848,18 @@
         
         yrLabel.backgroundColor     = labelAttributes[@"background"];
         
+        if ([labelAttributes[@"shouldSaveCenter"] boolValue]) {
+            
+            
+            
+            [savedPoints addObject:[NSDictionary dictionaryWithObjectsAndKeys:[NSValue valueWithCGPoint:yrLabel.center], @"point",[labelAttributes objectForKey:@"yearString"], @"year", nil]];
+            [savedYears addObject:yrLabel];
+            
+            
+            
+            
+        }
+        
         //  Update values
         
         labelCenter.x   += frameDiff;
@@ -825,6 +867,10 @@
         yr++;
         
     }
+    
+    TLManager.savedCenters = savedPoints;
+    TLManager.savedYears = [NSArray arrayWithArray:savedYears];
+    
 
 }
 /*
@@ -883,6 +929,26 @@
         
     }
     
+}
+-(void)handleImageSectionFrom:(id) sender
+{
+
+    
+    largeImageViewer *largeViewer = [largeImageViewer createLargeViewerWithFrame:self.view.frame];
+    
+    largeViewer.delegate = self;
+    
+    
+    
+    [self presentViewController:largeViewer animated:NO completion:^{
+        [largeViewer setDisplayedImage:_displayImageInformation];
+    }];
+}
+-(void)removeImageSelection:(id) sender
+{
+    UITapGestureRecognizer *rec = (UITapGestureRecognizer*)sender;
+    
+    [rec.view removeFromSuperview];
 }
 -(void)handlePanFrom:(id) sender
 {
@@ -1185,7 +1251,8 @@
                 *finalAlpha,
                 *xOffSet,
                 *rotation,
-                *lineHeight;
+                *lineHeight,
+                *shouldSaveCenter;
     
     NSString    *yearString;
 
@@ -1248,6 +1315,7 @@
             }
             
             finalAlpha = [NSNumber numberWithFloat:1.0];
+            shouldSaveCenter = [NSNumber numberWithBool:YES];
             
         }
         else {
@@ -1284,6 +1352,11 @@
         backgroundColor = [UIColor clearColor];
         
         
+        
+    }
+    
+    if (shouldSaveCenter == nil) {
+        shouldSaveCenter = [NSNumber numberWithBool:NO];
     }
     
     return @{@"textColor"   : textColor,
@@ -1295,7 +1368,8 @@
              @"xOffset"     : xOffSet,
              @"rotation"    : rotation,
              @"background"  : backgroundColor,
-             @"lineHeight"  : lineHeight};
+             @"lineHeight"  : lineHeight,
+             @"shouldSaveCenter" : shouldSaveCenter};
 }
 -(NSArray*)createYearsArrayWithStart:(NSNumber*) start andEnd:(NSNumber*) end
 {
@@ -1351,6 +1425,13 @@
     else{
         return [imageInformationVClist objectAtIndex:index - 1];
     }
+}
+-(void)shouldDismissImageViewer:(id)imageViewer
+{
+    largeImageViewer *imgViewer = (largeImageViewer*)imageViewer;
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 @end

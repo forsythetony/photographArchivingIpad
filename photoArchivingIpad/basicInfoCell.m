@@ -7,9 +7,10 @@
 //
 
 #import "basicInfoCell.h"
+#define TESTING NO
 
 @interface basicInfoCell () {
-    NSDictionary    *titleStyle,
+    NSMutableDictionary    *titleStyle,
                     *infoStyle,
                     *mainStyle;
     
@@ -18,73 +19,112 @@
 
 @end
 @implementation basicInfoCell
-
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
++(id)createCellOfType:(cellType)cellType
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
-        [self setupVariables];
-        [self setupViews];
+    basicInfoCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"basicDetailCell" owner:nil options:nil] lastObject];
+    
+    if ([cell isKindOfClass:[basicInfoCell class]]) {
+        [cell setupVariablesWithType:cellType];
+        [cell setupViews];
         
+        return cell;
     }
-    return self;
+    else
+    {
+        return nil;
+    }
 }
-
 - (void)awakeFromNib
 {
     // Initialization code
 }
--(void)setupVariables
+-(void)setupVariablesWithType:(cellType) cellType
 {
-    float titleFontSize = 20.0;
-    float infoFontSize = 14.0;
+    float titleFontSize = 15.0;
+    float infoFontSize = 18.0;
     
-    NSString *fontName = @"DINAlternate-Bold";
+    NSString *fontName = global_font_family;
     
     UIFont *titleFont = [UIFont fontWithName:fontName size:titleFontSize];
-    UIColor *titleFontColor = [UIColor blackColor];
-    float titleXOffset = 20.0;
+    UIColor *titleFontColor = [UIColor icebergColor];
+    UIColor *titleBackgroundColor = [UIColor clearColor];
+    NSTextAlignment titleTextAlign = NSTextAlignmentRight;
+    
     
     UIFont *infoFont = [UIFont fontWithName:fontName size:infoFontSize];
-    UIColor *infoFontColor = [UIColor blackColor];
-    NSTextAlignment infoAlign = NSTextAlignmentLeft;
-    float infoXOffset = 20.0;
+    UIColor *infoFontColor;
     
-    UIColor *backgroundColor = [UIColor whiteColor];
+    switch (cellType) {
+        case cellTypeDefault:
+            infoFontColor = [UIColor whiteColor];
+            
+            break;
+           case cellTypeLink:
+            infoFontColor = [UIColor babyBlueColor];
+            break;
 
-    CGRect infoRect = CGRectMake(
-                                 infoXOffset, 0.0,
-                                 self.contentView.frame.size.width - infoXOffset , self.contentView.frame.size.height
-                                 );
+        default:
+            infoFontColor = [UIColor whiteColor];
+            break;
+    }
     
+    UIColor *infoBackgroundColor = [UIColor clearColor];
     
+    NSTextAlignment infoAlign = NSTextAlignmentLeft;
     
+    UIColor *backgroundColor = [UIColor clearColor];
+
     
-    titleStyle = @{@"font": titleFont,
-                   @"textColor" : titleFontColor};
+    titleStyle = [NSMutableDictionary cellAttributesDictionaryForType:attrDictTypeTitle];
+    infoStyle = [NSMutableDictionary cellAttributesDictionaryForType:attrDictTypeLabel1];
+    mainStyle = [NSMutableDictionary cellAttributesDictionaryForType:attrDictTypeView1];
     
-    infoStyle = @{@"font": infoFont,
-                  @"textColor": infoFontColor,
-                  @"textAlignment" : [NSNumber numberWithInt:infoAlign],
-                  @"frame" : [NSValue valueWithCGRect:infoRect]};
+    [titleStyle updateValues:@[titleFont,
+                               titleBackgroundColor,
+                               titleFontColor,
+                               [NSNumber numberWithInteger:titleTextAlign]]
+                     forKeys:@[keyFont,
+                               keyBackgroundColor,
+                               keyTextColor,
+                               keytextAlignment]];
     
-    mainStyle = @{@"background": backgroundColor};
+    [infoStyle updateValues:@[infoFont,
+                             infoBackgroundColor,
+                             infoFontColor,
+                              [NSNumber numberWithInteger:infoAlign]]
+                    forKeys:@[keyFont,
+                              keyBackgroundColor,
+                              keyTextColor,
+                              keytextAlignment
+                              ]];
     
+    [mainStyle updateValues:@[backgroundColor]
+                    forKeys:@[keyBackgroundColor]];
     
 }
 -(void)setupViews
 {
+    [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
+    self.backgroundColor = [mainStyle objectForConstKey:(TESTING ? keyTestingBackground : keyBackgroundColor)];
+    
+    
 
     
-    _valueLabel = [[UILabel alloc] initWithFrame:[infoStyle[@"frame"] CGRectValue]];
+    _titleLabel.text = @"";
+    _titleLabel.font = [infoStyle objectForConstKey:keyFont];
+    _titleLabel.textAlignment = [[infoStyle objectForConstKey:keytextAlignment] integerValue];
+    _titleLabel.backgroundColor = [infoStyle objectForConstKey:(TESTING ? keyTestingBackground : keyBackgroundColor)];
+    _titleLabel.textColor = [infoStyle objectForConstKey:(TESTING ? keyTestingTextColor : keyTextColor)];
     
-    _valueLabel.text = @"";
-    _valueLabel.font = infoStyle[@"font"];
-    _valueLabel.textAlignment = [infoStyle[@"textAlignment"] intValue];
     
     
-    [self.contentView addSubview:_valueLabel];
+    
+    _titleConstLabel.text = @"Title";
+    _titleConstLabel.font = [titleStyle objectForConstKey:keyFont];
+    _titleConstLabel.textColor = [titleStyle objectForConstKey:(TESTING ? keyTestingTextColor : keyTextColor)];
+    _titleConstLabel.textAlignment = [[titleStyle objectForConstKey:keytextAlignment] integerValue];
+    _titleConstLabel.backgroundColor = [titleStyle objectForConstKey:(TESTING ? keyTestingBackground : keyBackgroundColor)];
     
     
 }

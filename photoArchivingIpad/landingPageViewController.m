@@ -56,6 +56,8 @@
     
     [self.buttonTimeline setTitleColor:btnTimelineTextColor
                               forState:UIControlStateNormal];
+    self.buttonTimeline.titleLabel.font = [UIFont fontWithName:global_font_family size:20.0];
+    self.buttonServer.titleLabel.font = [UIFont fontWithName:global_font_family size:20.0];
     
     if (btnTimelineDidSpring == NO) {
         

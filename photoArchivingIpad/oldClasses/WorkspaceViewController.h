@@ -18,7 +18,13 @@
 #import "pagerSocialVC.h"
 #import "imageInfoPagerVC.h"
 
+#import <LiveFrost.h>
+
+#import "largeImageViewer.h"
+
 #import "imageHandling.h"
+
+
 @class imageInfoPagerVC;
 
 typedef NS_ENUM(NSInteger, labelRotationType) {
@@ -35,7 +41,7 @@ typedef NS_ENUM(NSInteger, buttonIconType) {
     buttonIconTypeOther
 };
 
-@interface WorkspaceViewController : UIViewController < UIGestureRecognizerDelegate, timelineManagerDelegate, TFCommunicatorDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate >
+@interface WorkspaceViewController : UIViewController < UIGestureRecognizerDelegate, timelineManagerDelegate, TFCommunicatorDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate,largeImageViewerDelegate, UIScrollViewDelegate >
 
 @property (strong, nonatomic) NSDictionary* rangeInformation;
 
@@ -50,5 +56,6 @@ typedef NS_ENUM(NSInteger, buttonIconType) {
 @property (strong, nonatomic) UIButton* addOtherInfo;
 
 @property (strong, nonatomic) UIPageViewController* infoPager;
+
 
 @end

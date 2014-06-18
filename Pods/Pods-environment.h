@@ -54,6 +54,12 @@
 #define COCOAPODS_VERSION_MINOR_FontAwesomeKit_Zocial 1
 #define COCOAPODS_VERSION_PATCH_FontAwesomeKit_Zocial 6
 
+// LiveFrost
+#define COCOAPODS_POD_AVAILABLE_LiveFrost
+#define COCOAPODS_VERSION_MAJOR_LiveFrost 1
+#define COCOAPODS_VERSION_MINOR_LiveFrost 1
+#define COCOAPODS_VERSION_PATCH_LiveFrost 2
+
 // pop
 #define COCOAPODS_POD_AVAILABLE_pop
 #define COCOAPODS_VERSION_MAJOR_pop 1

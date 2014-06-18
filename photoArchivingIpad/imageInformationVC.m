@@ -49,20 +49,17 @@
     
 
     self.view.layer.cornerRadius = 8.0;
-    
-    UIFont *fontForLabelKeys = [UIFont fontWithName:@"DINAlternate-Bold" size:15.0];
-    UIFont *fontForLabelValues = [UIFont fontWithName:@"DINAlternate-Bold" size:13.0];
-    
-    UIColor *colorForLabelKeys = [UIColor black25PercentColor];
-    UIColor *colorForLabelValues = [UIColor blackColor];
-    
-    CGRect titleContainerFrame = CGRectMake(0.0, 0.0, self.view.frame.size.width, 40.0);
+
+    CGRect titleContainerFrame = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height);
     
     
     _tableView = [[UITableView alloc] initWithFrame:titleContainerFrame];
     
     _tableView.delegate = self;
     _tableView.dataSource = self;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    
     
     [self.view addSubview:_tableView];
     
@@ -126,12 +123,14 @@
     NSMutableArray *secs = [NSMutableArray new];
     
     
-    NSMutableDictionary *titleSection = [NSMutableDictionary dictionaryWithDictionary:@{@"sectionName": @"Title",
-                                                                                        @"value" : [NSArray arrayWithObject:@""]}];
-    NSMutableDictionary *datesSection = [NSMutableDictionary dictionaryWithDictionary:@{@"sectionName": @"Dates",
-                                                                                        @"value" : [NSArray new]}];
+    NSMutableDictionary *titleSection = [NSMutableDictionary dictionaryWithDictionary:@{@"sectionName": @"Title:",
+                                                                                        @"value" : @""}];
+    NSMutableDictionary *datesSection = [NSMutableDictionary dictionaryWithDictionary:@{@"sectionName": @"Date Taken:",
+                                                                                        @"value" : @"",
+                                                                                        @"confidence" : @""}];
     NSMutableDictionary *uploaderSection = [NSMutableDictionary dictionaryWithDictionary:@{@"sectionName": @"Uploader",
-                                                                                           @"value" : [NSArray new]}];
+                                                                                           @"value" : @""}];
+
     
     
     [secs addObject:titleSection];
@@ -161,17 +160,12 @@
     
     _information = information;
     
-    [[_imageSections objectAtIndex:0] setValue:[NSArray arrayWithObject:_information.title] forKey:@"value"];
+    [[_imageSections objectAtIndex:0] setValue:_information.title forKey:@"value"];
     
-    NSMutableArray *datesArray = [NSMutableArray new];
+    [[_imageSections objectAtIndex:1] setValue:[_information.date displayDateOfType:sDateTypPretty] forKeyPath:@"value"];
+    [[_imageSections objectAtIndex:1] setValue:_information.confidence forKey:@"confidence"];
     
-    [datesArray addObject:[_information.date displayDateOfType:sDateTypeSimple]];
-    
-    [[_imageSections objectAtIndex:1] setValue:[NSArray arrayWithArray:datesArray] forKeyPath:@"value"];
-    
-    [[_imageSections objectAtIndex:2] setValue:[NSArray arrayWithObject:_information.uploader] forKey:@"value"];
-    
-    
+    [[_imageSections objectAtIndex:2] setValue:_information.uploader forKey:@"value"];
     
     
     [_tableView reloadData];
@@ -188,10 +182,6 @@
     
     return rowCount;
 }
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    return [[_imageSections objectAtIndex:section] objectForKey:@"sectionName"];
-}
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -201,72 +191,47 @@
     
     NSString *sectionTitle = sectionDict[@"sectionName"];
     
-    
-    
-    if ([sectionTitle isEqualToString:@"Title"]) {
+    if ([sectionTitle isEqualToString:@"Date Taken:"]) {
+        dateInfoCell *cell = [dateInfoCell createCell];
         
-        basicInfoCell *cell = [basicInfoCell new];
-        
-        cell.valueLabel.text = @"Things";
-
-        return cell;
-    }
-    else if ([sectionTitle isEqualToString:@"Dates"])
-    {
-        UITableViewCell *cell = [UITableViewCell new];
-        
-        cell.textLabel.text = [sectionDict[@"value"] objectAtIndex:indexPath.row];
-        cell.backgroundColor = [UIColor clearColor];
-        
-        return cell;
-    }
-    else if ([sectionTitle isEqualToString:@"Uploader"]) {
-        UITableViewCell *cell = [UITableViewCell new];
-        
-        cell.textLabel.text = [sectionDict[@"value"] objectAtIndex:indexPath.row];
+        cell.titleLabel.text = sectionTitle;
+        cell.dateLabel.text = sectionDict[@"value"];
+        [cell setConfidenceValue:sectionDict[@"confidence"]];
         
         return cell;
     }
     else
     {
-        UITableViewCell *cell = [UITableViewCell new];
+        cellType theType;
         
-        cell.textLabel.text = @"Nothing";
+        if (sectionNum == 0) {
+            theType = cellTypeDefault;
+        }
+        else
+        {
+            theType = cellTypeLink;
+        }
+        basicInfoCell *cell = [basicInfoCell createCellOfType:theType];
+    
+        cell.titleConstLabel.text = sectionTitle;
+        cell.titleLabel.text = sectionDict[@"value"];
         
-        
-        return cell;
+    
+    return cell;
     }
-}
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    NSString *sectionTitle = [[_imageSections objectAtIndex:section] objectForKey:@"sectionName"];
-    
-    CGRect headerFrame = CGRectMake(10.0, 0.0, self.tableView.frame.size.width - 10.0, HEADERHEIGHT);
-    
-    UILabel *headerLabel = [[UILabel alloc] initWithFrame:headerFrame];
-    
-    headerLabel.font = [UIFont fontWithName:@"DINAlternate-Bold" size:20.0];
-    
-    headerLabel.textColor = [UIColor black25PercentColor];
-    headerLabel.backgroundColor = [UIColor ghostWhiteColor];
-    headerLabel.layer.cornerRadius = 8.0;
-    
-    headerLabel.text = sectionTitle;
-    
-    return headerLabel;
-}
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return HEADERHEIGHT;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch (indexPath.section) {
+    switch (indexPath.row) {
         case 0:
-            return 200.0;
+            return BASICROWHEIGHT / 2.0;
             
             break;
-            
+            case 1:
+            return BASICROWHEIGHT;
+            break;
+            case 2:
+            return BASICROWHEIGHT / 2.0;
         default:
             return 100.0;
             break;

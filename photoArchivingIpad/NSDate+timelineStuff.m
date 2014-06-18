@@ -87,7 +87,7 @@
             break;
             
         case sDateTypPretty:
-            dateFormat = @"EEE, MMM d yyyy";
+            dateFormat = @"EEEE MMMM d yyyy";
             break;
             
         case sDateTypeWithTime:
@@ -96,6 +96,10 @@
             
         case sDateTypeMonthAndYear:
             dateFormat = @"MMMM yyyy";
+            break;
+            
+            case sDateTypeYearOnly:
+            dateFormat = @"yyyy";
             break;
             
         default:

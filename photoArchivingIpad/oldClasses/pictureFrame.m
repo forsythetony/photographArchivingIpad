@@ -30,7 +30,7 @@
         picture.backgroundColor                 = [UIColor clearColor];
         
         picture.containerView.layer.cornerRadius    = CORNERRAD;
-        picture.containerView.backgroundColor       = [UIColor charcoalColor];
+        picture.containerView.backgroundColor       = [UIColor clearColor];
         
         return picture;
         

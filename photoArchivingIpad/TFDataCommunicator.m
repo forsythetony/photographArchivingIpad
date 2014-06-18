@@ -8,14 +8,14 @@
 
 #import "TFDataCommunicator.h"
 
-#import "constants.h"
+#import "updatedConstants.h"
 
 @implementation TFDataCommunicator
 
 -(void)getUserWithUsername:(NSString *)username
 {
     
-    NSString *apiEndpoint = [NSString stringWithFormat:@"%@%@%@", APIADDRESS, @"/users/", username];
+    NSString *apiEndpoint = [NSString stringWithFormat:@"%@%@/%@", (USELOCALHOST ? api_localhostBaseURL : api_ec2BaseURL), api_usersEndpoint, username];
     
     NSString        *urlString  = [NSString stringWithString:apiEndpoint];
     NSURL           *url        = [NSURL URLWithString:urlString];
@@ -34,7 +34,25 @@
         }
     }];
 }
-
+-(void)getPhotosForTestUser
+{
+    NSString        *urlString  = [NSString stringWithFormat:@"%@/%@?forUser=%@", (USELOCALHOST ? api_localhostBaseURL : api_ec2BaseURL), api_photosEndpoint, api_testUser];
+    NSURL           *url        = [NSURL URLWithString:urlString];
+    NSURLRequest    *urlRequest = [[NSURLRequest alloc] initWithURL:url];
+    
+    NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
+    
+    [NSURLConnection sendAsynchronousRequest:urlRequest queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        
+        if (httpResponse.statusCode == 200 && data) {
+            
+            [self parsePhotosFromData:data];
+            
+        }
+    }];
+}
 -(void)parsePersonDataFromData:(NSData*) data
 {
     
@@ -89,7 +107,7 @@
 -(void)getPhotoListWithOptions:(NSDictionary *)options
 {
     
-    NSString        *urlString  = [NSString stringWithFormat:@"%@%@", APIADDRESS, @"/photos"];
+    NSString        *urlString  = [NSString stringWithFormat:@"%@%@", (USELOCALHOST ? api_localhostBaseURL : api_ec2BaseURL), api_photosEndpoint];
     NSURL           *urlObject  = [NSURL URLWithString:urlString];
     NSURLRequest    *urlRequest = [[NSURLRequest alloc] initWithURL:urlObject];
     
@@ -106,7 +124,56 @@
         }
     }];
 }
-
+-(void)cleanImages
+{
+    
+    NSString        *urlString  = [NSString stringWithFormat:@"%@%@?%@=%@", (USELOCALHOST ? api_localhostBaseURL : api_ec2BaseURL), api_photosEndpoint, api_cleanFlagKey, api_cleanFlagValue];
+    
+    NSURL           *urlObject  = [NSURL URLWithString:urlString];
+    NSURLRequest    *urlRequest = [[NSURLRequest alloc] initWithURL:urlObject];
+    
+    NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
+    
+    [NSURLConnection sendAsynchronousRequest:urlRequest queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        
+        if (httpResponse.statusCode == 200 && data) {
+            
+            [self parseSimpleResponseFromData:data withType:simpleResponseTypeImageClean andStatus:serverResponseTypeOK];
+            
+        }
+    }];
+}
+-(void)parseSimpleResponseFromData:(NSData*) data withType:(simpleResponseType) responseType andStatus:(serverResponseType) status
+{
+    NSError *error;
+    NSDictionary *respDict;
+    
+    switch (responseType) {
+            
+        case simpleResponseTypeImageClean: {
+            
+            respDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+            
+            NSArray *resultsKeys = @[respKeys_responseStatus, respKeys_responseMessage];
+            NSArray *resultsValues = @[respDict[@"responseMessage"], [NSNumber numberWithInteger:status]];
+            
+            NSDictionary *resultsDict = [NSDictionary dictionaryWithObjects:resultsValues forKeys:resultsKeys];
+            
+            [self.delegate finishedServerCleanup:resultsDict];
+    }
+            break;
+            
+        case simpleResponseTypeServerStatus: {
+            
+        }
+            
+            break;
+        default:
+            break;
+    }
+}
 -(void)parsePhotoListFromData:(NSData*) data
 {
     NSError *error;
@@ -150,7 +217,7 @@
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     
     request.HTTPMethod  = @"POST";
-    request.URL         = [NSURL URLWithString:@"http://localhost:3000/photos"];
+    request.URL         = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", (USELOCALHOST ? api_localhostBaseURL : api_ec2BaseURL), api_photosEndpoint]];
     request.HTTPBody    = postDataData;
     
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -169,7 +236,7 @@
 -(void)getPhotosForUser:(NSString *)username
 {
     
-    NSString        *urlString  = [NSString stringWithFormat:@"%@/photos?forUser=%@", APIADDRESS, username];
+    NSString        *urlString  = [NSString stringWithFormat:@"%@%@?forUser=%@", (USELOCALHOST ? api_localhostBaseURL : api_ec2BaseURL), api_photosEndpoint, username];
     NSURL           *url        = [NSURL URLWithString:urlString];
     NSURLRequest    *urlRequest = [[NSURLRequest alloc] initWithURL:url];
     

@@ -10,6 +10,9 @@
 
 #import "imageHandling.h"
 #import "basicInfoCell.h"
+#import "dateInfoCell.h"
+
+
 @interface imageInformationVC : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) imageObject *information;

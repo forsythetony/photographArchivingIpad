@@ -13,7 +13,8 @@ typedef NS_ENUM(NSInteger, sDateType) {
     sDateTypeSimple,
     sDateTypPretty,
     sDateTypeWithTime,
-    sDateTypeMonthAndYear
+    sDateTypeMonthAndYear,
+    sDateTypeYearOnly
     
 };
 

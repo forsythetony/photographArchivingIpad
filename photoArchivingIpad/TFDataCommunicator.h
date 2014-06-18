@@ -14,6 +14,15 @@ typedef NS_ENUM(NSUInteger, photoType) {
     
 };
 
+typedef NS_ENUM(NSInteger, simpleResponseType) {
+    simpleResponseTypeImageClean,
+    simpleResponseTypeServerStatus
+};
+
+typedef NS_ENUM(NSInteger, serverResponseType) {
+    serverResponseTypeOK,
+    serverResponseTypeServerError
+};
 @class TFDataCommunicator;
 
 @protocol TFCommunicatorDelegate <NSObject>
@@ -23,6 +32,7 @@ typedef NS_ENUM(NSUInteger, photoType) {
 -(void)finishedParsingPeople:(NSArray*) people;
 -(void)finishedPullingImageFromUrl:(UIImage*) image;
 -(void)finishedPullingPhotoList:(NSArray*) list;
+-(void)finishedServerCleanup:(NSDictionary*) results;
 
 @end
 
@@ -38,5 +48,8 @@ typedef NS_ENUM(NSUInteger, photoType) {
 -(void)getPhotoListWithOptions:(NSDictionary*) options;
 -(void)sendImageToServer:(UIImage *)image ofType:(photoType) type withInformation:(NSDictionary*) information;
 -(void)getPhotosForUser:(NSString*) username;
+-(void)getPhotosForTestUser;
+-(void)cleanImages;
+
 
 @end

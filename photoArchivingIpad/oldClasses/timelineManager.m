@@ -10,7 +10,7 @@
 #import <math.h>
 
 #define HORIZONTALMOD 8.0
-
+#define DISTANCETHRESHOLD 50.0
 
 @implementation timelineManager
 
@@ -29,24 +29,63 @@
     return duration;
     
 }
+-(void)bringSubyearsToFront
+{
+    for (UILabel *lbl in _savedYears) {
+        [_TLView bringSubviewToFront:lbl];
+        
+    }
+}
 -(CGPoint)createPointWithDate:(NSDate *)date
 {
-    
     CGPoint centerPoint;
-    
-    NSTimeInterval pureDate = [date timeIntervalSinceBeginning];
-    
-    float specNumber    = _viewSpan / _duration;
-    
-    float   lowerYBound     =   _TLView.center.y - 100.0,
-            upperYBound     =   75.0;
-    
-    centerPoint.y = [self randomFloatBetween:lowerYBound and:upperYBound];
-    
-    centerPoint.x = _xOffset + (( pureDate - _pureStart ) * specNumber) - HORIZONTALMOD;
-    
-    float attempt = [self getRandomFloatWithDate:date];
-    
+    BOOL goodValue = NO;
+    while (goodValue == NO) {
+        NSString *yearString;
+        
+        NSTimeInterval pureDate = [date timeIntervalSinceBeginning];
+        
+        float specNumber    = _viewSpan / _duration;
+        
+        float   lowerYBound     =   _TLView.frame.size.height - 45.0,
+        upperYBound     =   90.0;
+        
+        centerPoint.y = [self randomFloatBetween:lowerYBound and:upperYBound];
+        
+        centerPoint.x = _xOffset + (( pureDate - _pureStart ) * specNumber) - HORIZONTALMOD;
+        
+        BOOL isFar = YES;
+        
+        for (NSDictionary* pointDict in _savedCenters) {
+            
+            CGPoint thePoint = [pointDict[@"point"] CGPointValue];
+            
+            float distance = [self getDistanceBetweenPoints:thePoint andTwo:centerPoint];
+            
+
+                float lineDist = [self distanceFromLineToPoint:thePoint];
+                
+                if (lineDist < DISTANCETHRESHOLD && distance < DISTANCETHRESHOLD) {
+                    isFar = NO;
+                }
+            
+            else
+            {
+                yearString = pointDict[@"year"];
+                
+            }
+        }
+        
+        if (isFar == YES) {
+            goodValue = YES;
+            NSLog(@"\nFound good value for year %@ at point %@\n", yearString, NSStringFromCGPoint(centerPoint));
+            
+        
+        }
+
+    }
+    [_savedCenters addObject:@{@"point": [NSValue valueWithCGPoint:centerPoint],
+                               @"year" : [date displayDateOfType:sDateTypeYearOnly]}];
     return centerPoint;
     
 }
@@ -84,6 +123,7 @@
         [_TLView addSubview:theFrame];
         
     }
+    
 }
 -(void)updateDateForPicture:(pictureFrame *)picture
 {
@@ -130,5 +170,23 @@
     NSLog(@"THE FLOAT IS %f", result);
     
     return result;
+}
+-(float)getDistanceBetweenPoints:(CGPoint) pointOne andTwo:(CGPoint) pointTwo
+{
+    float xDiff = fabsf(pointTwo.x - pointOne.x);
+    float yDiff = fabsf(pointTwo.y - pointOne.y);
+    
+    float distance = sqrtf(powf(xDiff, 2.0) + powf(yDiff, 2.0));
+    
+    return distance;
+
+}
+-(float)distanceFromLineToPoint:(CGPoint) thePoint
+{
+    CGPoint linePoint = [_lineCenter CGPointValue];
+    
+    float distance = fabsf(thePoint.y - linePoint.y);
+    
+    return distance;
 }
 @end

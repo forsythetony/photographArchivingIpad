@@ -38,8 +38,15 @@
 @property (nonatomic, assign) float viewSpan;
 @property (nonatomic, assign) float xOffset;
 
+@property (nonatomic, strong) NSMutableArray *savedCenters;
+
+@property (nonatomic, strong) NSValue *lineCenter;
+
+@property (nonatomic, strong) NSArray  *savedYears;
 
 @property (nonatomic, weak) id <timelineManagerDelegate> delegate;
+
+-(void)bringSubyearsToFront;
 
 -(NSNumber*)makeDuration;
 -(CGPoint)createPointWithDate:(NSDate*) date;

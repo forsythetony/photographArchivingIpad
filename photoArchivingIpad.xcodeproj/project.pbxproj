@@ -57,11 +57,25 @@
 		BA67F2191937B9D80056DD00 /* subtle_carbon.png in Resources */ = {isa = PBXBuildFile; fileRef = BA67F2171937B9D80056DD00 /* subtle_carbon.png */; };
 		BA67F21C193BC4AA0056DD00 /* NSDate+timelineStuff.m in Sources */ = {isa = PBXBuildFile; fileRef = BA67F21B193BC4AA0056DD00 /* NSDate+timelineStuff.m */; };
 		BA67F21F193BCC3A0056DD00 /* timelineManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA67F21E193BCC3A0056DD00 /* timelineManager.m */; };
+		BA6F5EC9194EBCE300E1E1FC /* attributesDictionaryConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6F5EC8194EBCE300E1E1FC /* attributesDictionaryConstants.m */; };
+		BA6F5ECC194EC3D400E1E1FC /* dateInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6F5ECB194EC3D400E1E1FC /* dateInfoCell.m */; };
+		BA6F5ECE194EC44F00E1E1FC /* dateInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA6F5ECD194EC44F00E1E1FC /* dateInfoCell.xib */; };
+		BA6F5ED1194EC66400E1E1FC /* UIColor+testingColors.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6F5ED0194EC66400E1E1FC /* UIColor+testingColors.m */; };
+		BA6F5EDA194ED05700E1E1FC /* attributesDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6F5ED9194ED05700E1E1FC /* attributesDictionary.m */; };
+		BA6F5EDD194ED5B100E1E1FC /* NSMutableDictionary+attributesDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6F5EDC194ED5B100E1E1FC /* NSMutableDictionary+attributesDictionary.m */; };
+		BA6F5EE0194EEFB200E1E1FC /* updatedConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6F5EDF194EEFB200E1E1FC /* updatedConstants.m */; };
+		BA6F5EE3194EFE6F00E1E1FC /* largeImageViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6F5EE2194EFE6F00E1E1FC /* largeImageViewer.m */; };
+		BA6F5EE5194EFEFF00E1E1FC /* largeImageViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA6F5EE4194EFEFF00E1E1FC /* largeImageViewer.xib */; };
+		BA6F5EE9194F12B700E1E1FC /* greyzz@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = BA6F5EE7194F12B700E1E1FC /* greyzz@2X.png */; };
+		BA6F5EEA194F12B700E1E1FC /* greyzz.png in Resources */ = {isa = PBXBuildFile; fileRef = BA6F5EE8194F12B700E1E1FC /* greyzz.png */; };
+		BA6F5EED194F192900E1E1FC /* UIImage+imageAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6F5EEC194F192900E1E1FC /* UIImage+imageAdditions.m */; };
 		BA9531AD194E2CC6005E0F10 /* pagerInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9531AC194E2CC6005E0F10 /* pagerInformationVC.m */; };
 		BA9531B0194E2E28005E0F10 /* pagerSocialVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9531AF194E2E28005E0F10 /* pagerSocialVC.m */; };
 		BA9531B3194E4A27005E0F10 /* imageInfoPagerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9531B2194E4A27005E0F10 /* imageInfoPagerVC.m */; };
 		BA9531B7194E4E2B005E0F10 /* imageInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9531B6194E4E2B005E0F10 /* imageInformationVC.m */; };
 		BA9531BB194E51BB005E0F10 /* socialInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9531BA194E51BB005E0F10 /* socialInformationVC.m */; };
+		BABF161219523BC900FF01C0 /* AWSRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BABF161019523BC900FF01C0 /* AWSRuntime.framework */; };
+		BABF161319523BC900FF01C0 /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BABF161119523BC900FF01C0 /* AWSS3.framework */; };
 		BAD16301194A581A008144A0 /* UIView+Glow.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD16300194A581A008144A0 /* UIView+Glow.m */; };
 /* End PBXBuildFile section */
 
@@ -144,6 +158,27 @@
 		BA67F21B193BC4AA0056DD00 /* NSDate+timelineStuff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+timelineStuff.m"; sourceTree = "<group>"; };
 		BA67F21D193BCC3A0056DD00 /* timelineManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timelineManager.h; sourceTree = "<group>"; };
 		BA67F21E193BCC3A0056DD00 /* timelineManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = timelineManager.m; sourceTree = "<group>"; };
+		BA6F5EC7194EBCE300E1E1FC /* attributesDictionaryConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = attributesDictionaryConstants.h; sourceTree = "<group>"; };
+		BA6F5EC8194EBCE300E1E1FC /* attributesDictionaryConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = attributesDictionaryConstants.m; sourceTree = "<group>"; };
+		BA6F5ECA194EC3D400E1E1FC /* dateInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dateInfoCell.h; sourceTree = "<group>"; };
+		BA6F5ECB194EC3D400E1E1FC /* dateInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dateInfoCell.m; sourceTree = "<group>"; };
+		BA6F5ECD194EC44F00E1E1FC /* dateInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = dateInfoCell.xib; sourceTree = "<group>"; };
+		BA6F5ECF194EC66400E1E1FC /* UIColor+testingColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+testingColors.h"; sourceTree = "<group>"; };
+		BA6F5ED0194EC66400E1E1FC /* UIColor+testingColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+testingColors.m"; sourceTree = "<group>"; };
+		BA6F5ED8194ED05700E1E1FC /* attributesDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = attributesDictionary.h; sourceTree = "<group>"; };
+		BA6F5ED9194ED05700E1E1FC /* attributesDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = attributesDictionary.m; sourceTree = "<group>"; };
+		BA6F5EDB194ED5B100E1E1FC /* NSMutableDictionary+attributesDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+attributesDictionary.h"; sourceTree = "<group>"; };
+		BA6F5EDC194ED5B100E1E1FC /* NSMutableDictionary+attributesDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+attributesDictionary.m"; sourceTree = "<group>"; };
+		BA6F5EDE194EEFB200E1E1FC /* updatedConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = updatedConstants.h; sourceTree = "<group>"; };
+		BA6F5EDF194EEFB200E1E1FC /* updatedConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = updatedConstants.m; sourceTree = "<group>"; };
+		BA6F5EE1194EFE6F00E1E1FC /* largeImageViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = largeImageViewer.h; sourceTree = "<group>"; };
+		BA6F5EE2194EFE6F00E1E1FC /* largeImageViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = largeImageViewer.m; sourceTree = "<group>"; };
+		BA6F5EE4194EFEFF00E1E1FC /* largeImageViewer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = largeImageViewer.xib; sourceTree = "<group>"; };
+		BA6F5EE6194F0ABF00E1E1FC /* largeImageViewerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = largeImageViewerDelegate.h; sourceTree = "<group>"; };
+		BA6F5EE7194F12B700E1E1FC /* greyzz@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "greyzz@2X.png"; sourceTree = "<group>"; };
+		BA6F5EE8194F12B700E1E1FC /* greyzz.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greyzz.png; sourceTree = "<group>"; };
+		BA6F5EEB194F192900E1E1FC /* UIImage+imageAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+imageAdditions.h"; sourceTree = "<group>"; };
+		BA6F5EEC194F192900E1E1FC /* UIImage+imageAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+imageAdditions.m"; sourceTree = "<group>"; };
 		BA9531AB194E2CC6005E0F10 /* pagerInformationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pagerInformationVC.h; sourceTree = "<group>"; };
 		BA9531AC194E2CC6005E0F10 /* pagerInformationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pagerInformationVC.m; sourceTree = "<group>"; };
 		BA9531AE194E2E28005E0F10 /* pagerSocialVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pagerSocialVC.h; sourceTree = "<group>"; };
@@ -155,6 +190,8 @@
 		BA9531B8194E4E43005E0F10 /* pageViewControllers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pageViewControllers.h; sourceTree = "<group>"; };
 		BA9531B9194E51BB005E0F10 /* socialInformationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = socialInformationVC.h; sourceTree = "<group>"; };
 		BA9531BA194E51BB005E0F10 /* socialInformationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = socialInformationVC.m; sourceTree = "<group>"; };
+		BABF161019523BC900FF01C0 /* AWSRuntime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSRuntime.framework; path = "../../../Downloads/aws-ios-sdk-1.7.1/AWSRuntime.framework"; sourceTree = "<group>"; };
+		BABF161119523BC900FF01C0 /* AWSS3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSS3.framework; path = "../../../Downloads/aws-ios-sdk-1.7.1/AWSS3.framework"; sourceTree = "<group>"; };
 		BAD162FD1949617E008144A0 /* imageHandling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imageHandling.h; sourceTree = "<group>"; };
 		BAD162FE194978AA008144A0 /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		BAD162FF194A581A008144A0 /* UIView+Glow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Glow.h"; sourceTree = "<group>"; };
@@ -167,6 +204,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BABF161219523BC900FF01C0 /* AWSRuntime.framework in Frameworks */,
+				BABF161319523BC900FF01C0 /* AWSS3.framework in Frameworks */,
 				BA3299AA1948DF430002EBFD /* ImageIO.framework in Frameworks */,
 				BA3299A81948DE850002EBFD /* SDWebImage.framework in Frameworks */,
 				BA67F1AE193666210056DD00 /* CoreGraphics.framework in Frameworks */,
@@ -212,6 +251,8 @@
 		BA67F1AA193666210056DD00 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BABF161019523BC900FF01C0 /* AWSRuntime.framework */,
+				BABF161119523BC900FF01C0 /* AWSS3.framework */,
 				BA3299A91948DF430002EBFD /* ImageIO.framework */,
 				BA67F1AB193666210056DD00 /* Foundation.framework */,
 				BA67F1AD193666210056DD00 /* CoreGraphics.framework */,
@@ -225,11 +266,10 @@
 		BA67F1B1193666210056DD00 /* photoArchivingIpad */ = {
 			isa = PBXGroup;
 			children = (
-				BAD162FF194A581A008144A0 /* UIView+Glow.h */,
-				BAD16300194A581A008144A0 /* UIView+Glow.m */,
-				BA3299A71948DE850002EBFD /* SDWebImage.framework */,
 				BA3299A11948BA430002EBFD /* TFDataCommunicator.h */,
 				BA3299A21948BA430002EBFD /* TFDataCommunicator.m */,
+				BA6F5EDE194EEFB200E1E1FC /* updatedConstants.h */,
+				BA6F5EDF194EEFB200E1E1FC /* updatedConstants.m */,
 				BA3299A31948BA430002EBFD /* TFPerson.h */,
 				BA3299A41948BA430002EBFD /* TFPerson.m */,
 				BA67F1E0193667140056DD00 /* images */,
@@ -253,6 +293,10 @@
 				BA9531AC194E2CC6005E0F10 /* pagerInformationVC.m */,
 				BA9531AE194E2E28005E0F10 /* pagerSocialVC.h */,
 				BA9531AF194E2E28005E0F10 /* pagerSocialVC.m */,
+				BA6F5EC7194EBCE300E1E1FC /* attributesDictionaryConstants.h */,
+				BA6F5EC8194EBCE300E1E1FC /* attributesDictionaryConstants.m */,
+				BA6F5EEB194F192900E1E1FC /* UIImage+imageAdditions.h */,
+				BA6F5EEC194F192900E1E1FC /* UIImage+imageAdditions.m */,
 			);
 			path = photoArchivingIpad;
 			sourceTree = "<group>";
@@ -260,6 +304,9 @@
 		BA67F1B2193666210056DD00 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BA3299A71948DE850002EBFD /* SDWebImage.framework */,
+				BAD162FF194A581A008144A0 /* UIView+Glow.h */,
+				BAD16300194A581A008144A0 /* UIView+Glow.m */,
 				BA67F1B3193666210056DD00 /* photoArchivingIpad-Info.plist */,
 				BA67F1B4193666210056DD00 /* InfoPlist.strings */,
 				BA67F1B7193666210056DD00 /* main.m */,
@@ -325,6 +372,8 @@
 		BA67F1EF193667140056DD00 /* textures */ = {
 			isa = PBXGroup;
 			children = (
+				BA6F5EE7194F12B700E1E1FC /* greyzz@2X.png */,
+				BA6F5EE8194F12B700E1E1FC /* greyzz.png */,
 				BA67F2161937B9D80056DD00 /* subtle_carbon_@2X.png */,
 				BA67F2171937B9D80056DD00 /* subtle_carbon.png */,
 				BA67F2121937B5470056DD00 /* textured_paper_@2X.png */,
@@ -354,6 +403,10 @@
 				BA67F210193670D60056DD00 /* timelineLabelView.m */,
 				BA67F21D193BCC3A0056DD00 /* timelineManager.h */,
 				BA67F21E193BCC3A0056DD00 /* timelineManager.m */,
+				BA6F5EE1194EFE6F00E1E1FC /* largeImageViewer.h */,
+				BA6F5EE2194EFE6F00E1E1FC /* largeImageViewer.m */,
+				BA6F5EE6194F0ABF00E1E1FC /* largeImageViewerDelegate.h */,
+				BA6F5EE4194EFEFF00E1E1FC /* largeImageViewer.xib */,
 			);
 			path = oldClasses;
 			sourceTree = "<group>";
@@ -371,6 +424,15 @@
 				7F03D0D1194E805C00558278 /* basicInfoCell.h */,
 				7F03D0D2194E805C00558278 /* basicInfoCell.m */,
 				7F03D0D4194E808600558278 /* basicDetailCell.xib */,
+				BA6F5ECD194EC44F00E1E1FC /* dateInfoCell.xib */,
+				BA6F5EDB194ED5B100E1E1FC /* NSMutableDictionary+attributesDictionary.h */,
+				BA6F5EDC194ED5B100E1E1FC /* NSMutableDictionary+attributesDictionary.m */,
+				BA6F5ECA194EC3D400E1E1FC /* dateInfoCell.h */,
+				BA6F5ECB194EC3D400E1E1FC /* dateInfoCell.m */,
+				BA6F5ECF194EC66400E1E1FC /* UIColor+testingColors.h */,
+				BA6F5ED0194EC66400E1E1FC /* UIColor+testingColors.m */,
+				BA6F5ED8194ED05700E1E1FC /* attributesDictionary.h */,
+				BA6F5ED9194ED05700E1E1FC /* attributesDictionary.m */,
 			);
 			name = "Page View Controller";
 			path = ..;
@@ -457,6 +519,7 @@
 				BA67F208193667140056DD00 /* tweed_@2X.png in Resources */,
 				BA67F206193667140056DD00 /* unknown.JPG in Resources */,
 				BA67F20E193667460056DD00 /* testing.xib in Resources */,
+				BA6F5ECE194EC44F00E1E1FC /* dateInfoCell.xib in Resources */,
 				7F03D0D5194E808600558278 /* basicDetailCell.xib in Resources */,
 				BA67F200193667140056DD00 /* christmas_tn.png in Resources */,
 				BA67F1FC193667140056DD00 /* fredAndFreddie.JPG in Resources */,
@@ -466,6 +529,7 @@
 				BA67F2181937B9D80056DD00 /* subtle_carbon_@2X.png in Resources */,
 				BA67F207193667140056DD00 /* tweed.png in Resources */,
 				BA67F1C4193666210056DD00 /* Images.xcassets in Resources */,
+				BA6F5EE9194F12B700E1E1FC /* greyzz@2X.png in Resources */,
 				BA67F1B6193666210056DD00 /* InfoPlist.strings in Resources */,
 				BA67F1FD193667140056DD00 /* freddie.JPG in Resources */,
 				BA67F1FF193667140056DD00 /* martin.JPG in Resources */,
@@ -473,8 +537,10 @@
 				BA67F1FE193667140056DD00 /* garden.JPG in Resources */,
 				BA67F205193667140056DD00 /* unknown_tn.png in Resources */,
 				BA67F1FB193667140056DD00 /* christmas.JPG in Resources */,
+				BA6F5EEA194F12B700E1E1FC /* greyzz.png in Resources */,
 				BA67F1BF193666210056DD00 /* Main.storyboard in Resources */,
 				BA67F2141937B5470056DD00 /* textured_paper_@2X.png in Resources */,
+				BA6F5EE5194EFEFF00E1E1FC /* largeImageViewer.xib in Resources */,
 				BA67F204193667140056DD00 /* martin_tn.png in Resources */,
 				BA67F2191937B9D80056DD00 /* subtle_carbon.png in Resources */,
 			);
@@ -529,10 +595,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA0BE0B81943B3E40054F7C7 /* workspaceAuxView.m in Sources */,
+				BA6F5EE0194EEFB200E1E1FC /* updatedConstants.m in Sources */,
 				BA3299A61948BA430002EBFD /* TFPerson.m in Sources */,
 				BA67F21F193BCC3A0056DD00 /* timelineManager.m in Sources */,
 				BA67F211193670D60056DD00 /* timelineLabelView.m in Sources */,
+				BA6F5EC9194EBCE300E1E1FC /* attributesDictionaryConstants.m in Sources */,
 				BA67F20C193667140056DD00 /* WorkspaceViewController.m in Sources */,
+				BA6F5ECC194EC3D400E1E1FC /* dateInfoCell.m in Sources */,
 				BAD16301194A581A008144A0 /* UIView+Glow.m in Sources */,
 				BA67F20B193667140056DD00 /* pictureFrame.m in Sources */,
 				BA67F20A193667140056DD00 /* imageObject.m in Sources */,
@@ -540,12 +609,17 @@
 				BA9531BB194E51BB005E0F10 /* socialInformationVC.m in Sources */,
 				BA9531AD194E2CC6005E0F10 /* pagerInformationVC.m in Sources */,
 				BA32997319489A730002EBFD /* landingPageViewController.m in Sources */,
+				BA6F5EDD194ED5B100E1E1FC /* NSMutableDictionary+attributesDictionary.m in Sources */,
 				BA3299761948B91E0002EBFD /* showServerData.m in Sources */,
 				BA67F1BC193666210056DD00 /* AppDelegate.m in Sources */,
+				BA6F5ED1194EC66400E1E1FC /* UIColor+testingColors.m in Sources */,
 				BA9531B7194E4E2B005E0F10 /* imageInformationVC.m in Sources */,
 				BA67F1B8193666210056DD00 /* main.m in Sources */,
+				BA6F5EDA194ED05700E1E1FC /* attributesDictionary.m in Sources */,
 				BA67F209193667140056DD00 /* dummyDataProvider.m in Sources */,
+				BA6F5EED194F192900E1E1FC /* UIImage+imageAdditions.m in Sources */,
 				BA9531B0194E2E28005E0F10 /* pagerSocialVC.m in Sources */,
+				BA6F5EE3194EFE6F00E1E1FC /* largeImageViewer.m in Sources */,
 				BA9531B3194E4A27005E0F10 /* imageInfoPagerVC.m in Sources */,
 				BA3299A51948BA430002EBFD /* TFDataCommunicator.m in Sources */,
 				7F03D0D3194E805C00558278 /* basicInfoCell.m in Sources */,
@@ -681,6 +755,7 @@
 					"$(inherited)",
 					/Users/Tonyf/Desktop/Coding/PhotoArchivingV4/PhotoArchivingV4,
 					"$(PROJECT_DIR)/photoArchivingIpad",
+					"/Users/Tonyf/Downloads/aws-ios-sdk-1.7.1",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "photoArchivingIpad/photoArchivingIpad-Prefix.pch";
@@ -700,6 +775,7 @@
 					"$(inherited)",
 					/Users/Tonyf/Desktop/Coding/PhotoArchivingV4/PhotoArchivingV4,
 					"$(PROJECT_DIR)/photoArchivingIpad",
+					"/Users/Tonyf/Downloads/aws-ios-sdk-1.7.1",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "photoArchivingIpad/photoArchivingIpad-Prefix.pch";

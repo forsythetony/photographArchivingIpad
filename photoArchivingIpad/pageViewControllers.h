@@ -12,5 +12,7 @@
 #import "imageInformationVC.h"
 #import "socialInformationVC.h"
 
+#define BASICROWHEIGHT 80.0
+
 #endif
 
