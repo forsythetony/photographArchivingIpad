@@ -110,9 +110,10 @@
     useDummyData = NO;
     
     
-    mainDataCom = [TFDataCommunicator new];
+    mainDataCom = [[TFDataCommunicator alloc] init];
+
     mainDataCom.delegate    = self;
-    
+  
 }
 -(void)finishedPullingPhotoList:(NSArray *)list
 {
@@ -139,6 +140,16 @@
             obj.imageInformation = [NSDictionary dictionaryWithDictionary:dict];
             obj.uploader        =   [[dict objectForKey:@"uploadInformation"] objectForKey:@"uploader"];
             obj.confidence      =   [NSString stringWithFormat:@"%@", [[[dict objectForKey:@"imageInformation"] objectForKey:@"dateTaken"] objectForKey:@"confidence"]];
+            
+            NSString *recordingURL = dict[@"recordingURL"];
+            
+            if (recordingURL) {
+                obj.recordingURL = [NSURL URLWithString:recordingURL];
+            }
+            else
+            {
+                obj.recordingURL = nil;
+            }
             
             
             [frame setImageObject:obj];
@@ -193,6 +204,9 @@
     [super viewDidLoad];
     
     [self initialSetup];
+    
+    
+    [mainDataCom uploadSmallFile];  
     
 }
 #pragma mark Create Views

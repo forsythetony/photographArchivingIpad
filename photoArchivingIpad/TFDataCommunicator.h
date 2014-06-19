@@ -7,6 +7,9 @@
 #import "TFPerson.h"
 #import <UIKit/UIKit.h>
 
+#import <AWSRuntime/AWSRuntime.h>
+#import <AWSS3/AWSS3.h>
+
 typedef NS_ENUM(NSUInteger, photoType) {
     
     tPNG,
@@ -37,7 +40,7 @@ typedef NS_ENUM(NSInteger, serverResponseType) {
 @end
 
 
-@interface TFDataCommunicator : NSObject
+@interface TFDataCommunicator : NSObject <AmazonServiceRequestDelegate>
 
 
 @property (nonatomic, weak) id <TFCommunicatorDelegate> delegate;
@@ -50,6 +53,8 @@ typedef NS_ENUM(NSInteger, serverResponseType) {
 -(void)getPhotosForUser:(NSString*) username;
 -(void)getPhotosForTestUser;
 -(void)cleanImages;
+-(void)uploadSmallFile;
+
 
 
 @end

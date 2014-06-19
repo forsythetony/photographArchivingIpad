@@ -13,6 +13,7 @@
 @end
 
 @implementation largeImageViewer
+
 +(id)createLargeViewerWithFrame:(CGRect)frame
 {
     largeImageViewer *viewer = [[[NSBundle mainBundle] loadNibNamed:@"largeImageViewer" owner:nil options:nil] firstObject];

@@ -76,6 +76,7 @@
 		BA9531BB194E51BB005E0F10 /* socialInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9531BA194E51BB005E0F10 /* socialInformationVC.m */; };
 		BABF161219523BC900FF01C0 /* AWSRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BABF161019523BC900FF01C0 /* AWSRuntime.framework */; };
 		BABF161319523BC900FF01C0 /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BABF161119523BC900FF01C0 /* AWSS3.framework */; };
+		BABF1616195247FD00FF01C0 /* audioManagrer.m in Sources */ = {isa = PBXBuildFile; fileRef = BABF1615195247FD00FF01C0 /* audioManagrer.m */; };
 		BAD16301194A581A008144A0 /* UIView+Glow.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD16300194A581A008144A0 /* UIView+Glow.m */; };
 /* End PBXBuildFile section */
 
@@ -192,6 +193,8 @@
 		BA9531BA194E51BB005E0F10 /* socialInformationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = socialInformationVC.m; sourceTree = "<group>"; };
 		BABF161019523BC900FF01C0 /* AWSRuntime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSRuntime.framework; path = "../../../Downloads/aws-ios-sdk-1.7.1/AWSRuntime.framework"; sourceTree = "<group>"; };
 		BABF161119523BC900FF01C0 /* AWSS3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSS3.framework; path = "../../../Downloads/aws-ios-sdk-1.7.1/AWSS3.framework"; sourceTree = "<group>"; };
+		BABF1614195247FD00FF01C0 /* audioManagrer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = audioManagrer.h; sourceTree = "<group>"; };
+		BABF1615195247FD00FF01C0 /* audioManagrer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = audioManagrer.m; sourceTree = "<group>"; };
 		BAD162FD1949617E008144A0 /* imageHandling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imageHandling.h; sourceTree = "<group>"; };
 		BAD162FE194978AA008144A0 /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		BAD162FF194A581A008144A0 /* UIView+Glow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Glow.h"; sourceTree = "<group>"; };
@@ -297,6 +300,8 @@
 				BA6F5EC8194EBCE300E1E1FC /* attributesDictionaryConstants.m */,
 				BA6F5EEB194F192900E1E1FC /* UIImage+imageAdditions.h */,
 				BA6F5EEC194F192900E1E1FC /* UIImage+imageAdditions.m */,
+				BABF1614195247FD00FF01C0 /* audioManagrer.h */,
+				BABF1615195247FD00FF01C0 /* audioManagrer.m */,
 			);
 			path = photoArchivingIpad;
 			sourceTree = "<group>";
@@ -596,6 +601,7 @@
 			files = (
 				BA0BE0B81943B3E40054F7C7 /* workspaceAuxView.m in Sources */,
 				BA6F5EE0194EEFB200E1E1FC /* updatedConstants.m in Sources */,
+				BABF1616195247FD00FF01C0 /* audioManagrer.m in Sources */,
 				BA3299A61948BA430002EBFD /* TFPerson.m in Sources */,
 				BA67F21F193BCC3A0056DD00 /* timelineManager.m in Sources */,
 				BA67F211193670D60056DD00 /* timelineLabelView.m in Sources */,

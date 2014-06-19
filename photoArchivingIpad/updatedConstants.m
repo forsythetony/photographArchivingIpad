@@ -21,4 +21,21 @@ NSString * const api_cleanFlagValue = @"true";
 NSString * const respKeys_responseStatus = @"responseStatus";
 NSString * const respKeys_responseMessage = @"responseMessage";
 
+NSString * const S3_secret_key = @"tXi3+4Ve3jjlFO5m39x81qTXqA8ry8JXCWOhndZF";
+NSString * const S3_access_Key_ID = @"AKIAJM7QSXPIIZFS4IUQ";
 
+NSString * const s3_bucket_name;
+NSString * const s3_bucket_key;
+
+NSString * const s3_error_already_owned = @"BucketAlreadyOwnedByYou";
+
+
+
+@implementation updatedConstants
+
++ (NSString *)transferManagerBucket
+{
+    return [[NSString stringWithFormat:@"%@-%@", S3TRANSFERMANAGER_BUCKET, S3_access_Key_ID] lowercaseString];
+}
+
+@end

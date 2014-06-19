@@ -10,8 +10,64 @@
 
 #import "updatedConstants.h"
 
+@interface TFDataCommunicator ()
+
+@property (strong, nonatomic) S3TransferOperation *fileUpload;
+
+@property (strong, nonatomic) S3TransferManager *tm;
+
+@property (strong, nonatomic) NSString *pathForFile;
+
+@end
+
+
 @implementation TFDataCommunicator
 
+-(id)init
+{
+    self = [super init];
+    
+    if (self) {
+        AmazonS3Client *s3 = [[AmazonS3Client alloc] initWithAccessKey:S3_access_Key_ID withSecretKey:S3_secret_key];
+        
+        s3.endpoint = [AmazonEndpoints s3Endpoint:US_WEST_2];
+        
+        self.tm = [S3TransferManager new];
+        self.tm.s3 = s3;
+        self.tm.delegate = self;
+        
+        S3CreateBucketRequest *createBucketRequest = [[S3CreateBucketRequest alloc] initWithName:[updatedConstants transferManagerBucket] andRegion:[S3Region USWest2]];
+        @try {
+            S3CreateBucketResponse *createBucketResponse = [s3 createBucket:createBucketRequest];
+            if (createBucketResponse.error != nil) {
+                NSLog(@"Error: %@", createBucketResponse.error);
+            }
+        }
+        @catch (AmazonServiceException *exception) {
+            
+            if ([s3_error_already_owned isEqualToString: exception.errorCode]) {
+                NSLog(@"Unable to create bucket: %@", exception.error);
+            }
+        }
+        
+        self.pathForFile = [self generateTempFile: @"small_test_data.txt": kSmallFileSize];
+        
+        return self;
+    
+    }
+    
+    else
+    {
+        return nil;
+    }
+}
+-(void)uploadSmallFile
+{
+    if(self.fileUpload == nil || (self.fileUpload.isFinished && !self.fileUpload.isPaused)){
+        self.fileUpload = [self.tm uploadFile:self.pathForFile bucket: [updatedConstants transferManagerBucket] key: kKeyForSmallFile];
+        
+    }
+}
 -(void)getUserWithUsername:(NSString *)username
 {
     
@@ -293,5 +349,28 @@
     
     return [imageData base64EncodedStringWithOptions:0];
     
+}
+
+-(void)request:(AmazonServiceRequest *)request didReceiveResponse:(NSURLResponse *)response
+{
+    NSLog(@"didReceiveResponse called: %@", response);
+}
+
+-(NSString *)generateTempFile: (NSString *)filename : (long long)approximateFileSize {
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSString * filePath = [NSTemporaryDirectory() stringByAppendingPathComponent:filename];
+    if (![fm fileExistsAtPath:filePath]) {
+        NSOutputStream * os= [NSOutputStream outputStreamToFileAtPath:filePath append:NO];
+        NSString * dataString = @"S3TransferManager_V2 ";
+        const uint8_t *bytes = [dataString dataUsingEncoding:NSUTF8StringEncoding].bytes;
+        long fileSize = 0;
+        [os open];
+        while(fileSize < approximateFileSize){
+            [os write:bytes maxLength:dataString.length];
+            fileSize += dataString.length;
+        }
+        [os close];
+    }
+    return filePath;
 }
 @end

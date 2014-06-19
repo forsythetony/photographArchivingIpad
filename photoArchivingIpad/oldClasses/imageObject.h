@@ -18,6 +18,8 @@
 
 @property (nonatomic, strong) NSURL* photoURL;
 @property (nonatomic, strong) NSURL* thumbNailURL;
+@property (nonatomic, strong) NSURL* recordingURL;
+
 
 @property (nonatomic, strong) NSDictionary *imageInformation;
 @property (nonatomic, strong) NSNumber* centerXoffset;
