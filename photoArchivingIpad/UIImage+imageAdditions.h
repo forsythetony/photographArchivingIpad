@@ -11,5 +11,5 @@
 @interface UIImage (imageAdditions)
 
 -(UIColor*)getDominantColor;
-
++(UIImage*)createThumbnailImageWithImage:(UIImage*) image;
 @end

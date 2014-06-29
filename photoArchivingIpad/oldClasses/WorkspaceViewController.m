@@ -113,6 +113,10 @@
     mainDataCom = [[TFDataCommunicator alloc] init];
 
     mainDataCom.delegate    = self;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+    
   
 }
 -(void)finishedPullingPhotoList:(NSArray *)list
@@ -140,6 +144,7 @@
             obj.imageInformation = [NSDictionary dictionaryWithDictionary:dict];
             obj.uploader        =   [[dict objectForKey:@"uploadInformation"] objectForKey:@"uploader"];
             obj.confidence      =   [NSString stringWithFormat:@"%@", [[[dict objectForKey:@"imageInformation"] objectForKey:@"dateTaken"] objectForKey:@"confidence"]];
+            obj.id = [NSString stringWithFormat:@"%@", dict[@"_id"]];
             
             NSString *recordingURL = dict[@"recordingURL"];
             
@@ -151,7 +156,9 @@
                 obj.recordingURL = nil;
             }
             
-            
+            if (obj.photoURL)
+            {
+                
             [frame setImageObject:obj];
             
             [frame setFrame:CGRectMake(
@@ -160,6 +167,7 @@
                                        )];
             
             [framez addObject:frame];
+            }
             
         }
         
@@ -206,7 +214,7 @@
     [self initialSetup];
     
     
-    [mainDataCom uploadSmallFile];  
+    [mainDataCom saveImageToCameraRoll];
     
 }
 #pragma mark Create Views
@@ -482,6 +490,7 @@
     
     [_addOtherInfo addSubview:addOtherText];
     [_addOtherInfo addSubview:addOtherIcon];
+    [_addOtherInfo addTarget:self action:@selector(handleOtherInfoClickFromSender:) forControlEvents:UIControlEventTouchUpInside];
     
     
     
@@ -496,6 +505,12 @@
     
     
     
+}
+-(void)handleOtherInfoClickFromSender:(id) sender
+{
+    if (_displayedImage) {
+        [mainDataCom deletePhoto:_displayImageInformation];
+    }
 }
 -(UIImage*)getImageViewForStoryType:(buttonIconType) storyType withButtonHeight:(float) buttonHeight
 {
@@ -556,10 +571,7 @@
     
     return img;
 }
--(void)handleStoryButtonClick:(id) sender
-{
-    
-}
+
 
 -(void)createSmallViewsWithImages:(NSArray*) images
 {
@@ -1414,6 +1426,23 @@
     
     return newLabel;
     
+}
+-(void)keyboardDidHide:(NSNotification*) notification
+{
+    self.view.frame = CGRectMake(self.view.frame.origin.x, 0.0, self.view.frame.size.width, self.view.frame.size.height);
+}
+-(void)keyboardDidShow:(NSNotification*) notification
+{
+    //[self.view setFrame:CGRectMake(0.0, -(self.view.frame.size.height / 2.0), self.view.frame.size.width, self.view.frame.size.height)];
+    
+    CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    CGRect newViewRect = self.view.frame;
+    
+    newViewRect.origin.y -= keyboardRect.size.width;
+    
+    NSLog(@"\nKeyboard Frame: %@\nNew View Frame: %@", NSStringFromCGRect(keyboardRect), NSStringFromCGRect(newViewRect));
+    [self.view setFrame:newViewRect];
 }
 -(UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {

@@ -10,12 +10,14 @@
 #import "NSMutableDictionary+attributesDictionary.h"
 #import <Colours.h>
 
-@interface dateInfoCell : UITableViewCell
+@interface dateInfoCell : UITableViewCell <UIPopoverControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *dateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *confidenceLabel;
 @property (strong, nonatomic) IBOutlet UILabel *confLabelConst;
+
+@property (strong, nonatomic) UIPopoverController *popoverController;
 
 + (id) createCell;
 -(void)setConfidenceValue:(NSString*) value;

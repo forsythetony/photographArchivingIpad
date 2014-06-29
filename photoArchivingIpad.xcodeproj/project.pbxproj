@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1338B06FDE54485BAF55439A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61ECDBD286AB45A0BA37A749 /* libPods.a */; };
 		7F03D0D3194E805C00558278 /* basicInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F03D0D2194E805C00558278 /* basicInfoCell.m */; };
-		7F03D0D5194E808600558278 /* basicDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F03D0D4194E808600558278 /* basicDetailCell.xib */; };
 		BA0BE0B81943B3E40054F7C7 /* workspaceAuxView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0BE0B71943B3E40054F7C7 /* workspaceAuxView.m */; };
 		BA32997319489A730002EBFD /* landingPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA32997219489A730002EBFD /* landingPageViewController.m */; };
 		BA3299761948B91E0002EBFD /* showServerData.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3299751948B91E0002EBFD /* showServerData.m */; };
@@ -69,6 +68,9 @@
 		BA6F5EE9194F12B700E1E1FC /* greyzz@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = BA6F5EE7194F12B700E1E1FC /* greyzz@2X.png */; };
 		BA6F5EEA194F12B700E1E1FC /* greyzz.png in Resources */ = {isa = PBXBuildFile; fileRef = BA6F5EE8194F12B700E1E1FC /* greyzz.png */; };
 		BA6F5EED194F192900E1E1FC /* UIImage+imageAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6F5EEC194F192900E1E1FC /* UIImage+imageAdditions.m */; };
+		BA89B37F195B29E700DA0FCC /* imageInformationConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BA89B37E195B29E700DA0FCC /* imageInformationConstants.m */; };
+		BA89B383195B33B100DA0FCC /* datePickingThing.m in Sources */ = {isa = PBXBuildFile; fileRef = BA89B381195B33B100DA0FCC /* datePickingThing.m */; };
+		BA89B384195B33B100DA0FCC /* datePickingThing.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA89B382195B33B100DA0FCC /* datePickingThing.xib */; };
 		BA9531AD194E2CC6005E0F10 /* pagerInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9531AC194E2CC6005E0F10 /* pagerInformationVC.m */; };
 		BA9531B0194E2E28005E0F10 /* pagerSocialVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9531AF194E2E28005E0F10 /* pagerSocialVC.m */; };
 		BA9531B3194E4A27005E0F10 /* imageInfoPagerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9531B2194E4A27005E0F10 /* imageInfoPagerVC.m */; };
@@ -77,7 +79,17 @@
 		BABF161219523BC900FF01C0 /* AWSRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BABF161019523BC900FF01C0 /* AWSRuntime.framework */; };
 		BABF161319523BC900FF01C0 /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BABF161119523BC900FF01C0 /* AWSS3.framework */; };
 		BABF1616195247FD00FF01C0 /* audioManagrer.m in Sources */ = {isa = PBXBuildFile; fileRef = BABF1615195247FD00FF01C0 /* audioManagrer.m */; };
+		BABF161819526A0400FF01C0 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BABF161719526A0400FF01C0 /* CFNetwork.framework */; };
+		BABF161C19526A1600FF01C0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BABF161B19526A1600FF01C0 /* AudioToolbox.framework */; };
+		BABF162019526A3500FF01C0 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BABF161F19526A3500FF01C0 /* MediaPlayer.framework */; };
+		BABF16AB195339DD00FF01C0 /* photoUploadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BABF16AA195339DD00FF01C0 /* photoUploadingViewController.m */; };
+		BABF16AE19533B7C00FF01C0 /* photoUploadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BABF16AD19533B7C00FF01C0 /* photoUploadingCell.m */; };
+		BABF16B11953416700FF01C0 /* uploadFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BABF16B01953416700FF01C0 /* uploadFormViewController.m */; };
+		BABF16B4195368FE00FF01C0 /* photoUploadingConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BABF16B3195368FE00FF01C0 /* photoUploadingConstants.m */; };
+		BABF16B7195372A800FF01C0 /* ImagePackage.m in Sources */ = {isa = PBXBuildFile; fileRef = BABF16B6195372A800FF01C0 /* ImagePackage.m */; };
+		BABF16BA1954A04400FF01C0 /* ImageTakerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BABF16B91954A04400FF01C0 /* ImageTakerViewController.m */; };
 		BAD16301194A581A008144A0 /* UIView+Glow.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD16300194A581A008144A0 /* UIView+Glow.m */; };
+		BAD3C56B195A15A3004CE905 /* basicInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAD3C56A195A15A3004CE905 /* basicInfoCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,7 +106,6 @@
 		61ECDBD286AB45A0BA37A749 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F03D0D1194E805C00558278 /* basicInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = basicInfoCell.h; sourceTree = "<group>"; };
 		7F03D0D2194E805C00558278 /* basicInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = basicInfoCell.m; sourceTree = "<group>"; };
-		7F03D0D4194E808600558278 /* basicDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = basicDetailCell.xib; sourceTree = "<group>"; };
 		BA0BE0B61943B3E40054F7C7 /* workspaceAuxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = workspaceAuxView.h; sourceTree = "<group>"; };
 		BA0BE0B71943B3E40054F7C7 /* workspaceAuxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = workspaceAuxView.m; sourceTree = "<group>"; };
 		BA32997119489A730002EBFD /* landingPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = landingPageViewController.h; sourceTree = "<group>"; };
@@ -180,6 +191,12 @@
 		BA6F5EE8194F12B700E1E1FC /* greyzz.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greyzz.png; sourceTree = "<group>"; };
 		BA6F5EEB194F192900E1E1FC /* UIImage+imageAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+imageAdditions.h"; sourceTree = "<group>"; };
 		BA6F5EEC194F192900E1E1FC /* UIImage+imageAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+imageAdditions.m"; sourceTree = "<group>"; };
+		BA89B37C195B281A00DA0FCC /* imageInformationUpdater.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imageInformationUpdater.h; sourceTree = "<group>"; };
+		BA89B37D195B29E700DA0FCC /* imageInformationConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imageInformationConstants.h; sourceTree = "<group>"; };
+		BA89B37E195B29E700DA0FCC /* imageInformationConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = imageInformationConstants.m; sourceTree = "<group>"; };
+		BA89B380195B33B100DA0FCC /* datePickingThing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = datePickingThing.h; sourceTree = "<group>"; };
+		BA89B381195B33B100DA0FCC /* datePickingThing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = datePickingThing.m; sourceTree = "<group>"; };
+		BA89B382195B33B100DA0FCC /* datePickingThing.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = datePickingThing.xib; sourceTree = "<group>"; };
 		BA9531AB194E2CC6005E0F10 /* pagerInformationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pagerInformationVC.h; sourceTree = "<group>"; };
 		BA9531AC194E2CC6005E0F10 /* pagerInformationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pagerInformationVC.m; sourceTree = "<group>"; };
 		BA9531AE194E2E28005E0F10 /* pagerSocialVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pagerSocialVC.h; sourceTree = "<group>"; };
@@ -195,10 +212,28 @@
 		BABF161119523BC900FF01C0 /* AWSS3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSS3.framework; path = "../../../Downloads/aws-ios-sdk-1.7.1/AWSS3.framework"; sourceTree = "<group>"; };
 		BABF1614195247FD00FF01C0 /* audioManagrer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = audioManagrer.h; sourceTree = "<group>"; };
 		BABF1615195247FD00FF01C0 /* audioManagrer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = audioManagrer.m; sourceTree = "<group>"; };
+		BABF161719526A0400FF01C0 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		BABF161919526A0F00FF01C0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		BABF161B19526A1600FF01C0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		BABF161D19526A2B00FF01C0 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		BABF161F19526A3500FF01C0 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		BABF16A9195339DD00FF01C0 /* photoUploadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = photoUploadingViewController.h; sourceTree = "<group>"; };
+		BABF16AA195339DD00FF01C0 /* photoUploadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = photoUploadingViewController.m; sourceTree = "<group>"; };
+		BABF16AC19533B7C00FF01C0 /* photoUploadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = photoUploadingCell.h; sourceTree = "<group>"; };
+		BABF16AD19533B7C00FF01C0 /* photoUploadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = photoUploadingCell.m; sourceTree = "<group>"; };
+		BABF16AF1953416700FF01C0 /* uploadFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uploadFormViewController.h; sourceTree = "<group>"; };
+		BABF16B01953416700FF01C0 /* uploadFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = uploadFormViewController.m; sourceTree = "<group>"; };
+		BABF16B2195368FE00FF01C0 /* photoUploadingConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = photoUploadingConstants.h; sourceTree = "<group>"; };
+		BABF16B3195368FE00FF01C0 /* photoUploadingConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = photoUploadingConstants.m; sourceTree = "<group>"; };
+		BABF16B5195372A800FF01C0 /* ImagePackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePackage.h; sourceTree = "<group>"; };
+		BABF16B6195372A800FF01C0 /* ImagePackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePackage.m; sourceTree = "<group>"; };
+		BABF16B81954A04400FF01C0 /* ImageTakerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTakerViewController.h; sourceTree = "<group>"; };
+		BABF16B91954A04400FF01C0 /* ImageTakerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTakerViewController.m; sourceTree = "<group>"; };
 		BAD162FD1949617E008144A0 /* imageHandling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imageHandling.h; sourceTree = "<group>"; };
 		BAD162FE194978AA008144A0 /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		BAD162FF194A581A008144A0 /* UIView+Glow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Glow.h"; sourceTree = "<group>"; };
 		BAD16300194A581A008144A0 /* UIView+Glow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Glow.m"; sourceTree = "<group>"; };
+		BAD3C56A195A15A3004CE905 /* basicInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = basicInfoCell.xib; sourceTree = "<group>"; };
 		D480C1DDB6EC466E8C8C3EAD /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -207,6 +242,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BABF162019526A3500FF01C0 /* MediaPlayer.framework in Frameworks */,
+				BABF161C19526A1600FF01C0 /* AudioToolbox.framework in Frameworks */,
+				BABF161819526A0400FF01C0 /* CFNetwork.framework in Frameworks */,
 				BABF161219523BC900FF01C0 /* AWSRuntime.framework in Frameworks */,
 				BABF161319523BC900FF01C0 /* AWSS3.framework in Frameworks */,
 				BA3299AA1948DF430002EBFD /* ImageIO.framework in Frameworks */,
@@ -254,6 +292,11 @@
 		BA67F1AA193666210056DD00 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BABF161F19526A3500FF01C0 /* MediaPlayer.framework */,
+				BABF161D19526A2B00FF01C0 /* libxml2.dylib */,
+				BABF161B19526A1600FF01C0 /* AudioToolbox.framework */,
+				BABF161919526A0F00FF01C0 /* AVFoundation.framework */,
+				BABF161719526A0400FF01C0 /* CFNetwork.framework */,
 				BABF161019523BC900FF01C0 /* AWSRuntime.framework */,
 				BABF161119523BC900FF01C0 /* AWSS3.framework */,
 				BA3299A91948DF430002EBFD /* ImageIO.framework */,
@@ -269,10 +312,12 @@
 		BA67F1B1193666210056DD00 /* photoArchivingIpad */ = {
 			isa = PBXGroup;
 			children = (
+				BABF16A8195330CC00FF01C0 /* Photo Uploading */,
 				BA3299A11948BA430002EBFD /* TFDataCommunicator.h */,
 				BA3299A21948BA430002EBFD /* TFDataCommunicator.m */,
 				BA6F5EDE194EEFB200E1E1FC /* updatedConstants.h */,
 				BA6F5EDF194EEFB200E1E1FC /* updatedConstants.m */,
+				BA89B37B195B227400DA0FCC /* Attributes Dictionary */,
 				BA3299A31948BA430002EBFD /* TFPerson.h */,
 				BA3299A41948BA430002EBFD /* TFPerson.m */,
 				BA67F1E0193667140056DD00 /* images */,
@@ -296,8 +341,6 @@
 				BA9531AC194E2CC6005E0F10 /* pagerInformationVC.m */,
 				BA9531AE194E2E28005E0F10 /* pagerSocialVC.h */,
 				BA9531AF194E2E28005E0F10 /* pagerSocialVC.m */,
-				BA6F5EC7194EBCE300E1E1FC /* attributesDictionaryConstants.h */,
-				BA6F5EC8194EBCE300E1E1FC /* attributesDictionaryConstants.m */,
 				BA6F5EEB194F192900E1E1FC /* UIImage+imageAdditions.h */,
 				BA6F5EEC194F192900E1E1FC /* UIImage+imageAdditions.m */,
 				BABF1614195247FD00FF01C0 /* audioManagrer.h */,
@@ -416,24 +459,26 @@
 			path = oldClasses;
 			sourceTree = "<group>";
 		};
+		BA89B37B195B227400DA0FCC /* Attributes Dictionary */ = {
+			isa = PBXGroup;
+			children = (
+				BA6F5EC7194EBCE300E1E1FC /* attributesDictionaryConstants.h */,
+				BA6F5EC8194EBCE300E1E1FC /* attributesDictionaryConstants.m */,
+				BA6F5EDB194ED5B100E1E1FC /* NSMutableDictionary+attributesDictionary.h */,
+				BA6F5EDC194ED5B100E1E1FC /* NSMutableDictionary+attributesDictionary.m */,
+			);
+			name = "Attributes Dictionary";
+			sourceTree = "<group>";
+		};
 		BA9531B4194E4DF9005E0F10 /* Page View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				BAD3C569195A10BA004CE905 /* Image Information */,
 				BA9531B8194E4E43005E0F10 /* pageViewControllers.h */,
 				BA9531B1194E4A27005E0F10 /* imageInfoPagerVC.h */,
 				BA9531B2194E4A27005E0F10 /* imageInfoPagerVC.m */,
-				BA9531B5194E4E2B005E0F10 /* imageInformationVC.h */,
-				BA9531B6194E4E2B005E0F10 /* imageInformationVC.m */,
 				BA9531B9194E51BB005E0F10 /* socialInformationVC.h */,
 				BA9531BA194E51BB005E0F10 /* socialInformationVC.m */,
-				7F03D0D1194E805C00558278 /* basicInfoCell.h */,
-				7F03D0D2194E805C00558278 /* basicInfoCell.m */,
-				7F03D0D4194E808600558278 /* basicDetailCell.xib */,
-				BA6F5ECD194EC44F00E1E1FC /* dateInfoCell.xib */,
-				BA6F5EDB194ED5B100E1E1FC /* NSMutableDictionary+attributesDictionary.h */,
-				BA6F5EDC194ED5B100E1E1FC /* NSMutableDictionary+attributesDictionary.m */,
-				BA6F5ECA194EC3D400E1E1FC /* dateInfoCell.h */,
-				BA6F5ECB194EC3D400E1E1FC /* dateInfoCell.m */,
 				BA6F5ECF194EC66400E1E1FC /* UIColor+testingColors.h */,
 				BA6F5ED0194EC66400E1E1FC /* UIColor+testingColors.m */,
 				BA6F5ED8194ED05700E1E1FC /* attributesDictionary.h */,
@@ -441,6 +486,46 @@
 			);
 			name = "Page View Controller";
 			path = ..;
+			sourceTree = "<group>";
+		};
+		BABF16A8195330CC00FF01C0 /* Photo Uploading */ = {
+			isa = PBXGroup;
+			children = (
+				BABF16A9195339DD00FF01C0 /* photoUploadingViewController.h */,
+				BABF16AA195339DD00FF01C0 /* photoUploadingViewController.m */,
+				BABF16B5195372A800FF01C0 /* ImagePackage.h */,
+				BABF16B6195372A800FF01C0 /* ImagePackage.m */,
+				BABF16B2195368FE00FF01C0 /* photoUploadingConstants.h */,
+				BABF16B3195368FE00FF01C0 /* photoUploadingConstants.m */,
+				BABF16AC19533B7C00FF01C0 /* photoUploadingCell.h */,
+				BABF16AD19533B7C00FF01C0 /* photoUploadingCell.m */,
+				BABF16AF1953416700FF01C0 /* uploadFormViewController.h */,
+				BABF16B01953416700FF01C0 /* uploadFormViewController.m */,
+				BABF16B81954A04400FF01C0 /* ImageTakerViewController.h */,
+				BABF16B91954A04400FF01C0 /* ImageTakerViewController.m */,
+			);
+			name = "Photo Uploading";
+			sourceTree = "<group>";
+		};
+		BAD3C569195A10BA004CE905 /* Image Information */ = {
+			isa = PBXGroup;
+			children = (
+				BA89B37D195B29E700DA0FCC /* imageInformationConstants.h */,
+				BA89B37E195B29E700DA0FCC /* imageInformationConstants.m */,
+				BA9531B5194E4E2B005E0F10 /* imageInformationVC.h */,
+				BA9531B6194E4E2B005E0F10 /* imageInformationVC.m */,
+				7F03D0D1194E805C00558278 /* basicInfoCell.h */,
+				7F03D0D2194E805C00558278 /* basicInfoCell.m */,
+				BAD3C56A195A15A3004CE905 /* basicInfoCell.xib */,
+				BA6F5ECA194EC3D400E1E1FC /* dateInfoCell.h */,
+				BA6F5ECB194EC3D400E1E1FC /* dateInfoCell.m */,
+				BA6F5ECD194EC44F00E1E1FC /* dateInfoCell.xib */,
+				BA89B37C195B281A00DA0FCC /* imageInformationUpdater.h */,
+				BA89B380195B33B100DA0FCC /* datePickingThing.h */,
+				BA89B381195B33B100DA0FCC /* datePickingThing.m */,
+				BA89B382195B33B100DA0FCC /* datePickingThing.xib */,
+			);
+			name = "Image Information";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -492,6 +577,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Tonyf;
 				TargetAttributes = {
+					BA67F1A7193666200056DD00 = {
+						DevelopmentTeam = CB6W4HNRCM;
+					};
 					BA67F1C8193666210056DD00 = {
 						TestTargetID = BA67F1A7193666200056DD00;
 					};
@@ -523,9 +611,9 @@
 			files = (
 				BA67F208193667140056DD00 /* tweed_@2X.png in Resources */,
 				BA67F206193667140056DD00 /* unknown.JPG in Resources */,
+				BA89B384195B33B100DA0FCC /* datePickingThing.xib in Resources */,
 				BA67F20E193667460056DD00 /* testing.xib in Resources */,
 				BA6F5ECE194EC44F00E1E1FC /* dateInfoCell.xib in Resources */,
-				7F03D0D5194E808600558278 /* basicDetailCell.xib in Resources */,
 				BA67F200193667140056DD00 /* christmas_tn.png in Resources */,
 				BA67F1FC193667140056DD00 /* fredAndFreddie.JPG in Resources */,
 				BA67F2151937B5470056DD00 /* textured_paper.png in Resources */,
@@ -534,6 +622,7 @@
 				BA67F2181937B9D80056DD00 /* subtle_carbon_@2X.png in Resources */,
 				BA67F207193667140056DD00 /* tweed.png in Resources */,
 				BA67F1C4193666210056DD00 /* Images.xcassets in Resources */,
+				BAD3C56B195A15A3004CE905 /* basicInfoCell.xib in Resources */,
 				BA6F5EE9194F12B700E1E1FC /* greyzz@2X.png in Resources */,
 				BA67F1B6193666210056DD00 /* InfoPlist.strings in Resources */,
 				BA67F1FD193667140056DD00 /* freddie.JPG in Resources */,
@@ -601,28 +690,36 @@
 			files = (
 				BA0BE0B81943B3E40054F7C7 /* workspaceAuxView.m in Sources */,
 				BA6F5EE0194EEFB200E1E1FC /* updatedConstants.m in Sources */,
+				BABF16B4195368FE00FF01C0 /* photoUploadingConstants.m in Sources */,
 				BABF1616195247FD00FF01C0 /* audioManagrer.m in Sources */,
 				BA3299A61948BA430002EBFD /* TFPerson.m in Sources */,
 				BA67F21F193BCC3A0056DD00 /* timelineManager.m in Sources */,
+				BABF16AB195339DD00FF01C0 /* photoUploadingViewController.m in Sources */,
 				BA67F211193670D60056DD00 /* timelineLabelView.m in Sources */,
+				BABF16B7195372A800FF01C0 /* ImagePackage.m in Sources */,
 				BA6F5EC9194EBCE300E1E1FC /* attributesDictionaryConstants.m in Sources */,
 				BA67F20C193667140056DD00 /* WorkspaceViewController.m in Sources */,
+				BABF16B11953416700FF01C0 /* uploadFormViewController.m in Sources */,
 				BA6F5ECC194EC3D400E1E1FC /* dateInfoCell.m in Sources */,
+				BABF16AE19533B7C00FF01C0 /* photoUploadingCell.m in Sources */,
 				BAD16301194A581A008144A0 /* UIView+Glow.m in Sources */,
 				BA67F20B193667140056DD00 /* pictureFrame.m in Sources */,
 				BA67F20A193667140056DD00 /* imageObject.m in Sources */,
 				BA67F1C2193666210056DD00 /* ViewController.m in Sources */,
 				BA9531BB194E51BB005E0F10 /* socialInformationVC.m in Sources */,
 				BA9531AD194E2CC6005E0F10 /* pagerInformationVC.m in Sources */,
+				BA89B383195B33B100DA0FCC /* datePickingThing.m in Sources */,
 				BA32997319489A730002EBFD /* landingPageViewController.m in Sources */,
 				BA6F5EDD194ED5B100E1E1FC /* NSMutableDictionary+attributesDictionary.m in Sources */,
 				BA3299761948B91E0002EBFD /* showServerData.m in Sources */,
 				BA67F1BC193666210056DD00 /* AppDelegate.m in Sources */,
 				BA6F5ED1194EC66400E1E1FC /* UIColor+testingColors.m in Sources */,
 				BA9531B7194E4E2B005E0F10 /* imageInformationVC.m in Sources */,
+				BABF16BA1954A04400FF01C0 /* ImageTakerViewController.m in Sources */,
 				BA67F1B8193666210056DD00 /* main.m in Sources */,
 				BA6F5EDA194ED05700E1E1FC /* attributesDictionary.m in Sources */,
 				BA67F209193667140056DD00 /* dummyDataProvider.m in Sources */,
+				BA89B37F195B29E700DA0FCC /* imageInformationConstants.m in Sources */,
 				BA6F5EED194F192900E1E1FC /* UIImage+imageAdditions.m in Sources */,
 				BA9531B0194E2E28005E0F10 /* pagerSocialVC.m in Sources */,
 				BA6F5EE3194EFE6F00E1E1FC /* largeImageViewer.m in Sources */,
@@ -757,6 +854,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/Tonyf/Desktop/Coding/PhotoArchivingV4/PhotoArchivingV4,
@@ -767,6 +866,7 @@
 				GCC_PREFIX_HEADER = "photoArchivingIpad/photoArchivingIpad-Prefix.pch";
 				INFOPLIST_FILE = "photoArchivingIpad/photoArchivingIpad-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -777,6 +877,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/Tonyf/Desktop/Coding/PhotoArchivingV4/PhotoArchivingV4,
@@ -787,6 +889,7 @@
 				GCC_PREFIX_HEADER = "photoArchivingIpad/photoArchivingIpad-Prefix.pch";
 				INFOPLIST_FILE = "photoArchivingIpad/photoArchivingIpad-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

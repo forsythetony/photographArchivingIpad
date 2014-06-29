@@ -10,5 +10,11 @@
 
 @implementation imageObject
 
-
+-(NSMutableDictionary *)informationAsMutableDictionary
+{
+    return [NSMutableDictionary dictionaryWithObjects:@[(_title ? _title : @"empty")
+                                                        ]
+                                              forKeys:@[fieldTypeTitle]];
+    
+}
 @end

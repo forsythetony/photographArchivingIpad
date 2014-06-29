@@ -20,3 +20,9 @@ extern UIColor * const valueTitleTestingBackgroundColor;
 extern UIColor * const valueTestingTextColor;
 extern UIColor * const valueInfoTestingBackgroundColor1;
 extern UIColor * const valueInfoTestingBackgroundColor2;
+
+extern NSString * const keyTextValue;
+extern NSString * const keyTestingTextValue;
+extern NSString * const keyCornerRadius;
+extern NSString * const keyEnabledColor;
+extern NSString * const keyDisabledColor;

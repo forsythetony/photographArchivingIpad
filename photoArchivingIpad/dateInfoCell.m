@@ -7,6 +7,7 @@
 //
 
 #import "dateInfoCell.h"
+#import "datePickingThing.h"
 
 #define TESTING NO
 
@@ -49,6 +50,8 @@
 }
 -(void)varSetup
 {
+    _popoverController = [[UIPopoverController alloc] initWithContentViewController:[datePickingThing new]];
+    
     NSString *fontFamily = global_font_family;
     
     float titleFontSize = 15.0;
@@ -78,13 +81,13 @@
     
     UIColor *mainBackground = [UIColor clearColor];
     
-    titleStyle = [NSMutableDictionary cellAttributesDictionaryForType:attrDictTypeTitle];
-    dateStyle = [NSMutableDictionary cellAttributesDictionaryForType:attrDictTypeLabel1];
+    titleStyle = [NSMutableDictionary attributesDictionaryForType:attrDictTypeTitle];
+    dateStyle = [NSMutableDictionary attributesDictionaryForType:attrDictTypeLabel1];
     
-    confidenceStyle = [NSMutableDictionary cellAttributesDictionaryForType:attrDictTypeLabel2];
-    confConstStyle = [NSMutableDictionary cellAttributesDictionaryForType:attrDictTypeLabel2];
+    confidenceStyle = [NSMutableDictionary attributesDictionaryForType:attrDictTypeLabel2];
+    confConstStyle = [NSMutableDictionary attributesDictionaryForType:attrDictTypeLabel2];
     
-    mainStyle = [NSMutableDictionary cellAttributesDictionaryForType:attrDictTypeView1];
+    mainStyle = [NSMutableDictionary attributesDictionaryForType:attrDictTypeView1];
     
     [titleStyle updateValues:@[titleFont,
                                titleBackground,
@@ -155,6 +158,11 @@
     _confLabelConst.textColor = [confConstStyle objectForConstKey:(TESTING ? keyTestingTextColor : keyTextColor)];
     _confLabelConst.textAlignment = [[confConstStyle objectForConstKey:keytextAlignment] integerValue];
     
+    
+}
+-(void)editDate:(id) sender
+{
+    [_popoverController presentPopoverFromRect:self.frame inView:self.superview permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     
 }
 -(UIColor*)getColorForValue:(NSString*) value

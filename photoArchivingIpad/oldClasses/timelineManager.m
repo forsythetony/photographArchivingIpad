@@ -78,14 +78,18 @@
         
         if (isFar == YES) {
             goodValue = YES;
+            
             NSLog(@"\nFound good value for year %@ at point %@\n", yearString, NSStringFromCGPoint(centerPoint));
             
         
         }
 
     }
+    
+    NSDate *dt = date;
+    
     [_savedCenters addObject:@{@"point": [NSValue valueWithCGPoint:centerPoint],
-                               @"year" : [date displayDateOfType:sDateTypeYearOnly]}];
+                               @"year" : [dt displayDateOfType:sDateTypeYearOnly]}];
     return centerPoint;
     
 }

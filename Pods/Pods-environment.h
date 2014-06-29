@@ -6,6 +6,48 @@
 // project.
 
 
+// AFNetworking
+#define COCOAPODS_POD_AVAILABLE_AFNetworking
+#define COCOAPODS_VERSION_MAJOR_AFNetworking 2
+#define COCOAPODS_VERSION_MINOR_AFNetworking 3
+#define COCOAPODS_VERSION_PATCH_AFNetworking 1
+
+// AFNetworking/NSURLConnection
+#define COCOAPODS_POD_AVAILABLE_AFNetworking_NSURLConnection
+#define COCOAPODS_VERSION_MAJOR_AFNetworking_NSURLConnection 2
+#define COCOAPODS_VERSION_MINOR_AFNetworking_NSURLConnection 3
+#define COCOAPODS_VERSION_PATCH_AFNetworking_NSURLConnection 1
+
+// AFNetworking/NSURLSession
+#define COCOAPODS_POD_AVAILABLE_AFNetworking_NSURLSession
+#define COCOAPODS_VERSION_MAJOR_AFNetworking_NSURLSession 2
+#define COCOAPODS_VERSION_MINOR_AFNetworking_NSURLSession 3
+#define COCOAPODS_VERSION_PATCH_AFNetworking_NSURLSession 1
+
+// AFNetworking/Reachability
+#define COCOAPODS_POD_AVAILABLE_AFNetworking_Reachability
+#define COCOAPODS_VERSION_MAJOR_AFNetworking_Reachability 2
+#define COCOAPODS_VERSION_MINOR_AFNetworking_Reachability 3
+#define COCOAPODS_VERSION_PATCH_AFNetworking_Reachability 1
+
+// AFNetworking/Security
+#define COCOAPODS_POD_AVAILABLE_AFNetworking_Security
+#define COCOAPODS_VERSION_MAJOR_AFNetworking_Security 2
+#define COCOAPODS_VERSION_MINOR_AFNetworking_Security 3
+#define COCOAPODS_VERSION_PATCH_AFNetworking_Security 1
+
+// AFNetworking/Serialization
+#define COCOAPODS_POD_AVAILABLE_AFNetworking_Serialization
+#define COCOAPODS_VERSION_MAJOR_AFNetworking_Serialization 2
+#define COCOAPODS_VERSION_MINOR_AFNetworking_Serialization 3
+#define COCOAPODS_VERSION_PATCH_AFNetworking_Serialization 1
+
+// AFNetworking/UIKit
+#define COCOAPODS_POD_AVAILABLE_AFNetworking_UIKit
+#define COCOAPODS_VERSION_MAJOR_AFNetworking_UIKit 2
+#define COCOAPODS_VERSION_MINOR_AFNetworking_UIKit 3
+#define COCOAPODS_VERSION_PATCH_AFNetworking_UIKit 1
+
 // CRToast
 #define COCOAPODS_POD_AVAILABLE_CRToast
 #define COCOAPODS_VERSION_MAJOR_CRToast 0
@@ -15,44 +57,50 @@
 // Colours
 #define COCOAPODS_POD_AVAILABLE_Colours
 #define COCOAPODS_VERSION_MAJOR_Colours 5
-#define COCOAPODS_VERSION_MINOR_Colours 3
+#define COCOAPODS_VERSION_MINOR_Colours 4
 #define COCOAPODS_VERSION_PATCH_Colours 0
 
 // FontAwesomeKit
 #define COCOAPODS_POD_AVAILABLE_FontAwesomeKit
 #define COCOAPODS_VERSION_MAJOR_FontAwesomeKit 2
 #define COCOAPODS_VERSION_MINOR_FontAwesomeKit 1
-#define COCOAPODS_VERSION_PATCH_FontAwesomeKit 6
+#define COCOAPODS_VERSION_PATCH_FontAwesomeKit 7
 
 // FontAwesomeKit/Core
 #define COCOAPODS_POD_AVAILABLE_FontAwesomeKit_Core
 #define COCOAPODS_VERSION_MAJOR_FontAwesomeKit_Core 2
 #define COCOAPODS_VERSION_MINOR_FontAwesomeKit_Core 1
-#define COCOAPODS_VERSION_PATCH_FontAwesomeKit_Core 6
+#define COCOAPODS_VERSION_PATCH_FontAwesomeKit_Core 7
 
 // FontAwesomeKit/FontAwesome
 #define COCOAPODS_POD_AVAILABLE_FontAwesomeKit_FontAwesome
 #define COCOAPODS_VERSION_MAJOR_FontAwesomeKit_FontAwesome 2
 #define COCOAPODS_VERSION_MINOR_FontAwesomeKit_FontAwesome 1
-#define COCOAPODS_VERSION_PATCH_FontAwesomeKit_FontAwesome 6
+#define COCOAPODS_VERSION_PATCH_FontAwesomeKit_FontAwesome 7
 
 // FontAwesomeKit/FoundationIcons
 #define COCOAPODS_POD_AVAILABLE_FontAwesomeKit_FoundationIcons
 #define COCOAPODS_VERSION_MAJOR_FontAwesomeKit_FoundationIcons 2
 #define COCOAPODS_VERSION_MINOR_FontAwesomeKit_FoundationIcons 1
-#define COCOAPODS_VERSION_PATCH_FontAwesomeKit_FoundationIcons 6
+#define COCOAPODS_VERSION_PATCH_FontAwesomeKit_FoundationIcons 7
 
 // FontAwesomeKit/IonIcons
 #define COCOAPODS_POD_AVAILABLE_FontAwesomeKit_IonIcons
 #define COCOAPODS_VERSION_MAJOR_FontAwesomeKit_IonIcons 2
 #define COCOAPODS_VERSION_MINOR_FontAwesomeKit_IonIcons 1
-#define COCOAPODS_VERSION_PATCH_FontAwesomeKit_IonIcons 6
+#define COCOAPODS_VERSION_PATCH_FontAwesomeKit_IonIcons 7
 
 // FontAwesomeKit/Zocial
 #define COCOAPODS_POD_AVAILABLE_FontAwesomeKit_Zocial
 #define COCOAPODS_VERSION_MAJOR_FontAwesomeKit_Zocial 2
 #define COCOAPODS_VERSION_MINOR_FontAwesomeKit_Zocial 1
-#define COCOAPODS_VERSION_PATCH_FontAwesomeKit_Zocial 6
+#define COCOAPODS_VERSION_PATCH_FontAwesomeKit_Zocial 7
+
+// ImageInformationForm
+#define COCOAPODS_POD_AVAILABLE_ImageInformationForm
+#define COCOAPODS_VERSION_MAJOR_ImageInformationForm 0
+#define COCOAPODS_VERSION_MINOR_ImageInformationForm 3
+#define COCOAPODS_VERSION_PATCH_ImageInformationForm 0
 
 // LiveFrost
 #define COCOAPODS_POD_AVAILABLE_LiveFrost
@@ -60,9 +108,93 @@
 #define COCOAPODS_VERSION_MINOR_LiveFrost 1
 #define COCOAPODS_VERSION_PATCH_LiveFrost 2
 
+// MRProgress
+#define COCOAPODS_POD_AVAILABLE_MRProgress
+#define COCOAPODS_VERSION_MAJOR_MRProgress 0
+#define COCOAPODS_VERSION_MINOR_MRProgress 5
+#define COCOAPODS_VERSION_PATCH_MRProgress 0
+
+// MRProgress/ActivityIndicator
+#define COCOAPODS_POD_AVAILABLE_MRProgress_ActivityIndicator
+#define COCOAPODS_VERSION_MAJOR_MRProgress_ActivityIndicator 0
+#define COCOAPODS_VERSION_MINOR_MRProgress_ActivityIndicator 5
+#define COCOAPODS_VERSION_PATCH_MRProgress_ActivityIndicator 0
+
+// MRProgress/Blur
+#define COCOAPODS_POD_AVAILABLE_MRProgress_Blur
+#define COCOAPODS_VERSION_MAJOR_MRProgress_Blur 0
+#define COCOAPODS_VERSION_MINOR_MRProgress_Blur 5
+#define COCOAPODS_VERSION_PATCH_MRProgress_Blur 0
+
+// MRProgress/Circular
+#define COCOAPODS_POD_AVAILABLE_MRProgress_Circular
+#define COCOAPODS_VERSION_MAJOR_MRProgress_Circular 0
+#define COCOAPODS_VERSION_MINOR_MRProgress_Circular 5
+#define COCOAPODS_VERSION_PATCH_MRProgress_Circular 0
+
+// MRProgress/Helper
+#define COCOAPODS_POD_AVAILABLE_MRProgress_Helper
+#define COCOAPODS_VERSION_MAJOR_MRProgress_Helper 0
+#define COCOAPODS_VERSION_MINOR_MRProgress_Helper 5
+#define COCOAPODS_VERSION_PATCH_MRProgress_Helper 0
+
+// MRProgress/Icons
+#define COCOAPODS_POD_AVAILABLE_MRProgress_Icons
+#define COCOAPODS_VERSION_MAJOR_MRProgress_Icons 0
+#define COCOAPODS_VERSION_MINOR_MRProgress_Icons 5
+#define COCOAPODS_VERSION_PATCH_MRProgress_Icons 0
+
+// MRProgress/MessageInterceptor
+#define COCOAPODS_POD_AVAILABLE_MRProgress_MessageInterceptor
+#define COCOAPODS_VERSION_MAJOR_MRProgress_MessageInterceptor 0
+#define COCOAPODS_VERSION_MINOR_MRProgress_MessageInterceptor 5
+#define COCOAPODS_VERSION_PATCH_MRProgress_MessageInterceptor 0
+
+// MRProgress/NavigationBarProgress
+#define COCOAPODS_POD_AVAILABLE_MRProgress_NavigationBarProgress
+#define COCOAPODS_VERSION_MAJOR_MRProgress_NavigationBarProgress 0
+#define COCOAPODS_VERSION_MINOR_MRProgress_NavigationBarProgress 5
+#define COCOAPODS_VERSION_PATCH_MRProgress_NavigationBarProgress 0
+
+// MRProgress/Overlay
+#define COCOAPODS_POD_AVAILABLE_MRProgress_Overlay
+#define COCOAPODS_VERSION_MAJOR_MRProgress_Overlay 0
+#define COCOAPODS_VERSION_MINOR_MRProgress_Overlay 5
+#define COCOAPODS_VERSION_PATCH_MRProgress_Overlay 0
+
+// MRProgress/Stopable
+#define COCOAPODS_POD_AVAILABLE_MRProgress_Stopable
+#define COCOAPODS_VERSION_MAJOR_MRProgress_Stopable 0
+#define COCOAPODS_VERSION_MINOR_MRProgress_Stopable 5
+#define COCOAPODS_VERSION_PATCH_MRProgress_Stopable 0
+
+// MRProgress/WeakProxy
+#define COCOAPODS_POD_AVAILABLE_MRProgress_WeakProxy
+#define COCOAPODS_VERSION_MAJOR_MRProgress_WeakProxy 0
+#define COCOAPODS_VERSION_MINOR_MRProgress_WeakProxy 5
+#define COCOAPODS_VERSION_PATCH_MRProgress_WeakProxy 0
+
+// SBJson
+#define COCOAPODS_POD_AVAILABLE_SBJson
+#define COCOAPODS_VERSION_MAJOR_SBJson 4
+#define COCOAPODS_VERSION_MINOR_SBJson 0
+#define COCOAPODS_VERSION_PATCH_SBJson 1
+
+// XLDataLoader
+#define COCOAPODS_POD_AVAILABLE_XLDataLoader
+#define COCOAPODS_VERSION_MAJOR_XLDataLoader 1
+#define COCOAPODS_VERSION_MINOR_XLDataLoader 0
+#define COCOAPODS_VERSION_PATCH_XLDataLoader 0
+
+// XLForm
+#define COCOAPODS_POD_AVAILABLE_XLForm
+#define COCOAPODS_VERSION_MAJOR_XLForm 1
+#define COCOAPODS_VERSION_MINOR_XLForm 0
+#define COCOAPODS_VERSION_PATCH_XLForm 1
+
 // pop
 #define COCOAPODS_POD_AVAILABLE_pop
 #define COCOAPODS_VERSION_MAJOR_pop 1
 #define COCOAPODS_VERSION_MINOR_pop 0
-#define COCOAPODS_VERSION_PATCH_pop 5
+#define COCOAPODS_VERSION_PATCH_pop 6
 

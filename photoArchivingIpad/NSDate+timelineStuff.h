@@ -14,7 +14,8 @@ typedef NS_ENUM(NSInteger, sDateType) {
     sDateTypPretty,
     sDateTypeWithTime,
     sDateTypeMonthAndYear,
-    sDateTypeYearOnly
+    sDateTypeYearOnly,
+    sdatetypeURL
     
 };
 

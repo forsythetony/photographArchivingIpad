@@ -7,15 +7,24 @@
 //
 
 #import "imageInformationVC.h"
+#import "TFDataCommunicator.h"
 
 #define HEADERHEIGHT 30.0
+#define FOOTERHEIGHT 50.0
 
-@interface imageInformationVC ()
+@interface imageInformationVC () {
+    
+    NSDictionary *footerStyle;
+    BOOL imageInformationEdited;
+    NSMutableDictionary *currentInformation;
+    NSMutableArray *fieldInfo;
+    TFDataCommunicator *mainCom;
+}
 
 @property (nonatomic, strong) UILabel* imageTitle;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *imageSections;
-
+@property (nonatomic, strong) UIButton *saveButton;
 @end
 
 @implementation imageInformationVC
@@ -33,9 +42,44 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self variableSetup];
     [self dataSetup];
     
     [self viewSetup];
+    
+}
+-(void)variableSetup
+{
+    imageInformationEdited = NO;
+    
+    mainCom = [TFDataCommunicator new];
+    mainCom.delegate = self;
+    
+    CGRect footerFrame = CGRectMake(
+                                    0.0     , 0.0           ,
+                                    320.0   , FOOTERHEIGHT
+                                    );
+    
+    float cornerRadius = 8.0;
+    
+    UIColor *enabledColor = [UIColor successColor];
+    UIColor *disabledColor = [UIColor black50PercentColor];
+    
+    
+    NSMutableDictionary *footerDict = [NSMutableDictionary attributesDictionaryForType:attrDictTypeTableFooter];
+    
+    [footerDict updateValues:@[[NSValue valueWithCGRect:footerFrame],
+                               @"Save",
+                               [NSNumber numberWithFloat:cornerRadius],
+                               enabledColor,
+                               disabledColor]
+                     forKeys:@[keyFrame,
+                               keyTextValue,
+                               keyCornerRadius,
+                               keyEnabledColor,
+                               keyDisabledColor]];
+    
+    footerStyle = [NSDictionary dictionaryWithDictionary:footerDict];
     
 }
 
@@ -128,7 +172,7 @@
     NSMutableDictionary *datesSection = [NSMutableDictionary dictionaryWithDictionary:@{@"sectionName": @"Date Taken:",
                                                                                         @"value" : @"",
                                                                                         @"confidence" : @""}];
-    NSMutableDictionary *uploaderSection = [NSMutableDictionary dictionaryWithDictionary:@{@"sectionName": @"Uploader",
+    NSMutableDictionary *uploaderSection = [NSMutableDictionary dictionaryWithDictionary:@{@"sectionName": @"Uploader:",
                                                                                            @"value" : @""}];
 
     
@@ -143,6 +187,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [_tableView reloadData];
+   
 }
 -(void)updateInformation:(imageObject *)information
 {
@@ -170,6 +215,12 @@
     
     [_tableView reloadData];
     
+    currentInformation = [_information informationAsMutableDictionary];
+    
+    fieldInfo = [NSMutableArray new];
+    [fieldInfo insertObject:[NSMutableDictionary dictionaryWithDictionary:@{fieldTypeTitle: currentInformation[fieldTypeTitle],
+                              fieldTypeHasEdited : [NSNumber numberWithBool:NO]}] atIndex:fieldInformationTitle];
+    
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -181,6 +232,53 @@
     NSInteger rowCount = [_imageSections count];
     
     return rowCount;
+}
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    switch (section) {
+        case 0:
+            return [self createSectionFooter];
+            
+            break;
+            
+        default:
+            return nil;
+            break;
+    }
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    switch (section) {
+        case 0:
+            return FOOTERHEIGHT;
+            break;
+            
+        default:
+            return 50.0;
+            
+            break;
+    }
+}
+-(UIView*)createSectionFooter
+{
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.tableView.frame.size.width, FOOTERHEIGHT)];
+    
+    UIButton* footerButton = [[UIButton alloc] initWithFrame:[footerStyle[keyFrame] CGRectValue]];
+    
+    footerButton.backgroundColor = footerStyle[keyDisabledColor];
+    footerButton.titleLabel.font = footerStyle[keyFont];
+    footerButton.titleLabel.textColor = footerStyle[keyTextColor];
+    footerButton.layer.cornerRadius = [footerStyle[keyCornerRadius] floatValue];
+    
+    [footerButton setTitle:footerStyle[keyTextValue] forState:UIControlStateNormal];
+    
+    [footerButton addTarget:self action:@selector(useDidSaveInformation:) forControlEvents:UIControlEventTouchUpInside];
+    
+    _saveButton = footerButton;
+    
+    [footerView addSubview:footerButton];
+    
+    return footerView;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -214,9 +312,9 @@
         basicInfoCell *cell = [basicInfoCell createCellOfType:theType];
     
         cell.titleConstLabel.text = sectionTitle;
-        cell.titleLabel.text = sectionDict[@"value"];
+        [cell setPlaceholderText:@"" withMainText:sectionDict[@"value"]];
+        cell.delegate = self;
         
-    
     return cell;
     }
 }
@@ -237,4 +335,77 @@
             break;
     }
 }
+-(void)useDidSaveInformation:(id) sender
+{
+    ImagePackage *package = [ImagePackage new];
+    [package setContentsWithImageObject:_information];
+    
+    [mainCom updatePhoto:package];
+    
+}
+-(void)updatedOldTextValue:(NSString *)oldVal toNewValue:(NSString *)newVal ofType:(NSString *)type
+{
+    NSLog(@"\nThe old value -- %@ -- was updated to new value -- %@ -- of field type -> %@", oldVal, newVal, type);
+    
+    if ([self isNewValue:newVal forField:type]) {
+        [fieldInfo[fieldInformationTitle] setObject:newVal forKey:fieldTypeTitle];
+        [fieldInfo[fieldInformationTitle] setObject:[NSNumber numberWithBool:YES] forKey:fieldTypeHasEdited];
+        _information.title = newVal;
+        
+        [self updateSaveButton];
+        
+        
+        
+    }
+    
+}
+-(void)updateSaveButton
+{
+    BOOL hasEdited = NO;
+    
+    for (NSDictionary* dict in fieldInfo) {
+        if ([dict[fieldTypeHasEdited] boolValue]) {
+            hasEdited = YES;
+        }
+    }
+    
+    if (hasEdited) {
+        //_saveButton.backgroundColor = footerStyle[keyEnabledColor];
+        POPSpringAnimation *colorChange = [POPSpringAnimation animation];
+        
+        colorChange.property = [POPAnimatableProperty propertyWithName:kPOPViewBackgroundColor];
+        
+        colorChange.toValue = footerStyle[keyEnabledColor];
+    
+        [_saveButton pop_addAnimation:colorChange forKey:@"colorChangeEnabled"];
+        
+        _saveButton.enabled = YES;
+    }
+    else
+    {
+        _saveButton.backgroundColor = footerStyle[keyDisabledColor];
+        _saveButton.enabled = NO;
+    }
+}
+-(BOOL)isNewValue:(NSString*) newValue forField:(NSString*) fieldType
+{
+    if ([fieldType isEqualToString:fieldTypeTitle]) {
+        NSString *oldValue = fieldInfo[fieldInformationTitle][fieldTypeTitle];
+        
+        if (oldValue == nil && newValue != nil) {
+            return YES;
+        }
+        return (!([newValue isEqualToString:oldValue]));
+    }
+    else
+    {
+        return NO;
+    }
+    
+    
+    
+    
+    
+}
+
 @end

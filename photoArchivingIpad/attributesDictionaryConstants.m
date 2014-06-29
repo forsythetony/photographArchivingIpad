@@ -16,5 +16,8 @@ NSString * const keyFrame = @"frame";
 NSString * const keytextAlignment = @"textAlignment";
 NSString * const keyTestingBackground = @"testingBackground";
 NSString * const keyTestingTextColor = @"testingTextColor";
-
- 
+NSString * const keyTextValue = @"textValue";
+NSString * const keyTestingTextValue  = @"testingTextValue";
+NSString * const keyCornerRadius = @"cornerRadiusValue";
+NSString * const keyEnabledColor = @"keyEnabledColor";
+NSString * const keyDisabledColor = @"keyDisabledColor";

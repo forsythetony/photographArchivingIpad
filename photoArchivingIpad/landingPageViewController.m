@@ -11,6 +11,7 @@
 @interface landingPageViewController () {
     
     BOOL btnTimelineDidSpring;
+    NSMutableDictionary *buttonStyle;
     
 }
 
@@ -30,10 +31,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     
     [self initialSetup];
     
     btnTimelineDidSpring = NO;
+    
+    _testType = testingSegueTypeNone;
     
 }
 -(void)initialSetup
@@ -44,21 +48,34 @@
     
     //  Set the button to be invisible
     
+    /*
     self.buttonTimeline.alpha   = 0.0;
     self.buttonServer.alpha     = 0.0;
+    _buttonUploading.alpha       = 0.0;
+    */
     
+    [self varSetup];
+    [self aestheticsConfiguration];
+}
+-(void)varSetup
+{
+    buttonStyle = [NSMutableDictionary attributesDictionaryForType:attrDictTypeButtonDefault];
 }
 - (void)aestheticsConfiguration
 {
     //  Set the 'Go to Timeline' button's visual properties
     
-    UIColor *btnTimelineTextColor = [UIColor indigoColor];
     
-    [self.buttonTimeline setTitleColor:btnTimelineTextColor
-                              forState:UIControlStateNormal];
-    self.buttonTimeline.titleLabel.font = [UIFont fontWithName:global_font_family size:20.0];
-    self.buttonServer.titleLabel.font = [UIFont fontWithName:global_font_family size:20.0];
+    [_buttonTimeline setTitleColor:buttonStyle[keyTextColor] forState:UIControlStateNormal];
+    [_buttonServer setTitleColor:buttonStyle[keyTextColor] forState:UIControlStateNormal];
+    [_buttonUploading setTitleColor:buttonStyle[keyTextColor] forState:UIControlStateNormal];
     
+    
+    _buttonTimeline.titleLabel.font = buttonStyle[keyFont];
+    _buttonServer.titleLabel.font = buttonStyle[keyFont];
+    _buttonUploading.titleLabel.font = buttonStyle[keyFont];
+    
+    /*
     if (btnTimelineDidSpring == NO) {
         
         float buttonToValue = 200.0;
@@ -110,17 +127,50 @@
         
         
         
+        buttonToValue += 50.0;
         
-        [self.buttonServer setTitleColor:btnTimelineTextColor
-                                forState:UIControlStateNormal];
+        
+        POPSpringAnimation *springFromBelowUploading = [POPSpringAnimation animation];
+        
+        springFromBelowUploading.property = [POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
+        
+        springFromBelowUploading.fromValue = @(1000);
+        springFromBelowUploading.toValue = @(buttonToValue);
+        
+        springFromBelowServer.springSpeed = 10.0;
+        
+        [_buttonUploading.layer pop_addAnimation:springFromBelowUploading forKey:@"springFromBelowUploading"];
+        
+        [_buttonUploading pop_addAnimation:alphaSpring forKey:@"alphaSpringUploading"];
         
         btnTimelineDidSpring = YES;
     }
+     
+     */
     
 }
 -(void)viewDidAppear:(BOOL)animated
 {
-    [self aestheticsConfiguration];
+    [self testingCheck];
+}
+-(void)testingCheck
+{
+    switch (_testType) {
+        case testingSegueTypeTimeline:
+            
+            [self performSegueWithIdentifier:segueTimeline sender:nil];
+            break;
+            
+        case testingSegueTypeUploader:
+            [self performSegueWithIdentifier:segueUploader sender:nil];
+            break;
+            
+        case testingSegueTypeNone:
+            break;
+            
+        default:
+            break;
+    }
 }
 - (void)didReceiveMemoryWarning
 {

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "imageInformationConstants.h"
 
 @interface imageObject : NSObject
 
@@ -18,10 +19,14 @@
 
 @property (nonatomic, strong) NSURL* photoURL;
 @property (nonatomic, strong) NSURL* thumbNailURL;
-@property (nonatomic, strong) NSURL* recordingURL;
+@property (nonatomic, strong) UIImage *largeImage;
+@property (nonatomic, strong) UIImage *thumbnailImage;
 
+@property (nonatomic, strong) NSURL* recordingURL;
 
 @property (nonatomic, strong) NSDictionary *imageInformation;
 @property (nonatomic, strong) NSNumber* centerXoffset;
+
+-(NSMutableDictionary*)informationAsMutableDictionary;
 
 @end

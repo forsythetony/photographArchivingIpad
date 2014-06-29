@@ -14,6 +14,8 @@
                     *infoStyle,
                     *mainStyle;
     
+    NSString *oldValue;
+    
     
 }
 
@@ -21,7 +23,7 @@
 @implementation basicInfoCell
 +(id)createCellOfType:(cellType)cellType
 {
-    basicInfoCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"basicDetailCell" owner:nil options:nil] lastObject];
+    basicInfoCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"basicInfoCell" owner:nil options:nil] lastObject];
     
     if ([cell isKindOfClass:[basicInfoCell class]]) {
         [cell setupVariablesWithType:cellType];
@@ -75,9 +77,9 @@
     UIColor *backgroundColor = [UIColor clearColor];
 
     
-    titleStyle = [NSMutableDictionary cellAttributesDictionaryForType:attrDictTypeTitle];
-    infoStyle = [NSMutableDictionary cellAttributesDictionaryForType:attrDictTypeLabel1];
-    mainStyle = [NSMutableDictionary cellAttributesDictionaryForType:attrDictTypeView1];
+    titleStyle = [NSMutableDictionary attributesDictionaryForType:attrDictTypeTitle];
+    infoStyle = [NSMutableDictionary attributesDictionaryForType:attrDictTypeLabel1];
+    mainStyle = [NSMutableDictionary attributesDictionaryForType:attrDictTypeView1];
     
     [titleStyle updateValues:@[titleFont,
                                titleBackgroundColor,
@@ -102,22 +104,30 @@
                     forKeys:@[keyBackgroundColor]];
     
 }
+-(void)setPlaceholderText:(NSString *)placeholderText withMainText:(NSString *)mainText
+{
+    _titleTextField.placeholder = placeholderText;
+    _titleTextField.text = mainText;
+}
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [_titleTextField resignFirstResponder];
+    
+    return NO;
+}
 -(void)setupViews
 {
     [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     self.backgroundColor = [mainStyle objectForConstKey:(TESTING ? keyTestingBackground : keyBackgroundColor)];
     
-    
-
-    
-    _titleLabel.text = @"";
-    _titleLabel.font = [infoStyle objectForConstKey:keyFont];
-    _titleLabel.textAlignment = [[infoStyle objectForConstKey:keytextAlignment] integerValue];
-    _titleLabel.backgroundColor = [infoStyle objectForConstKey:(TESTING ? keyTestingBackground : keyBackgroundColor)];
-    _titleLabel.textColor = [infoStyle objectForConstKey:(TESTING ? keyTestingTextColor : keyTextColor)];
-    
-    
+    _titleTextField.text = @"";
+    _titleTextField.placeholder = @"";
+    _titleTextField.borderStyle = UITextBorderStyleNone;
+    _titleTextField.font = [infoStyle objectForConstKey:keyFont];
+    _titleTextField.textColor = [infoStyle objectForConstKey:(TESTING ? keyTestingTextColor : keyTextColor)];
+    _titleTextField.textAlignment = [[infoStyle objectForConstKey:keytextAlignment] integerValue];
+    _titleTextField.delegate = self;
     
     
     _titleConstLabel.text = @"Title";
@@ -133,6 +143,16 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    NSLog(@"The new text is %@", textField.text);
+    [self.delegate updatedOldTextValue:oldValue toNewValue:textField.text ofType:fieldTypeTitle];
+    
+}
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    oldValue = textField.text;
 }
 
 @end

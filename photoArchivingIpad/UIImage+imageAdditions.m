@@ -69,4 +69,19 @@ struct pixel {
     }
     return [UIColor colorWithRed:red/255.0f green:green/255.0f blue:blue/255.0f alpha:0.6];
 }
+//  Utility method found on stack overflow at this
+//  URL -> http://stackoverflow.com/questions/2658738/the-simplest-way-to-resize-an-uiimage
+
++(UIImage *)createThumbnailImageWithImage:(UIImage *)image
+{
+    CGSize newSize = CGSizeMake(100.0, 100.0);
+    
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
 @end

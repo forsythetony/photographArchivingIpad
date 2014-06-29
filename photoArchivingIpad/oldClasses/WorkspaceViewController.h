@@ -24,6 +24,7 @@
 
 #import "imageHandling.h"
 
+#import "updatedConstants.h"
 
 @class imageInfoPagerVC;
 

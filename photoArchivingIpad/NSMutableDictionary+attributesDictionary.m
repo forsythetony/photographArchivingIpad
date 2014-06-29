@@ -15,50 +15,99 @@
     
     return object;
 }
-+(instancetype)cellAttributesDictionaryForType:(attrDictType) dictType
++(instancetype)attributesDictionaryForType:(attrDictType) dictType
 {
-    UIFont *defaultFont = [UIFont fontWithName:@"DINAlternate-Bold" size:13.0];
+    UIFont *defaultFont;
     
-    UIColor *defaultTextColor = [UIColor whiteColor];
-    UIColor *defaultBackground = [UIColor clearColor];
+    UIColor *defaultTextColor;
+    UIColor *defaultBackground;
     UIColor *defaultTestingBackground;
     UIColor *defaultTestingTextColor;
+    NSTextAlignment defaultTextAlignment;
+    
+    NSString *textValue = @"";
+    NSString *testingTextValue = @"testing";
     
     switch (dictType) {
         case attrDictTypeDefault:
+            defaultTextColor = [UIColor blackColor];
+            defaultBackground = [UIColor clearColor];
             defaultTestingBackground = [UIColor testInfoBackgroundOne];
             defaultTestingTextColor = [UIColor testInfoTextOne];
+            defaultTextAlignment = NSTextAlignmentLeft;
+            defaultFont = [UIFont fontWithName:global_font_family size:13.0];
+            
             break;
             
             case attrDictTypeLabel1:
+            defaultTextColor = [UIColor blackColor];
+            defaultBackground = [UIColor clearColor];
+            
             defaultTestingBackground = [UIColor testInfoBackgroundOne];
             defaultTestingTextColor = [UIColor testInfoTextOne];
+            defaultTextAlignment = NSTextAlignmentLeft;
+            defaultFont = [UIFont fontWithName:global_font_family size:13.0];
             break;
             
             case attrDictTypeLabel2:
+            defaultTextColor = [UIColor blackColor];
+            defaultBackground = [UIColor clearColor];
+            
             defaultTestingBackground = [UIColor testInfoBackgroundTwo];
             defaultTestingTextColor = [UIColor testInfoTextTwo];
+            defaultTextAlignment = NSTextAlignmentLeft;
+            defaultFont = [UIFont fontWithName:global_font_family size:13.0];
             break;
             
             case attrDictTypeTitle:
+            defaultTextColor = [UIColor blackColor];
+            defaultBackground = [UIColor clearColor];
             defaultTestingBackground = [UIColor testTitleBackground];
             defaultTestingTextColor = [UIColor testTitleText];
+            defaultTextAlignment = NSTextAlignmentLeft;
+            defaultFont = [UIFont fontWithName:global_font_family size:13.0];
             break;
             
             case attrDictTypeView1:
+            defaultTextColor = [UIColor blackColor];
+            defaultBackground = [UIColor clearColor];
             defaultTestingBackground = [UIColor testMainBackground];
             defaultTestingTextColor = [UIColor blackColor];
+            defaultTextAlignment = NSTextAlignmentLeft;
+            defaultFont = [UIFont fontWithName:global_font_family size:13.0];
             break;
             
+            case attrDictTypeButtonDefault:
+            defaultTextColor = [UIColor indigoColor];
+            defaultBackground = [UIColor clearColor];
+            
+            defaultTestingBackground = [UIColor testInfoBackgroundOne];
+            defaultTestingTextColor = [UIColor testInfoTextOne];
+            defaultTextAlignment = NSTextAlignmentCenter;
+            defaultFont = [UIFont fontWithName:global_font_family size:18.0];
+            break;
+            
+            case attrDictTypeTableFooter:
+            
+            defaultTextColor = [UIColor black25PercentColor];
+            defaultBackground = [UIColor blueberryColor];
+            
+            defaultTestingBackground = [UIColor yellowColor];
+            defaultTestingTextColor = [UIColor black25PercentColor];
+            defaultFont = [UIFont fontWithName:global_font_family size:18.0];
+            defaultTextAlignment = NSTextAlignmentCenter;
+            break;
         
         default:
+            defaultTextColor = [UIColor blackColor];
+            defaultBackground = [UIColor clearColor];
             defaultTestingBackground = [UIColor testMainBackground];
             defaultTestingTextColor = [UIColor blackColor];
+            defaultTextAlignment = NSTextAlignmentLeft;
+            defaultFont = [UIFont fontWithName:global_font_family size:13.0];
             break;
     }
     CGRect defaultFrame = CGRectMake(0.0, 0.0, 0.0, 0.0);
-    
-    NSTextAlignment defaultTextAlignment = NSTextAlignmentLeft;
     
     
     NSArray *keys = @[keyFont,
@@ -67,7 +116,9 @@
                       keyTextColor,
                       keyTestingBackground,
                       keyTestingTextColor,
-                      keytextAlignment];
+                      keytextAlignment,
+                      keyTextValue,
+                      keyTestingTextValue];
     
     NSArray *values = @[defaultFont,
                         [NSValue valueWithCGRect:defaultFrame],
@@ -75,7 +126,9 @@
                         defaultTextColor,
                         defaultTestingBackground,
                         defaultTestingTextColor,
-                        [NSNumber numberWithInteger:defaultTextAlignment]];
+                        [NSNumber numberWithInteger:defaultTextAlignment],
+                        textValue,
+                        testingTextValue];
     
     return [[self class] dictionaryWithObjects:values forKeys:keys];
 }

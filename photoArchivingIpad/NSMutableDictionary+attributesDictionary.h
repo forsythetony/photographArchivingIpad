@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Colours.h>
 #import "attributesDictionaryConstants.h"
 #import "UIColor+testingColors.h"
 
@@ -16,12 +17,13 @@ typedef NS_ENUM(NSInteger, attrDictType) {
     attrDictTypeDefault,
     attrDictTypeTitle,
     attrDictTypeLabel1,
-    attrDictTypeLabel2
+    attrDictTypeLabel2,
+    attrDictTypeButtonDefault,
+    attrDictTypeTableFooter
 };
 @interface NSMutableDictionary (attributesDictionary)
 
-+(instancetype) cellAttributesDictionaryForType:(attrDictType) dictType;
-
++(instancetype) attributesDictionaryForType:(attrDictType) dictType;
 -(id)objectForConstKey:(NSString*) key;
 -(void)updateValues:(NSArray *) values forKeys:(NSArray *)keys;
 

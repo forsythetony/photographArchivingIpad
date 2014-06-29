@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "attributesDictionaryConstants.h"
+#import <Colours.h>
 
 typedef NS_ENUM(NSInteger, tstColorType) {
     tstColorTypeTitleBackground,

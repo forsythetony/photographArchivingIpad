@@ -8,6 +8,12 @@
 
 #import "updatedConstants.h"
 
+//  Notification Stuff
+
+NSString * const notify_userDidReturn = @"userDidReturnTextfieldCustomNotification";
+
+//  Other Stuff
+
 NSString * const api_localhostBaseURL = @"http://localhost:3000";
 NSString * const api_ec2BaseURL = @"http://54.187.204.201:3000";
 NSString * const api_photosEndpoint = @"/photos";
@@ -28,6 +34,9 @@ NSString * const s3_bucket_name;
 NSString * const s3_bucket_key;
 
 NSString * const s3_error_already_owned = @"BucketAlreadyOwnedByYou";
+
+NSString * const contentTypeJPEG = @"image/jpeg";
+NSString * const contentTypePNG = @"image/PNG";
 
 
 

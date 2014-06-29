@@ -102,6 +102,9 @@
             dateFormat = @"yyyy";
             break;
             
+        case sdatetypeURL:
+            dateFormat = @"M-dd-yyyy-hh-mm";
+            
         default:
             break;
     }

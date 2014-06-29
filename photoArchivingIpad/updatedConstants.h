@@ -10,7 +10,13 @@
 
 #define USELOCALHOST YES
 
+//  Notification Stuff
+
+extern NSString * const notify_userDidReturn;
+
+
 //  Networking Stuff
+
 extern NSString * const api_localhostBaseURL;
 extern NSString * const api_ec2BaseURL;
 
@@ -36,6 +42,11 @@ extern NSString * const S3_access_Key_ID;
 
 extern NSString * const s3_bucket_name;
 extern NSString * const s3_bucket_key;
+
+//  HTTP Stuff
+
+extern NSString * const contentTypeJPEG;
+extern NSString * const contentTypePNG;
 
 #define kSmallFileSize 1024*1024*4.8
 

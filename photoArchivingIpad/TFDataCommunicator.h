@@ -6,9 +6,12 @@
 #import <Foundation/Foundation.h>
 #import "TFPerson.h"
 #import <UIKit/UIKit.h>
-
+#import "imageHandling.h"
+#import "NSDate+timelineStuff.h"
+#import "photoUploadingConstants.h"
 #import <AWSRuntime/AWSRuntime.h>
 #import <AWSS3/AWSS3.h>
+#import "ImagePackage.h"
 
 typedef NS_ENUM(NSUInteger, photoType) {
     
@@ -36,6 +39,8 @@ typedef NS_ENUM(NSInteger, serverResponseType) {
 -(void)finishedPullingImageFromUrl:(UIImage*) image;
 -(void)finishedPullingPhotoList:(NSArray*) list;
 -(void)finishedServerCleanup:(NSDictionary*) results;
+-(void)finishedUploadingRequestWithData:(NSDictionary*) data;
+-(void)finishedUploadingPhotoInfoToServer;
 
 @end
 
@@ -45,6 +50,7 @@ typedef NS_ENUM(NSInteger, serverResponseType) {
 
 @property (nonatomic, weak) id <TFCommunicatorDelegate> delegate;
 
+-(void)setupTransferManager;
 
 -(void)getUserWithUsername:(NSString*) username;
 -(void)retrieveImageWithURL:(NSString*) url;
@@ -54,7 +60,12 @@ typedef NS_ENUM(NSInteger, serverResponseType) {
 -(void)getPhotosForTestUser;
 -(void)cleanImages;
 -(void)uploadSmallFile;
-
+-(void)saveImageToCameraRoll;
+-(void)uploadPhoto:(UIImage*) photo withInformation:(NSDictionary*) information;
+-(void)uploadPhoto:(ImagePackage*) photo;
+-(void)mainServerUploadPhoto:(ImagePackage *)photo;
+-(void)deletePhoto:(imageObject*) photo;
+-(void)updatePhoto:(ImagePackage*) photo;
 
 
 @end

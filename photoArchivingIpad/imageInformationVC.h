@@ -11,9 +11,15 @@
 #import "imageHandling.h"
 #import "basicInfoCell.h"
 #import "dateInfoCell.h"
+#import "imageInformationUpdater.h"
+#import "imageInformationConstants.h"
+#import "TFDataCommunicator.h"
 
-
-@interface imageInformationVC : UIViewController <UITableViewDataSource, UITableViewDelegate>
+typedef NS_ENUM(NSInteger, fieldInformation) {
+    fieldInformationTitle,
+    fieldInformationDateTaken
+};
+@interface imageInformationVC : UIViewController <TFCommunicatorDelegate, UITableViewDataSource, UITableViewDelegate, imageInformationUpdater>
 
 @property (strong, nonatomic) imageObject *information;
 
