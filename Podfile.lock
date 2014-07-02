@@ -1,0 +1,110 @@
+PODS:
+  - AFNetworking (2.3.1):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+    - AFNetworking/UIKit
+  - AFNetworking/NSURLConnection (2.3.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.3.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.3.1)
+  - AFNetworking/Security (2.3.1)
+  - AFNetworking/Serialization (2.3.1)
+  - AFNetworking/UIKit (2.3.1):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - Colours (5.4.0)
+  - CRToast (0.0.7)
+  - FontAwesomeKit (2.1.7):
+    - FontAwesomeKit/Core
+    - FontAwesomeKit/FontAwesome
+    - FontAwesomeKit/FoundationIcons
+    - FontAwesomeKit/IonIcons
+    - FontAwesomeKit/Zocial
+  - FontAwesomeKit/Core (2.1.7)
+  - FontAwesomeKit/FontAwesome (2.1.7):
+    - FontAwesomeKit/Core
+  - FontAwesomeKit/FoundationIcons (2.1.7):
+    - FontAwesomeKit/Core
+  - FontAwesomeKit/IonIcons (2.1.7):
+    - FontAwesomeKit/Core
+  - FontAwesomeKit/Zocial (2.1.7):
+    - FontAwesomeKit/Core
+  - ImageInformationForm (0.3.3):
+    - Colours
+  - LiveFrost (1.1.2)
+  - MRProgress (0.5.0):
+    - MRProgress/ActivityIndicator
+    - MRProgress/Blur
+    - MRProgress/Circular
+    - MRProgress/Helper
+    - MRProgress/Icons
+    - MRProgress/MessageInterceptor
+    - MRProgress/NavigationBarProgress
+    - MRProgress/Overlay
+    - MRProgress/Stopable
+    - MRProgress/WeakProxy
+  - MRProgress/ActivityIndicator (0.5.0):
+    - MRProgress/Stopable
+  - MRProgress/Blur (0.5.0):
+    - MRProgress/Helper
+  - MRProgress/Circular (0.5.0):
+    - MRProgress/Helper
+    - MRProgress/Stopable
+  - MRProgress/Helper (0.5.0)
+  - MRProgress/Icons (0.5.0)
+  - MRProgress/MessageInterceptor (0.5.0)
+  - MRProgress/NavigationBarProgress (0.5.0)
+  - MRProgress/Overlay (0.5.0):
+    - MRProgress/ActivityIndicator
+    - MRProgress/Blur
+    - MRProgress/Circular
+    - MRProgress/Helper
+    - MRProgress/Icons
+  - MRProgress/Stopable (0.5.0):
+    - MRProgress/Helper
+  - MRProgress/WeakProxy (0.5.0)
+  - pop (1.0.6)
+  - SBJson (4.0.1)
+  - XLDataLoader (1.0.0):
+    - AFNetworking (~> 2.0)
+  - XLForm (1.0.1):
+    - AFNetworking (~> 2.0)
+    - MRProgress (~> 0.2)
+    - XLDataLoader (~> 1.0)
+
+DEPENDENCIES:
+  - Colours
+  - CRToast (~> 0.0.7)
+  - FontAwesomeKit (~> 2.1.0)
+  - ImageInformationForm (from `https://github.com/forsythetony/infoForm.git`)
+  - LiveFrost
+  - pop (~> 1.0)
+  - SBJson (~> 4.0.0)
+  - XLForm (~> 1.0.0)
+
+EXTERNAL SOURCES:
+  ImageInformationForm:
+    :git: https://github.com/forsythetony/infoForm.git
+
+SPEC CHECKSUMS:
+  AFNetworking: 6d7b76aa5d04c8c37daad3eef4b7e3f2a7620da3
+  Colours: 4ad8fe1c28d4a7ad36598067e4902044d697f345
+  CRToast: f9f2c4b29776d68ba24c4d621cba59a83fea921b
+  FontAwesomeKit: af6eef70d23986349284d2feb4e959459621587d
+  ImageInformationForm: 0a0de0fd06f2d5af97b517e16c7746b2178b8eba
+  LiveFrost: 8c7e447e6833902ddc2a639faa27e71e091b5062
+  MRProgress: 0f0a200c2c211d2dfb83ac31aa2c117dca07db57
+  pop: e518794da38942c05255eb64b36d894e70cb4f00
+  SBJson: d71212c078abf4679d54b0d0565260c474e46235
+  XLDataLoader: 629d2beb074079b2352d9c7a106998df6d65639a
+  XLForm: 57e453a391473088e5296abe7d557530f52dfda8
+
+COCOAPODS: 0.33.1
