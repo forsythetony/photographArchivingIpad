@@ -37,10 +37,10 @@ PODS:
     - FontAwesomeKit/Core
   - FontAwesomeKit/Zocial (2.1.7):
     - FontAwesomeKit/Core
-  - ImageInformationForm (0.3.3):
+  - ImageInformationForm (0.3.6):
     - Colours
   - LiveFrost (1.1.2)
-  - MRProgress (0.5.0):
+  - MRProgress (0.5.1):
     - MRProgress/ActivityIndicator
     - MRProgress/Blur
     - MRProgress/Circular
@@ -51,26 +51,26 @@ PODS:
     - MRProgress/Overlay
     - MRProgress/Stopable
     - MRProgress/WeakProxy
-  - MRProgress/ActivityIndicator (0.5.0):
+  - MRProgress/ActivityIndicator (0.5.1):
     - MRProgress/Stopable
-  - MRProgress/Blur (0.5.0):
+  - MRProgress/Blur (0.5.1):
     - MRProgress/Helper
-  - MRProgress/Circular (0.5.0):
+  - MRProgress/Circular (0.5.1):
     - MRProgress/Helper
     - MRProgress/Stopable
-  - MRProgress/Helper (0.5.0)
-  - MRProgress/Icons (0.5.0)
-  - MRProgress/MessageInterceptor (0.5.0)
-  - MRProgress/NavigationBarProgress (0.5.0)
-  - MRProgress/Overlay (0.5.0):
+  - MRProgress/Helper (0.5.1)
+  - MRProgress/Icons (0.5.1)
+  - MRProgress/MessageInterceptor (0.5.1)
+  - MRProgress/NavigationBarProgress (0.5.1)
+  - MRProgress/Overlay (0.5.1):
     - MRProgress/ActivityIndicator
     - MRProgress/Blur
     - MRProgress/Circular
     - MRProgress/Helper
     - MRProgress/Icons
-  - MRProgress/Stopable (0.5.0):
+  - MRProgress/Stopable (0.5.1):
     - MRProgress/Helper
-  - MRProgress/WeakProxy (0.5.0)
+  - MRProgress/WeakProxy (0.5.1)
   - pop (1.0.6)
   - SBJson (4.0.1)
   - XLDataLoader (1.0.0):
@@ -99,9 +99,9 @@ SPEC CHECKSUMS:
   Colours: 4ad8fe1c28d4a7ad36598067e4902044d697f345
   CRToast: f9f2c4b29776d68ba24c4d621cba59a83fea921b
   FontAwesomeKit: af6eef70d23986349284d2feb4e959459621587d
-  ImageInformationForm: 0a0de0fd06f2d5af97b517e16c7746b2178b8eba
+  ImageInformationForm: bdd9164762c71b7f227ca99c2970e1ef475a81cc
   LiveFrost: 8c7e447e6833902ddc2a639faa27e71e091b5062
-  MRProgress: 0f0a200c2c211d2dfb83ac31aa2c117dca07db57
+  MRProgress: 7853c177e7d79b90e6f0910561967ebcf3289eb1
   pop: e518794da38942c05255eb64b36d894e70cb4f00
   SBJson: d71212c078abf4679d54b0d0565260c474e46235
   XLDataLoader: 629d2beb074079b2352d9c7a106998df6d65639a

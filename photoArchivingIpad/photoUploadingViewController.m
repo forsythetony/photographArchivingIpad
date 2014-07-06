@@ -16,6 +16,8 @@
     UIPopoverController *popOverController;
     TFDataCommunicator *dataCom;
     ImagePackage *currentUpload;
+    InformationForm *infoForm;
+    
     
 }
 
@@ -226,6 +228,9 @@
     // Do any additional setup after loading the view.
      
      */
+    
+    [self addImageForm];
+    
 }
 -(void)didSelectFormRow:(XLFormRowDescriptor *)formRow
 {
@@ -281,15 +286,18 @@
     return 1;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+-(void)addImageForm
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    infoForm = [[InformationForm alloc] init];
+    
+    infoForm.view.frame = _formContainerView.bounds;
+    infoForm.delegate = self;
+    
+    [_formContainerView addSubview:infoForm.view];
+    
+    [self addChildViewController:infoForm];
+    [infoForm didMoveToParentViewController:self];
+    
 }
-*/
 
 @end

@@ -114,7 +114,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" patternImage="6F0BD094-F105-4997-8733-F24980959458" colorSpace="pattern"/>
+                                        <color key="backgroundColor" patternImage="7961F7CC-3B85-4612-9618-C82C36ABF979" colorSpace="pattern"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -272,14 +272,6 @@
                                     <action selector="takeNewPhoto:" destination="4Yu-H2-63t" eventType="touchUpInside" id="yCb-Kx-NyF"/>
                                 </connections>
                             </button>
-                            <containerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p7M-DL-FqO">
-                                <rect key="frame" x="349" y="134" width="303" height="384"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <connections>
-                                    <segue destination="oGQ-hL-76j" kind="embed" id="YHf-s7-wiG"/>
-                                </connections>
-                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -301,36 +293,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JqZ-oN-JDJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1266" y="1052"/>
-        </scene>
-        <!--Information Form-->
-        <scene sceneID="YWU-Dv-AOL">
-            <objects>
-                <tableViewController id="oGQ-hL-76j" customClass="InformationForm" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="o3l-lF-cA7">
-                        <rect key="frame" x="0.0" y="0.0" width="303" height="384"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="RZ4-eP-Qzl">
-                                <rect key="frame" x="0.0" y="22" width="303" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RZ4-eP-Qzl" id="QM5-XE-uYL">
-                                    <rect key="frame" x="0.0" y="0.0" width="303" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="oGQ-hL-76j" id="FXz-zH-fFv"/>
-                            <outlet property="delegate" destination="oGQ-hL-76j" id="aIV-1P-fuc"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0SU-se-4gD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2010" y="2528"/>
+            <point key="canvasLocation" x="1280" y="1026"/>
         </scene>
         <!--Workspace View Controller-->
         <scene sceneID="38f-W1-YYl">
@@ -403,7 +366,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="6F0BD094-F105-4997-8733-F24980959458" width="320" height="460">
+        <image name="7961F7CC-3B85-4612-9618-C82C36ABF979" width="320" height="460">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

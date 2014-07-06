@@ -15,8 +15,9 @@
 #import "imageHandling.h"
 #import "ImagePackage.h"
 #import "imageInformationVC.h"
+#import <InformationForm.h>
 
-@interface photoUploadingViewController : UIViewController <TFCommunicatorDelegate, XLFormViewControllerPresenting, XLFormViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPopoverControllerDelegate>
+@interface photoUploadingViewController : UIViewController <TFCommunicatorDelegate, XLFormViewControllerPresenting, XLFormViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPopoverControllerDelegate, InformationFormDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *photoUploadsCollectionView;
 @property (weak, nonatomic) IBOutlet UIView *formContainerView;
