@@ -39,6 +39,8 @@ PODS:
     - FontAwesomeKit/Core
   - ImageInformationForm (0.3.6):
     - Colours
+  - ImageTaker (0.1.5):
+    - Colours
   - LiveFrost (1.1.2)
   - MRProgress (0.5.1):
     - MRProgress/ActivityIndicator
@@ -81,25 +83,31 @@ PODS:
     - XLDataLoader (~> 1.0)
 
 DEPENDENCIES:
-  - Colours
+  - Colours (from `https://github.com/forsythetony/Colours.git`)
   - CRToast (~> 0.0.7)
   - FontAwesomeKit (~> 2.1.0)
   - ImageInformationForm (from `https://github.com/forsythetony/infoForm.git`)
+  - ImageTaker (from `https://github.com/forsythetony/ImageTaker.git`)
   - LiveFrost
   - pop (~> 1.0)
   - SBJson (~> 4.0.0)
   - XLForm (~> 1.0.0)
 
 EXTERNAL SOURCES:
+  Colours:
+    :git: https://github.com/forsythetony/Colours.git
   ImageInformationForm:
     :git: https://github.com/forsythetony/infoForm.git
+  ImageTaker:
+    :git: https://github.com/forsythetony/ImageTaker.git
 
 SPEC CHECKSUMS:
   AFNetworking: 6d7b76aa5d04c8c37daad3eef4b7e3f2a7620da3
-  Colours: 4ad8fe1c28d4a7ad36598067e4902044d697f345
+  Colours: 0c3497cef9e3aafd07e338fb62885b1bcf57ac50
   CRToast: f9f2c4b29776d68ba24c4d621cba59a83fea921b
   FontAwesomeKit: af6eef70d23986349284d2feb4e959459621587d
   ImageInformationForm: bdd9164762c71b7f227ca99c2970e1ef475a81cc
+  ImageTaker: 05ff371f181676fe753c8acca3c3e7c622077c8a
   LiveFrost: 8c7e447e6833902ddc2a639faa27e71e091b5062
   MRProgress: 7853c177e7d79b90e6f0910561967ebcf3289eb1
   pop: e518794da38942c05255eb64b36d894e70cb4f00

@@ -1195,7 +1195,12 @@ static CGFloat (^RAD)(CGFloat) = ^CGFloat (CGFloat degree){
 	return [[self class] colorWithR:236 G:214 B:197 A:1.0];
 }
 
+#pragma mark - Personal Colors
 
++ (instancetype)tonyColor
+{
+    return [[self class] colorWithR:100 G:100 B:180 A:1.0];
+}
 #pragma mark - Private
 
 

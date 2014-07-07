@@ -501,4 +501,8 @@ typedef NS_ENUM(NSInteger, ColorComparison) {
 + (instancetype)siennaColor;
 + (instancetype)dustColor;
 
+//  Personal Colors
+
++ (instancetype)tonyColor;
+
 @end
