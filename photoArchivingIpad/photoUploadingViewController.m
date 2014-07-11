@@ -11,7 +11,6 @@
 
 @interface photoUploadingViewController () {
     NSArray *photos;
-    XLFormViewController *formView;
     UIImagePickerController *imagePicker;
     UIPopoverController *popOverController;
     TFDataCommunicator *dataCom;
@@ -38,11 +37,7 @@
     CGRect popoverContainer;
     popoverContainer.origin.x = self.view.center.x - (popOverWidth / 2.0);
     popoverContainer.origin.y = self.view.center.y - (popOverHeight / 2.0);
-    popoverContainer.size = CGSizeMake(popOverWidth, popOverHeight);
-    
-   // [popOverController presentPopoverFromRect:popoverContainer inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-    
-    
+    popoverContainer.size = CGSizeMake(popOverWidth, popOverHeight); 
 
 }
 
@@ -63,33 +58,6 @@
 }
 - (IBAction)takeNewPhoto:(id)sender {
 
-    
-    
-}
-- (IBAction)testButtonPressed:(id)sender {
-    
-    NSDictionary *dict = [formView.form httpParameters:formView];
-    
-    NSLog(@"%@", dict);
-    
-    
-}
-- (IBAction)addPhoto:(id)sender {
-    
-    NSDictionary *formValues = [formView httpParameters];
-    
-    
-    ImagePackage *newImage = [ImagePackage new];
-    
-    newImage.image_large    = _mainImageView.image;
-    newImage.title          = formValues[keyTitle];
-    newImage.dateTaken      = formValues[keyDateTaken];
-    newImage.dateUploaded   = [NSDate date];
-    newImage.contentType    = contentTypeJPEG;
-    
-    currentUpload = newImage;
-    
-    [dataCom uploadPhoto:newImage];
     
     
 }
@@ -231,12 +199,6 @@
     
     [self addImageForm];
     
-}
--(void)didSelectFormRow:(XLFormRowDescriptor *)formRow
-{
-    NSString *string = [formRow displayText];
-    
-    NSLog(@"Did select form with value %@", string);
 }
 -(void)dataSetup
 {

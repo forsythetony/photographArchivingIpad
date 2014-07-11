@@ -114,7 +114,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" patternImage="7961F7CC-3B85-4612-9618-C82C36ABF979" colorSpace="pattern"/>
+                                        <color key="backgroundColor" patternImage="BAC620BB-BA57-48A5-9F3E-89479318F113" colorSpace="pattern"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -248,9 +248,6 @@
                                 <state key="normal" title="Test Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="testButtonPressed:" destination="4Yu-H2-63t" eventType="touchUpInside" id="Nes-tt-0YP"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mwF-D4-rYq">
                                 <rect key="frame" x="370" y="70" width="95" height="30"/>
@@ -258,9 +255,6 @@
                                 <state key="normal" title="Upload Photo">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="addPhoto:" destination="4Yu-H2-63t" eventType="touchUpInside" id="Ge6-yC-vMI"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Syf-FJ-Po7">
                                 <rect key="frame" x="180" y="70" width="152" height="30"/>
@@ -277,11 +271,7 @@
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" id="oKd-9S-i67">
-                        <barButtonItem key="rightBarButtonItem" title="Take New" id="Ugg-eJ-ilg">
-                            <connections>
-                                <action selector="takePhooto:" destination="4Yu-H2-63t" id="Jjb-cQ-gaq"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Take New" id="Ugg-eJ-ilg"/>
                     </navigationItem>
                     <connections>
                         <outlet property="containerView" destination="0Jk-AE-hoN" id="68M-nN-23a"/>
@@ -366,7 +356,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="7961F7CC-3B85-4612-9618-C82C36ABF979" width="320" height="460">
+        <image name="BAC620BB-BA57-48A5-9F3E-89479318F113" width="320" height="460">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

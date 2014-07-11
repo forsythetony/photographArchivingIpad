@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <Colours.h>
-#import "uploadFormViewController.h"
 #import "TFDataCommunicator.h"
 #import "photoUploadingConstants.h"
 #import "imageHandling.h"
@@ -16,7 +15,7 @@
 #import "imageInformationVC.h"
 #import <InformationForm.h>
 
-@interface photoUploadingViewController : UIViewController <TFCommunicatorDelegate, XLFormViewControllerPresenting, XLFormViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPopoverControllerDelegate, InformationFormDelegate>
+@interface photoUploadingViewController : UIViewController <TFCommunicatorDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPopoverControllerDelegate, InformationFormDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *photoUploadsCollectionView;
 @property (weak, nonatomic) IBOutlet UIView *formContainerView;
@@ -24,6 +23,5 @@
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet UIButton *testButton;
 
-@property (strong, nonatomic) uploadFormViewController *myForm;
 
 @end
