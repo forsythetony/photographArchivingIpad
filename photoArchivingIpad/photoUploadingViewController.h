@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <Colours.h>
-#import <XLForm.h>
 #import "uploadFormViewController.h"
 #import "TFDataCommunicator.h"
 #import "photoUploadingConstants.h"

@@ -84,7 +84,6 @@
 		BABF162019526A3500FF01C0 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BABF161F19526A3500FF01C0 /* MediaPlayer.framework */; };
 		BABF16AB195339DD00FF01C0 /* photoUploadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BABF16AA195339DD00FF01C0 /* photoUploadingViewController.m */; };
 		BABF16AE19533B7C00FF01C0 /* photoUploadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BABF16AD19533B7C00FF01C0 /* photoUploadingCell.m */; };
-		BABF16B11953416700FF01C0 /* uploadFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BABF16B01953416700FF01C0 /* uploadFormViewController.m */; };
 		BABF16B4195368FE00FF01C0 /* photoUploadingConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BABF16B3195368FE00FF01C0 /* photoUploadingConstants.m */; };
 		BABF16B7195372A800FF01C0 /* ImagePackage.m in Sources */ = {isa = PBXBuildFile; fileRef = BABF16B6195372A800FF01C0 /* ImagePackage.m */; };
 		BAD16301194A581A008144A0 /* UIView+Glow.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD16300194A581A008144A0 /* UIView+Glow.m */; };
@@ -220,8 +219,6 @@
 		BABF16AA195339DD00FF01C0 /* photoUploadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = photoUploadingViewController.m; sourceTree = "<group>"; };
 		BABF16AC19533B7C00FF01C0 /* photoUploadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = photoUploadingCell.h; sourceTree = "<group>"; };
 		BABF16AD19533B7C00FF01C0 /* photoUploadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = photoUploadingCell.m; sourceTree = "<group>"; };
-		BABF16AF1953416700FF01C0 /* uploadFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uploadFormViewController.h; sourceTree = "<group>"; };
-		BABF16B01953416700FF01C0 /* uploadFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = uploadFormViewController.m; sourceTree = "<group>"; };
 		BABF16B2195368FE00FF01C0 /* photoUploadingConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = photoUploadingConstants.h; sourceTree = "<group>"; };
 		BABF16B3195368FE00FF01C0 /* photoUploadingConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = photoUploadingConstants.m; sourceTree = "<group>"; };
 		BABF16B5195372A800FF01C0 /* ImagePackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePackage.h; sourceTree = "<group>"; };
@@ -496,8 +493,6 @@
 				BABF16B3195368FE00FF01C0 /* photoUploadingConstants.m */,
 				BABF16AC19533B7C00FF01C0 /* photoUploadingCell.h */,
 				BABF16AD19533B7C00FF01C0 /* photoUploadingCell.m */,
-				BABF16AF1953416700FF01C0 /* uploadFormViewController.h */,
-				BABF16B01953416700FF01C0 /* uploadFormViewController.m */,
 			);
 			name = "Photo Uploading";
 			sourceTree = "<group>";
@@ -694,7 +689,6 @@
 				BABF16B7195372A800FF01C0 /* ImagePackage.m in Sources */,
 				BA6F5EC9194EBCE300E1E1FC /* attributesDictionaryConstants.m in Sources */,
 				BA67F20C193667140056DD00 /* WorkspaceViewController.m in Sources */,
-				BABF16B11953416700FF01C0 /* uploadFormViewController.m in Sources */,
 				BA6F5ECC194EC3D400E1E1FC /* dateInfoCell.m in Sources */,
 				BABF16AE19533B7C00FF01C0 /* photoUploadingCell.m in Sources */,
 				BAD16301194A581A008144A0 /* UIView+Glow.m in Sources */,
