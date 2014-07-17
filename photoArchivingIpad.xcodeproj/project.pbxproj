@@ -263,13 +263,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BA0F645319787BF4000588A8 /* Photo Uploading v2.0 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Photo Uploading v2.0";
-			sourceTree = "<group>";
-		};
 		BA67F19F193666200056DD00 = {
 			isa = PBXGroup;
 			children = (
@@ -313,7 +306,6 @@
 		BA67F1B1193666210056DD00 /* photoArchivingIpad */ = {
 			isa = PBXGroup;
 			children = (
-				BA0F645319787BF4000588A8 /* Photo Uploading v2.0 */,
 				BABF16A8195330CC00FF01C0 /* Photo Uploading */,
 				BA3299A11948BA430002EBFD /* TFDataCommunicator.h */,
 				BA3299A21948BA430002EBFD /* TFDataCommunicator.m */,
