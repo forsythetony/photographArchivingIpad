@@ -112,7 +112,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" patternImage="A71BE219-B3F9-49F3-B6B7-0457F12E5A2B" colorSpace="pattern"/>
+                                        <color key="backgroundColor" patternImage="B36E5010-F792-4E43-AAEA-C52E3681CA56" colorSpace="pattern"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -184,104 +184,6 @@
             </objects>
             <point key="canvasLocation" x="2542" y="16"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="hIs-Ya-CaV">
-            <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="4Yu-H2-63t" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="KyP-NE-Pst"/>
-                        <viewControllerLayoutGuide type="bottom" id="ImZ-rK-65i"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="SQV-gY-VYo">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UaS-wd-pRN">
-                                <rect key="frame" x="0.0" y="608" width="779" height="416"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="j8u-KQ-3Qh">
-                                    <size key="itemSize" width="146" height="117"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="TopLeft" reuseIdentifier="cell" id="KyT-Lj-940" customClass="photoUploadingCell">
-                                        <rect key="frame" x="0.0" y="0.0" width="146" height="117"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="146" height="117"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xyt-zj-FBW">
-                                                    <rect key="frame" x="16" y="10" width="110" height="97"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                </imageView>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <color key="backgroundColor" red="0.58846382470000003" green="0.14277563909999999" blue="0.1155509473" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <outlet property="thumbImage" destination="Xyt-zj-FBW" id="4uM-59-RIM"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
-                                <connections>
-                                    <outlet property="dataSource" destination="4Yu-H2-63t" id="LRV-KG-SWP"/>
-                                    <outlet property="delegate" destination="4Yu-H2-63t" id="iTZ-p5-CgH"/>
-                                </connections>
-                            </collectionView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xFQ-S6-AOh">
-                                <rect key="frame" x="74" y="115" width="428" height="421"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Jk-AE-hoN">
-                                <rect key="frame" x="634" y="134" width="303" height="384"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qym-Nm-wqf">
-                                <rect key="frame" x="502" y="70" width="79" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Test Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mwF-D4-rYq">
-                                <rect key="frame" x="370" y="70" width="95" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Upload Photo">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Syf-FJ-Po7">
-                                <rect key="frame" x="180" y="70" width="152" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Take New Photograph">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="takeNewPhoto:" destination="4Yu-H2-63t" eventType="touchUpInside" id="yCb-Kx-NyF"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="oKd-9S-i67">
-                        <barButtonItem key="rightBarButtonItem" title="Take New" id="Ugg-eJ-ilg"/>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="containerView" destination="0Jk-AE-hoN" id="68M-nN-23a"/>
-                        <outlet property="formContainerView" destination="0Jk-AE-hoN" id="jjf-S3-30e"/>
-                        <outlet property="mainImageView" destination="xFQ-S6-AOh" id="iaz-Ra-29X"/>
-                        <outlet property="photoUploadsCollectionView" destination="UaS-wd-pRN" id="5lI-rz-6Ah"/>
-                        <outlet property="testButton" destination="Qym-Nm-wqf" id="t3e-9N-Yof"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JqZ-oN-JDJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1280" y="1026"/>
-        </scene>
         <!--Photo Uploading View Controller-->
         <scene sceneID="DSk-Ze-mNy">
             <objects>
@@ -301,7 +203,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MV4-0x-sSw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1280" y="2028"/>
+            <point key="canvasLocation" x="1140" y="1424"/>
         </scene>
         <!--Workspace View Controller-->
         <scene sceneID="38f-W1-YYl">
@@ -374,7 +276,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="A71BE219-B3F9-49F3-B6B7-0457F12E5A2B" width="320" height="460">
+        <image name="B36E5010-F792-4E43-AAEA-C52E3681CA56" width="320" height="460">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
