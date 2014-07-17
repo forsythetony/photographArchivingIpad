@@ -114,7 +114,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" patternImage="BAC620BB-BA57-48A5-9F3E-89479318F113" colorSpace="pattern"/>
+                                        <color key="backgroundColor" patternImage="64F6BF77-1199-4630-8DE7-6B16A0CA6857" colorSpace="pattern"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -285,6 +285,26 @@
             </objects>
             <point key="canvasLocation" x="1280" y="1026"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="DSk-Ze-mNy">
+            <objects>
+                <viewController id="5rZ-fp-2J0" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ItT-oS-YAA"/>
+                        <viewControllerLayoutGuide type="bottom" id="gQ8-pq-FcU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EFU-Pm-hUJ">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MV4-0x-sSw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1280" y="2028"/>
+        </scene>
         <!--Workspace View Controller-->
         <scene sceneID="38f-W1-YYl">
             <objects>
@@ -356,7 +376,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BAC620BB-BA57-48A5-9F3E-89479318F113" width="320" height="460">
+        <image name="64F6BF77-1199-4630-8DE7-6B16A0CA6857" width="320" height="460">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

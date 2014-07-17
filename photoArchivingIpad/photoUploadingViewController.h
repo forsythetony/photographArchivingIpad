@@ -7,21 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Colours.h>
-#import "TFDataCommunicator.h"
-#import "photoUploadingConstants.h"
-#import "imageHandling.h"
-#import "ImagePackage.h"
-#import "imageInformationVC.h"
-#import <InformationForm.h>
 
-@interface photoUploadingViewController : UIViewController <TFCommunicatorDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPopoverControllerDelegate, InformationFormDelegate>
-
-@property (weak, nonatomic) IBOutlet UICollectionView *photoUploadsCollectionView;
-@property (weak, nonatomic) IBOutlet UIView *formContainerView;
-@property (weak, nonatomic) IBOutlet UIImageView *mainImageView;
-@property (weak, nonatomic) IBOutlet UIView *containerView;
-@property (weak, nonatomic) IBOutlet UIButton *testButton;
-
+@interface photoUploadingViewController : UIViewController
 
 @end
