@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "attributesDictionaryConstants.h"
+
 @interface photoUploadingViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIView *imageTakerContainer;

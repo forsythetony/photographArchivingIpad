@@ -263,6 +263,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA0F645419787FEF000588A8 /* Landing Page */ = {
+			isa = PBXGroup;
+			children = (
+				BA32997119489A730002EBFD /* landingPageViewController.h */,
+				BA32997219489A730002EBFD /* landingPageViewController.m */,
+			);
+			name = "Landing Page";
+			sourceTree = "<group>";
+		};
 		BA67F19F193666200056DD00 = {
 			isa = PBXGroup;
 			children = (
@@ -306,6 +315,7 @@
 		BA67F1B1193666210056DD00 /* photoArchivingIpad */ = {
 			isa = PBXGroup;
 			children = (
+				BA0F645419787FEF000588A8 /* Landing Page */,
 				BABF16A8195330CC00FF01C0 /* Photo Uploading */,
 				BA3299A11948BA430002EBFD /* TFDataCommunicator.h */,
 				BA3299A21948BA430002EBFD /* TFDataCommunicator.m */,
@@ -325,8 +335,6 @@
 				BA67F1B2193666210056DD00 /* Supporting Files */,
 				BA67F21A193BC4AA0056DD00 /* NSDate+timelineStuff.h */,
 				BA67F21B193BC4AA0056DD00 /* NSDate+timelineStuff.m */,
-				BA32997119489A730002EBFD /* landingPageViewController.h */,
-				BA32997219489A730002EBFD /* landingPageViewController.m */,
 				BA3299741948B91E0002EBFD /* showServerData.h */,
 				BA3299751948B91E0002EBFD /* showServerData.m */,
 				BAD162FD1949617E008144A0 /* imageHandling.h */,
