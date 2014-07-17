@@ -31,13 +31,18 @@
     return self;
 }
 
+-(void)viewDidLoad
+{
+    [self variableSetup];
+    [self initialConfiguration];
+}
 #pragma mark Custom
 -(void)initialConfiguration {
 
 //  Set up containers
     
     _imageTakerContainer.backgroundColor = imageTakerStyle[keyContainerBackgroundColor];
-    _imageInformationContainer.backgroundColor = imageTakerStyle[keyContainerBackgroundColor];
+    _imageInformationContainer.backgroundColor = imageInfoStyle[keyContainerBackgroundColor];
     
     
 }
