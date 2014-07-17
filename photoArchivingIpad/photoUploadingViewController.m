@@ -35,9 +35,9 @@
     
     
     CGRect popoverContainer;
-    popoverContainer.origin.x = self.view.center.x - (popOverWidth / 2.0);
-    popoverContainer.origin.y = self.view.center.y - (popOverHeight / 2.0);
-    popoverContainer.size = CGSizeMake(popOverWidth, popOverHeight); 
+    popoverContainer.origin.x   = self.view.center.x - (popOverWidth / 2.0);
+    popoverContainer.origin.y   = self.view.center.y - (popOverHeight / 2.0);
+    popoverContainer.size       = CGSizeMake(popOverWidth, popOverHeight);
 
 }
 
