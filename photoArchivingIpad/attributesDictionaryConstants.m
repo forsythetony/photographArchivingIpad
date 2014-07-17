@@ -10,6 +10,7 @@
 
 
 NSString * const keyBackgroundColor = @"backgroundColor";
+NSString * const keyContainerBackgroundColor = @"containerBackgroundColor";
 NSString * const keyFont = @"font";
 NSString * const keyTextColor = @"textColor";
 NSString * const keyFrame = @"frame";

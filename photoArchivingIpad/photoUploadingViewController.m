@@ -9,6 +9,8 @@
 #import "photoUploadingViewController.h"
 
 @interface photoUploadingViewController () {
+
+    NSDictionary *imageTakerStyle, *imageInfoStyle;
     
 }
 
@@ -16,5 +18,20 @@
 
 @implementation photoUploadingViewController
 
+-(void)initialConfiguration {
+    
+}
+-(void)variableSetup {
+    
+//  Container style setup
 
+    UIColor *takerContainerBackground, *informationContainerBackground;
+    
+    takerContainerBackground = [UIColor clearColor];
+    informationContainerBackground = [UIColor clearColor];
+    
+    
+    
+    
+}
 @end

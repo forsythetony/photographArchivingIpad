@@ -26,3 +26,5 @@ extern NSString * const keyTestingTextValue;
 extern NSString * const keyCornerRadius;
 extern NSString * const keyEnabledColor;
 extern NSString * const keyDisabledColor;
+
+extern NSString * const keyContainerBackgroundColor;
