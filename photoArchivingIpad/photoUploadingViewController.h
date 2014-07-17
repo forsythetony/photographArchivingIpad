@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 #import "attributesDictionaryConstants.h"
+#import "PhotoUploadManager.h"
+
 
 @interface photoUploadingViewController : UIViewController
 

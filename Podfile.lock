@@ -16,7 +16,7 @@ PODS:
     - FontAwesomeKit/Core
   - FontAwesomeKit/Zocial (2.1.7):
     - FontAwesomeKit/Core
-  - ImageInformationForm (0.3.6):
+  - ImageInformationForm (0.3.7):
     - Colours
   - ImageTaker (0.1.5):
     - Colours
@@ -46,7 +46,7 @@ SPEC CHECKSUMS:
   Colours: 0c3497cef9e3aafd07e338fb62885b1bcf57ac50
   CRToast: f9f2c4b29776d68ba24c4d621cba59a83fea921b
   FontAwesomeKit: af6eef70d23986349284d2feb4e959459621587d
-  ImageInformationForm: bdd9164762c71b7f227ca99c2970e1ef475a81cc
+  ImageInformationForm: c624fb731ae49767013ae62458a8320765d214ce
   ImageTaker: 05ff371f181676fe753c8acca3c3e7c622077c8a
   LiveFrost: 8c7e447e6833902ddc2a639faa27e71e091b5062
   pop: e518794da38942c05255eb64b36d894e70cb4f00

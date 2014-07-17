@@ -10,6 +10,7 @@
 		1338B06FDE54485BAF55439A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61ECDBD286AB45A0BA37A749 /* libPods.a */; };
 		7F03D0D3194E805C00558278 /* basicInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F03D0D2194E805C00558278 /* basicInfoCell.m */; };
 		BA0BE0B81943B3E40054F7C7 /* workspaceAuxView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0BE0B71943B3E40054F7C7 /* workspaceAuxView.m */; };
+		BA0F645719788101000588A8 /* PhotoUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0F645619788101000588A8 /* PhotoUploadManager.m */; };
 		BA32997319489A730002EBFD /* landingPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA32997219489A730002EBFD /* landingPageViewController.m */; };
 		BA3299761948B91E0002EBFD /* showServerData.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3299751948B91E0002EBFD /* showServerData.m */; };
 		BA3299A51948BA430002EBFD /* TFDataCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3299A21948BA430002EBFD /* TFDataCommunicator.m */; };
@@ -106,6 +107,8 @@
 		7F03D0D2194E805C00558278 /* basicInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = basicInfoCell.m; sourceTree = "<group>"; };
 		BA0BE0B61943B3E40054F7C7 /* workspaceAuxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = workspaceAuxView.h; sourceTree = "<group>"; };
 		BA0BE0B71943B3E40054F7C7 /* workspaceAuxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = workspaceAuxView.m; sourceTree = "<group>"; };
+		BA0F645519788101000588A8 /* PhotoUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoUploadManager.h; sourceTree = "<group>"; };
+		BA0F645619788101000588A8 /* PhotoUploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoUploadManager.m; sourceTree = "<group>"; };
 		BA32997119489A730002EBFD /* landingPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = landingPageViewController.h; sourceTree = "<group>"; };
 		BA32997219489A730002EBFD /* landingPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = landingPageViewController.m; sourceTree = "<group>"; };
 		BA3299741948B91E0002EBFD /* showServerData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = showServerData.h; sourceTree = "<group>"; };
@@ -270,6 +273,13 @@
 				BA32997219489A730002EBFD /* landingPageViewController.m */,
 			);
 			name = "Landing Page";
+			sourceTree = "<group>";
+		};
+		BA0F6465197893A7000588A8 /* v2.0 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = v2.0;
 			sourceTree = "<group>";
 		};
 		BA67F19F193666200056DD00 = {
@@ -493,6 +503,7 @@
 		BABF16A8195330CC00FF01C0 /* Photo Uploading */ = {
 			isa = PBXGroup;
 			children = (
+				BA0F6465197893A7000588A8 /* v2.0 */,
 				BABF16A9195339DD00FF01C0 /* photoUploadingViewController.h */,
 				BABF16AA195339DD00FF01C0 /* photoUploadingViewController.m */,
 				BABF16B5195372A800FF01C0 /* ImagePackage.h */,
@@ -501,6 +512,8 @@
 				BABF16B3195368FE00FF01C0 /* photoUploadingConstants.m */,
 				BABF16AC19533B7C00FF01C0 /* photoUploadingCell.h */,
 				BABF16AD19533B7C00FF01C0 /* photoUploadingCell.m */,
+				BA0F645519788101000588A8 /* PhotoUploadManager.h */,
+				BA0F645619788101000588A8 /* PhotoUploadManager.m */,
 			);
 			name = "Photo Uploading";
 			sourceTree = "<group>";
@@ -687,6 +700,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA0BE0B81943B3E40054F7C7 /* workspaceAuxView.m in Sources */,
+				BA0F645719788101000588A8 /* PhotoUploadManager.m in Sources */,
 				BA6F5EE0194EEFB200E1E1FC /* updatedConstants.m in Sources */,
 				BABF16B4195368FE00FF01C0 /* photoUploadingConstants.m in Sources */,
 				BABF1616195247FD00FF01C0 /* audioManagrer.m in Sources */,

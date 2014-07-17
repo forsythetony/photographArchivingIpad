@@ -11,7 +11,7 @@
 @interface photoUploadingViewController () {
 
     NSDictionary *imageTakerStyle, *imageInfoStyle;
-    
+    PhotoUploadManager *uploadingManager;
 }
 
 @end
@@ -35,6 +35,12 @@
 {
     [self variableSetup];
     [self initialConfiguration];
+    
+    
+    uploadingManager = [[PhotoUploadManager alloc] initWithInfoContainer:_imageInformationContainer andImageTakerContainer:_imageTakerContainer];
+    
+    
+    
 }
 #pragma mark Custom
 -(void)initialConfiguration {
