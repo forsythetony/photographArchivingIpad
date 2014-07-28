@@ -278,6 +278,10 @@
 		BA0F6465197893A7000588A8 /* v2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				BA0F645519788101000588A8 /* PhotoUploadManager.h */,
+				BA0F645619788101000588A8 /* PhotoUploadManager.m */,
+				BABF16A9195339DD00FF01C0 /* photoUploadingViewController.h */,
+				BABF16AA195339DD00FF01C0 /* photoUploadingViewController.m */,
 			);
 			name = v2.0;
 			sourceTree = "<group>";
@@ -504,16 +508,12 @@
 			isa = PBXGroup;
 			children = (
 				BA0F6465197893A7000588A8 /* v2.0 */,
-				BABF16A9195339DD00FF01C0 /* photoUploadingViewController.h */,
-				BABF16AA195339DD00FF01C0 /* photoUploadingViewController.m */,
 				BABF16B5195372A800FF01C0 /* ImagePackage.h */,
 				BABF16B6195372A800FF01C0 /* ImagePackage.m */,
 				BABF16B2195368FE00FF01C0 /* photoUploadingConstants.h */,
 				BABF16B3195368FE00FF01C0 /* photoUploadingConstants.m */,
 				BABF16AC19533B7C00FF01C0 /* photoUploadingCell.h */,
 				BABF16AD19533B7C00FF01C0 /* photoUploadingCell.m */,
-				BA0F645519788101000588A8 /* PhotoUploadManager.h */,
-				BA0F645619788101000588A8 /* PhotoUploadManager.m */,
 			);
 			name = "Photo Uploading";
 			sourceTree = "<group>";
