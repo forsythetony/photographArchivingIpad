@@ -14,7 +14,4 @@
 
 @interface photoUploadingViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UIView *imageTakerContainer;
-@property (weak, nonatomic) IBOutlet UIView *imageInformationContainer;
-
 @end
