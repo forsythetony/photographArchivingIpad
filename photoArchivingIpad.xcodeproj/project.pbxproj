@@ -11,6 +11,7 @@
 		7F03D0D3194E805C00558278 /* basicInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F03D0D2194E805C00558278 /* basicInfoCell.m */; };
 		BA0BE0B81943B3E40054F7C7 /* workspaceAuxView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0BE0B71943B3E40054F7C7 /* workspaceAuxView.m */; };
 		BA0F645719788101000588A8 /* PhotoUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0F645619788101000588A8 /* PhotoUploadManager.m */; };
+		BA1194B61990B4F60032DEC6 /* PreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1194B51990B4F60032DEC6 /* PreviewView.m */; };
 		BA32997319489A730002EBFD /* landingPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA32997219489A730002EBFD /* landingPageViewController.m */; };
 		BA3299761948B91E0002EBFD /* showServerData.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3299751948B91E0002EBFD /* showServerData.m */; };
 		BA3299A51948BA430002EBFD /* TFDataCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3299A21948BA430002EBFD /* TFDataCommunicator.m */; };
@@ -109,6 +110,8 @@
 		BA0BE0B71943B3E40054F7C7 /* workspaceAuxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = workspaceAuxView.m; sourceTree = "<group>"; };
 		BA0F645519788101000588A8 /* PhotoUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoUploadManager.h; sourceTree = "<group>"; };
 		BA0F645619788101000588A8 /* PhotoUploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoUploadManager.m; sourceTree = "<group>"; };
+		BA1194B41990B4F60032DEC6 /* PreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewView.h; sourceTree = "<group>"; };
+		BA1194B51990B4F60032DEC6 /* PreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewView.m; sourceTree = "<group>"; };
 		BA32997119489A730002EBFD /* landingPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = landingPageViewController.h; sourceTree = "<group>"; };
 		BA32997219489A730002EBFD /* landingPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = landingPageViewController.m; sourceTree = "<group>"; };
 		BA3299741948B91E0002EBFD /* showServerData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = showServerData.h; sourceTree = "<group>"; };
@@ -507,6 +510,8 @@
 		BABF16A8195330CC00FF01C0 /* Photo Uploading */ = {
 			isa = PBXGroup;
 			children = (
+				BA1194B41990B4F60032DEC6 /* PreviewView.h */,
+				BA1194B51990B4F60032DEC6 /* PreviewView.m */,
 				BA0F6465197893A7000588A8 /* v2.0 */,
 				BABF16B5195372A800FF01C0 /* ImagePackage.h */,
 				BABF16B6195372A800FF01C0 /* ImagePackage.m */,
@@ -727,6 +732,7 @@
 				BA6F5ED1194EC66400E1E1FC /* UIColor+testingColors.m in Sources */,
 				BA9531B7194E4E2B005E0F10 /* imageInformationVC.m in Sources */,
 				BA67F1B8193666210056DD00 /* main.m in Sources */,
+				BA1194B61990B4F60032DEC6 /* PreviewView.m in Sources */,
 				BA6F5EDA194ED05700E1E1FC /* attributesDictionary.m in Sources */,
 				BA67F209193667140056DD00 /* dummyDataProvider.m in Sources */,
 				BA89B37F195B29E700DA0FCC /* imageInformationConstants.m in Sources */,

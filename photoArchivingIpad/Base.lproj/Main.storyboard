@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="aio-EE-f8L">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="aio-EE-f8L">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -46,7 +46,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="5rZ-fp-2J0" kind="push" id="La7-PU-Abs"/>
+                                    <segue destination="5rZ-fp-2J0" kind="push" identifier="segue_uploader" id="La7-PU-Abs"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -114,7 +114,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" patternImage="776BC592-AAB9-4C35-9277-80790847A707" colorSpace="pattern"/>
+                                        <color key="backgroundColor" patternImage="8007D02B-CAEB-47F6-B8D8-3725C3372DF7" colorSpace="pattern"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -198,15 +198,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gJR-Kf-Gny">
-                                <rect key="frame" x="505" y="115" width="427" height="455"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n0z-hb-YCX" customClass="PreviewView">
+                                <rect key="frame" x="203" y="166" width="387" height="387"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="53B-Qo-QCB">
-                                <rect key="frame" x="20" y="135" width="421" height="426"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BQb-Cd-xaU">
+                                        <rect key="frame" x="158" y="227" width="55" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Capture">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="snapStillImage:" destination="5rZ-fp-2J0" eventType="touchUpInside" id="Y6x-p4-JPo"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="b4g-wx-TrY" appends="YES" id="nxD-FW-2DB"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -215,11 +226,16 @@
                     <navigationItem key="navigationItem" id="cGh-9a-YHZ"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
-                        <outlet property="imageInformationContainer" destination="gJR-Kf-Gny" id="41L-lP-HCG"/>
-                        <outlet property="imageTakerContainer" destination="53B-Qo-QCB" id="Xds-Kz-TEP"/>
+                        <outlet property="previewView" destination="n0z-hb-YCX" id="c4K-68-sg9"/>
+                        <outlet property="stillButton" destination="BQb-Cd-xaU" id="beg-Sa-fkc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MV4-0x-sSw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="b4g-wx-TrY">
+                    <connections>
+                        <action selector="focusAndExposeTap:" destination="5rZ-fp-2J0" id="Pts-Dg-zmM"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1140" y="1424"/>
         </scene>
@@ -294,7 +310,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="776BC592-AAB9-4C35-9277-80790847A707" width="320" height="460">
+        <image name="8007D02B-CAEB-47F6-B8D8-3725C3372DF7" width="320" height="460">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
