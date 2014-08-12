@@ -10,9 +10,10 @@
 
 #import <AVFoundation/AVFoundation.h>
 
-#import "Story.h"
+#import <ImageInformationForm/Story.h>
 #import "TFDataCommunicator.h"
 #import "NSMutableDictionary+attributesDictionary.h"
+#import "Story+StoryHelpers.h"
 
 
 
@@ -124,6 +125,14 @@
     
     saveButton.titleLabel.font = [buttonStyle objectForConstKey:keyFont];
     saveButton.titleLabel.textColor = [buttonStyle objectForConstKey:keyTextColor];
+    
+    titleValue.autocapitalizationType = UITextAutocapitalizationTypeWords;
+    titleValue.inputAccessoryView = [self createInputAccessoryView];
+    [titleValue setDelegate:self];
+    
+    storytellerValue.autocapitalizationType = UITextAutocapitalizationTypeWords;
+    [storytellerValue setDelegate:self];
+    
 }
 -(void)audioPlayerSetup
 {
@@ -171,6 +180,7 @@
     newStory.storyDate = datePickerView.date;
     newStory.recordingS3Url = _s3URL;
     newStory.recordingLength = [NSNumber numberWithInteger:totalTimeInMilliseconds];
+    [newStory setRandomId];
     
     [self.delegate didSaveStory:newStory];
     
@@ -249,7 +259,8 @@
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     [audioSession setActive:NO error:nil];
     
-    [mainCom uploadAudioFileWithUrl:recorder.url];
+    
+    [mainCom uploadAudioFileWithUrl:recorder.url andKey:[[NSDate date] displayDateOfType:sdatetypeURL]];
     [saveButton startUploading];
     
 }
@@ -345,5 +356,64 @@
     totalTimeInMilliseconds++;
     
     [timeLabel setText:[NSString stringWithFormat:@"%d.%3d", recordingSeconds, recordingMilliseconds]];
+}
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    
+}
+-(UIView*)createInputAccessoryView
+{
+    UIView *inputView;
+    
+    //  Sizes
+    
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    
+    CGRect inputViewRect;
+    
+    CGFloat inputViewHeight = 40.0;
+    CGFloat inputViewWidth = screenRect.size.width;
+    
+    inputViewRect.size.height = inputViewHeight;
+    inputViewRect.size.width = inputViewWidth;
+    inputViewRect.origin = CGPointMake(0.0, 0.0);
+    
+    //  Initialize View
+    
+    inputView = [[UIView alloc] initWithFrame:inputViewRect];
+    
+    //  Configure View
+    
+    [inputView setBackgroundColor:[UIColor whiteColor]];
+    
+    //  Add buttons
+    
+    CGFloat buttonHeight = inputViewHeight * 0.75;
+    CGFloat buttonWidth = 50.0;
+    
+    CGRect nextButtonRect;
+    
+    nextButtonRect.origin.x = 10.0;
+    nextButtonRect.origin.y = 0.0;//(inputViewHeight / 2.0) - (buttonHeight / 2.0);
+    nextButtonRect.size.width = buttonWidth;
+    nextButtonRect.size.height = buttonHeight;
+    
+    UIButton *nextButton = [[UIButton alloc] initWithFrame:nextButtonRect];
+    
+    [nextButton setTitle:@"Next" forState:UIControlStateNormal];
+    [nextButton setBackgroundColor:[UIColor yellowColor]];
+    [nextButton addTarget:self action:@selector(nextButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    //  Add Buttons to inputview
+    
+    [inputView addSubview:nextButton];
+    
+    return inputView;
+    
+}
+-(void)nextButton:(id) sender
+{
+    
 }
 @end

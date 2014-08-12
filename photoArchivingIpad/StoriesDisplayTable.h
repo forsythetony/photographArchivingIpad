@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "StoryCellTableViewCell.h"
-#import "imageObject.h"
+#import <ImageInformationForm/imageObject.h>
+
 #import "ImageInformationDisplayer.h"
 
 @interface StoriesDisplayTable : UIViewController

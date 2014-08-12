@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "imageObject.h"
-#import "Story.h"
+#import <ImageInformationForm/ImageObject.h>
+#import <ImageInformationForm/Story.h>
 #import "StoryRecordingMeter.h"
 #import "UploadingButton.h"
 

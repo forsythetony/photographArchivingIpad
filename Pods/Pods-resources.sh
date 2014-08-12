@@ -47,6 +47,7 @@ install_resource "FontAwesomeKit/FontAwesomeKit/ionicons.ttf"
 install_resource "FontAwesomeKit/FontAwesomeKit/zocial-regular-webfont.ttf"
 install_resource "ImageInformationForm/imageFormPod/FormClasses/Cells/BasicCell.xib"
 install_resource "ImageInformationForm/imageFormPod/FormClasses/Cells/DateCell.xib"
+install_resource "ImageInformationForm/imageFormPod/FormClasses/Cells/SliderCell.xib"
 install_resource "ImageInformationForm/imageFormPod/FormClasses/PopOverDateViewController.xib"
 install_resource "ImageInformationForm/imageFormPod/FormClasses/TextViewCell.xib"
 

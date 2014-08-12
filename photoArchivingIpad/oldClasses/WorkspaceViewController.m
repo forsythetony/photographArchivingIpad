@@ -13,7 +13,7 @@
 #define TLWALLSPACING 100.0
 #define MAINSCROLLVIEWSIZE 4000.0
 
-@interface WorkspaceViewController () <StoryTellerCreationFormDelegate> {
+@interface WorkspaceViewController () <StoryTellerCreationFormDelegate, UIAlertViewDelegate> {
     
     float   TLSpacing;
     
@@ -53,11 +53,19 @@
 @implementation WorkspaceViewController
 @synthesize timelineDateRange;
 
+-(void)finishedAddingStory
+{
+    UIAlertView *storyAddedAlert = [[UIAlertView alloc] initWithTitle:@"Story Added!" message:@"The story has been added to the image" delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    
+    [storyAddedAlert show];
+    
+}
 -(void)didSaveStory:(Story *)aStory
 {
     [_displayImageInformation addStory:aStory];
     
     [_infPager updateImageInformation:_displayImageInformation];
+    [mainDataCom addStoryToImage:aStory imageObject:_displayImageInformation];
     
     [storyAddPopover dismissPopoverAnimated:YES];
 }
@@ -87,16 +95,7 @@
         [self createScrollView];
         [self createAuxViews];
 
-        
-        if (useDummyData == NO) {
-            
-            [mainDataCom getDummyData];
-        }
-        else
-        {
-            [self dummyDataGenerator];
-        }
-        
+        [mainDataCom getPhotosForUser:@"forsytheTony"];
         shouldLoadAgain = NO;
     }
     
@@ -164,6 +163,27 @@
             
             NSString *recordingURL = dict[@"recordingURL"];
             
+            NSArray *storiesArray = dict[jsonKeyStories];
+            
+            if (storiesArray) {
+                
+                NSMutableArray *storiesArr = [NSMutableArray new];
+                
+                for (NSDictionary *storyDictionary in storiesArray) {
+                
+                    Story *newStory = [Story new];
+                    
+                    newStory.title = storyDictionary[jsonKeyStories_title];
+                    
+                    newStory.storyTeller = storyDictionary[jsonKeyStories_StoryTeller];
+                    newStory.recordingS3Url = [NSURL URLWithString:storyDictionary[jsonKeyStories_RecordingURL]];
+                    newStory.storyDate = [NSDate dateWithv1String:storyDictionary[jsonKeyStories_Date]];
+                    newStory.stringId = storyDictionary[jsonKeyStories_stringID];
+                    
+                    [storiesArr addObject:newStory];
+                }
+                obj.stories = [NSArray arrayWithArray:storiesArr];
+            }
             if (recordingURL) {
                 obj.recordingURL = [NSURL URLWithString:recordingURL];
             }

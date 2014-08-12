@@ -10,6 +10,7 @@
 
 #import "updatedConstants.h"
 #import "TFDataCommunicator+Helpers.h"
+#import "Story+StoryHelpers.h"
 
 @interface TFDataCommunicator ()
 
@@ -490,9 +491,9 @@
         
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
         
-        
-        
-        [self.delegate finishedPullingPhotoList:nil];
+        if (httpResponse.statusCode == 200) {
+            [self parsePhotosFromData:data];
+        }
         
     }];
 }
@@ -597,14 +598,14 @@
     [self.delegate finishedUploadingRequestWithData:@{keyImageURL: request.url}];
 };
 
--(void)uploadAudioFileWithUrl:(NSURL *)url
+-(void)uploadAudioFileWithUrl:(NSURL *)url andKey:(NSString *)uniqueKey
 {
     if (self.fileUpload == nil || (self.fileUpload.isFinished && !self.fileUpload.isPaused)) {
         
         NSData* audioData = [NSData dataWithContentsOfURL:url];
         
         
-        NSString *audioFile = [NSString stringWithFormat:@"%@/%@/%@%@", @"forsytheTony", @"audio", @"testFile", @".m4a"];
+        NSString *audioFile = [NSString stringWithFormat:@"%@/%@/%@%@%@", @"forsytheTony", @"audio", @"recording_", uniqueKey, @".m4a"];
         
         S3PutObjectRequest* req = [[S3PutObjectRequest alloc] initWithKey:audioFile inBucket:[updatedConstants transferManagerBucket]];
         req.data = audioData;
@@ -675,6 +676,57 @@
     [outputStream close];
     
 }
+-(void)addStoryToImage:(Story *)aStory imageObject:(imageObject *)theImage
+{
+    
+    NSString        *urlString  = [NSString stringWithFormat:@"%@%@/%@%@", (USELOCALHOST ? api_localhostBaseURL : api_ec2BaseURL), api_photosEndpoint, theImage.id, APIAddStoryURLParam];
+    
+    NSURL           *urlObject  = [NSURL URLWithString:urlString];
+    
+    
+    
+    NSError *err;
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:[aStory convertToDictionary] options:NSJSONWritingPrettyPrinted error:&err];
+    
+    
+    NSMutableURLRequest *mutableReq = [[NSMutableURLRequest alloc] initWithURL:urlObject];
 
+    mutableReq.HTTPBody = postData;
+    mutableReq.HTTPMethod = @"PUT";
+    [mutableReq setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
+    
+    [NSURLConnection sendAsynchronousRequest:mutableReq queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        
+        if (httpResponse.statusCode == 201) {
+            
+            
+            
+        }
+    }];
+}
+-(void)removeStoryFromImage:(imageObject *)theImage withStoryID:(NSString *)storyID
+{
+    NSString        *urlString  = [NSString stringWithFormat:@"%@%@/%@%@%@", (USELOCALHOST ? api_localhostBaseURL : api_ec2BaseURL), api_photosEndpoint, theImage.id, APIDeleteStoryWithID, storyID];
+    
+    NSURL           *urlObject  = [NSURL URLWithString:urlString];
+    
+    NSMutableURLRequest *mutableReq = [[NSMutableURLRequest alloc] initWithURL:urlObject];
+    
+    mutableReq.HTTPMethod = @"GET";
+    [mutableReq setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
+    
+    [NSURLConnection sendAsynchronousRequest:mutableReq queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+    
+        [self.delegate finishedDeletingStoryWithStatusCode:httpResponse.statusCode];
+    }];
+}
 
 @end

@@ -151,7 +151,7 @@
     
     double pointAsPureDate = thePoint * modifier;
     
-    pointAsPureDate *= (double)1.052;
+    //pointAsPureDate *= (double)1.052;
     
     NSDate *newDate = [NSDate dateWithTimeInterval:pointAsPureDate sinceDate:_startDate];
     

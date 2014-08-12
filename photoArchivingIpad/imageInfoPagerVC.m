@@ -8,6 +8,7 @@
 
 #import "imageInfoPagerVC.h"
 #import "ImageInformationDisplayer.h"
+#import <InformationForm.h>
 
 @interface imageInfoPagerVC ()
 
@@ -53,22 +54,25 @@
 {
     NSMutableArray *VCs = [NSMutableArray new];
     
-    imageInformationVC* imageInfo = [imageInformationVC new];
-
-    imageInfo.view.frame = self.view.frame;
-    imageInfo.view.alpha = 0.0;
+    InformationForm *infoForm = [InformationForm new];
     
+    infoForm.view.frame = self.view.frame;
+    
+
     StoriesDisplayTable *stories = [StoriesDisplayTable new];
     
     stories.view.frame = self.view.frame;
     
-    
-    [VCs addObject:imageInfo];
-    [VCs addObject:stories];
-    
+
+    [VCs addObject:infoForm];
+    [VCs addObject:stories];    
     NSArray *viewControllers = [NSArray arrayWithArray:VCs];
     
     _pageVCs = viewControllers;
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+
 }
 /*
 #pragma mark - Navigation
@@ -83,9 +87,18 @@
 -(void)updateImageInformation:(imageObject *)theImage
 {
     for (NSUInteger i = 0 ; i < [_pageVCs count]; i++) {
-        [[_pageVCs objectAtIndex:i] updateInformationForImage:theImage];
+        
+        if (![[_pageVCs objectAtIndex:i] isKindOfClass:[InformationForm class]]) {
+            [[_pageVCs objectAtIndex:i] updateInformationForImage:theImage];
+        }
+        else
+        {
+            [[_pageVCs objectAtIndex:i] updateFormWithInformation:theImage];
+        }
         
     }
+    
+    
 }
 -(UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {

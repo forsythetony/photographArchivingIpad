@@ -17,7 +17,7 @@
 #import <FontAwesomeKit.h>
 #import "UIView+Glow.h"
 
-#import "imageObject.h"
+#import <ImageInformationForm/ImageObject.h>
 #import "pictureFrame.h"
 
 #endif

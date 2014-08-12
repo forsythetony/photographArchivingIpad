@@ -10,7 +10,8 @@
 #import "NSDate+timelineStuff.h"
 #import "UIImage+imageAdditions.h"
 #import "photoUploadingConstants.h"
-#import "imageObject.h"
+#import <ImageInformationForm/imageObject.h>
+
 
 @interface ImagePackage : NSObject
 

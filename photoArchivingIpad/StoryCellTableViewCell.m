@@ -27,8 +27,12 @@
 @end
 @implementation StoryCellTableViewCell
 
-@synthesize titleLabel, PlayButton, StopButton, timeView, dateLabel;
+@synthesize titleLabel, PlayButton, StopButton, timeView, dateLabel, deleteButton;
 
+- (IBAction)deleteMe:(id)sender {
+    
+    [self.delegate deleteMePlease:self];
+}
 +(id)createCell
 {
     StoryCellTableViewCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"StoryCellTableViewCell"
@@ -86,11 +90,15 @@
     
     [StopButton setImage:buttonStyle[@"stopButton"] forState:UIControlStateNormal];
     
+    [deleteButton setImage:buttonStyle[@"trashButton"] forState:UIControlStateNormal];
+    [deleteButton setTintColor:[UIColor dangerColor]];
+    
     dateLabel.font = [dateStyle objectForConstKey:keyFont];
     dateLabel.textColor = [dateStyle objectForKeyedSubscript:keyTextColor];
     dateLabel.textAlignment = [[dateStyle objectForConstKey:keytextAlignment] integerValue];
     dateLabel.alpha = [[dateStyle objectForConstKey:keyAlpha] floatValue];
     
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
 //    
 //    titleLabel.font = titleStyle[keyFont];
 //    
@@ -205,7 +213,7 @@
     NSString *fontName = global_font_family;
     
     UIFont *titleFont = [UIFont fontWithName:fontName size:titleFontSize];
-    UIColor *titleFontColor = [UIColor black25PercentColor];
+    UIColor *titleFontColor = [UIColor whiteColor];
     
     UIFont *titlePlaceholderFont = [UIFont fontWithName:fontName size:(titleFontSize - 2.0)];
     UIColor *titlePlaceholderColor = [UIColor icebergColor];
@@ -278,9 +286,11 @@
     
     
     [buttonStyle updateValues:@[[self playButtonImageForSize:buttonSize],
-                                [self pauseButtonForSize:buttonSize]]
+                                [self pauseButtonForSize:buttonSize],
+                                [self trashIconForSize:buttonSize]]
                       forKeys:@[@"playButton",
-                                @"stopButton"]];
+                                @"stopButton",
+                                @"trashButton"]];
     
     [dateStyle updateValues:@[dateLabelFont,
                              dateTextColor,
@@ -298,7 +308,7 @@
     
     FAKFoundationIcons *playIcon = [FAKFoundationIcons playIconWithSize:size];
     
-    [playIcon setAttributes:@{NSForegroundColorAttributeName: [UIColor icebergColor]}];
+    [playIcon setAttributes:@{NSForegroundColorAttributeName: [UIColor successColor]}];
     
     return [playIcon imageWithSize:sizeSize];
 }
@@ -307,9 +317,19 @@
     CGSize sizeSize = CGSizeMake(size, size);
     
     FAKFoundationIcons *stopIcon = [FAKFoundationIcons stopIconWithSize:size];
-    [stopIcon setAttributes:@{NSForegroundColorAttributeName: [UIColor icebergColor]}];
+    [stopIcon setAttributes:@{NSForegroundColorAttributeName: [UIColor dangerColor]}];
     
     return [stopIcon imageWithSize:sizeSize];
+}
+-(UIImage*)trashIconForSize:(CGFloat) size
+{
+    CGSize sizeSize = CGSizeMake(size, size);
+    
+    FAKFoundationIcons *trashIcon = [FAKFoundationIcons trashIconWithSize:size];
+    [trashIcon setAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    
+    return [trashIcon imageWithSize:sizeSize];
+
 }
 
 @end

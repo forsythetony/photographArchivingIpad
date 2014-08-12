@@ -7,13 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Story.h"
+#import <ImageInformationForm/Story.h>
+
 #import <AVFoundation/AVFoundation.h>
 #import <AVFoundation/AVAudioPlayer.h>
+@class StoryCellTableViewCell;
 
+@protocol StoryCellDelegate <NSObject>
+
+-(void)deleteMePlease:(StoryCellTableViewCell*) me;
+
+
+@end
 
 
 @interface StoryCellTableViewCell : UITableViewCell
+
+@property (weak, nonatomic) id <StoryCellDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+
 @property (weak, nonatomic) IBOutlet UIButton *StopButton;
 @property (weak, nonatomic) IBOutlet UIButton *PlayButton;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;

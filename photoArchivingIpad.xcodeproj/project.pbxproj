@@ -20,7 +20,6 @@
 		BA3299AA1948DF430002EBFD /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA3299A91948DF430002EBFD /* ImageIO.framework */; };
 		BA365A88199649B8008E6975 /* StoryCreationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA365A87199649B8008E6975 /* StoryCreationViewController.m */; };
 		BA365A8A19964C43008E6975 /* AddStoryForm.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA365A8919964C43008E6975 /* AddStoryForm.xib */; };
-		BA365A8F19968D7B008E6975 /* Story.m in Sources */ = {isa = PBXBuildFile; fileRef = BA365A8E19968D7B008E6975 /* Story.m */; };
 		BA365A9319969545008E6975 /* StoryCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA365A9119969545008E6975 /* StoryCellTableViewCell.m */; };
 		BA365A9419969545008E6975 /* StoryCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA365A9219969545008E6975 /* StoryCellTableViewCell.xib */; };
 		BA365A9D1996B79E008E6975 /* TFDataCommunicator+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = BA365A9C1996B79E008E6975 /* TFDataCommunicator+Helpers.m */; };
@@ -32,6 +31,8 @@
 		BA66942D19999CA300412313 /* StoriesDisplayTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA66942B19999CA300412313 /* StoriesDisplayTable.xib */; };
 		BA6694311999C72400412313 /* dummy2.json in Resources */ = {isa = PBXBuildFile; fileRef = BA6694301999C72400412313 /* dummy2.json */; };
 		BA6694341999CAFF00412313 /* DateRange.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6694331999CAFF00412313 /* DateRange.m */; };
+		BA6694371999E10200412313 /* InformationForm+InformationFormAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6694361999E10200412313 /* InformationForm+InformationFormAdditions.m */; };
+		BA669456199A1C1300412313 /* Story+StoryHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = BA669455199A1C1300412313 /* Story+StoryHelpers.m */; };
 		BA67F1AC193666210056DD00 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA67F1AB193666210056DD00 /* Foundation.framework */; };
 		BA67F1AE193666210056DD00 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA67F1AD193666210056DD00 /* CoreGraphics.framework */; };
 		BA67F1B0193666210056DD00 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA67F1AF193666210056DD00 /* UIKit.framework */; };
@@ -61,7 +62,6 @@
 		BA67F207193667140056DD00 /* tweed.png in Resources */ = {isa = PBXBuildFile; fileRef = BA67F1F0193667140056DD00 /* tweed.png */; };
 		BA67F208193667140056DD00 /* tweed_@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = BA67F1F1193667140056DD00 /* tweed_@2X.png */; };
 		BA67F209193667140056DD00 /* dummyDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = BA67F1F4193667140056DD00 /* dummyDataProvider.m */; };
-		BA67F20A193667140056DD00 /* imageObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BA67F1F6193667140056DD00 /* imageObject.m */; };
 		BA67F20B193667140056DD00 /* pictureFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = BA67F1F8193667140056DD00 /* pictureFrame.m */; };
 		BA67F20C193667140056DD00 /* WorkspaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA67F1FA193667140056DD00 /* WorkspaceViewController.m */; };
 		BA67F20E193667460056DD00 /* testing.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA67F20D193667460056DD00 /* testing.xib */; };
@@ -139,8 +139,6 @@
 		BA365A86199649B8008E6975 /* StoryCreationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryCreationViewController.h; sourceTree = "<group>"; };
 		BA365A87199649B8008E6975 /* StoryCreationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryCreationViewController.m; sourceTree = "<group>"; };
 		BA365A8919964C43008E6975 /* AddStoryForm.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddStoryForm.xib; path = oldClasses/AddStoryForm.xib; sourceTree = "<group>"; };
-		BA365A8D19968D7B008E6975 /* Story.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Story.h; sourceTree = "<group>"; };
-		BA365A8E19968D7B008E6975 /* Story.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Story.m; sourceTree = "<group>"; };
 		BA365A9019969545008E6975 /* StoryCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryCellTableViewCell.h; sourceTree = "<group>"; };
 		BA365A9119969545008E6975 /* StoryCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryCellTableViewCell.m; sourceTree = "<group>"; };
 		BA365A9219969545008E6975 /* StoryCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoryCellTableViewCell.xib; sourceTree = "<group>"; };
@@ -159,6 +157,10 @@
 		BA6694301999C72400412313 /* dummy2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dummy2.json; sourceTree = "<group>"; };
 		BA6694321999CAFF00412313 /* DateRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateRange.h; sourceTree = "<group>"; };
 		BA6694331999CAFF00412313 /* DateRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateRange.m; sourceTree = "<group>"; };
+		BA6694351999E10200412313 /* InformationForm+InformationFormAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "InformationForm+InformationFormAdditions.h"; sourceTree = "<group>"; };
+		BA6694361999E10200412313 /* InformationForm+InformationFormAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "InformationForm+InformationFormAdditions.m"; sourceTree = "<group>"; };
+		BA669454199A1C1300412313 /* Story+StoryHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Story+StoryHelpers.h"; sourceTree = "<group>"; };
+		BA669455199A1C1300412313 /* Story+StoryHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Story+StoryHelpers.m"; sourceTree = "<group>"; };
 		BA67F1A8193666210056DD00 /* photoArchivingIpad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photoArchivingIpad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA67F1AB193666210056DD00 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BA67F1AD193666210056DD00 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -194,8 +196,6 @@
 		BA67F1F1193667140056DD00 /* tweed_@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tweed_@2X.png"; sourceTree = "<group>"; };
 		BA67F1F3193667140056DD00 /* dummyDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dummyDataProvider.h; sourceTree = "<group>"; };
 		BA67F1F4193667140056DD00 /* dummyDataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dummyDataProvider.m; sourceTree = "<group>"; };
-		BA67F1F5193667140056DD00 /* imageObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imageObject.h; sourceTree = "<group>"; };
-		BA67F1F6193667140056DD00 /* imageObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = imageObject.m; sourceTree = "<group>"; };
 		BA67F1F7193667140056DD00 /* pictureFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pictureFrame.h; sourceTree = "<group>"; };
 		BA67F1F8193667140056DD00 /* pictureFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pictureFrame.m; sourceTree = "<group>"; };
 		BA67F1F9193667140056DD00 /* WorkspaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkspaceViewController.h; sourceTree = "<group>"; };
@@ -332,8 +332,6 @@
 				BA365A86199649B8008E6975 /* StoryCreationViewController.h */,
 				BA365A87199649B8008E6975 /* StoryCreationViewController.m */,
 				BA365A8919964C43008E6975 /* AddStoryForm.xib */,
-				BA365A8D19968D7B008E6975 /* Story.h */,
-				BA365A8E19968D7B008E6975 /* Story.m */,
 				BA365AA519996992008E6975 /* StoryRecordingMeter.h */,
 				BA365AA619996992008E6975 /* StoryRecordingMeter.m */,
 				BA365AAB19998DF9008E6975 /* UploadingButton.h */,
@@ -351,6 +349,8 @@
 				BA365A9019969545008E6975 /* StoryCellTableViewCell.h */,
 				BA365A9119969545008E6975 /* StoryCellTableViewCell.m */,
 				BA365A9219969545008E6975 /* StoryCellTableViewCell.xib */,
+				BA6694351999E10200412313 /* InformationForm+InformationFormAdditions.h */,
+				BA6694361999E10200412313 /* InformationForm+InformationFormAdditions.m */,
 			);
 			name = Stories;
 			sourceTree = "<group>";
@@ -402,6 +402,8 @@
 				BABF16A8195330CC00FF01C0 /* Photo Uploading */,
 				BA3299A11948BA430002EBFD /* TFDataCommunicator.h */,
 				BA3299A21948BA430002EBFD /* TFDataCommunicator.m */,
+				BA669454199A1C1300412313 /* Story+StoryHelpers.h */,
+				BA669455199A1C1300412313 /* Story+StoryHelpers.m */,
 				BA365AA21996BBA4008E6975 /* dummyData.json */,
 				BA6694301999C72400412313 /* dummy2.json */,
 				BA365A9B1996B79E008E6975 /* TFDataCommunicator+Helpers.h */,
@@ -535,8 +537,6 @@
 				BA0BE0B71943B3E40054F7C7 /* workspaceAuxView.m */,
 				BA67F1F3193667140056DD00 /* dummyDataProvider.h */,
 				BA67F1F4193667140056DD00 /* dummyDataProvider.m */,
-				BA67F1F5193667140056DD00 /* imageObject.h */,
-				BA67F1F6193667140056DD00 /* imageObject.m */,
 				BA67F20D193667460056DD00 /* testing.xib */,
 				BA67F1F7193667140056DD00 /* pictureFrame.h */,
 				BA67F1F8193667140056DD00 /* pictureFrame.m */,
@@ -786,7 +786,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA365A8F19968D7B008E6975 /* Story.m in Sources */,
 				BA0BE0B81943B3E40054F7C7 /* workspaceAuxView.m in Sources */,
 				BA0F645719788101000588A8 /* PhotoUploadManager.m in Sources */,
 				BA6F5EE0194EEFB200E1E1FC /* updatedConstants.m in Sources */,
@@ -805,7 +804,7 @@
 				BABF16AE19533B7C00FF01C0 /* photoUploadingCell.m in Sources */,
 				BAD16301194A581A008144A0 /* UIView+Glow.m in Sources */,
 				BA67F20B193667140056DD00 /* pictureFrame.m in Sources */,
-				BA67F20A193667140056DD00 /* imageObject.m in Sources */,
+				BA6694371999E10200412313 /* InformationForm+InformationFormAdditions.m in Sources */,
 				BA67F1C2193666210056DD00 /* ViewController.m in Sources */,
 				BA9531BB194E51BB005E0F10 /* socialInformationVC.m in Sources */,
 				BA9531AD194E2CC6005E0F10 /* pagerInformationVC.m in Sources */,
@@ -814,6 +813,7 @@
 				BA32997319489A730002EBFD /* landingPageViewController.m in Sources */,
 				BA6F5EDD194ED5B100E1E1FC /* NSMutableDictionary+attributesDictionary.m in Sources */,
 				BA3299761948B91E0002EBFD /* showServerData.m in Sources */,
+				BA669456199A1C1300412313 /* Story+StoryHelpers.m in Sources */,
 				BA67F1BC193666210056DD00 /* AppDelegate.m in Sources */,
 				BA6F5ED1194EC66400E1E1FC /* UIColor+testingColors.m in Sources */,
 				BA9531B7194E4E2B005E0F10 /* imageInformationVC.m in Sources */,
