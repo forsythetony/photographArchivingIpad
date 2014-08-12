@@ -7,11 +7,13 @@
 //
 #import "WorkspaceViewController.h"
 #import <objc/message.h>
+#import "StoryCreationViewController.h"
+#import "StoriesDisplayTable.h"
 
 #define TLWALLSPACING 100.0
 #define MAINSCROLLVIEWSIZE 4000.0
 
-@interface WorkspaceViewController () {
+@interface WorkspaceViewController () <StoryTellerCreationFormDelegate> {
     
     float   TLSpacing;
     
@@ -38,12 +40,27 @@
     NSArray *photoList;
     NSArray *imageInformationVClist;
     
+    UIPopoverController *storyAddPopover;
+    
+    UIView *buttonsContainerView;
+    
+    
+    
 }
 
 @end
 
 @implementation WorkspaceViewController
+@synthesize timelineDateRange;
 
+-(void)didSaveStory:(Story *)aStory
+{
+    [_displayImageInformation addStory:aStory];
+    
+    [_infPager updateImageInformation:_displayImageInformation];
+    
+    [storyAddPopover dismissPopoverAnimated:YES];
+}
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -73,7 +90,7 @@
         
         if (useDummyData == NO) {
             
-            [mainDataCom getPhotosForUser:@"forsythetony"];
+            [mainDataCom getDummyData];
         }
         else
         {
@@ -83,7 +100,9 @@
         shouldLoadAgain = NO;
     }
     
-    
+    StoryCreationViewController *story = [[StoryCreationViewController alloc] initWithNibName:@"AddStoryForm" bundle:[NSBundle mainBundle]];
+    story.delegate = self;
+    storyAddPopover = [[UIPopoverController alloc] initWithContentViewController:story];
     
 }
 -(void)initialSetup
@@ -97,12 +116,9 @@
     self.title                  = @"Timeline";
     
     
-    dataProvider = [dummyDataProvider new];
-    
-    if (!self.rangeInformation) {
+    if (!self.timelineDateRange) {
         
-        self.rangeInformation = [dataProvider getDummyRange];
-        
+        self.timelineDateRange = [DateRange createRangeWithDefaultValues];
     }
     
     photoList = [NSArray new];
@@ -308,6 +324,9 @@
     
     pagerSocialVC *socialInfo = [pagerSocialVC new];
     
+    StoriesDisplayTable *stories = [StoriesDisplayTable new];
+    [pagerVCs addObject:stories];
+    
     [pagerVCs addObject:socialInfo];
 
     imageInformationVClist = [NSArray arrayWithArray:pagerVCs];
@@ -395,7 +414,7 @@
     
     _addStoryButton = [[UIButton alloc] initWithFrame:addStoryButtonFrame];
     
-    [_addStoryButton addTarget:self action:@selector(handleStoryButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+
     
     _addStoryButton.backgroundColor = buttonBackgroundColor;
     _addStoryButton.layer.cornerRadius = 8.0;
@@ -468,6 +487,8 @@
     
     [_addStoryButton addSubview:addStoryText];
     
+    [_addStoryButton addTarget:self action:@selector(handleStoryAddition:) forControlEvents:UIControlEventTouchUpInside];
+    
     
     CGRect addOtherInfoRect = addRecordingButtonFrame;
     
@@ -502,14 +523,31 @@
     
     [addcontentViewContainer addSubview:_addRecording];
     
+    buttonsContainerView = addcontentViewContainer;
     
     
+}
+-(void)handleStoryAddition:(id) sender
+{
+    
+    [storyAddPopover presentPopoverFromRect:_addStoryButton.frame inView:buttonsContainerView  permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
     
 }
 -(void)handleOtherInfoClickFromSender:(id) sender
 {
     if (_displayedImage) {
         [mainDataCom deletePhoto:_displayImageInformation];
+    }
+}
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.destinationViewController isKindOfClass:[StoryCreationViewController class]]) {
+        
+        StoryCreationViewController *dest = (StoryCreationViewController*)segue.destinationViewController;
+        
+        
+        [dest setInformation:_displayImageInformation];
+        
     }
 }
 -(UIImage*)getImageViewForStoryType:(buttonIconType) storyType withButtonHeight:(float) buttonHeight
@@ -656,8 +694,8 @@
 }
 -(void)createTimelineWithValues
 {
-    startDate   = [self.rangeInformation objectForKey:@"startDate"];
-    endDate     = [self.rangeInformation objectForKey:@"endDate"];
+    startDate   = timelineDateRange.startDate;
+    endDate     = timelineDateRange.endDate;
     
     NSNumber *startYear = [startDate yearAsNumber];
     NSNumber *endYear   = [endDate yearAsNumber];
@@ -691,7 +729,7 @@
     
     [self addTimelineLineToView:timelineView];
     
-    [self createYearPointsWithYearData:@{@"startYear": startYear,@"endYear" : endYear}
+    [self createYearPointsWithYearData:timelineDateRange
                         andContentSize:mainScrollView.contentSize
                                 toView:timelineView];
     
@@ -753,13 +791,13 @@
     
     
 }
--(void)createYearPointsWithYearData:(NSDictionary*) yearData andContentSize:(CGSize) contentSize toView:(UIView*) timelineView
+-(void)createYearPointsWithYearData:(DateRange*) yearData andContentSize:(CGSize) contentSize toView:(UIView*) timelineView
 {
     NSMutableArray *savedPoints = [NSMutableArray new];
     NSMutableArray *savedYears = [NSMutableArray new];
     
-    NSInteger startYear = [[self.rangeInformation[@"startDate"] yearAsNumber] integerValue];
-    NSInteger endYear   = [[self.rangeInformation[@"endDate"] yearAsNumber] integerValue];
+    NSInteger startYear = [[yearData.startDate yearAsNumber] integerValue];
+    NSInteger endYear   = [[yearData.endDate yearAsNumber] integerValue];
     
     float sizeOfTL = contentSize.width - (TLWALLSPACING * 2.0);
     
@@ -1267,7 +1305,7 @@
     
 }
 
--(NSDictionary*)getTextAttributesWithYear:(NSInteger) year withInfo:(NSDictionary*) info
+-(NSDictionary*)getTextAttributesWithYear:(NSInteger) year withInfo:(DateRange*) info
 {
     UIColor     *textColor,
                 *backgroundColor;
@@ -1282,8 +1320,8 @@
     
     NSString    *yearString;
 
-    NSInteger startYear = [[info valueForKey:@"startYear"] integerValue];
-    NSInteger endYear   = [[info valueForKey:@"endYear"] integerValue];
+    NSInteger startYear = [[info.startDate yearAsNumber] integerValue];
+    NSInteger endYear   = [[info.endDate yearAsNumber] integerValue];
     
     float lineHeightPrim = 0.0;
     
@@ -1349,23 +1387,25 @@
             textColor = [UIColor warmGrayColor];
             fontSize  = [NSNumber numberWithFloat:15.0];
             heightMod = [NSNumber numberWithFloat:0];
+           
             
-            if(year < 2000) {
+            NSInteger yearCopy = year;
+            
+            while (yearCopy >= 100) {
                 
-                year -= 1900;
-            }
-            else if(year >= 2000) {
+                yearCopy -= 100;
                 
-                year -= 2000;
             }
             
-            if (year >= 10) {
+            
+            
+            if (yearCopy >= 10) {
                 
-                yearString = [NSString stringWithFormat:@"'%i", year];
+                yearString = [NSString stringWithFormat:@"'%i", yearCopy];
             }
             else {
                 
-                yearString = [NSString stringWithFormat:@"'0%i", year];
+                yearString = [NSString stringWithFormat:@"'0%i", yearCopy];
             }
             
             finalAlpha = [NSNumber numberWithFloat:0.6];

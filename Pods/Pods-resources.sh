@@ -47,6 +47,8 @@ install_resource "FontAwesomeKit/FontAwesomeKit/ionicons.ttf"
 install_resource "FontAwesomeKit/FontAwesomeKit/zocial-regular-webfont.ttf"
 install_resource "ImageInformationForm/imageFormPod/FormClasses/Cells/BasicCell.xib"
 install_resource "ImageInformationForm/imageFormPod/FormClasses/Cells/DateCell.xib"
+install_resource "ImageInformationForm/imageFormPod/FormClasses/PopOverDateViewController.xib"
+install_resource "ImageInformationForm/imageFormPod/FormClasses/TextViewCell.xib"
 
 rsync -avr --copy-links --no-relative --exclude '*/.svn/*' --files-from="$RESOURCES_TO_COPY" / "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
 if [[ "${ACTION}" == "install" ]]; then

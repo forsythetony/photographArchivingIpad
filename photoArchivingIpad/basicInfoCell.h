@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "NSMutableDictionary+attributesDictionary.h"
-#import "pageViewControllers.h"
 #import <Colours.h>
+#import "pageViewControllers.h"
+
 #import "imageInformationUpdater.h"
 #import "imageInformationConstants.h"
 typedef NS_ENUM(NSInteger, cellType) {

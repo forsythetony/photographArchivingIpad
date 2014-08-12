@@ -24,7 +24,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="FWd-UJ-IIP" kind="push" identifier="segue_timeline" id="sNE-jZ-ckY"/>
+                                    <action selector="goToTimeline:" destination="veY-Iz-my8" eventType="touchUpInside" id="sFT-jl-rq2"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xHa-YK-Yl0">
@@ -45,9 +45,6 @@
                                 <state key="normal" title="Photo Uploading">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="5rZ-fp-2J0" kind="push" identifier="segue_uploader" id="La7-PU-Abs"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -59,6 +56,7 @@
                         <outlet property="buttonServer" destination="xHa-YK-Yl0" id="OMC-S6-fpl"/>
                         <outlet property="buttonTimeline" destination="QFr-Lr-KCM" id="02G-2J-ToO"/>
                         <outlet property="buttonUploading" destination="XKn-kh-asH" id="wPl-mS-nBi"/>
+                        <segue destination="FWd-UJ-IIP" kind="push" identifier="showTimeline" id="oB1-qc-sMe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ffp-Xn-g8M" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -114,7 +112,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" patternImage="8007D02B-CAEB-47F6-B8D8-3725C3372DF7" colorSpace="pattern"/>
+                                        <color key="backgroundColor" patternImage="09B165C6-D5A0-47AD-A86F-2329F105FE90" colorSpace="pattern"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -156,6 +154,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bz3-vR-drn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1208" y="-156"/>
+        </scene>
+        <!--Story Creation View Controller-->
+        <scene sceneID="IVn-uQ-gUw">
+            <objects>
+                <viewController id="pae-Ra-Zbw" customClass="StoryCreationViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1m2-3Z-cPT"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZEt-3q-53Y"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lDs-ss-avQ">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="768"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xLQ-nT-T5P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2562" y="-1604"/>
         </scene>
         <!--Image Taker View Controller-->
         <scene sceneID="Jt4-bU-THI">
@@ -256,6 +273,9 @@
                     <navigationItem key="navigationItem" id="ZC5-Yr-zul"/>
                     <value key="contentSizeForViewInPopover" type="size" width="1024" height="768"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <segue destination="pae-Ra-Zbw" kind="modal" identifier="createStory" modalPresentationStyle="pageSheet" id="y1v-NW-cgS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WEQ-Jq-3Uo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -310,7 +330,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="8007D02B-CAEB-47F6-B8D8-3725C3372DF7" width="320" height="460">
+        <image name="09B165C6-D5A0-47AD-A86F-2329F105FE90" width="320" height="460">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

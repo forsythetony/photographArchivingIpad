@@ -8,11 +8,12 @@
 
 #import "imageInformationVC.h"
 #import "TFDataCommunicator.h"
+#import "ImageInformationDisplayer.h"
 
 #define HEADERHEIGHT 30.0
 #define FOOTERHEIGHT 50.0
 
-@interface imageInformationVC () {
+@interface imageInformationVC () <ImageInformationDisplayer> {
     
     NSDictionary *footerStyle;
     BOOL imageInformationEdited;
@@ -175,12 +176,13 @@
     NSMutableDictionary *uploaderSection = [NSMutableDictionary dictionaryWithDictionary:@{@"sectionName": @"Uploader:",
                                                                                            @"value" : @""}];
 
-    
+//    
+//    NSMutableDictionary *storySection =[NSMutableDictionary dictionaryWithDictionary:@{@"sectionName": @"Stories:", @"value" : @""}];
     
     [secs addObject:titleSection];
     [secs addObject:datesSection];
-
     [secs addObject:uploaderSection];
+//    [secs addObject:storySection];
     _imageSections = [NSArray arrayWithArray:secs];
     
 }
@@ -189,39 +191,7 @@
     [_tableView reloadData];
    
 }
--(void)updateInformation:(imageObject *)information
-{
-    POPSpringAnimation *alphaAnimation = [POPSpringAnimation animation];
-    
-    alphaAnimation.property = [POPAnimatableProperty propertyWithName:kPOPViewAlpha];
-    
-    alphaAnimation.fromValue = @(0.0);
-    alphaAnimation.toValue = @(1.0);
-    
-    alphaAnimation.springBounciness = 10.0;
-    alphaAnimation.springSpeed = 10.0;
-    
-    [self.view pop_addAnimation:alphaAnimation forKey:@"canNowSeeAlpha"];
-    
-    _information = information;
-    
-    [[_imageSections objectAtIndex:0] setValue:_information.title forKey:@"value"];
-    
-    [[_imageSections objectAtIndex:1] setValue:[_information.date displayDateOfType:sDateTypPretty] forKeyPath:@"value"];
-    [[_imageSections objectAtIndex:1] setValue:_information.confidence forKey:@"confidence"];
-    
-    [[_imageSections objectAtIndex:2] setValue:_information.uploader forKey:@"value"];
-    
-    
-    [_tableView reloadData];
-    
-    currentInformation = [_information informationAsMutableDictionary];
-    
-    fieldInfo = [NSMutableArray new];
-    [fieldInfo insertObject:[NSMutableDictionary dictionaryWithDictionary:@{fieldTypeTitle: currentInformation[fieldTypeTitle],
-                              fieldTypeHasEdited : [NSNumber numberWithBool:NO]}] atIndex:fieldInformationTitle];
-    
-}
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -298,6 +268,18 @@
         
         return cell;
     }
+//    else if ([sectionTitle isEqualToString:@"Stories:"])
+//    {
+//        StoryCellTableViewCell *cell = [StoryCellTableViewCell createCell];
+//        
+//        if ([_information myStory]) {
+//            [cell setMyStory:[_information myStory]];
+//            
+//            [cell setupStreamer];
+//        }
+//        
+//        return cell;
+//    }
     else
     {
         cellType theType;
@@ -408,4 +390,36 @@
     
 }
 
+-(void)updateInformationForImage:(imageObject *)information
+{
+    POPSpringAnimation *alphaAnimation = [POPSpringAnimation animation];
+    
+    alphaAnimation.property = [POPAnimatableProperty propertyWithName:kPOPViewAlpha];
+    
+    alphaAnimation.fromValue = @(0.0);
+    alphaAnimation.toValue = @(1.0);
+    
+    alphaAnimation.springBounciness = 10.0;
+    alphaAnimation.springSpeed = 10.0;
+    
+    [self.view pop_addAnimation:alphaAnimation forKey:@"canNowSeeAlpha"];
+    
+    _information = information;
+    
+    [[_imageSections objectAtIndex:0] setValue:_information.title forKey:@"value"];
+    
+    [[_imageSections objectAtIndex:1] setValue:[_information.date displayDateOfType:sDateTypPretty] forKeyPath:@"value"];
+    [[_imageSections objectAtIndex:1] setValue:_information.confidence forKey:@"confidence"];
+    
+    [[_imageSections objectAtIndex:2] setValue:_information.uploader forKey:@"value"];
+    
+    
+    [_tableView reloadData];
+    
+    currentInformation = [_information informationAsMutableDictionary];
+    
+    fieldInfo = [NSMutableArray new];
+    [fieldInfo insertObject:[NSMutableDictionary dictionaryWithDictionary:@{fieldTypeTitle: currentInformation[fieldTypeTitle],
+                                                                            fieldTypeHasEdited : [NSNumber numberWithBool:NO]}] atIndex:fieldInformationTitle];
+}
 @end

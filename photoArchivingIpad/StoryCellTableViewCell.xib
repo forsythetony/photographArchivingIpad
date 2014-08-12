@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="KGk-i7-Jjw" customClass="StoryCellTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="595" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="595" height="69"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WRZ-JL-KUH">
+                        <rect key="frame" x="5" y="29" width="200" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="200" id="9WB-uc-zOF"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CjB-IZ-KOy">
+                        <rect key="frame" x="502" y="29" width="30" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="uKH-xU-cQH"/>
+                            <constraint firstAttribute="width" constant="30" id="xgI-ch-NzS"/>
+                        </constraints>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="tappedPlay:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="t7S-D3-ALG"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nlr-IE-811">
+                        <rect key="frame" x="552" y="29" width="30" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="5mO-Hy-7N9"/>
+                            <constraint firstAttribute="height" constant="30" id="PcO-eo-bYw"/>
+                        </constraints>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="tappedStop:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jkr-a1-2MS"/>
+                        </connections>
+                    </button>
+                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TXp-ZA-8rS">
+                        <rect key="frame" x="0.0" y="64" width="595" height="5"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="5" id="IlB-kn-N3Y"/>
+                        </constraints>
+                    </progressView>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TKh-G7-iuY">
+                        <rect key="frame" x="213" y="33" width="287" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="TXp-ZA-8rS" secondAttribute="bottom" id="1HY-hs-KgU"/>
+                    <constraint firstItem="WRZ-JL-KUH" firstAttribute="bottom" secondItem="CjB-IZ-KOy" secondAttribute="bottom" id="8Ay-vl-z5E"/>
+                    <constraint firstItem="TKh-G7-iuY" firstAttribute="leading" secondItem="WRZ-JL-KUH" secondAttribute="trailing" constant="5" id="9wb-Am-4qW"/>
+                    <constraint firstItem="CjB-IZ-KOy" firstAttribute="centerY" secondItem="WRZ-JL-KUH" secondAttribute="centerY" id="BqI-ZI-6nF"/>
+                    <constraint firstItem="Nlr-IE-811" firstAttribute="bottom" secondItem="CjB-IZ-KOy" secondAttribute="bottom" id="L61-K4-XHm"/>
+                    <constraint firstItem="WRZ-JL-KUH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="Tv8-58-IQb"/>
+                    <constraint firstAttribute="trailing" secondItem="Nlr-IE-811" secondAttribute="trailing" constant="13" id="WDo-kC-kEU"/>
+                    <constraint firstItem="CjB-IZ-KOy" firstAttribute="leading" secondItem="TKh-G7-iuY" secondAttribute="trailing" constant="5" id="lhK-SA-vI8"/>
+                    <constraint firstAttribute="trailing" secondItem="TXp-ZA-8rS" secondAttribute="trailing" id="n0I-Gi-Nyx"/>
+                    <constraint firstItem="Nlr-IE-811" firstAttribute="leading" secondItem="CjB-IZ-KOy" secondAttribute="trailing" constant="20" id="o27-9S-NWH"/>
+                    <constraint firstItem="TXp-ZA-8rS" firstAttribute="top" secondItem="TKh-G7-iuY" secondAttribute="bottom" constant="8" symbolic="YES" id="oOw-L8-QuP"/>
+                    <constraint firstItem="TXp-ZA-8rS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="udo-b5-k6a"/>
+                    <constraint firstItem="TXp-ZA-8rS" firstAttribute="top" secondItem="WRZ-JL-KUH" secondAttribute="bottom" constant="5" id="ugq-jq-qfa"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="PlayButton" destination="CjB-IZ-KOy" id="VUY-xK-zLF"/>
+                <outlet property="StopButton" destination="Nlr-IE-811" id="eQm-7O-4S7"/>
+                <outlet property="dateLabel" destination="TKh-G7-iuY" id="ILa-ei-t9d"/>
+                <outlet property="timeView" destination="TXp-ZA-8rS" id="mVt-k5-WOD"/>
+                <outlet property="titleLabel" destination="WRZ-JL-KUH" id="FPl-3n-njf"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

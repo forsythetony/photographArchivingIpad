@@ -22,3 +22,9 @@ NSString * const keyTestingTextValue  = @"testingTextValue";
 NSString * const keyCornerRadius = @"cornerRadiusValue";
 NSString * const keyEnabledColor = @"keyEnabledColor";
 NSString * const keyDisabledColor = @"keyDisabledColor";
+
+NSString * const keyPlaceholderFont = @"keyPlaceholderFont";
+NSString * const keyPlaceholderTextColor = @"keyPlaceholderTextColor";
+
+NSString * const keyPlaceholderText = @"keyPlaceholderText";
+NSString * const keyAlpha = @"keyAlpha";

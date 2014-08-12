@@ -32,3 +32,8 @@ extern NSString * const jsonKeyUploadInformation_uploadDate;
 extern NSString * const jsonKeyContentType;
 extern NSString * const jsonKeyImageLargeURL;
 extern NSString * const jsonKeyImageThumbnailURL;
+
+extern NSString * const jsonKeyStories;
+extern NSString * const jsonKeyStories_Date;
+extern NSString * const jsonKeyStories_StoryTeller;
+extern NSString * const jsonKeyStories_RecordingURL;

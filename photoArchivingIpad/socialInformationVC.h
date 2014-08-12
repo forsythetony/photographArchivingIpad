@@ -11,6 +11,5 @@
 
 @interface socialInformationVC : UIViewController
 
--(void)updateInformation:(imageObject*)information;
 
 @end

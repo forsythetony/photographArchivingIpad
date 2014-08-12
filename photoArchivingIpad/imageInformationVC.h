@@ -14,6 +14,7 @@
 #import "imageInformationUpdater.h"
 #import "imageInformationConstants.h"
 #import "TFDataCommunicator.h"
+#import "StoryCellTableViewCell.h"
 
 typedef NS_ENUM(NSInteger, fieldInformation) {
     fieldInformationTitle,
@@ -23,6 +24,5 @@ typedef NS_ENUM(NSInteger, fieldInformation) {
 
 @property (strong, nonatomic) imageObject *information;
 
--(void)updateInformation:(imageObject*)information;
 
 @end

@@ -25,6 +25,8 @@
 #import "imageHandling.h"
 
 #import "updatedConstants.h"
+#import "ImageInformationDisplayer.h"
+#import "DateRange.h"
 
 @class imageInfoPagerVC;
 
@@ -58,5 +60,6 @@ typedef NS_ENUM(NSInteger, buttonIconType) {
 
 @property (strong, nonatomic) UIPageViewController* infoPager;
 
+@property (strong, nonatomic) DateRange *timelineDateRange;
 
 @end

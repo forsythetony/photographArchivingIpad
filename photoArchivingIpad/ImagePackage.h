@@ -29,6 +29,8 @@
 @property (nonatomic, strong) NSString* title;
 @property (nonatomic, strong) NSString* contentType;
 
+@property (nonatomic, strong) NSArray* stories;
+
 @property (nonatomic, strong) NSString* imageID;
 
 -(void)setDateWithString:(NSString*) dateString;
@@ -38,5 +40,6 @@
 -(void)setImageIDWithNumber:(NSInteger) idNumber;
 -(void)setContentsWithImageObject:(imageObject*) imageObject;
 -(NSData*)createJSONReadyDict;
+-(NSDictionary*)createJSONReadyDict2;
 
 @end

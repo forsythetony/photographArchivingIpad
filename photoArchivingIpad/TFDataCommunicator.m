@@ -9,6 +9,7 @@
 #import "TFDataCommunicator.h"
 
 #import "updatedConstants.h"
+#import "TFDataCommunicator+Helpers.h"
 
 @interface TFDataCommunicator ()
 
@@ -39,6 +40,14 @@
     {
         return nil;
     }
+}
+-(void)getDummyData
+{
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"dummyData" ofType:@"json"];
+    NSData *data = [NSData dataWithContentsOfFile:filePath];
+    NSArray *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+    
+    [self.delegate finishedPullingPhotoList:json];
 }
 -(void)uploadSmallFile
 {
@@ -469,6 +478,9 @@
 {
     
     NSString        *urlString  = [NSString stringWithFormat:@"%@%@?forUser=%@", (USELOCALHOST ? api_localhostBaseURL : api_ec2BaseURL), api_photosEndpoint, username];
+   // NSString *urlString = @"http://localhost:3000/photos?forUser=forsythetony";
+    
+    
     NSURL           *url        = [NSURL URLWithString:urlString];
     NSURLRequest    *urlRequest = [[NSURLRequest alloc] initWithURL:url];
     
@@ -478,11 +490,10 @@
         
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
         
-        if (httpResponse.statusCode == 200 && data) {
-            
-            [self parsePhotosFromData:data];
-            
-        }
+        
+        
+        [self.delegate finishedPullingPhotoList:nil];
+        
     }];
 }
 
@@ -585,6 +596,85 @@
     
     [self.delegate finishedUploadingRequestWithData:@{keyImageURL: request.url}];
 };
+
+-(void)uploadAudioFileWithUrl:(NSURL *)url
+{
+    if (self.fileUpload == nil || (self.fileUpload.isFinished && !self.fileUpload.isPaused)) {
+        
+        NSData* audioData = [NSData dataWithContentsOfURL:url];
+        
+        
+        NSString *audioFile = [NSString stringWithFormat:@"%@/%@/%@%@", @"forsytheTony", @"audio", @"testFile", @".m4a"];
+        
+        S3PutObjectRequest* req = [[S3PutObjectRequest alloc] initWithKey:audioFile inBucket:[updatedConstants transferManagerBucket]];
+        req.data = audioData;
+        req.contentType = @"audio/m4a";
+        req.cannedACL = [S3CannedACL publicRead];
+        
+        _fileUpload = [_tm upload:req];
+    }
+}
+-(void)dummyUpdateImageWithStory:(imageObject *)image andStory:(Story *)newStory
+{
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"dummyData" ofType:@"json"];
+    NSData *data = [NSData dataWithContentsOfFile:filePath];
+    NSArray *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+    
+    NSMutableArray *imageObjects = [NSMutableArray new];
+    NSMutableArray *imagePackages = [NSMutableArray new];
+    
+    for (NSDictionary* dict in json) {
+        
+        imageObject *newImage = [self createImageObjectWithDictionary:dict];
+        [imageObjects addObject:newImage];
+    }
+    
+    for (imageObject* imageObj in imageObjects) {
+        
+        ImagePackage *package = [ImagePackage new];
+        
+        [package setContentsWithImageObject:imageObj];
+        
+        [imagePackages addObject:package];
+        
+    }
+    
+    NSInteger idOfPackage = 0;
+    
+    for (ImagePackage *pack in imagePackages) {
+        
+        if ([pack.imageID isEqualToString:image.id]) {
+            
+            idOfPackage = [imagePackages indexOfObject:pack];
+            
+            
+        }
+    }
+    ImagePackage *packageTwo = [ImagePackage new];
+    [packageTwo setContentsWithImageObject:image];
+    NSMutableArray *thingsTwo = [NSMutableArray new];
+    
+    [imagePackages replaceObjectAtIndex:idOfPackage withObject:packageTwo];
+    
+    for (ImagePackage* package2 in imagePackages) {
+        
+        NSDictionary *newDict = [package2 createJSONReadyDict2];
+        [thingsTwo addObject:newDict];
+        
+    }
+    NSString *newFilePath = [[NSBundle mainBundle] pathForResource:@"dummy2" ofType:@"json"];
+
+    NSError *error = nil;
+    NSOutputStream *outputStream = [NSOutputStream outputStreamToFileAtPath:newFilePath append:YES];
+    [outputStream open];
+    
+    [NSJSONSerialization writeJSONObject:[NSArray arrayWithArray:thingsTwo]
+                                toStream:outputStream
+                                 options:0
+                                   error:&error];
+    [outputStream close];
+    
+}
 
 
 @end

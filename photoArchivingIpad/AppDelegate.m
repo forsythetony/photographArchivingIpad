@@ -16,7 +16,7 @@
 {
     // Override point for customization after application launch.
     
-    [self setAppearance];
+    //[self setAppearance];
     return YES;
 }
 							

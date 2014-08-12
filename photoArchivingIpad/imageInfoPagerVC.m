@@ -7,6 +7,7 @@
 //
 
 #import "imageInfoPagerVC.h"
+#import "ImageInformationDisplayer.h"
 
 @interface imageInfoPagerVC ()
 
@@ -57,14 +58,13 @@
     imageInfo.view.frame = self.view.frame;
     imageInfo.view.alpha = 0.0;
     
-    socialInformationVC* socialInfo = [socialInformationVC new];
+    StoriesDisplayTable *stories = [StoriesDisplayTable new];
     
-    socialInfo.view.frame = self.view.frame;
-    socialInfo.view.alpha = 1.0;
+    stories.view.frame = self.view.frame;
+    
     
     [VCs addObject:imageInfo];
-    [VCs addObject:socialInfo];
-    
+    [VCs addObject:stories];
     
     NSArray *viewControllers = [NSArray arrayWithArray:VCs];
     
@@ -83,7 +83,7 @@
 -(void)updateImageInformation:(imageObject *)theImage
 {
     for (NSUInteger i = 0 ; i < [_pageVCs count]; i++) {
-        [[_pageVCs objectAtIndex:i] updateInformation:theImage];
+        [[_pageVCs objectAtIndex:i] updateInformationForImage:theImage];
         
     }
 }

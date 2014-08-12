@@ -66,6 +66,9 @@ typedef NS_ENUM(NSInteger, serverResponseType) {
 -(void)mainServerUploadPhoto:(ImagePackage *)photo;
 -(void)deletePhoto:(imageObject*) photo;
 -(void)updatePhoto:(ImagePackage*) photo;
+-(void)uploadAudioFileWithUrl:(NSURL*) url;
+-(void)getDummyData;
+-(void)dummyUpdateImageWithStory:(imageObject*) image andStory:(Story*) newStory;
 
 
 @end

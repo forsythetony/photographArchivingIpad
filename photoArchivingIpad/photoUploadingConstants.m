@@ -30,3 +30,10 @@ NSString * const keyImageURL = @"imageURL";
  NSString * const jsonKeyContentType = @"contentType";
  NSString * const jsonKeyImageLargeURL = @"imageURL";
  NSString * const jsonKeyImageThumbnailURL = @"thumbnailURL";
+
+NSString * const jsonKeyStories = @"Stories";
+
+NSString * const jsonKeyStories_Date = @"date";
+NSString * const jsonKeyStories_StoryTeller = @"storyTeller";
+NSString * const jsonKeyStories_RecordingURL = @"recordingUrl";
+

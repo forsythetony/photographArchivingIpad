@@ -7,11 +7,26 @@
 //
 
 #import "landingPageViewController.h"
+#import "DateRange.h"
+#import "WorkspaceViewController.h"
 
-@interface landingPageViewController () {
+NSString* const timelineSegue = @"showTimeline";
+
+NSString* const keyTitle = @"keyTitle";
+NSString* const keyTimeline = @"keyTimeline";
+
+@interface landingPageViewController () <UIActionSheetDelegate>
+{
     
     BOOL btnTimelineDidSpring;
     NSMutableDictionary *buttonStyle;
+    
+    
+    DateRange *timelineDateRange;
+    
+    NSArray *dateRanges;
+    
+    UIActionSheet *timelineChooser;
     
 }
 
@@ -39,6 +54,29 @@
     
     _testType = testingSegueTypeNone;
     
+    
+    timelineDateRange = [DateRange createRangeWithStartYear:1850 andEndYear:1900];
+    
+}
+- (IBAction)goToTimeline:(id)sender {
+    
+    
+    [timelineChooser showInView:self.view];
+    
+    
+    
+   // [self performSegueWithIdentifier:timelineSegue sender:nil];
+    
+}
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.destinationViewController isKindOfClass:[WorkspaceViewController class]]) {
+        
+        WorkspaceViewController *dest = (WorkspaceViewController*)segue.destinationViewController;
+        
+        dest.timelineDateRange = timelineDateRange;
+        
+    }
 }
 -(void)initialSetup
 {
@@ -56,10 +94,12 @@
     
     [self varSetup];
     [self aestheticsConfiguration];
+    [self setupActionSheet];
 }
 -(void)varSetup
 {
     buttonStyle = [NSMutableDictionary attributesDictionaryForType:attrDictTypeButtonDefault];
+    [self setupTimelines];
 }
 - (void)aestheticsConfiguration
 {
@@ -178,4 +218,43 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)setupTimelines
+{
+    NSMutableArray *timelineArray = [NSMutableArray new];
+    
+    [timelineArray addObject:@{keyTitle: @"1850 - 1900",
+                               keyTimeline: [DateRange createRangeWithStartYear:1850 andEndYear:1900]}];
+    
+    [timelineArray addObject:@{keyTitle: @"1900 - 1950",
+                               keyTimeline: [DateRange createRangeWithStartYear:1900 andEndYear:1950]}];
+    
+    [timelineArray addObject:@{keyTitle: @"1950 - 2000",
+                               keyTimeline: [DateRange createRangeWithStartYear:1950 andEndYear:2000]}];
+    
+    dateRanges = [NSArray arrayWithArray:timelineArray];
+    
+    
+}
+-(void)setupActionSheet
+{
+    timelineChooser = [[UIActionSheet alloc] init];
+    [timelineChooser setTitle:@"Choose Timeline"];
+    [timelineChooser setDelegate:self];
+    
+    for (NSDictionary* dict in dateRanges) {
+        
+        [timelineChooser addButtonWithTitle:dict[keyTitle]];
+    }
+}
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != -1) {
+        
+
+    timelineDateRange = dateRanges[buttonIndex][keyTimeline];
+    
+    [self performSegueWithIdentifier:timelineSegue sender:nil];
+        
+    }
+}
 @end

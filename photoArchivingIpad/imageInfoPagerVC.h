@@ -11,6 +11,7 @@
 #import "imageObject.h"
 #import "WorkspaceViewController.h"
 #import "pageViewControllers.h"
+#import "StoriesDisplayTable.h"
 
 
 

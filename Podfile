@@ -1,4 +1,5 @@
 pod 'pop', '~> 1.0'
+pod 'TheAmazingAudioEngine'
 pod 'Colours', :git => 'https://github.com/forsythetony/Colours.git'
 pod 'CRToast', '~> 0.0.7'
 pod 'FontAwesomeKit', '~> 2.1.0'

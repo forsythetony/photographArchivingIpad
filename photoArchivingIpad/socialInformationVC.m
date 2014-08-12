@@ -7,8 +7,9 @@
 //
 
 #import "socialInformationVC.h"
+#import "ImageInformationDisplayer.h"
 
-@interface socialInformationVC ()
+@interface socialInformationVC () <ImageInformationDisplayer>
 
 @end
 
@@ -21,6 +22,7 @@
         // Custom initialization
         
         self.view.backgroundColor = [UIColor greenColor];
+        self.view.backgroundColor = [UIColor pinkColor];
     }
     return self;
 }
@@ -38,7 +40,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)updateInformation:(imageObject* )information
+-(void)updateInformationForImage:(imageObject *)information
 {
     
 }

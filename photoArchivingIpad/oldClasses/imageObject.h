@@ -8,8 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "imageInformationConstants.h"
+#import "Story.h"
 
 @interface imageObject : NSObject
+
+@property (nonatomic, strong) Story* myStory;
+
+@property (nonatomic, strong) NSArray* stories;
 
 @property (nonatomic, strong) NSString *id;
 @property (nonatomic, strong) NSString *title;
@@ -28,5 +33,6 @@
 @property (nonatomic, strong) NSNumber* centerXoffset;
 
 -(NSMutableDictionary*)informationAsMutableDictionary;
+-(void)addStory:(Story*) newStory;
 
 @end

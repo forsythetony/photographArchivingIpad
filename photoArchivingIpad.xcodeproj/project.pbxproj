@@ -18,6 +18,20 @@
 		BA3299A61948BA430002EBFD /* TFPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3299A41948BA430002EBFD /* TFPerson.m */; };
 		BA3299A81948DE850002EBFD /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA3299A71948DE850002EBFD /* SDWebImage.framework */; };
 		BA3299AA1948DF430002EBFD /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA3299A91948DF430002EBFD /* ImageIO.framework */; };
+		BA365A88199649B8008E6975 /* StoryCreationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA365A87199649B8008E6975 /* StoryCreationViewController.m */; };
+		BA365A8A19964C43008E6975 /* AddStoryForm.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA365A8919964C43008E6975 /* AddStoryForm.xib */; };
+		BA365A8F19968D7B008E6975 /* Story.m in Sources */ = {isa = PBXBuildFile; fileRef = BA365A8E19968D7B008E6975 /* Story.m */; };
+		BA365A9319969545008E6975 /* StoryCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA365A9119969545008E6975 /* StoryCellTableViewCell.m */; };
+		BA365A9419969545008E6975 /* StoryCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA365A9219969545008E6975 /* StoryCellTableViewCell.xib */; };
+		BA365A9D1996B79E008E6975 /* TFDataCommunicator+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = BA365A9C1996B79E008E6975 /* TFDataCommunicator+Helpers.m */; };
+		BA365AA11996B85D008E6975 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = BA365AA01996B85D008E6975 /* data.json */; };
+		BA365AA31996BBA4008E6975 /* dummyData.json in Resources */ = {isa = PBXBuildFile; fileRef = BA365AA21996BBA4008E6975 /* dummyData.json */; };
+		BA365AA719996992008E6975 /* StoryRecordingMeter.m in Sources */ = {isa = PBXBuildFile; fileRef = BA365AA619996992008E6975 /* StoryRecordingMeter.m */; };
+		BA365AAD19998DF9008E6975 /* UploadingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BA365AAC19998DF9008E6975 /* UploadingButton.m */; };
+		BA66942C19999CA300412313 /* StoriesDisplayTable.m in Sources */ = {isa = PBXBuildFile; fileRef = BA66942A19999CA300412313 /* StoriesDisplayTable.m */; };
+		BA66942D19999CA300412313 /* StoriesDisplayTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA66942B19999CA300412313 /* StoriesDisplayTable.xib */; };
+		BA6694311999C72400412313 /* dummy2.json in Resources */ = {isa = PBXBuildFile; fileRef = BA6694301999C72400412313 /* dummy2.json */; };
+		BA6694341999CAFF00412313 /* DateRange.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6694331999CAFF00412313 /* DateRange.m */; };
 		BA67F1AC193666210056DD00 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA67F1AB193666210056DD00 /* Foundation.framework */; };
 		BA67F1AE193666210056DD00 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA67F1AD193666210056DD00 /* CoreGraphics.framework */; };
 		BA67F1B0193666210056DD00 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA67F1AF193666210056DD00 /* UIKit.framework */; };
@@ -122,6 +136,29 @@
 		BA3299A41948BA430002EBFD /* TFPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFPerson.m; sourceTree = "<group>"; };
 		BA3299A71948DE850002EBFD /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = "<group>"; };
 		BA3299A91948DF430002EBFD /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		BA365A86199649B8008E6975 /* StoryCreationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryCreationViewController.h; sourceTree = "<group>"; };
+		BA365A87199649B8008E6975 /* StoryCreationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryCreationViewController.m; sourceTree = "<group>"; };
+		BA365A8919964C43008E6975 /* AddStoryForm.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddStoryForm.xib; path = oldClasses/AddStoryForm.xib; sourceTree = "<group>"; };
+		BA365A8D19968D7B008E6975 /* Story.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Story.h; sourceTree = "<group>"; };
+		BA365A8E19968D7B008E6975 /* Story.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Story.m; sourceTree = "<group>"; };
+		BA365A9019969545008E6975 /* StoryCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryCellTableViewCell.h; sourceTree = "<group>"; };
+		BA365A9119969545008E6975 /* StoryCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryCellTableViewCell.m; sourceTree = "<group>"; };
+		BA365A9219969545008E6975 /* StoryCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoryCellTableViewCell.xib; sourceTree = "<group>"; };
+		BA365A9B1996B79E008E6975 /* TFDataCommunicator+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TFDataCommunicator+Helpers.h"; sourceTree = "<group>"; };
+		BA365A9C1996B79E008E6975 /* TFDataCommunicator+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TFDataCommunicator+Helpers.m"; sourceTree = "<group>"; };
+		BA365AA01996B85D008E6975 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
+		BA365AA21996BBA4008E6975 /* dummyData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dummyData.json; sourceTree = "<group>"; };
+		BA365AA519996992008E6975 /* StoryRecordingMeter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryRecordingMeter.h; sourceTree = "<group>"; };
+		BA365AA619996992008E6975 /* StoryRecordingMeter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryRecordingMeter.m; sourceTree = "<group>"; };
+		BA365AAB19998DF9008E6975 /* UploadingButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadingButton.h; sourceTree = "<group>"; };
+		BA365AAC19998DF9008E6975 /* UploadingButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadingButton.m; sourceTree = "<group>"; };
+		BA66942919999CA300412313 /* StoriesDisplayTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoriesDisplayTable.h; sourceTree = "<group>"; };
+		BA66942A19999CA300412313 /* StoriesDisplayTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoriesDisplayTable.m; sourceTree = "<group>"; };
+		BA66942B19999CA300412313 /* StoriesDisplayTable.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoriesDisplayTable.xib; sourceTree = "<group>"; };
+		BA66942F1999A00A00412313 /* ImageInformationDisplayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageInformationDisplayer.h; sourceTree = "<group>"; };
+		BA6694301999C72400412313 /* dummy2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dummy2.json; sourceTree = "<group>"; };
+		BA6694321999CAFF00412313 /* DateRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateRange.h; sourceTree = "<group>"; };
+		BA6694331999CAFF00412313 /* DateRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateRange.m; sourceTree = "<group>"; };
 		BA67F1A8193666210056DD00 /* photoArchivingIpad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photoArchivingIpad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA67F1AB193666210056DD00 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BA67F1AD193666210056DD00 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -289,6 +326,35 @@
 			name = v2.0;
 			sourceTree = "<group>";
 		};
+		BA365AA41999696D008E6975 /* Story Creation */ = {
+			isa = PBXGroup;
+			children = (
+				BA365A86199649B8008E6975 /* StoryCreationViewController.h */,
+				BA365A87199649B8008E6975 /* StoryCreationViewController.m */,
+				BA365A8919964C43008E6975 /* AddStoryForm.xib */,
+				BA365A8D19968D7B008E6975 /* Story.h */,
+				BA365A8E19968D7B008E6975 /* Story.m */,
+				BA365AA519996992008E6975 /* StoryRecordingMeter.h */,
+				BA365AA619996992008E6975 /* StoryRecordingMeter.m */,
+				BA365AAB19998DF9008E6975 /* UploadingButton.h */,
+				BA365AAC19998DF9008E6975 /* UploadingButton.m */,
+			);
+			name = "Story Creation";
+			sourceTree = "<group>";
+		};
+		BA66942E19999D1600412313 /* Stories */ = {
+			isa = PBXGroup;
+			children = (
+				BA66942919999CA300412313 /* StoriesDisplayTable.h */,
+				BA66942A19999CA300412313 /* StoriesDisplayTable.m */,
+				BA66942B19999CA300412313 /* StoriesDisplayTable.xib */,
+				BA365A9019969545008E6975 /* StoryCellTableViewCell.h */,
+				BA365A9119969545008E6975 /* StoryCellTableViewCell.m */,
+				BA365A9219969545008E6975 /* StoryCellTableViewCell.xib */,
+			);
+			name = Stories;
+			sourceTree = "<group>";
+		};
 		BA67F19F193666200056DD00 = {
 			isa = PBXGroup;
 			children = (
@@ -336,6 +402,10 @@
 				BABF16A8195330CC00FF01C0 /* Photo Uploading */,
 				BA3299A11948BA430002EBFD /* TFDataCommunicator.h */,
 				BA3299A21948BA430002EBFD /* TFDataCommunicator.m */,
+				BA365AA21996BBA4008E6975 /* dummyData.json */,
+				BA6694301999C72400412313 /* dummy2.json */,
+				BA365A9B1996B79E008E6975 /* TFDataCommunicator+Helpers.h */,
+				BA365A9C1996B79E008E6975 /* TFDataCommunicator+Helpers.m */,
 				BA6F5EDE194EEFB200E1E1FC /* updatedConstants.h */,
 				BA6F5EDF194EEFB200E1E1FC /* updatedConstants.m */,
 				BA89B37B195B227400DA0FCC /* Attributes Dictionary */,
@@ -348,6 +418,7 @@
 				BA67F1BD193666210056DD00 /* Main.storyboard */,
 				BA67F1C0193666210056DD00 /* ViewController.h */,
 				BA67F1C1193666210056DD00 /* ViewController.m */,
+				BA365AA41999696D008E6975 /* Story Creation */,
 				BA67F1C3193666210056DD00 /* Images.xcassets */,
 				BA67F1B2193666210056DD00 /* Supporting Files */,
 				BA67F21A193BC4AA0056DD00 /* NSDate+timelineStuff.h */,
@@ -364,6 +435,9 @@
 				BA6F5EEC194F192900E1E1FC /* UIImage+imageAdditions.m */,
 				BABF1614195247FD00FF01C0 /* audioManagrer.h */,
 				BABF1615195247FD00FF01C0 /* audioManagrer.m */,
+				BA365AA01996B85D008E6975 /* data.json */,
+				BA6694321999CAFF00412313 /* DateRange.h */,
+				BA6694331999CAFF00412313 /* DateRange.m */,
 			);
 			path = photoArchivingIpad;
 			sourceTree = "<group>";
@@ -526,6 +600,7 @@
 		BAD3C569195A10BA004CE905 /* Image Information */ = {
 			isa = PBXGroup;
 			children = (
+				BA66942E19999D1600412313 /* Stories */,
 				BA89B37D195B29E700DA0FCC /* imageInformationConstants.h */,
 				BA89B37E195B29E700DA0FCC /* imageInformationConstants.m */,
 				BA9531B5194E4E2B005E0F10 /* imageInformationVC.h */,
@@ -540,6 +615,7 @@
 				BA89B380195B33B100DA0FCC /* datePickingThing.h */,
 				BA89B381195B33B100DA0FCC /* datePickingThing.m */,
 				BA89B382195B33B100DA0FCC /* datePickingThing.xib */,
+				BA66942F1999A00A00412313 /* ImageInformationDisplayer.h */,
 			);
 			name = "Image Information";
 			sourceTree = "<group>";
@@ -625,8 +701,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA66942D19999CA300412313 /* StoriesDisplayTable.xib in Resources */,
 				BA67F208193667140056DD00 /* tweed_@2X.png in Resources */,
 				BA67F206193667140056DD00 /* unknown.JPG in Resources */,
+				BA6694311999C72400412313 /* dummy2.json in Resources */,
 				BA89B384195B33B100DA0FCC /* datePickingThing.xib in Resources */,
 				BA67F20E193667460056DD00 /* testing.xib in Resources */,
 				BA6F5ECE194EC44F00E1E1FC /* dateInfoCell.xib in Resources */,
@@ -636,6 +714,7 @@
 				BA67F203193667140056DD00 /* garden_tn.png in Resources */,
 				BA67F201193667140056DD00 /* fredAndFreddie_tn.png in Resources */,
 				BA67F2181937B9D80056DD00 /* subtle_carbon_@2X.png in Resources */,
+				BA365AA11996B85D008E6975 /* data.json in Resources */,
 				BA67F207193667140056DD00 /* tweed.png in Resources */,
 				BA67F1C4193666210056DD00 /* Images.xcassets in Resources */,
 				BAD3C56B195A15A3004CE905 /* basicInfoCell.xib in Resources */,
@@ -650,9 +729,12 @@
 				BA6F5EEA194F12B700E1E1FC /* greyzz.png in Resources */,
 				BA67F1BF193666210056DD00 /* Main.storyboard in Resources */,
 				BA67F2141937B5470056DD00 /* textured_paper_@2X.png in Resources */,
+				BA365A8A19964C43008E6975 /* AddStoryForm.xib in Resources */,
 				BA6F5EE5194EFEFF00E1E1FC /* largeImageViewer.xib in Resources */,
+				BA365AA31996BBA4008E6975 /* dummyData.json in Resources */,
 				BA67F204193667140056DD00 /* martin_tn.png in Resources */,
 				BA67F2191937B9D80056DD00 /* subtle_carbon.png in Resources */,
+				BA365A9419969545008E6975 /* StoryCellTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -704,11 +786,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA365A8F19968D7B008E6975 /* Story.m in Sources */,
 				BA0BE0B81943B3E40054F7C7 /* workspaceAuxView.m in Sources */,
 				BA0F645719788101000588A8 /* PhotoUploadManager.m in Sources */,
 				BA6F5EE0194EEFB200E1E1FC /* updatedConstants.m in Sources */,
+				BA365A9D1996B79E008E6975 /* TFDataCommunicator+Helpers.m in Sources */,
 				BABF16B4195368FE00FF01C0 /* photoUploadingConstants.m in Sources */,
 				BABF1616195247FD00FF01C0 /* audioManagrer.m in Sources */,
+				BA365AA719996992008E6975 /* StoryRecordingMeter.m in Sources */,
 				BA3299A61948BA430002EBFD /* TFPerson.m in Sources */,
 				BA67F21F193BCC3A0056DD00 /* timelineManager.m in Sources */,
 				BABF16AB195339DD00FF01C0 /* photoUploadingViewController.m in Sources */,
@@ -725,6 +810,7 @@
 				BA9531BB194E51BB005E0F10 /* socialInformationVC.m in Sources */,
 				BA9531AD194E2CC6005E0F10 /* pagerInformationVC.m in Sources */,
 				BA89B383195B33B100DA0FCC /* datePickingThing.m in Sources */,
+				BA365AAD19998DF9008E6975 /* UploadingButton.m in Sources */,
 				BA32997319489A730002EBFD /* landingPageViewController.m in Sources */,
 				BA6F5EDD194ED5B100E1E1FC /* NSMutableDictionary+attributesDictionary.m in Sources */,
 				BA3299761948B91E0002EBFD /* showServerData.m in Sources */,
@@ -734,6 +820,7 @@
 				BA67F1B8193666210056DD00 /* main.m in Sources */,
 				BA1194B61990B4F60032DEC6 /* PreviewView.m in Sources */,
 				BA6F5EDA194ED05700E1E1FC /* attributesDictionary.m in Sources */,
+				BA6694341999CAFF00412313 /* DateRange.m in Sources */,
 				BA67F209193667140056DD00 /* dummyDataProvider.m in Sources */,
 				BA89B37F195B29E700DA0FCC /* imageInformationConstants.m in Sources */,
 				BA6F5EED194F192900E1E1FC /* UIImage+imageAdditions.m in Sources */,
@@ -741,6 +828,9 @@
 				BA6F5EE3194EFE6F00E1E1FC /* largeImageViewer.m in Sources */,
 				BA9531B3194E4A27005E0F10 /* imageInfoPagerVC.m in Sources */,
 				BA3299A51948BA430002EBFD /* TFDataCommunicator.m in Sources */,
+				BA365A88199649B8008E6975 /* StoryCreationViewController.m in Sources */,
+				BA365A9319969545008E6975 /* StoryCellTableViewCell.m in Sources */,
+				BA66942C19999CA300412313 /* StoriesDisplayTable.m in Sources */,
 				7F03D0D3194E805C00558278 /* basicInfoCell.m in Sources */,
 				BA67F21C193BC4AA0056DD00 /* NSDate+timelineStuff.m in Sources */,
 			);
