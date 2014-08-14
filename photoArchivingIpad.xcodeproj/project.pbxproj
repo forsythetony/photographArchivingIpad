@@ -402,8 +402,6 @@
 				BA67F1BD193666210056DD00 /* Main.storyboard */,
 				BA67F1BA193666210056DD00 /* AppDelegate.h */,
 				BA67F1BB193666210056DD00 /* AppDelegate.m */,
-				BA3299A11948BA430002EBFD /* TFDataCommunicator.h */,
-				BA3299A21948BA430002EBFD /* TFDataCommunicator.m */,
 				BA669454199A1C1300412313 /* Story+StoryHelpers.h */,
 				BA669455199A1C1300412313 /* Story+StoryHelpers.m */,
 				BA365A9B1996B79E008E6975 /* TFDataCommunicator+Helpers.h */,
@@ -431,12 +429,11 @@
 				BA6694321999CAFF00412313 /* DateRange.h */,
 				BA6694331999CAFF00412313 /* DateRange.m */,
 				BA67F1C3193666210056DD00 /* Images.xcassets */,
+				BAD9F365199D847F00107D3A /* Data */,
 				BA89B37B195B227400DA0FCC /* Attributes Dictionary */,
-				BAD9F363199D842100107D3A /* Local Data */,
 				BA67F1F2193667140056DD00 /* oldClasses */,
 				BA365AA41999696D008E6975 /* Story Creation */,
 				BA0F645419787FEF000588A8 /* Landing Page */,
-				BABF16A8195330CC00FF01C0 /* Photo Uploading */,
 			);
 			path = photoArchivingIpad;
 			sourceTree = "<group>";
@@ -635,6 +632,17 @@
 				BA6694301999C72400412313 /* dummy2.json */,
 			);
 			name = JSON;
+			sourceTree = "<group>";
+		};
+		BAD9F365199D847F00107D3A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				BABF16A8195330CC00FF01C0 /* Photo Uploading */,
+				BA3299A11948BA430002EBFD /* TFDataCommunicator.h */,
+				BA3299A21948BA430002EBFD /* TFDataCommunicator.m */,
+				BAD9F363199D842100107D3A /* Local Data */,
+			);
+			name = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
