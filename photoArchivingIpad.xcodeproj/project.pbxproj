@@ -359,6 +359,7 @@
 			isa = PBXGroup;
 			children = (
 				BA67F1B1193666210056DD00 /* photoArchivingIpad */,
+				BA67F1B2193666210056DD00 /* Supporting Files */,
 				BA67F1D0193666210056DD00 /* photoArchivingIpadTests */,
 				BA67F1AA193666210056DD00 /* Frameworks */,
 				BA67F1A9193666210056DD00 /* Products */,
@@ -398,31 +399,21 @@
 		BA67F1B1193666210056DD00 /* photoArchivingIpad */ = {
 			isa = PBXGroup;
 			children = (
-				BA0F645419787FEF000588A8 /* Landing Page */,
-				BABF16A8195330CC00FF01C0 /* Photo Uploading */,
+				BA67F1BD193666210056DD00 /* Main.storyboard */,
+				BA67F1BA193666210056DD00 /* AppDelegate.h */,
+				BA67F1BB193666210056DD00 /* AppDelegate.m */,
 				BA3299A11948BA430002EBFD /* TFDataCommunicator.h */,
 				BA3299A21948BA430002EBFD /* TFDataCommunicator.m */,
 				BA669454199A1C1300412313 /* Story+StoryHelpers.h */,
 				BA669455199A1C1300412313 /* Story+StoryHelpers.m */,
-				BA365AA21996BBA4008E6975 /* dummyData.json */,
-				BA6694301999C72400412313 /* dummy2.json */,
 				BA365A9B1996B79E008E6975 /* TFDataCommunicator+Helpers.h */,
 				BA365A9C1996B79E008E6975 /* TFDataCommunicator+Helpers.m */,
 				BA6F5EDE194EEFB200E1E1FC /* updatedConstants.h */,
 				BA6F5EDF194EEFB200E1E1FC /* updatedConstants.m */,
-				BA89B37B195B227400DA0FCC /* Attributes Dictionary */,
 				BA3299A31948BA430002EBFD /* TFPerson.h */,
 				BA3299A41948BA430002EBFD /* TFPerson.m */,
-				BA67F1E0193667140056DD00 /* images */,
-				BA67F1F2193667140056DD00 /* oldClasses */,
-				BA67F1BA193666210056DD00 /* AppDelegate.h */,
-				BA67F1BB193666210056DD00 /* AppDelegate.m */,
-				BA67F1BD193666210056DD00 /* Main.storyboard */,
 				BA67F1C0193666210056DD00 /* ViewController.h */,
 				BA67F1C1193666210056DD00 /* ViewController.m */,
-				BA365AA41999696D008E6975 /* Story Creation */,
-				BA67F1C3193666210056DD00 /* Images.xcassets */,
-				BA67F1B2193666210056DD00 /* Supporting Files */,
 				BA67F21A193BC4AA0056DD00 /* NSDate+timelineStuff.h */,
 				BA67F21B193BC4AA0056DD00 /* NSDate+timelineStuff.m */,
 				BA3299741948B91E0002EBFD /* showServerData.h */,
@@ -437,9 +428,15 @@
 				BA6F5EEC194F192900E1E1FC /* UIImage+imageAdditions.m */,
 				BABF1614195247FD00FF01C0 /* audioManagrer.h */,
 				BABF1615195247FD00FF01C0 /* audioManagrer.m */,
-				BA365AA01996B85D008E6975 /* data.json */,
 				BA6694321999CAFF00412313 /* DateRange.h */,
 				BA6694331999CAFF00412313 /* DateRange.m */,
+				BA67F1C3193666210056DD00 /* Images.xcassets */,
+				BA89B37B195B227400DA0FCC /* Attributes Dictionary */,
+				BAD9F363199D842100107D3A /* Local Data */,
+				BA67F1F2193667140056DD00 /* oldClasses */,
+				BA365AA41999696D008E6975 /* Story Creation */,
+				BA0F645419787FEF000588A8 /* Landing Page */,
+				BABF16A8195330CC00FF01C0 /* Photo Uploading */,
 			);
 			path = photoArchivingIpad;
 			sourceTree = "<group>";
@@ -456,6 +453,7 @@
 				BA67F1B9193666210056DD00 /* photoArchivingIpad-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			path = photoArchivingIpad;
 			sourceTree = "<group>";
 		};
 		BA67F1D0193666210056DD00 /* photoArchivingIpadTests */ = {
@@ -618,6 +616,25 @@
 				BA66942F1999A00A00412313 /* ImageInformationDisplayer.h */,
 			);
 			name = "Image Information";
+			sourceTree = "<group>";
+		};
+		BAD9F363199D842100107D3A /* Local Data */ = {
+			isa = PBXGroup;
+			children = (
+				BAD9F364199D842900107D3A /* JSON */,
+				BA67F1E0193667140056DD00 /* images */,
+			);
+			name = "Local Data";
+			sourceTree = "<group>";
+		};
+		BAD9F364199D842900107D3A /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				BA365AA21996BBA4008E6975 /* dummyData.json */,
+				BA365AA01996B85D008E6975 /* data.json */,
+				BA6694301999C72400412313 /* dummy2.json */,
+			);
+			name = JSON;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
