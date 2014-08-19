@@ -9,9 +9,16 @@
 #import <objc/message.h>
 #import "StoryCreationViewController.h"
 #import "StoriesDisplayTable.h"
+#import "ImageDisplay.h"
+#import "NSDictionary+ObjectCreationHelpers.h"
 
 #define TLWALLSPACING 100.0
 #define MAINSCROLLVIEWSIZE 4000.0
+
+//  Segue Constants
+
+NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
+
 
 @interface WorkspaceViewController () <StoryTellerCreationFormDelegate, UIAlertViewDelegate> {
     
@@ -143,7 +150,7 @@
         
         for (NSDictionary* dict in list)
         {
-            
+            /*
             NSLog(@"%@", dict);
             
             imageObject *obj = [imageObject new];
@@ -204,6 +211,24 @@
             
             [framez addObject:frame];
             }
+             */
+            
+            
+            imageObject *newImage = [dict convertToImageObject];
+            pictureFrame *frame = [pictureFrame createFrame];
+            
+
+                
+                [frame setImageObject:newImage];
+                
+                [frame setFrame:CGRectMake(
+                                           0.0  , 0.0,
+                                           70.0 , 70.0
+                                           )];
+                
+                [framez addObject:frame];
+
+            
             
         }
         
@@ -568,6 +593,12 @@
         
         [dest setInformation:_displayImageInformation];
         
+    }
+    else if( [segue.destinationViewController isKindOfClass:[ImageDisplay class]])
+    {
+        ImageDisplay *dest = (ImageDisplay*)segue.destinationViewController;
+        
+        dest.imageInformation = (imageObject*)sender;
     }
 }
 -(UIImage*)getImageViewForStoryType:(buttonIconType) storyType withButtonHeight:(float) buttonHeight
@@ -1196,6 +1227,7 @@
 }
 -(void)displayInformationForImage:(imageObject*) obj
 {
+    
     NSString *displayString = [NSString stringWithFormat:@"%@", obj.imageInformation];
     
     _imageInfoDisplay.text = displayString;
@@ -1211,7 +1243,7 @@
     [_imageInfoDisplay pop_addAnimation:alphaChange
                                  forKey:@"alphaChangeToOne"];
     
-    float   slideDelta      = 300.0,
+    float    slideDelta      = 300.0,
             slideInTo       = slideDelta - (slideDelta / 2.0),
             slideInFrom     = slideDelta;
 
@@ -1259,21 +1291,7 @@
     
     btn3Slide.fromValue = @(slideInFrom);
     btn3Slide.toValue = @(slideInTo);
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     [_addRecording.layer pop_addAnimation:btn2Slide forKey:@"buttonTwoSlideUp"];
     [_addRecording pop_addAnimation:alphaChange forKey:@"buttonTwoAlphaChange"];
     
@@ -1283,6 +1301,9 @@
     [_addOtherInfo pop_addAnimation:alphaChange forKey:@"otherInfoButtonAlpha"];
     [_addOtherInfo pop_addAnimation:btn3Slide forKey:@"btn3slide"];
     
+    
+    
+    //[self performSegueWithIdentifier:segueDisplayLargeImage sender:obj];
     
 }
 #pragma mark Delegate Methods

@@ -102,8 +102,13 @@
 		BABF16AE19533B7C00FF01C0 /* photoUploadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BABF16AD19533B7C00FF01C0 /* photoUploadingCell.m */; };
 		BABF16B4195368FE00FF01C0 /* photoUploadingConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BABF16B3195368FE00FF01C0 /* photoUploadingConstants.m */; };
 		BABF16B7195372A800FF01C0 /* ImagePackage.m in Sources */ = {isa = PBXBuildFile; fileRef = BABF16B6195372A800FF01C0 /* ImagePackage.m */; };
+		BACF0802199DB53B00F5F3E3 /* LargeImageDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = BACF0801199DB53B00F5F3E3 /* LargeImageDisplayView.m */; };
+		BACF080619A2B96400F5F3E3 /* NSDictionary+ObjectCreationHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = BACF080519A2B96400F5F3E3 /* NSDictionary+ObjectCreationHelpers.m */; };
 		BAD16301194A581A008144A0 /* UIView+Glow.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD16300194A581A008144A0 /* UIView+Glow.m */; };
 		BAD3C56B195A15A3004CE905 /* basicInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAD3C56A195A15A3004CE905 /* basicInfoCell.xib */; };
+		BAD9F36A199D851D00107D3A /* ImageDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD9F369199D851D00107D3A /* ImageDisplay.m */; };
+		BAD9F36F199D890700107D3A /* ImageDisplayRecordingSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD9F36E199D890700107D3A /* ImageDisplayRecordingSliderView.m */; };
+		BAD9F372199DABCF00107D3A /* StoryCreationForm.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD9F371199DABCF00107D3A /* StoryCreationForm.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -266,11 +271,22 @@
 		BABF16B3195368FE00FF01C0 /* photoUploadingConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = photoUploadingConstants.m; sourceTree = "<group>"; };
 		BABF16B5195372A800FF01C0 /* ImagePackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePackage.h; sourceTree = "<group>"; };
 		BABF16B6195372A800FF01C0 /* ImagePackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePackage.m; sourceTree = "<group>"; };
+		BACF0800199DB53B00F5F3E3 /* LargeImageDisplayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LargeImageDisplayView.h; sourceTree = "<group>"; };
+		BACF0801199DB53B00F5F3E3 /* LargeImageDisplayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LargeImageDisplayView.m; sourceTree = "<group>"; };
+		BACF080419A2B96400F5F3E3 /* NSDictionary+ObjectCreationHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+ObjectCreationHelpers.h"; path = "Categories/NSDictionary+ObjectCreationHelpers.h"; sourceTree = "<group>"; };
+		BACF080519A2B96400F5F3E3 /* NSDictionary+ObjectCreationHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+ObjectCreationHelpers.m"; path = "Categories/NSDictionary+ObjectCreationHelpers.m"; sourceTree = "<group>"; };
 		BAD162FD1949617E008144A0 /* imageHandling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imageHandling.h; sourceTree = "<group>"; };
 		BAD162FE194978AA008144A0 /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		BAD162FF194A581A008144A0 /* UIView+Glow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Glow.h"; sourceTree = "<group>"; };
 		BAD16300194A581A008144A0 /* UIView+Glow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Glow.m"; sourceTree = "<group>"; };
 		BAD3C56A195A15A3004CE905 /* basicInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = basicInfoCell.xib; sourceTree = "<group>"; };
+		BAD9F368199D851D00107D3A /* ImageDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDisplay.h; sourceTree = "<group>"; };
+		BAD9F369199D851D00107D3A /* ImageDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDisplay.m; sourceTree = "<group>"; };
+		BAD9F36C199D88CB00107D3A /* ImageDispaySubviews.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageDispaySubviews.h; sourceTree = "<group>"; };
+		BAD9F36D199D890700107D3A /* ImageDisplayRecordingSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageDisplayRecordingSliderView.h; path = "Image Display/ImageDisplayRecordingSliderView.h"; sourceTree = "<group>"; };
+		BAD9F36E199D890700107D3A /* ImageDisplayRecordingSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageDisplayRecordingSliderView.m; path = "Image Display/ImageDisplayRecordingSliderView.m"; sourceTree = "<group>"; };
+		BAD9F370199DABCF00107D3A /* StoryCreationForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryCreationForm.h; sourceTree = "<group>"; };
+		BAD9F371199DABCF00107D3A /* StoryCreationForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryCreationForm.m; sourceTree = "<group>"; };
 		D480C1DDB6EC466E8C8C3EAD /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -404,8 +420,6 @@
 				BA67F1BB193666210056DD00 /* AppDelegate.m */,
 				BA669454199A1C1300412313 /* Story+StoryHelpers.h */,
 				BA669455199A1C1300412313 /* Story+StoryHelpers.m */,
-				BA365A9B1996B79E008E6975 /* TFDataCommunicator+Helpers.h */,
-				BA365A9C1996B79E008E6975 /* TFDataCommunicator+Helpers.m */,
 				BA6F5EDE194EEFB200E1E1FC /* updatedConstants.h */,
 				BA6F5EDF194EEFB200E1E1FC /* updatedConstants.m */,
 				BA3299A31948BA430002EBFD /* TFPerson.h */,
@@ -430,9 +444,11 @@
 				BA6694331999CAFF00412313 /* DateRange.m */,
 				BA67F1C3193666210056DD00 /* Images.xcassets */,
 				BAD9F365199D847F00107D3A /* Data */,
+				BACF080319A2B94100F5F3E3 /* Categories */,
 				BA89B37B195B227400DA0FCC /* Attributes Dictionary */,
 				BA67F1F2193667140056DD00 /* oldClasses */,
 				BA365AA41999696D008E6975 /* Story Creation */,
+				BAD9F367199D84F700107D3A /* Image Display */,
 				BA0F645419787FEF000588A8 /* Landing Page */,
 			);
 			path = photoArchivingIpad;
@@ -592,6 +608,15 @@
 			name = "Photo Uploading";
 			sourceTree = "<group>";
 		};
+		BACF080319A2B94100F5F3E3 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				BACF080419A2B96400F5F3E3 /* NSDictionary+ObjectCreationHelpers.h */,
+				BACF080519A2B96400F5F3E3 /* NSDictionary+ObjectCreationHelpers.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		BAD3C569195A10BA004CE905 /* Image Information */ = {
 			isa = PBXGroup;
 			children = (
@@ -637,12 +662,38 @@
 		BAD9F365199D847F00107D3A /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				BABF16A8195330CC00FF01C0 /* Photo Uploading */,
+				BA365A9B1996B79E008E6975 /* TFDataCommunicator+Helpers.h */,
+				BA365A9C1996B79E008E6975 /* TFDataCommunicator+Helpers.m */,
 				BA3299A11948BA430002EBFD /* TFDataCommunicator.h */,
 				BA3299A21948BA430002EBFD /* TFDataCommunicator.m */,
+				BABF16A8195330CC00FF01C0 /* Photo Uploading */,
 				BAD9F363199D842100107D3A /* Local Data */,
 			);
 			name = Data;
+			sourceTree = "<group>";
+		};
+		BAD9F367199D84F700107D3A /* Image Display */ = {
+			isa = PBXGroup;
+			children = (
+				BAD9F368199D851D00107D3A /* ImageDisplay.h */,
+				BAD9F369199D851D00107D3A /* ImageDisplay.m */,
+				BAD9F36C199D88CB00107D3A /* ImageDispaySubviews.h */,
+				BAD9F36B199D88B100107D3A /* Subviews */,
+			);
+			name = "Image Display";
+			sourceTree = "<group>";
+		};
+		BAD9F36B199D88B100107D3A /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				BAD9F36D199D890700107D3A /* ImageDisplayRecordingSliderView.h */,
+				BAD9F36E199D890700107D3A /* ImageDisplayRecordingSliderView.m */,
+				BAD9F370199DABCF00107D3A /* StoryCreationForm.h */,
+				BAD9F371199DABCF00107D3A /* StoryCreationForm.m */,
+				BACF0800199DB53B00F5F3E3 /* LargeImageDisplayView.h */,
+				BACF0801199DB53B00F5F3E3 /* LargeImageDisplayView.m */,
+			);
+			name = Subviews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -813,6 +864,7 @@
 			files = (
 				BA0BE0B81943B3E40054F7C7 /* workspaceAuxView.m in Sources */,
 				BA0F645719788101000588A8 /* PhotoUploadManager.m in Sources */,
+				BAD9F36A199D851D00107D3A /* ImageDisplay.m in Sources */,
 				BA6F5EE0194EEFB200E1E1FC /* updatedConstants.m in Sources */,
 				BA365A9D1996B79E008E6975 /* TFDataCommunicator+Helpers.m in Sources */,
 				BABF16B4195368FE00FF01C0 /* photoUploadingConstants.m in Sources */,
@@ -820,6 +872,7 @@
 				BA365AA719996992008E6975 /* StoryRecordingMeter.m in Sources */,
 				BA3299A61948BA430002EBFD /* TFPerson.m in Sources */,
 				BA67F21F193BCC3A0056DD00 /* timelineManager.m in Sources */,
+				BACF0802199DB53B00F5F3E3 /* LargeImageDisplayView.m in Sources */,
 				BABF16AB195339DD00FF01C0 /* photoUploadingViewController.m in Sources */,
 				BA67F211193670D60056DD00 /* timelineLabelView.m in Sources */,
 				BABF16B7195372A800FF01C0 /* ImagePackage.m in Sources */,
@@ -829,16 +882,19 @@
 				BABF16AE19533B7C00FF01C0 /* photoUploadingCell.m in Sources */,
 				BAD16301194A581A008144A0 /* UIView+Glow.m in Sources */,
 				BA67F20B193667140056DD00 /* pictureFrame.m in Sources */,
+				BACF080619A2B96400F5F3E3 /* NSDictionary+ObjectCreationHelpers.m in Sources */,
 				BA6694371999E10200412313 /* InformationForm+InformationFormAdditions.m in Sources */,
 				BA67F1C2193666210056DD00 /* ViewController.m in Sources */,
 				BA9531BB194E51BB005E0F10 /* socialInformationVC.m in Sources */,
 				BA9531AD194E2CC6005E0F10 /* pagerInformationVC.m in Sources */,
 				BA89B383195B33B100DA0FCC /* datePickingThing.m in Sources */,
+				BAD9F36F199D890700107D3A /* ImageDisplayRecordingSliderView.m in Sources */,
 				BA365AAD19998DF9008E6975 /* UploadingButton.m in Sources */,
 				BA32997319489A730002EBFD /* landingPageViewController.m in Sources */,
 				BA6F5EDD194ED5B100E1E1FC /* NSMutableDictionary+attributesDictionary.m in Sources */,
 				BA3299761948B91E0002EBFD /* showServerData.m in Sources */,
 				BA669456199A1C1300412313 /* Story+StoryHelpers.m in Sources */,
+				BAD9F372199DABCF00107D3A /* StoryCreationForm.m in Sources */,
 				BA67F1BC193666210056DD00 /* AppDelegate.m in Sources */,
 				BA6F5ED1194EC66400E1E1FC /* UIColor+testingColors.m in Sources */,
 				BA9531B7194E4E2B005E0F10 /* imageInformationVC.m in Sources */,
