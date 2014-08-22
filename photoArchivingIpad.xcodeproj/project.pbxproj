@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1338B06FDE54485BAF55439A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61ECDBD286AB45A0BA37A749 /* libPods.a */; };
 		7F03D0D3194E805C00558278 /* basicInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F03D0D2194E805C00558278 /* basicInfoCell.m */; };
+		BA0183E219A7ECA200416EB9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA0183E119A7ECA200416EB9 /* libPods.a */; };
 		BA0BE0B81943B3E40054F7C7 /* workspaceAuxView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0BE0B71943B3E40054F7C7 /* workspaceAuxView.m */; };
 		BA0F645719788101000588A8 /* PhotoUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0F645619788101000588A8 /* PhotoUploadManager.m */; };
 		BA1194B61990B4F60032DEC6 /* PreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1194B51990B4F60032DEC6 /* PreviewView.m */; };
@@ -125,6 +125,7 @@
 		61ECDBD286AB45A0BA37A749 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F03D0D1194E805C00558278 /* basicInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = basicInfoCell.h; sourceTree = "<group>"; };
 		7F03D0D2194E805C00558278 /* basicInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = basicInfoCell.m; sourceTree = "<group>"; };
+		BA0183E119A7ECA200416EB9 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		BA0BE0B61943B3E40054F7C7 /* workspaceAuxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = workspaceAuxView.h; sourceTree = "<group>"; };
 		BA0BE0B71943B3E40054F7C7 /* workspaceAuxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = workspaceAuxView.m; sourceTree = "<group>"; };
 		BA0F645519788101000588A8 /* PhotoUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoUploadManager.h; sourceTree = "<group>"; };
@@ -295,6 +296,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA0183E219A7ECA200416EB9 /* libPods.a in Frameworks */,
 				BABF162019526A3500FF01C0 /* MediaPlayer.framework in Frameworks */,
 				BABF161C19526A1600FF01C0 /* AudioToolbox.framework in Frameworks */,
 				BABF161819526A0400FF01C0 /* CFNetwork.framework in Frameworks */,
@@ -305,7 +307,6 @@
 				BA67F1AE193666210056DD00 /* CoreGraphics.framework in Frameworks */,
 				BA67F1B0193666210056DD00 /* UIKit.framework in Frameworks */,
 				BA67F1AC193666210056DD00 /* Foundation.framework in Frameworks */,
-				1338B06FDE54485BAF55439A /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +396,7 @@
 		BA67F1AA193666210056DD00 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BA0183E119A7ECA200416EB9 /* libPods.a */,
 				BABF161F19526A3500FF01C0 /* MediaPlayer.framework */,
 				BABF161D19526A2B00FF01C0 /* libxml2.dylib */,
 				BABF161B19526A1600FF01C0 /* AudioToolbox.framework */,
@@ -1052,6 +1054,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "photoArchivingIpad/photoArchivingIpad-Prefix.pch";
 				INFOPLIST_FILE = "photoArchivingIpad/photoArchivingIpad-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -1075,6 +1081,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "photoArchivingIpad/photoArchivingIpad-Prefix.pch";
 				INFOPLIST_FILE = "photoArchivingIpad/photoArchivingIpad-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;

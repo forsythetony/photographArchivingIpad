@@ -12,7 +12,7 @@
 
 NSString* const timelineSegue = @"showTimeline";
 
-NSString* const keyTitle = @"keyTitle";
+
 NSString* const keyTimeline = @"keyTimeline";
 
 @interface landingPageViewController () <UIActionSheetDelegate>
