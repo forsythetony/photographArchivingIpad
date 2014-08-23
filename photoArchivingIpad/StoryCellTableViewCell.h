@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <ImageInformationForm/Story.h>
+#import "Story.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <AVFoundation/AVAudioPlayer.h>

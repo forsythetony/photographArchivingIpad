@@ -88,15 +88,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 			<string>this is a test license
 </string>
 			<key>Title</key>
-			<string>ImageInformationForm</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>this is a test license
-</string>
-			<key>Title</key>
 			<string>ImageTaker</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>

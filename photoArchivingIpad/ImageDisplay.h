@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <ImageInformationForm/imageObject.h>
+#import "imageObject.h"
+
 #import "ImageDispaySubviews.h"
 
 @interface ImageDisplay : UIViewController

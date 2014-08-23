@@ -15,17 +15,17 @@
     self = [super init];
     
     if (self) {
-        
+        /*
         [self addInfoFormToView:infoContainer];
         [self addImageTakerToView:takerContainer];
-        
+        */
     }
     
     return self;
 }
 
 #pragma mark Helper Functions - 
-
+/*
 -(void)addInfoFormToView:(UIView*) container
 {
     _infoForm = [[InformationForm alloc] init];
@@ -37,6 +37,7 @@
     [_infoForm addTestCells];
     
 }
+*/
 -(void)addImageTakerToView:(UIView*) container
 {
     _imageTaker = [[ImageTakerViewController alloc] init];

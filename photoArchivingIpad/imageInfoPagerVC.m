@@ -8,7 +8,6 @@
 
 #import "imageInfoPagerVC.h"
 #import "ImageInformationDisplayer.h"
-#import <InformationForm.h>
 
 @interface imageInfoPagerVC ()
 
@@ -52,19 +51,24 @@
 }
 -(void)dataSetup
 {
+    
     NSMutableArray *VCs = [NSMutableArray new];
+    /*
     
     InformationForm *infoForm = [InformationForm new];
     
     infoForm.view.frame = self.view.frame;
     
-
+    [VCs addObject:infoForm];
+    
+    */
+    
     StoriesDisplayTable *stories = [StoriesDisplayTable new];
     
     stories.view.frame = self.view.frame;
     
 
-    [VCs addObject:infoForm];
+    
     [VCs addObject:stories];    
     NSArray *viewControllers = [NSArray arrayWithArray:VCs];
     
@@ -86,6 +90,7 @@
 */
 -(void)updateImageInformation:(imageObject *)theImage
 {
+    /*
     for (NSUInteger i = 0 ; i < [_pageVCs count]; i++) {
         
         if (![[_pageVCs objectAtIndex:i] isKindOfClass:[InformationForm class]]) {
@@ -96,6 +101,13 @@
             [[_pageVCs objectAtIndex:i] updateFormWithInformation:theImage];
         }
         
+    }
+    */
+    
+    for (NSUInteger i = 0 ; i < [_pageVCs count]; i++) {
+        
+        [[_pageVCs objectAtIndex:i] updateInformationForImage:theImage];
+    
     }
     
     

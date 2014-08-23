@@ -31,7 +31,6 @@
 		BA66942D19999CA300412313 /* StoriesDisplayTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA66942B19999CA300412313 /* StoriesDisplayTable.xib */; };
 		BA6694311999C72400412313 /* dummy2.json in Resources */ = {isa = PBXBuildFile; fileRef = BA6694301999C72400412313 /* dummy2.json */; };
 		BA6694341999CAFF00412313 /* DateRange.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6694331999CAFF00412313 /* DateRange.m */; };
-		BA6694371999E10200412313 /* InformationForm+InformationFormAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6694361999E10200412313 /* InformationForm+InformationFormAdditions.m */; };
 		BA669456199A1C1300412313 /* Story+StoryHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = BA669455199A1C1300412313 /* Story+StoryHelpers.m */; };
 		BA67F1AC193666210056DD00 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA67F1AB193666210056DD00 /* Foundation.framework */; };
 		BA67F1AE193666210056DD00 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA67F1AD193666210056DD00 /* CoreGraphics.framework */; };
@@ -84,6 +83,8 @@
 		BA6F5EE9194F12B700E1E1FC /* greyzz@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = BA6F5EE7194F12B700E1E1FC /* greyzz@2X.png */; };
 		BA6F5EEA194F12B700E1E1FC /* greyzz.png in Resources */ = {isa = PBXBuildFile; fileRef = BA6F5EE8194F12B700E1E1FC /* greyzz.png */; };
 		BA6F5EED194F192900E1E1FC /* UIImage+imageAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6F5EEC194F192900E1E1FC /* UIImage+imageAdditions.m */; };
+		BA7525D419A7F3AD007DD95E /* imageObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7525D119A7F3AD007DD95E /* imageObject.m */; };
+		BA7525D519A7F3AD007DD95E /* Story.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7525D319A7F3AD007DD95E /* Story.m */; };
 		BA89B37F195B29E700DA0FCC /* imageInformationConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BA89B37E195B29E700DA0FCC /* imageInformationConstants.m */; };
 		BA89B383195B33B100DA0FCC /* datePickingThing.m in Sources */ = {isa = PBXBuildFile; fileRef = BA89B381195B33B100DA0FCC /* datePickingThing.m */; };
 		BA89B384195B33B100DA0FCC /* datePickingThing.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA89B382195B33B100DA0FCC /* datePickingThing.xib */; };
@@ -163,8 +164,6 @@
 		BA6694301999C72400412313 /* dummy2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dummy2.json; sourceTree = "<group>"; };
 		BA6694321999CAFF00412313 /* DateRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateRange.h; sourceTree = "<group>"; };
 		BA6694331999CAFF00412313 /* DateRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateRange.m; sourceTree = "<group>"; };
-		BA6694351999E10200412313 /* InformationForm+InformationFormAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "InformationForm+InformationFormAdditions.h"; sourceTree = "<group>"; };
-		BA6694361999E10200412313 /* InformationForm+InformationFormAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "InformationForm+InformationFormAdditions.m"; sourceTree = "<group>"; };
 		BA669454199A1C1300412313 /* Story+StoryHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Story+StoryHelpers.h"; sourceTree = "<group>"; };
 		BA669455199A1C1300412313 /* Story+StoryHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Story+StoryHelpers.m"; sourceTree = "<group>"; };
 		BA67F1A8193666210056DD00 /* photoArchivingIpad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photoArchivingIpad.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -238,6 +237,10 @@
 		BA6F5EE8194F12B700E1E1FC /* greyzz.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greyzz.png; sourceTree = "<group>"; };
 		BA6F5EEB194F192900E1E1FC /* UIImage+imageAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+imageAdditions.h"; sourceTree = "<group>"; };
 		BA6F5EEC194F192900E1E1FC /* UIImage+imageAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+imageAdditions.m"; sourceTree = "<group>"; };
+		BA7525D019A7F3AD007DD95E /* imageObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imageObject.h; sourceTree = "<group>"; };
+		BA7525D119A7F3AD007DD95E /* imageObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = imageObject.m; sourceTree = "<group>"; };
+		BA7525D219A7F3AD007DD95E /* Story.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Story.h; sourceTree = "<group>"; };
+		BA7525D319A7F3AD007DD95E /* Story.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Story.m; sourceTree = "<group>"; };
 		BA89B37C195B281A00DA0FCC /* imageInformationUpdater.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imageInformationUpdater.h; sourceTree = "<group>"; };
 		BA89B37D195B29E700DA0FCC /* imageInformationConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imageInformationConstants.h; sourceTree = "<group>"; };
 		BA89B37E195B29E700DA0FCC /* imageInformationConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = imageInformationConstants.m; sourceTree = "<group>"; };
@@ -366,8 +369,6 @@
 				BA365A9019969545008E6975 /* StoryCellTableViewCell.h */,
 				BA365A9119969545008E6975 /* StoryCellTableViewCell.m */,
 				BA365A9219969545008E6975 /* StoryCellTableViewCell.xib */,
-				BA6694351999E10200412313 /* InformationForm+InformationFormAdditions.h */,
-				BA6694361999E10200412313 /* InformationForm+InformationFormAdditions.m */,
 			);
 			name = Stories;
 			sourceTree = "<group>";
@@ -417,6 +418,10 @@
 		BA67F1B1193666210056DD00 /* photoArchivingIpad */ = {
 			isa = PBXGroup;
 			children = (
+				BA7525D019A7F3AD007DD95E /* imageObject.h */,
+				BA7525D119A7F3AD007DD95E /* imageObject.m */,
+				BA7525D219A7F3AD007DD95E /* Story.h */,
+				BA7525D319A7F3AD007DD95E /* Story.m */,
 				BA67F1BD193666210056DD00 /* Main.storyboard */,
 				BA67F1BA193666210056DD00 /* AppDelegate.h */,
 				BA67F1BB193666210056DD00 /* AppDelegate.m */,
@@ -867,6 +872,7 @@
 				BA0BE0B81943B3E40054F7C7 /* workspaceAuxView.m in Sources */,
 				BA0F645719788101000588A8 /* PhotoUploadManager.m in Sources */,
 				BAD9F36A199D851D00107D3A /* ImageDisplay.m in Sources */,
+				BA7525D519A7F3AD007DD95E /* Story.m in Sources */,
 				BA6F5EE0194EEFB200E1E1FC /* updatedConstants.m in Sources */,
 				BA365A9D1996B79E008E6975 /* TFDataCommunicator+Helpers.m in Sources */,
 				BABF16B4195368FE00FF01C0 /* photoUploadingConstants.m in Sources */,
@@ -885,7 +891,6 @@
 				BAD16301194A581A008144A0 /* UIView+Glow.m in Sources */,
 				BA67F20B193667140056DD00 /* pictureFrame.m in Sources */,
 				BACF080619A2B96400F5F3E3 /* NSDictionary+ObjectCreationHelpers.m in Sources */,
-				BA6694371999E10200412313 /* InformationForm+InformationFormAdditions.m in Sources */,
 				BA67F1C2193666210056DD00 /* ViewController.m in Sources */,
 				BA9531BB194E51BB005E0F10 /* socialInformationVC.m in Sources */,
 				BA9531AD194E2CC6005E0F10 /* pagerInformationVC.m in Sources */,
@@ -902,6 +907,7 @@
 				BA9531B7194E4E2B005E0F10 /* imageInformationVC.m in Sources */,
 				BA67F1B8193666210056DD00 /* main.m in Sources */,
 				BA1194B61990B4F60032DEC6 /* PreviewView.m in Sources */,
+				BA7525D419A7F3AD007DD95E /* imageObject.m in Sources */,
 				BA6F5EDA194ED05700E1E1FC /* attributesDictionary.m in Sources */,
 				BA6694341999CAFF00412313 /* DateRange.m in Sources */,
 				BA67F209193667140056DD00 /* dummyDataProvider.m in Sources */,

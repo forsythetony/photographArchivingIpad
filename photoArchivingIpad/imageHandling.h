@@ -16,8 +16,8 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <FontAwesomeKit.h>
 #import "UIView+Glow.h"
-
-#import <ImageInformationForm/ImageObject.h>
+#import "Story.h"
+#import "imageObject.h"
 #import "pictureFrame.h"
 
 #endif

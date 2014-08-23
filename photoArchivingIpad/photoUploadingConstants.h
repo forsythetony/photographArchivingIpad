@@ -43,3 +43,32 @@ extern NSString * const jsonKeyStories_stringID;
 extern NSString * const APIAddStoryURLParam;
 extern NSString * const APISetupStoryURLParam;
 extern NSString * const APIDeleteStoryWithID;
+
+
+@class photoUploadingConstants;
+
+@interface photoUploadingConstants : NSObject
+
+
++(NSString*)getLabelDateTaken;
++(NSString*)getLabelDateUploaded;
++(NSString*)getLabelTakenBy;
++(NSString*)getLabelTitle;
++(NSString*)getLabelUploadedBy;
++(NSString*)getLabelConfidence;
+
++(NSString*)getKeyDateTaken;
++(NSString*)getKeyDateUploaded;
++(NSString*)getKeyPhotographerName;
++(NSString*)getKeyTitle;
+
+
+/*
+ Image Information Constants
+ */
++(NSString*)getFieldTypeTitle;
++(NSString*)getFieldTypeDateTaken;
++(NSString*)getFieldTypeHasEdited;
+
+
+@end

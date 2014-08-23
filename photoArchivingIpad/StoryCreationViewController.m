@@ -10,7 +10,7 @@
 
 #import <AVFoundation/AVFoundation.h>
 
-#import <ImageInformationForm/Story.h>
+#import "Story.h"
 #import "TFDataCommunicator.h"
 #import "NSMutableDictionary+attributesDictionary.h"
 #import "Story+StoryHelpers.h"

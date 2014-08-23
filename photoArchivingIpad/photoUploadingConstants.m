@@ -42,3 +42,75 @@ NSString * const APIAddStoryURLParam = @"?addStory=adding";
 NSString * const APISetupStoryURLParam = @"?addStory=setup";
 NSString * const APIDeleteStoryWithID = @"?deleteStoryWithID=";
 NSString * const jsonKeyStories_stringID = @"stringId";
+
+
+@implementation photoUploadingConstants
+
+/*
+ Keys
+ */
++(NSString *)getKeyDateTaken
+{
+    return @"keyDateTakenJSON";
+}
+
++(NSString *)getKeyDateUploaded
+{
+    return @"keyDateUploadedJSON";
+}
+
++(NSString *)getKeyPhotographerName
+{
+    return @"keyPhotographerNameJSON";
+}
+
++(NSString *)getKeyTitle
+{
+    return @"keyTitleJSON";
+}
+
+/*
+ Labels
+ */
++(NSString *)getLabelDateTaken
+{
+    return @"Date Taken";
+}
++(NSString *)getLabelTakenBy
+{
+    return @"Taken By";
+}
++(NSString *)getLabelDateUploaded
+{
+    return @"Date Uploaded";
+}
++(NSString *)getLabelTitle
+{
+    return @"Title";
+}
++(NSString *)getLabelConfidence
+{
+    return @"Confidence";
+}
++(NSString *)getLabelUploadedBy
+{
+    return @"Uploaded By";
+}
+
+/*
+ Image Information Constants
+ */
+
++(NSString *)getFieldTypeTitle
+{
+    return @"fieldTitle";
+}
++(NSString *)getFieldTypeDateTaken
+{
+    return @"fieldDateTaken";
+}
++(NSString *)getFieldTypeHasEdited
+{
+    return @"fieldTypeHasEdited";
+}
+@end

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <imageObject.h>
+#import "imageObject.h"
 
 @interface NSDictionary (ObjectCreationHelpers)
 

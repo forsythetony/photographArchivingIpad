@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <ImageInformationForm/ImageObject.h>
+#import "imageObject.h"
 
 @protocol ImageInformationDisplayer <NSObject>
 

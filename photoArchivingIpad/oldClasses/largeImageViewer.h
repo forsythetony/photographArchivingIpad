@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <POP.h>
-#import <ImageInformationForm/ImageObject.h>
+#import "imageObject.h"
 
 #import "imageHandling.h"
 #import <LiveFrost.h>

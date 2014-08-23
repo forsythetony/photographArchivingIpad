@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import <ImageInformationForm/ImageObject.h>
+#import "imageObject.h"
 #import "WorkspaceViewController.h"
 #import "pageViewControllers.h"
 #import "StoriesDisplayTable.h"

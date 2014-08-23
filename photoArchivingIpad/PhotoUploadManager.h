@@ -8,12 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-#import <InformationForm.h>
 #import <ImageTakerViewController.h>
 
 @interface PhotoUploadManager : NSObject
 
-@property (strong, nonatomic) InformationForm *infoForm;
+//@property (strong, nonatomic) InformationForm *infoForm;
 @property (strong, nonatomic) ImageTakerViewController *imageTaker;
 
 -(id)initWithInfoContainer:(UIView*) infoContainer andImageTakerContainer:(UIView*) takerContainer;
