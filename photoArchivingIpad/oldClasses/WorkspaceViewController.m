@@ -13,7 +13,7 @@
 #import "NSDictionary+ObjectCreationHelpers.h"
 
 #define TLWALLSPACING 100.0
-#define MAINSCROLLVIEWSIZE 4000.0
+#define MAINSCROLLVIEWSIZE 10000.0
 
 //  Segue Constants
 
