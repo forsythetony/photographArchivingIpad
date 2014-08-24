@@ -231,6 +231,9 @@ NSString* const keyTimeline = @"keyTimeline";
     [timelineArray addObject:@{keyTitle: @"1950 - 2000",
                                keyTimeline: [DateRange createRangeWithStartYear:1950 andEndYear:2000]}];
     
+    [timelineArray addObject:@{keyTitle: @"1900 - 2000",
+                               keyTimeline: [DateRange createRangeWithStartYear:1900 andEndYear:2000]}];
+    
     dateRanges = [NSArray arrayWithArray:timelineArray];
     
     
