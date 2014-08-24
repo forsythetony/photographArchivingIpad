@@ -36,6 +36,8 @@
     imageScrollView.zoomScale = self.frame.size.width / displayedImage.size.width;
     imageScrollView.maximumZoomScale = 10.0;
     imageScrollView.minimumZoomScale = 0.1;
+    imageScrollView.showsHorizontalScrollIndicator = NO;
+    imageScrollView.showsVerticalScrollIndicator = NO;
     _displayedImage = displayedImage;
     
 }
