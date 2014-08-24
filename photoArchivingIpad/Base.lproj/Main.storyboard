@@ -112,7 +112,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" patternImage="EA7A7F51-3AA1-49D0-AB3E-CA37982E4B84" colorSpace="pattern"/>
+                                        <color key="backgroundColor" patternImage="3EDD130A-BCDC-41D5-B42F-069DA82EE73B" colorSpace="pattern"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -380,7 +380,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="EA7A7F51-3AA1-49D0-AB3E-CA37982E4B84" width="320" height="460">
+        <image name="3EDD130A-BCDC-41D5-B42F-069DA82EE73B" width="320" height="460">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

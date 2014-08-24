@@ -25,6 +25,7 @@
     }
     return self;
 }
+
 -(void)setDisplayedImage:(UIImage *)displayedImage
 {
     imageScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
@@ -38,17 +39,10 @@
     _displayedImage = displayedImage;
     
 }
+
 -(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
     return [[UIImageView alloc] initWithImage:_displayedImage];
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

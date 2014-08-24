@@ -1303,7 +1303,7 @@ NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
     
     
     
-    //[self performSegueWithIdentifier:segueDisplayLargeImage sender:obj];
+    [self performSegueWithIdentifier:segueDisplayLargeImage sender:obj];
     
 }
 #pragma mark Delegate Methods
