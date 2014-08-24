@@ -98,7 +98,10 @@
     _startDate  = startDate;
     _endDate    = endDate;
     
+    
     _pureStart  = [_startDate timeIntervalSinceBeginning];
+    
+    
     _pureEnd    = [_endDate timeIntervalSinceBeginning];
     
     _TLView     = tlview;
@@ -167,6 +170,7 @@
 }
 -(float)getRandomFloatWithDate:(NSDate*) theDate
 {
+    
     float timeInt = (float)[theDate timeIntervalSinceBeginning];
     
     float result = fmod(timeInt, 2.0);
@@ -177,6 +181,7 @@
 }
 -(float)getDistanceBetweenPoints:(CGPoint) pointOne andTwo:(CGPoint) pointTwo
 {
+    
     float xDiff = fabsf(pointTwo.x - pointOne.x);
     float yDiff = fabsf(pointTwo.y - pointOne.y);
     
@@ -187,6 +192,7 @@
 }
 -(float)distanceFromLineToPoint:(CGPoint) thePoint
 {
+    
     CGPoint linePoint = [_lineCenter CGPointValue];
     
     float distance = fabsf(thePoint.y - linePoint.y);

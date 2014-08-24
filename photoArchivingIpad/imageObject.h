@@ -17,7 +17,7 @@
 
 @property (nonatomic, strong) NSString *id;
 @property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSDate* date;
+@property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) NSString *uploader;
 @property (nonatomic, strong) NSString *confidence;
 

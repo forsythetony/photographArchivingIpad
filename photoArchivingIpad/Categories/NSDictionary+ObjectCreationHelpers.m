@@ -60,7 +60,7 @@ NSString * const KEYThumbnailURL        = @"thumbnailURL";
     //  Set Properties
     
     newObject.title = imageInfoDictionary[KEYImageInformation_Title];
-    newObject.date  = imageInfoDictionary[KEYImageInformation_DateTaken][KEYImageInformation_DateTaken_DateString];
+    newObject.date  = [NSDate dateWithv1String:imageInfoDictionary[KEYImageInformation_DateTaken][KEYImageInformation_DateTaken_DateString]];
     newObject.confidence = imageInfoDictionary[KEYImageInformation_DateTaken][KEYImageInformation_DateTaken_Confidence];
     
     newObject.photoURL = [NSURL URLWithString:self[KEYImageURL]];
@@ -88,6 +88,7 @@ NSString * const KEYThumbnailURL        = @"thumbnailURL";
         newStory.recordingS3Url = [NSURL URLWithString:dict[KEYStories_RecordingURL]];
         newStory.storyTeller = [NSURL URLWithString:dict[KEYStories_Storyteller]];
         newStory.stringId = dict[KEYStories_StringID];
+        
         newStory.storyDate = [NSDate dateWithv1String:dict[KEYStories_Date]];
         
         [storiesArr addObject:newStory];

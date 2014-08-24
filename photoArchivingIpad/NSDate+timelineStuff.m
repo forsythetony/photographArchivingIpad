@@ -30,9 +30,15 @@
     
     [fm setDateFormat:formatString];
     
-    return [fm dateFromString:v1String];
+    NSDate *returnDate = [fm dateFromString:v1String];
     
+    NSString *dateDescription = [returnDate description];
+    
+    NSLog(@"\nDescription of the date is: %@\n", dateDescription);
+    
+    return returnDate;
 }
+
 +(NSDate*)dateWithYear:(NSNumber*) year
 {
     
@@ -48,6 +54,7 @@
 }
 -(NSTimeInterval)timeIntervalSinceBeginning
 {
+    
     NSString *formatString  = @"M/dd/yyyy";
     NSString *dateString    = @"1/01/0001";
     
