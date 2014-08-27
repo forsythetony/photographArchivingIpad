@@ -112,7 +112,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" patternImage="A20407B1-A84F-4CFE-B6F1-940F3149BABD" colorSpace="pattern"/>
+                                        <color key="backgroundColor" patternImage="B7622BA0-C1C1-40C9-B41A-55BB09EEA2B2" colorSpace="pattern"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -289,6 +289,16 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="omx-Cc-ctW">
+                                <rect key="frame" x="547" y="705" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapSaveStory:" destination="KBA-GO-szo" eventType="touchUpInside" id="A5u-Dt-qv3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -297,6 +307,7 @@
                     <connections>
                         <outlet property="imageDisplaySliderCont" destination="1fh-NW-Hn7" id="toK-G2-3qD"/>
                         <outlet property="largeImageDisplayContainer" destination="PDw-Js-aYn" id="rrR-rp-tu5"/>
+                        <outlet property="saveStoryButton" destination="omx-Cc-ctW" id="dgd-g7-wns"/>
                         <outlet property="storyCreationContainer" destination="wgj-Qe-PKb" id="t63-pC-nzG"/>
                         <outlet property="testLabel" destination="Et8-K3-4FU" id="rp7-yy-xo6"/>
                     </connections>
@@ -380,7 +391,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="A20407B1-A84F-4CFE-B6F1-940F3149BABD" width="320" height="460">
+        <image name="B7622BA0-C1C1-40C9-B41A-55BB09EEA2B2" width="320" height="460">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

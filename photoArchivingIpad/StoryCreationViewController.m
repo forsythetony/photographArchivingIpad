@@ -37,7 +37,7 @@
 @implementation StoryCreationViewController
 @synthesize titleLabel, storytellerLabel, dateLabel;
 @synthesize titleValue, storytellerValue, datePickerView;
-
+@synthesize recordingContainer, recordingTimeLabel, recordingTitle, recordingTitleTitle, recordingTimeTitle;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -101,6 +101,33 @@
     storytellerValue.autocapitalizationType = UITextAutocapitalizationTypeWords;
     [storytellerValue setDelegate:self];
     
+    recordingTitle.text = @"New Recording";
+    recordingTitle.alpha = 0.0;
+    
+    recordingTimeLabel.text = @"0";
+    recordingTimeLabel.alpha = 0.0;
+    
+    UIFont *titleTitleFont = [UIFont fontWithName:@"DINAlternate-Bold" size:9.0];
+    
+    
+    recordingTitleTitle.font = titleTitleFont;
+    
+    recordingTitleTitle.backgroundColor = [UIColor clearColor];
+    recordingTitleTitle.textColor = [UIColor charcoalColor];
+    recordingTitleTitle.alpha = 0.0;
+    
+    recordingTimeTitle.font = titleTitleFont;
+    recordingTimeTitle.backgroundColor = [UIColor clearColor];
+    recordingTimeTitle.textColor = [UIColor charcoalColor];
+    recordingTimeTitle.alpha = 0.0;
+    
+    
+    UIFont *valueFont = [UIFont fontWithName:@"DINAlternate-Bold" size:15.0];
+
+    recordingTitle.font = valueFont;
+    
+    recordingTimeLabel.font = valueFont;
+    
 }
 #pragma mark - AVAudioPlayerDelegate
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -160,12 +187,33 @@
     return inputView;
     
 }
+- (IBAction)tappedSaveButton:(id)sender {
+    
+    
+}
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     if (textField == titleValue ) {
         
         [self.updaterDelegate didUpdateTitle:titleValue.text];
     }
+}
+-(void)didAddRecording:(PAARecording *)recording
+{
+    _myRecording = recording;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+
+        recordingTimeLabel.text = [NSString stringWithFormat:@"%d %@", recording.recordingLength, @"seconds"];
+        
+        recordingTimeLabel.alpha = 1.0;
+        recordingTimeTitle.alpha = 1.0;
+        recordingTitleTitle.alpha = 1.0;
+        
+        recordingTitle.alpha = 1.0;
+
+    });
+    
 }
 -(void)nextButton:(id) sender
 {

@@ -29,6 +29,7 @@
 @property (nonatomic, weak) id <ImageDisplayStoryUpdater> updaterDelegate;
 
 @property (nonatomic, strong) imageObject *information;
+@property (nonatomic, strong) PAARecording *myRecording;
 
 @property (nonatomic, strong) NSURL *s3URL;
 
@@ -41,7 +42,15 @@
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePickerView;
 
+@property (weak, nonatomic) IBOutlet UIButton *saveButton;
 
+@property (weak, nonatomic) IBOutlet UIView *recordingContainer;
+@property (weak, nonatomic) IBOutlet UILabel *recordingTitle;
+@property (weak, nonatomic) IBOutlet UILabel *recordingTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *recordingTitleTitle;
+@property (weak, nonatomic) IBOutlet UILabel *recordingTimeTitle;
+
+-(void)didAddRecording:(PAARecording*) recording;
 
 
 

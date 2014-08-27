@@ -14,7 +14,7 @@
 @protocol ImageDisplayRecordingSliderViewDelegate <NSObject>
 
 -(void)didSlideToRecordLock;
--(void)didUnlockSlider;
+-(void)didUnlockSliderWithRecordingTime:(NSInteger) recordingTime;
 
 @end
 

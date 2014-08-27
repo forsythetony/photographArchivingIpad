@@ -10,6 +10,8 @@
 #import <pop/POP.h>
 #import <Colours.h>
 
+#define CORNERRADIUS 45.0
+
 typedef struct SliderBounds_t {
     
     CGFloat leftBound;
@@ -46,6 +48,7 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
     BOOL releaseToRecord;
     
     UILabel *recSliderLabel;
+    UILabel *recSliderTimeLabel;
     
     NSTimer *recordingTimer;
     NSInteger secondsPassed;
@@ -102,7 +105,7 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
     UIColor *sliderLineColor = [UIColor charcoalColor];
     
     
-    sliderLineHeight = self.frame.size.height / 4.0;
+    sliderLineHeight = self.frame.size.height * 0.75;
     sliderLineWidth = self.frame.size.width * .75;
     
     sliderOrigin = getNewOrigin(self.frame.size, CGSizeMake(sliderLineWidth, sliderLineHeight));
@@ -119,17 +122,31 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
     
     CGRect labelFrame = sliderLineView.bounds;
     
+
+    
+    CGFloat widthOfRecSlider = self.frame.size.height * 0.8;
+    
+    CGFloat widthOfLabel = sliderLineView.bounds.size.width - widthOfRecSlider - 5.0;
+    CGFloat xOriginOfLabel = widthOfRecSlider + 5.0;
+    
+    labelFrame.size.width = widthOfLabel;
+    labelFrame.origin.x = xOriginOfLabel;
+    
     relLabel = [[UILabel alloc] initWithFrame:labelFrame];
     
+
     //  Set label Properties
     
     relLabel.text = @"Slide to Record";
     
-    relLabel.textAlignment = NSTextAlignmentCenter;
+    relLabel.textAlignment = NSTextAlignmentLeft;
     relLabel.alpha = 1.0;
     relLabel.textColor = [UIColor whiteColor];
     [sliderLineView addSubview:relLabel];
     recSliderLabel = relLabel;
+    
+    
+    sliderLineView.layer.cornerRadius = CORNERRADIUS;
     
     return sliderLineView;
 }
@@ -148,8 +165,8 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
     
     UIColor *recSliderColor = [UIColor fadedBlueColor];
     
-    recSliderWidth = 20.0;
-    recSliderHeight = self.frame.size.height * 0.75;
+    recSliderWidth = self.frame.size.height * 0.8;
+    recSliderHeight = self.frame.size.height * 0.8;
     
     recSliderOrigin = CGPointMake(0.0, 0.0);
     
@@ -161,6 +178,24 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
     recordingSlider.backgroundColor = recSliderColor;
     
     
+    
+    CGFloat sliderTimeLabelHeight = recSliderFrame.size.height / 3;
+    
+    CGFloat sliderTimeLabelWidth = recSliderFrame.size.width * 0.8;
+    
+    CGRect sliderTimeLabelFrame = CGRectMake(0.0, 0.0, sliderTimeLabelWidth, sliderTimeLabelHeight);
+    
+    recSliderTimeLabel = [[UILabel alloc] initWithFrame:sliderTimeLabelFrame];
+    [recordingSlider addSubview:recSliderTimeLabel];
+    recSliderTimeLabel.center = recordingSlider.center;
+    
+    recSliderTimeLabel.font = [UIFont fontWithName:@"DINAlternate-Bold" size:20.0];
+    recSliderTimeLabel.textColor = [UIColor whiteColor];
+    recSliderTimeLabel.textAlignment = NSTextAlignmentCenter;
+    
+    recSliderTimeLabel.alpha = 0.0;
+    
+    
     //  Add gesture recognizer
     
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(updateRecordingSliderPosition:)];
@@ -170,6 +205,9 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
     
     [recordingSlider addGestureRecognizer:panGestureRecognizer];
     [recordingSlider addGestureRecognizer:tapGest];
+    
+    recordingSlider.layer.cornerRadius = CORNERRADIUS;
+    
     return recordingSlider;
     
 }
@@ -236,6 +274,14 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
         trans = CGPointMake(firstPoint.x + trans.x, [[sender view] center].y);
         
         [[sender view] setCenter:trans];
+        CGFloat newAlpha = [self calculateAlphaValueForPoint:trans.x];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            recSliderLabel.alpha = newAlpha;
+            
+        });
+        
     }
     
     
@@ -287,11 +333,12 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
                 finalY = 1024;
             }
         }
-        
+        /*
         NSLog(@"\nRecording Area Bounds are: {%f , %f}", recSliderBounds.recordingAreaLeftBound, recSliderBounds.rightBound);
         
         NSLog(@"\nFinal X: %f\nFinal Y: %f", finalX, finalY);
         NSLog(@"\nNew X trans %f", newXTrans);
+        */
         
         if (newXTrans >= recSliderBounds.recordingAreaLeftBound) {
             [self performSelectorOnMainThread:@selector(lockRecSliderAtEnd:) withObject:nil waitUntilDone:NO];
@@ -310,6 +357,11 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
 {
     [self startTimer];
     
+    dispatch_async(dispatch_get_main_queue(), ^{
+        recSliderLabel.text = @"Recording";
+        
+    });
+    
 }
 -(void)stoppedRecording
 {
@@ -319,9 +371,12 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
 {
     [recordingTimer invalidate];
     recordingTimer = nil;
+    recSliderTimeLabel.alpha = 0.0;
+    
 }
 -(void)startTimer
 {
+    recSliderTimeLabel.alpha = 1.0;
     secondsPassed = 0;
     
     recordingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimer:) userInfo:nil repeats:YES];
@@ -330,15 +385,14 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
 {
     secondsPassed += 1;
     
-    NSString *recText = @"Recording ";
     
     NSString *timerText = [NSString stringWithFormat:@"%d", secondsPassed];
     
-    NSString *labelText = [NSString stringWithFormat:@"%@%@", recText, timerText];
+    NSString *labelText = [NSString stringWithFormat:@"%@s", timerText];
     
     dispatch_async(dispatch_get_main_queue(), ^{
     
-        [recSliderLabel setText:labelText];
+        [recSliderTimeLabel setText:labelText];
         
     });
     
@@ -417,7 +471,7 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
     POPSpringAnimation *colorChange = [POPSpringAnimation animation];
     colorChange.property = [POPAnimatableProperty propertyWithName:kPOPViewBackgroundColor];
     
-    colorChange.toValue = [UIColor chartreuseColor];
+    colorChange.toValue = [UIColor redColor];
     
     [self setAnimationSpeedFast:colorChange];
     
@@ -437,7 +491,7 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
     if (isSliderLocker) {
         
         [self performSelectorOnMainThread:@selector(sendRecSliderBackToStart:) withObject:nil waitUntilDone:NO];
-        [self.delegate didUnlockSlider];
+        [self.delegate didUnlockSliderWithRecordingTime:secondsPassed];
         
         POPSpringAnimation *shrinkAni = [POPSpringAnimation animation];
         shrinkAni.property = [POPAnimatableProperty propertyWithName:kPOPLayerScaleXY];
@@ -599,5 +653,19 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
     // Drawing code
 }
 */
+-(CGFloat)calculateAlphaValueForPoint:(CGFloat) thePoint
+{
+    CGFloat leftBound = firstPoint.x;
+    CGFloat rightBound = firstPoint.x + recSliderLine.bounds.size.width - recSlider.bounds.size.width;
+    
+    CGFloat totalSpace = rightBound - leftBound;
+    
+    
+    
+    thePoint = thePoint - leftBound;
+   // NSLog(@"TotalSpace is: %f\nThe Point is: %f", totalSpace, thePoint);
+    
+    return 1 - (thePoint / totalSpace);
+}
 
 @end

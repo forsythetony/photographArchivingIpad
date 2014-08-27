@@ -35,6 +35,9 @@
 @implementation ImageDisplay
 @synthesize imageInformation;
 @synthesize imageDisplaySliderCont, largeImageDisplayContainer;
+@synthesize currentStory, currentRecording;
+@synthesize saveStoryButton;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -87,6 +90,11 @@
     [mainCom retrieveImageWithURL:[imageInformation.photoURL absoluteString]];
     
     
+    //  Button Setup
+    
+    [saveStoryButton setTitle:@"Save Story" forState:UIControlStateNormal];
+    [saveStoryButton setEnabled:NO];
+    
     
     formController = form;
     [self audioPlayerSetup];
@@ -113,7 +121,7 @@
 -(void)didSlideToRecordLock
 {
     
-    _currentStory = [Story setupWithRandomID];
+    currentStory = [Story setupWithRandomID];
     
     _testLabel.text = @"Recording";
 
@@ -137,7 +145,7 @@
 
     
 }
--(void)didUnlockSlider
+-(void)didUnlockSliderWithRecordingTime:(NSInteger)recordingTime
 {
     
     _testLabel.text = @"Stopped Recording";
@@ -150,9 +158,15 @@
     
     NSLog(@"The recorders url string is %@", recorderURL.absoluteString);
     
+    currentRecording = [PAARecording new];
+    
+    currentRecording.title = @"Some title";
+    currentRecording.recordingLength = recordingTime;
     
     [mainCom uploadAudioFileWithUrl:recorder.url andKey:[[NSDate date] displayDateOfType:sdatetypeURL]];
     [sliderView stoppedRecording];
+    
+
     
 }
 /*
@@ -160,7 +174,12 @@
 */
 -(void)finishedUploadingRequestWithData:(NSDictionary *)data
 {
-    NSString *recordingURLString = data[keyImageURL];
+
+    currentRecording.s3URL = data[keyImageURL];
+    
+    [formController didAddRecording:currentRecording];
+    
+    [saveStoryButton setEnabled:YES];
     
 }
 -(void)finishedPullingImageFromUrl:(UIImage *)image
@@ -205,11 +224,11 @@
 
 -(BOOL)didUpdateTitle:(NSString *)newTitle
 {
-    BOOL isSuccessful;
+    BOOL isSuccessful = YES;
     
-    NSLog(@"The new title is %@", newTitle);
-    
-    isSuccessful = YES;
+    if (currentStory) {
+        currentStory.title = newTitle;
+    }
     
     return  isSuccessful;
 }
@@ -218,12 +237,26 @@
     BOOL isSuccess = YES;
     
     
-    NSLog(@"The date was updated to %@", newDate.description);
-    
-    
+    if (currentStory) {
+        currentStory.storyDate = newDate;
+    }
     
     return isSuccess;
 }
-
+-(BOOL)didUpdateStoryteller:(NSString *)newStoryteller
+{
+    BOOL isSuccess = YES;
+    
+    if(currentStory)
+    {
+        currentStory.storyTeller = newStoryteller;
+    }
+    
+    return isSuccess;
+}
+- (IBAction)didTapSaveStory:(id)sender {
+    
+    
+}
 
 @end
