@@ -11,8 +11,10 @@
 #import "TFDataCommunicator.h"
 #import <AVFoundation/AVFoundation.h>
 #import "Story+StoryHelpers.h"
+#import "StoriesDisplayTableview.h"
+#import "ImageDisplay+testThingies.h"
 
-@interface ImageDisplay () <ImageDisplayRecordingSliderViewDelegate, TFCommunicatorDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate> {
+@interface ImageDisplay () <ImageDisplayRecordingSliderViewDelegate, TFCommunicatorDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITableViewDataSource, UITableViewDelegate> {
     
     //  Audio stuff
     
@@ -27,6 +29,9 @@
     StoryCreationViewController *formController;
     LargeImageDisplayView *displayView;
     TFDataCommunicator *mainCom;
+    StoriesDisplayTableview *storiesList;
+    
+    NSArray *currentStories;
 }
 
 
@@ -52,6 +57,10 @@
 {
     [super viewDidLoad];
     
+    [self aestheticsConfiguration];
+    
+    currentStories = imageInformation.stories;
+    
     //  Set up data communicator
     
     mainCom = [TFDataCommunicator new];
@@ -71,17 +80,17 @@
     [imageDisplaySliderCont addSubview:sliderView];
     
     _testLabel.text = @"";
+    
+    CGRect storiesListFrame = _storyCreationContainer.bounds;
+    
+    storiesList = [[StoriesDisplayTableview alloc] initWithFrame:storiesListFrame];
+    storiesList.delegate = self;
+    storiesList.dataSource = self;
+    
+    
+    [_storyCreationContainer addSubview:storiesList];
+    
 
-    StoryCreationViewController *form = [[StoryCreationViewController alloc] initWithNibName:@"AddStoryForm" bundle:[NSBundle mainBundle]];
-    form.updaterDelegate = self;
-    
-    
-    form.view.frame = CGRectMake(1000.0, 0.0, _storyCreationContainer.bounds.size.width, _storyCreationContainer.bounds.size.height);
-    
-    [_storyCreationContainer addSubview:form.view];
-    [self addChildViewController:form];
-    [form didMoveToParentViewController:self];
-    
     
 
     displayView = [[LargeImageDisplayView alloc] initWithFrame:largeImageDisplayContainer.bounds];
@@ -96,8 +105,26 @@
     [saveStoryButton setEnabled:NO];
     
     
-    formController = form;
+
     [self audioPlayerSetup];
+    
+}
+-(void)viewDidAppear:(BOOL)animated
+{
+    [storiesList reloadData];
+}
+-(void)aestheticsConfiguration
+{
+    //  Set Background Pattern/Color
+    
+    UIImage *patternImage = [UIImage imageNamed:@"subtle_carbon.png"];
+    
+    UIColor *mainBackgroundColor = [UIColor colorWithPatternImage:patternImage];
+    
+    self.view.backgroundColor = mainBackgroundColor;
+    
+    _storyCreationContainer.backgroundColor = [UIColor charcoalColor];
+    
     
 }
 -(void)moveFormToView
@@ -120,7 +147,17 @@
 
 -(void)didSlideToRecordLock
 {
+    formController = [[StoryCreationViewController alloc] initWithNibName:@"AddStoryForm" bundle:[NSBundle mainBundle]];
+    formController.updaterDelegate = self;
     
+    
+    formController.view.frame = CGRectMake(1000.0, 0.0, _storyCreationContainer.bounds.size.width, _storyCreationContainer.bounds.size.height);
+    
+    [_storyCreationContainer addSubview:formController.view];
+    [self addChildViewController:formController];
+    [formController didMoveToParentViewController:self];
+    
+
     currentStory = [Story setupWithRandomID];
     
     _testLabel.text = @"Recording";
@@ -178,6 +215,8 @@
     currentRecording.s3URL = data[keyImageURL];
     
     [formController didAddRecording:currentRecording];
+    
+    currentStory.audioRecording = currentRecording;
     
     [saveStoryButton setEnabled:YES];
     
@@ -256,7 +295,152 @@
 }
 - (IBAction)didTapSaveStory:(id)sender {
     
+    NSLog(@"Data For Current Story\nTitle: %@\nStoryTeller: %@\nDate: %@", currentStory.title, currentStory.storyTeller, [currentStory.storyDate description]);
+    
+    currentStory.audioRecording = currentRecording;
+    
+    [mainCom addStoryToImage:currentStory imageObject:imageInformation];
+    
+    
+
+    
+    [self removeStoryFromView];
     
 }
+-(void)finishedAddingStoryWithHTTPResponseCode:(NSInteger)responseCode
+{
+    if (responseCode == 201) {
+        
+        [self addStoryToList:currentStory];
+        
+        currentStory = nil;
+        currentRecording = nil;
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error adding the story to the photograph." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        
+        [alert show];
+    }
+}
+-(void)addStoryToList:(Story*) newStory
+{
+    NSMutableArray *storiesarr;
+    if (currentStories) {
+        storiesarr = [NSMutableArray arrayWithArray:currentStories];
+    }
+    else
+    {
+        storiesarr = [NSMutableArray new];
+    }
+    
+    
+    
+    
+    [storiesarr addObject:newStory];
+    
+    currentStories = [NSArray arrayWithArray:storiesarr];
+    
+    [storiesList reloadData];
+    
+}
+-(void)removeStoryFromView
+{
+    CGRect currentStoryFrame = formController.view.frame;
+    CGRect newStoryControllerFrame = currentStoryFrame;
+    
+    newStoryControllerFrame.origin.x += 1000.0;
+    
+    POPSpringAnimation *moveControllerAway = [POPSpringAnimation animation];
+    moveControllerAway.property = [POPAnimatableProperty propertyWithName:kPOPViewFrame];
+    
+    moveControllerAway.fromValue = [NSValue valueWithCGRect:currentStoryFrame];
+    moveControllerAway.toValue = [NSValue valueWithCGRect:newStoryControllerFrame];
+    
+    [moveControllerAway setCompletionBlock:^(POPAnimation *ani, BOOL maybe) {
+        [formController removeFromParentViewController ];
+        formController = nil;
+        
+    }];
+    
+    [formController.view pop_addAnimation:moveControllerAway forKey:@"moveingAway"];
+}
+/*
+    Stories Display Table view stuff
+*/
 
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    if (tableView == storiesList) {
+        return 1;
+    }
+    
+    return 0;
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (tableView == storiesList) {
+        return [currentStories count];
+    }
+
+    return 0;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString * storiesListCellID = @"storiesTableViewCell";
+    
+    StoriesDisplayTableviewCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:storiesListCellID];
+    
+    if (cell == nil) {
+        
+        UINib *cellNib = [UINib nibWithNibName:@"StoriesDisplayTableviewCellTableViewCell" bundle:[NSBundle mainBundle]];
+        
+        [tableView registerNib:cellNib forCellReuseIdentifier:storiesListCellID];
+        
+        
+        
+    }
+    
+    cell = (StoriesDisplayTableviewCellTableViewCell*)[tableView dequeueReusableCellWithIdentifier:storiesListCellID];
+    
+    [cell setMyStory:[currentStories objectAtIndex:indexPath.row]];
+    
+    return cell;
+    
+}
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView == storiesList) {
+        return YES;
+    }
+    
+    return NO;
+}
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        NSInteger cellIndex = indexPath.row;
+        
+        NSMutableArray *stories = [NSMutableArray arrayWithArray:currentStories];
+        
+        [tableView beginUpdates];
+        [stories removeObjectAtIndex:cellIndex];
+        currentStories = [NSArray arrayWithArray:stories];
+        
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [tableView endUpdates];
+        
+        
+    }
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView == storiesList) {
+        return 174.0;
+    }
+    
+    return 10.0;
+    
+}
 @end

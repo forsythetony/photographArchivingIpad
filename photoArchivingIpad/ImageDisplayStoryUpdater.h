@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-//#import "Story.h"
+#import "Story.h"
 
 @protocol ImageDisplayStoryUpdater <NSObject>
 
 -(BOOL)didUpdateTitle:(NSString*) newTitle;
 -(BOOL)didUpdateDate:(NSDate*) newDate;
 -(BOOL)didUpdateStoryteller:(NSString*) newStoryteller;
+
 @end

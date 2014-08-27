@@ -28,6 +28,10 @@
 		BA365AA719996992008E6975 /* StoryRecordingMeter.m in Sources */ = {isa = PBXBuildFile; fileRef = BA365AA619996992008E6975 /* StoryRecordingMeter.m */; };
 		BA365AAD19998DF9008E6975 /* UploadingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BA365AAC19998DF9008E6975 /* UploadingButton.m */; };
 		BA4C4BCA19ADCB46009C9C16 /* PAARecording.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4C4BC919ADCB46009C9C16 /* PAARecording.m */; };
+		BA4C4BD219ADF553009C9C16 /* StoriesDisplayTableview.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4C4BD119ADF553009C9C16 /* StoriesDisplayTableview.m */; };
+		BA4C4BD719ADF58D009C9C16 /* StoriesDisplayTableviewCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4C4BD519ADF58D009C9C16 /* StoriesDisplayTableviewCellTableViewCell.m */; };
+		BA4C4BD819ADF58D009C9C16 /* StoriesDisplayTableviewCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4C4BD619ADF58D009C9C16 /* StoriesDisplayTableviewCellTableViewCell.xib */; };
+		BA4C4BDB19ADFAA4009C9C16 /* ImageDisplay+testThingies.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4C4BDA19ADFAA4009C9C16 /* ImageDisplay+testThingies.m */; };
 		BA66942C19999CA300412313 /* StoriesDisplayTable.m in Sources */ = {isa = PBXBuildFile; fileRef = BA66942A19999CA300412313 /* StoriesDisplayTable.m */; };
 		BA66942D19999CA300412313 /* StoriesDisplayTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA66942B19999CA300412313 /* StoriesDisplayTable.xib */; };
 		BA6694311999C72400412313 /* dummy2.json in Resources */ = {isa = PBXBuildFile; fileRef = BA6694301999C72400412313 /* dummy2.json */; };
@@ -161,6 +165,13 @@
 		BA4C4BC719ADC6A5009C9C16 /* ImageDisplayStoryUpdater.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageDisplayStoryUpdater.h; sourceTree = "<group>"; };
 		BA4C4BC819ADCB46009C9C16 /* PAARecording.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAARecording.h; sourceTree = "<group>"; };
 		BA4C4BC919ADCB46009C9C16 /* PAARecording.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAARecording.m; sourceTree = "<group>"; };
+		BA4C4BD019ADF553009C9C16 /* StoriesDisplayTableview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoriesDisplayTableview.h; sourceTree = "<group>"; };
+		BA4C4BD119ADF553009C9C16 /* StoriesDisplayTableview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoriesDisplayTableview.m; sourceTree = "<group>"; };
+		BA4C4BD419ADF58D009C9C16 /* StoriesDisplayTableviewCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoriesDisplayTableviewCellTableViewCell.h; sourceTree = "<group>"; };
+		BA4C4BD519ADF58D009C9C16 /* StoriesDisplayTableviewCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoriesDisplayTableviewCellTableViewCell.m; sourceTree = "<group>"; };
+		BA4C4BD619ADF58D009C9C16 /* StoriesDisplayTableviewCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoriesDisplayTableviewCellTableViewCell.xib; sourceTree = "<group>"; };
+		BA4C4BD919ADFAA4009C9C16 /* ImageDisplay+testThingies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ImageDisplay+testThingies.h"; sourceTree = "<group>"; };
+		BA4C4BDA19ADFAA4009C9C16 /* ImageDisplay+testThingies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ImageDisplay+testThingies.m"; sourceTree = "<group>"; };
 		BA66942919999CA300412313 /* StoriesDisplayTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoriesDisplayTable.h; sourceTree = "<group>"; };
 		BA66942A19999CA300412313 /* StoriesDisplayTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoriesDisplayTable.m; sourceTree = "<group>"; };
 		BA66942B19999CA300412313 /* StoriesDisplayTable.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoriesDisplayTable.xib; sourceTree = "<group>"; };
@@ -362,6 +373,18 @@
 				BA365AAC19998DF9008E6975 /* UploadingButton.m */,
 			);
 			name = "Story Creation";
+			sourceTree = "<group>";
+		};
+		BA4C4BD319ADF573009C9C16 /* Stories Table View */ = {
+			isa = PBXGroup;
+			children = (
+				BA4C4BD019ADF553009C9C16 /* StoriesDisplayTableview.h */,
+				BA4C4BD119ADF553009C9C16 /* StoriesDisplayTableview.m */,
+				BA4C4BD419ADF58D009C9C16 /* StoriesDisplayTableviewCellTableViewCell.h */,
+				BA4C4BD519ADF58D009C9C16 /* StoriesDisplayTableviewCellTableViewCell.m */,
+				BA4C4BD619ADF58D009C9C16 /* StoriesDisplayTableviewCellTableViewCell.xib */,
+			);
+			name = "Stories Table View";
 			sourceTree = "<group>";
 		};
 		BA66942E19999D1600412313 /* Stories */ = {
@@ -690,6 +713,8 @@
 				BA4C4BC919ADCB46009C9C16 /* PAARecording.m */,
 				BAD9F368199D851D00107D3A /* ImageDisplay.h */,
 				BAD9F369199D851D00107D3A /* ImageDisplay.m */,
+				BA4C4BD919ADFAA4009C9C16 /* ImageDisplay+testThingies.h */,
+				BA4C4BDA19ADFAA4009C9C16 /* ImageDisplay+testThingies.m */,
 				BAD9F36C199D88CB00107D3A /* ImageDispaySubviews.h */,
 				BA4C4BC719ADC6A5009C9C16 /* ImageDisplayStoryUpdater.h */,
 				BAD9F36B199D88B100107D3A /* Subviews */,
@@ -700,6 +725,7 @@
 		BAD9F36B199D88B100107D3A /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				BA4C4BD319ADF573009C9C16 /* Stories Table View */,
 				BAD9F36D199D890700107D3A /* ImageDisplayRecordingSliderView.h */,
 				BAD9F36E199D890700107D3A /* ImageDisplayRecordingSliderView.m */,
 				BAD9F370199DABCF00107D3A /* StoryCreationForm.h */,
@@ -821,6 +847,7 @@
 				BA67F2141937B5470056DD00 /* textured_paper_@2X.png in Resources */,
 				BA365A8A19964C43008E6975 /* AddStoryForm.xib in Resources */,
 				BA6F5EE5194EFEFF00E1E1FC /* largeImageViewer.xib in Resources */,
+				BA4C4BD819ADF58D009C9C16 /* StoriesDisplayTableviewCellTableViewCell.xib in Resources */,
 				BA365AA31996BBA4008E6975 /* dummyData.json in Resources */,
 				BA67F204193667140056DD00 /* martin_tn.png in Resources */,
 				BA67F2191937B9D80056DD00 /* subtle_carbon.png in Resources */,
@@ -905,6 +932,7 @@
 				BA89B383195B33B100DA0FCC /* datePickingThing.m in Sources */,
 				BAD9F36F199D890700107D3A /* ImageDisplayRecordingSliderView.m in Sources */,
 				BA365AAD19998DF9008E6975 /* UploadingButton.m in Sources */,
+				BA4C4BD219ADF553009C9C16 /* StoriesDisplayTableview.m in Sources */,
 				BA32997319489A730002EBFD /* landingPageViewController.m in Sources */,
 				BA6F5EDD194ED5B100E1E1FC /* NSMutableDictionary+attributesDictionary.m in Sources */,
 				BA3299761948B91E0002EBFD /* showServerData.m in Sources */,
@@ -912,11 +940,13 @@
 				BAD9F372199DABCF00107D3A /* StoryCreationForm.m in Sources */,
 				BA67F1BC193666210056DD00 /* AppDelegate.m in Sources */,
 				BA6F5ED1194EC66400E1E1FC /* UIColor+testingColors.m in Sources */,
+				BA4C4BDB19ADFAA4009C9C16 /* ImageDisplay+testThingies.m in Sources */,
 				BA9531B7194E4E2B005E0F10 /* imageInformationVC.m in Sources */,
 				BA67F1B8193666210056DD00 /* main.m in Sources */,
 				BA1194B61990B4F60032DEC6 /* PreviewView.m in Sources */,
 				BA7525D419A7F3AD007DD95E /* imageObject.m in Sources */,
 				BA6F5EDA194ED05700E1E1FC /* attributesDictionary.m in Sources */,
+				BA4C4BD719ADF58D009C9C16 /* StoriesDisplayTableviewCellTableViewCell.m in Sources */,
 				BA6694341999CAFF00412313 /* DateRange.m in Sources */,
 				BA67F209193667140056DD00 /* dummyDataProvider.m in Sources */,
 				BA89B37F195B29E700DA0FCC /* imageInformationConstants.m in Sources */,

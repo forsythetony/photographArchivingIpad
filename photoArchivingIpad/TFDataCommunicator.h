@@ -41,7 +41,7 @@ typedef NS_ENUM(NSInteger, serverResponseType) {
 -(void)finishedServerCleanup:(NSDictionary*) results;
 -(void)finishedUploadingRequestWithData:(NSDictionary*) data;
 -(void)finishedUploadingPhotoInfoToServer;
--(void)finishedAddingStory;
+-(void)finishedAddingStoryWithHTTPResponseCode:(NSInteger) responseCode;
 -(void)finishedDeletingStoryWithStatusCode:(NSInteger) statusCode;
 
 @end

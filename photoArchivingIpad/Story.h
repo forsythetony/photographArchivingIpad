@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PAARecording.h"
 
 
 @interface Story : NSObject
@@ -20,5 +21,6 @@
 @property (nonatomic, strong) NSNumber *recordingLength;
 @property (nonatomic, strong) NSString *stringId;
 
+@property (nonatomic, strong) PAARecording *audioRecording;
 
 @end

@@ -13,6 +13,11 @@
 #import "ImageDisplayStoryUpdater.h"
 #import "PAARecording.h"
 
+typedef NS_ENUM(NSInteger, textFieldType) {
+    textFieldTypeTitle,
+    textFieldTypeStoryteller
+    
+};
 @class StoryCreationViewController;
 
 @protocol StoryTellerCreationFormDelegate <NSObject>

@@ -86,6 +86,12 @@ NSString * const KEYThumbnailURL        = @"thumbnailURL";
         
         newStory.title = dict[KEYStories_Title];
         newStory.recordingS3Url = [NSURL URLWithString:dict[KEYStories_RecordingURL]];
+        
+        PAARecording *newRec = [PAARecording new];
+        newRec.s3URL = [NSURL URLWithString:dict[KEYStories_RecordingURL]];
+        
+        newStory.audioRecording = newRec;
+        
         newStory.storyTeller = [NSURL URLWithString:dict[KEYStories_Storyteller]];
         newStory.stringId = dict[KEYStories_StringID];
         

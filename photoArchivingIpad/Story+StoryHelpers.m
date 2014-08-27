@@ -15,7 +15,7 @@
 -(NSDictionary *)convertToDictionary
 {
     NSString *dateString = [self.storyDate displayDateOfType:sDateTypeSimple];
-    NSString *recordingURL = [self.recordingS3Url absoluteString];
+    NSString *recordingURL = [self.audioRecording.s3URL absoluteString];
     NSString *storyTeller = (self.storyTeller ? self.storyTeller : @"Noone");
     NSString *titleString = (self.title ? self.title : @"Untitled");
     NSString *stringID = self.stringId;

@@ -692,7 +692,7 @@
     NSMutableURLRequest *mutableReq = [[NSMutableURLRequest alloc] initWithURL:urlObject];
 
     mutableReq.HTTPBody = postData;
-    mutableReq.HTTPMethod = @"PUT";
+    mutableReq.HTTPMethod = @"POST";
     [mutableReq setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
@@ -701,11 +701,8 @@
         
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
         
-        if (httpResponse.statusCode == 201) {
-            
-            
-            
-        }
+        [self.delegate finishedAddingStoryWithHTTPResponseCode:httpResponse.statusCode];
+        
     }];
 }
 -(void)removeStoryFromImage:(imageObject *)theImage withStoryID:(NSString *)storyID

@@ -19,6 +19,7 @@
 @property (nonatomic, strong) Story* currentStory;
 @property (nonatomic, strong) PAARecording* currentRecording;
 
+
 @property (weak, nonatomic) IBOutlet UIView *imageDisplaySliderCont;
 @property (weak, nonatomic) IBOutlet UILabel *testLabel;
 @property (weak, nonatomic) IBOutlet UIView *storyCreationContainer;
