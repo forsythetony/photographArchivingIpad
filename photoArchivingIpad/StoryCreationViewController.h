@@ -21,6 +21,7 @@
 -(void)didSaveStory:(Story*) aStory;
 
 @end
+
 @interface StoryCreationViewController : UIViewController
 
 @property (nonatomic, weak) id <StoryTellerCreationFormDelegate> delegate;

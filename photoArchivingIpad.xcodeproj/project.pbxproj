@@ -27,6 +27,7 @@
 		BA365AA31996BBA4008E6975 /* dummyData.json in Resources */ = {isa = PBXBuildFile; fileRef = BA365AA21996BBA4008E6975 /* dummyData.json */; };
 		BA365AA719996992008E6975 /* StoryRecordingMeter.m in Sources */ = {isa = PBXBuildFile; fileRef = BA365AA619996992008E6975 /* StoryRecordingMeter.m */; };
 		BA365AAD19998DF9008E6975 /* UploadingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BA365AAC19998DF9008E6975 /* UploadingButton.m */; };
+		BA4C4BCA19ADCB46009C9C16 /* PAARecording.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4C4BC919ADCB46009C9C16 /* PAARecording.m */; };
 		BA66942C19999CA300412313 /* StoriesDisplayTable.m in Sources */ = {isa = PBXBuildFile; fileRef = BA66942A19999CA300412313 /* StoriesDisplayTable.m */; };
 		BA66942D19999CA300412313 /* StoriesDisplayTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA66942B19999CA300412313 /* StoriesDisplayTable.xib */; };
 		BA6694311999C72400412313 /* dummy2.json in Resources */ = {isa = PBXBuildFile; fileRef = BA6694301999C72400412313 /* dummy2.json */; };
@@ -158,6 +159,8 @@
 		BA365AAB19998DF9008E6975 /* UploadingButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadingButton.h; sourceTree = "<group>"; };
 		BA365AAC19998DF9008E6975 /* UploadingButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadingButton.m; sourceTree = "<group>"; };
 		BA4C4BC719ADC6A5009C9C16 /* ImageDisplayStoryUpdater.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageDisplayStoryUpdater.h; sourceTree = "<group>"; };
+		BA4C4BC819ADCB46009C9C16 /* PAARecording.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAARecording.h; sourceTree = "<group>"; };
+		BA4C4BC919ADCB46009C9C16 /* PAARecording.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAARecording.m; sourceTree = "<group>"; };
 		BA66942919999CA300412313 /* StoriesDisplayTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoriesDisplayTable.h; sourceTree = "<group>"; };
 		BA66942A19999CA300412313 /* StoriesDisplayTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoriesDisplayTable.m; sourceTree = "<group>"; };
 		BA66942B19999CA300412313 /* StoriesDisplayTable.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoriesDisplayTable.xib; sourceTree = "<group>"; };
@@ -688,6 +691,8 @@
 				BAD9F36C199D88CB00107D3A /* ImageDispaySubviews.h */,
 				BA4C4BC719ADC6A5009C9C16 /* ImageDisplayStoryUpdater.h */,
 				BAD9F36B199D88B100107D3A /* Subviews */,
+				BA4C4BC819ADCB46009C9C16 /* PAARecording.h */,
+				BA4C4BC919ADCB46009C9C16 /* PAARecording.m */,
 			);
 			name = "Image Display";
 			sourceTree = "<group>";
@@ -877,6 +882,7 @@
 				BA7525D519A7F3AD007DD95E /* Story.m in Sources */,
 				BA6F5EE0194EEFB200E1E1FC /* updatedConstants.m in Sources */,
 				BA365A9D1996B79E008E6975 /* TFDataCommunicator+Helpers.m in Sources */,
+				BA4C4BCA19ADCB46009C9C16 /* PAARecording.m in Sources */,
 				BABF16B4195368FE00FF01C0 /* photoUploadingConstants.m in Sources */,
 				BABF1616195247FD00FF01C0 /* audioManagrer.m in Sources */,
 				BA365AA719996992008E6975 /* StoryRecordingMeter.m in Sources */,

@@ -13,5 +13,6 @@
 @protocol ImageDisplayStoryUpdater <NSObject>
 
 -(BOOL)didUpdateTitle:(NSString*) newTitle;
-
+-(BOOL)didUpdateDate:(NSDate*) newDate;
+-(BOOL)didUpdateStoryteller:(NSString*) newStoryteller;
 @end

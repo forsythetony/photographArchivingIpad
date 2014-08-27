@@ -123,6 +123,17 @@
     
     return  isSuccessful;
 }
+-(BOOL)didUpdateDate:(NSDate *)newDate
+{
+    BOOL isSuccess = YES;
+    
+    
+    NSLog(@"The date was updated to %@", newDate.description);
+    
+    
+    
+    return isSuccess;
+}
 
 
 @end

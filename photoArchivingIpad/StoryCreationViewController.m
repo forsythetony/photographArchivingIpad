@@ -68,6 +68,10 @@
 
     [self setupVariables];
     [self aestheticsConfig];
+    
+    
+    [datePickerView addTarget:self action:@selector(dateWasUpdated:) forControlEvents:UIControlEventValueChanged];
+    
     [meterView addMeterToView];
 }
 
@@ -419,5 +423,12 @@
 -(void)nextButton:(id) sender
 {
     
+}
+-(void)dateWasUpdated:(UIDatePicker*) sender
+{
+    if (sender == datePickerView) {
+        
+        [self.updaterDelegate didUpdateDate:sender.date];
+    }
 }
 @end
