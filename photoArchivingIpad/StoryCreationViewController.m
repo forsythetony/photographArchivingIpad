@@ -63,12 +63,6 @@
 
 -(void)setupVariables
 {
-    recordingSeconds = 0;
-    recordingMilliseconds = 0;
-    totalTimeInMilliseconds = 0;
-    
-    levelPercentage = 0.0;
-    
     
     labelFont = [UIFont fontWithName:@"DINAlternate-Bold" size:20.0];
     labelTextColor = [UIColor blackColor];
