@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface Story : NSObject
 
 @property (nonatomic, strong) NSString *storyTeller;
@@ -18,5 +19,6 @@
 @property (nonatomic, strong) NSURL *recordingS3Url;
 @property (nonatomic, strong) NSNumber *recordingLength;
 @property (nonatomic, strong) NSString *stringId;
+
 
 @end

@@ -10,4 +10,9 @@
 
 @interface PAARecording : NSObject
 
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSURL *s3URL;
+@property (nonatomic, strong) NSURL *localURL;
+@property (nonatomic, assign) NSTimeInterval recordingLength;
+
 @end

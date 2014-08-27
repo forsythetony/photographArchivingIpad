@@ -23,4 +23,8 @@
 @property (nonatomic, weak) id <ImageDisplayRecordingSliderViewDelegate> delegate;
 @property (nonatomic, weak) id <ImageDisplayStoryUpdater> updaterDelegate;
 
+
+-(void)startedRecording;
+-(void)stoppedRecording;
+
 @end

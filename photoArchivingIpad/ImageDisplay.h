@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "imageObject.h"
+#import "PAARecording.h"
 
 #import "ImageDispaySubviews.h"
 
@@ -15,6 +16,8 @@
 
 
 @property (nonatomic, strong) imageObject* imageInformation;
+@property (nonatomic, strong) Story* currentStory;
+
 @property (weak, nonatomic) IBOutlet UIView *imageDisplaySliderCont;
 @property (weak, nonatomic) IBOutlet UILabel *testLabel;
 @property (weak, nonatomic) IBOutlet UIView *storyCreationContainer;

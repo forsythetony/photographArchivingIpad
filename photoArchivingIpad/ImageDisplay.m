@@ -9,8 +9,20 @@
 #import "ImageDisplay.h"
 #import <POP.h>
 #import "TFDataCommunicator.h"
+#import <AVFoundation/AVFoundation.h>
+#import "Story+StoryHelpers.h"
 
-@interface ImageDisplay () <ImageDisplayRecordingSliderViewDelegate, TFCommunicatorDelegate> {
+@interface ImageDisplay () <ImageDisplayRecordingSliderViewDelegate, TFCommunicatorDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate> {
+    
+    //  Audio stuff
+    
+    AVAudioRecorder *recorder;
+    AVAudioPlayer *player;
+    
+    
+    NSURL *recordingURL;
+    
+    ImageDisplayRecordingSliderView *sliderView;
     
     StoryCreationViewController *formController;
     LargeImageDisplayView *displayView;
@@ -40,6 +52,7 @@
     //  Set up data communicator
     
     mainCom = [TFDataCommunicator new];
+    [mainCom setupTransferManager];
     mainCom.delegate = self;
     
     
@@ -47,7 +60,7 @@
     
     NSLog(@"%@", imageInformation.title);
     
-    ImageDisplayRecordingSliderView *sliderView = [[ImageDisplayRecordingSliderView alloc] initWithFrame:imageDisplaySliderCont.bounds];
+    sliderView = [[ImageDisplayRecordingSliderView alloc] initWithFrame:imageDisplaySliderCont.bounds];
     sliderView.delegate = self;
     sliderView.updaterDelegate = self;
     
@@ -76,6 +89,7 @@
     
     
     formController = form;
+    [self audioPlayerSetup];
     
 }
 -(void)moveFormToView
@@ -98,13 +112,56 @@
 
 -(void)didSlideToRecordLock
 {
+    
+    _currentStory = [Story setupWithRandomID];
+    
     _testLabel.text = @"Recording";
+
     [self moveFormToView];
+    
+    if (!recorder.recording) {
+        AVAudioSession *session = [AVAudioSession sharedInstance];
+        [session setActive:YES error:nil];
+        
+        // Start recording
+        [recorder record];
+        
+    } else {
+        
+        // Pause recording
+        [recorder pause];
+    }
+    
+    [sliderView startedRecording];
+    
+
     
 }
 -(void)didUnlockSlider
 {
+    
     _testLabel.text = @"Stopped Recording";
+    
+    [recorder stop];
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    [audioSession setActive:NO error:nil];
+    
+    NSURL *recorderURL = recorder.url;
+    
+    NSLog(@"The recorders url string is %@", recorderURL.absoluteString);
+    
+    
+    [mainCom uploadAudioFileWithUrl:recorder.url andKey:[[NSDate date] displayDateOfType:sdatetypeURL]];
+    [sliderView stoppedRecording];
+    
+}
+/*
+    Data communicator delegate methods
+*/
+-(void)finishedUploadingRequestWithData:(NSDictionary *)data
+{
+    NSString *recordingURLString = data[keyImageURL];
+    
 }
 -(void)finishedPullingImageFromUrl:(UIImage *)image
 {
@@ -113,6 +170,39 @@
         [displayView setDisplayedImage:image];
     });
 }
+/*
+    Recording Stuff
+*/
+-(void)audioPlayerSetup
+{
+    NSArray *pathComponents = [NSArray arrayWithObjects:
+                               [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject],
+                               @"MyAudioMemo.m4a",
+                               nil];
+    recordingURL = [NSURL fileURLWithPathComponents:pathComponents];
+    
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+    
+    // Define the recorder setting
+    NSMutableDictionary *recordSetting = [[NSMutableDictionary alloc] init];
+    
+    [recordSetting setValue:[NSNumber numberWithInt:kAudioFormatMPEG4AAC] forKey:AVFormatIDKey];
+    [recordSetting setValue:[NSNumber numberWithFloat:44100.0] forKey:AVSampleRateKey];
+    [recordSetting setValue:[NSNumber numberWithInt: 2] forKey:AVNumberOfChannelsKey];
+    
+    // Initiate and prepare the recorder
+    recorder = [[AVAudioRecorder alloc] initWithURL:recordingURL settings:recordSetting error:nil];
+    recorder.delegate = self;
+    recorder.meteringEnabled = YES;
+    [recorder prepareToRecord];
+
+}
+
+/*
+    Story Updater Delegate Methods
+*/
+
 -(BOOL)didUpdateTitle:(NSString *)newTitle
 {
     BOOL isSuccessful;

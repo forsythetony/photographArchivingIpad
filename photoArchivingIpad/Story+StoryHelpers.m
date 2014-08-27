@@ -45,4 +45,13 @@
     
     return [NSString stringWithString:s];
 }
++(id)setupWithRandomID
+{
+    Story* newStory = [[self class] new];
+    
+    newStory.stringId = [newStory generateRandomID];
+    
+    return newStory;
+}
+
 @end

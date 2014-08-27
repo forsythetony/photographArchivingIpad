@@ -46,6 +46,10 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
     BOOL releaseToRecord;
     
     UILabel *recSliderLabel;
+    
+    NSTimer *recordingTimer;
+    NSInteger secondsPassed;
+    
 }
 
 @end
@@ -301,6 +305,44 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
     }
 
     }
+}
+-(void)startedRecording
+{
+    [self startTimer];
+    
+}
+-(void)stoppedRecording
+{
+    [self stopTimer];
+}
+-(void)stopTimer
+{
+    [recordingTimer invalidate];
+    recordingTimer = nil;
+}
+-(void)startTimer
+{
+    secondsPassed = 0;
+    
+    recordingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimer:) userInfo:nil repeats:YES];
+}
+-(void)updateTimer:(id) sender
+{
+    secondsPassed += 1;
+    
+    NSString *recText = @"Recording ";
+    
+    NSString *timerText = [NSString stringWithFormat:@"%d", secondsPassed];
+    
+    NSString *labelText = [NSString stringWithFormat:@"%@%@", recText, timerText];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+    
+        [recSliderLabel setText:labelText];
+        
+    });
+    
+    
 }
 -(void)sendRecSliderBackToStart:(id) sender
 {

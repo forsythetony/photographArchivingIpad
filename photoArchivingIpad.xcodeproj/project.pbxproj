@@ -686,13 +686,13 @@
 		BAD9F367199D84F700107D3A /* Image Display */ = {
 			isa = PBXGroup;
 			children = (
+				BA4C4BC819ADCB46009C9C16 /* PAARecording.h */,
+				BA4C4BC919ADCB46009C9C16 /* PAARecording.m */,
 				BAD9F368199D851D00107D3A /* ImageDisplay.h */,
 				BAD9F369199D851D00107D3A /* ImageDisplay.m */,
 				BAD9F36C199D88CB00107D3A /* ImageDispaySubviews.h */,
 				BA4C4BC719ADC6A5009C9C16 /* ImageDisplayStoryUpdater.h */,
 				BAD9F36B199D88B100107D3A /* Subviews */,
-				BA4C4BC819ADCB46009C9C16 /* PAARecording.h */,
-				BA4C4BC919ADCB46009C9C16 /* PAARecording.m */,
 			);
 			name = "Image Display";
 			sourceTree = "<group>";
