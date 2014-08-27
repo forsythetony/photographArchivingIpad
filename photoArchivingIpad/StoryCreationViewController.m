@@ -97,9 +97,11 @@
     titleValue.autocapitalizationType = UITextAutocapitalizationTypeWords;
     titleValue.inputAccessoryView = [self createInputAccessoryView];
     [titleValue setDelegate:self];
+    titleValue.placeholder = @"Story Title";
     
     storytellerValue.autocapitalizationType = UITextAutocapitalizationTypeWords;
     [storytellerValue setDelegate:self];
+    storytellerValue.placeholder = @"Name";
     
     recordingTitle.text = @"New Recording";
     recordingTitle.alpha = 0.0;
