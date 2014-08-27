@@ -18,7 +18,8 @@
 
 
 @interface StoryCreationViewController () <TFCommunicatorDelegate, UITextFieldDelegate> {
-        UIFont *labelFont;
+    
+    UIFont *labelFont;
     UIColor *labelTextColor;
     
     NSURL *recordingURL;
