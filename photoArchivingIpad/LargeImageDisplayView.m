@@ -11,6 +11,7 @@
 @interface LargeImageDisplayView () <UIScrollViewDelegate> {
     
     UIScrollView *imageScrollView;
+    UIImageView *displayImageView;
     
 }
 
@@ -30,21 +31,31 @@
 {
     imageScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
     [imageScrollView setContentSize:displayedImage.size];
-    [imageScrollView addSubview:[[UIImageView alloc] initWithImage:displayedImage]];
+    
+    displayImageView = [[UIImageView alloc] initWithImage:displayedImage];
+    [imageScrollView addSubview:displayImageView];
     
     [self addSubview:imageScrollView];
     imageScrollView.zoomScale = self.frame.size.width / displayedImage.size.width;
-    imageScrollView.maximumZoomScale = 10.0;
-    imageScrollView.minimumZoomScale = 0.1;
+    imageScrollView.maximumZoomScale = 2.0;
+    imageScrollView.minimumZoomScale = 0.5;
+    
+    //[displayImageView setCenter:[imageScrollView center]];
+    imageScrollView.zoomScale = 0.9;
+    
+    
+    
     imageScrollView.showsHorizontalScrollIndicator = NO;
     imageScrollView.showsVerticalScrollIndicator = NO;
+    imageScrollView.delegate = self;
+    
     _displayedImage = displayedImage;
     
 }
 
 -(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
-    return [[UIImageView alloc] initWithImage:_displayedImage];
+    return displayImageView;
 }
 
 @end
