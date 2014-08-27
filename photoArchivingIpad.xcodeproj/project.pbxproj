@@ -157,6 +157,7 @@
 		BA365AA619996992008E6975 /* StoryRecordingMeter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryRecordingMeter.m; sourceTree = "<group>"; };
 		BA365AAB19998DF9008E6975 /* UploadingButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadingButton.h; sourceTree = "<group>"; };
 		BA365AAC19998DF9008E6975 /* UploadingButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadingButton.m; sourceTree = "<group>"; };
+		BA4C4BC719ADC6A5009C9C16 /* ImageDisplayStoryUpdater.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageDisplayStoryUpdater.h; sourceTree = "<group>"; };
 		BA66942919999CA300412313 /* StoriesDisplayTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoriesDisplayTable.h; sourceTree = "<group>"; };
 		BA66942A19999CA300412313 /* StoriesDisplayTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoriesDisplayTable.m; sourceTree = "<group>"; };
 		BA66942B19999CA300412313 /* StoriesDisplayTable.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoriesDisplayTable.xib; sourceTree = "<group>"; };
@@ -686,6 +687,7 @@
 				BAD9F369199D851D00107D3A /* ImageDisplay.m */,
 				BAD9F36C199D88CB00107D3A /* ImageDispaySubviews.h */,
 				BAD9F36B199D88B100107D3A /* Subviews */,
+				BA4C4BC719ADC6A5009C9C16 /* ImageDisplayStoryUpdater.h */,
 			);
 			name = "Image Display";
 			sourceTree = "<group>";
