@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+//#import "Story.h"
+
 @protocol ImageDisplayStoryUpdater <NSObject>
+
+-(BOOL)didUpdateTitle:(NSString*) newTitle;
 
 @end

@@ -357,10 +357,7 @@
     
     [timeLabel setText:[NSString stringWithFormat:@"%d.%3d", recordingSeconds, recordingMilliseconds]];
 }
--(void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    
-}
+
 -(UIView*)createInputAccessoryView
 {
     UIView *inputView;
@@ -411,6 +408,13 @@
     
     return inputView;
     
+}
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (textField == titleValue ) {
+        
+        [self.updaterDelegate didUpdateTitle:titleValue.text];
+    }
 }
 -(void)nextButton:(id) sender
 {

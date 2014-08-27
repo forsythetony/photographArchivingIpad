@@ -10,6 +10,7 @@
 #import "imageHandling.h"
 #import "StoryRecordingMeter.h"
 #import "UploadingButton.h"
+#import "ImageDisplayStoryUpdater.h"
 
 @class StoryCreationViewController;
 
@@ -23,6 +24,7 @@
 @interface StoryCreationViewController : UIViewController
 
 @property (nonatomic, weak) id <StoryTellerCreationFormDelegate> delegate;
+@property (nonatomic, weak) id <ImageDisplayStoryUpdater> updaterDelegate;
 
 @property (nonatomic, strong) imageObject *information;
 

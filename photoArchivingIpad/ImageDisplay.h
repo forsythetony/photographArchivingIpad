@@ -11,7 +11,8 @@
 
 #import "ImageDispaySubviews.h"
 
-@interface ImageDisplay : UIViewController
+@interface ImageDisplay : UIViewController <ImageDisplayStoryUpdater>
+
 
 @property (nonatomic, strong) imageObject* imageInformation;
 @property (weak, nonatomic) IBOutlet UIView *imageDisplaySliderCont;

@@ -49,13 +49,16 @@
     
     ImageDisplayRecordingSliderView *sliderView = [[ImageDisplayRecordingSliderView alloc] initWithFrame:imageDisplaySliderCont.bounds];
     sliderView.delegate = self;
+    sliderView.updaterDelegate = self;
+    
     
     [imageDisplaySliderCont addSubview:sliderView];
     
     _testLabel.text = @"";
 
     StoryCreationViewController *form = [[StoryCreationViewController alloc] initWithNibName:@"AddStoryForm" bundle:[NSBundle mainBundle]];
-
+    form.updaterDelegate = self;
+    
     
     form.view.frame = CGRectMake(1000.0, 0.0, _storyCreationContainer.bounds.size.width, _storyCreationContainer.bounds.size.height);
     
@@ -109,6 +112,16 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [displayView setDisplayedImage:image];
     });
+}
+-(BOOL)didUpdateTitle:(NSString *)newTitle
+{
+    BOOL isSuccessful;
+    
+    NSLog(@"The new title is %@", newTitle);
+    
+    isSuccessful = YES;
+    
+    return  isSuccessful;
 }
 
 

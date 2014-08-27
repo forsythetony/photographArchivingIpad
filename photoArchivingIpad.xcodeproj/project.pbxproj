@@ -686,8 +686,8 @@
 				BAD9F368199D851D00107D3A /* ImageDisplay.h */,
 				BAD9F369199D851D00107D3A /* ImageDisplay.m */,
 				BAD9F36C199D88CB00107D3A /* ImageDispaySubviews.h */,
-				BAD9F36B199D88B100107D3A /* Subviews */,
 				BA4C4BC719ADC6A5009C9C16 /* ImageDisplayStoryUpdater.h */,
+				BAD9F36B199D88B100107D3A /* Subviews */,
 			);
 			name = "Image Display";
 			sourceTree = "<group>";

@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ImageDisplayStoryUpdater.h"
+
 @class ImageDisplayRecordingSliderView;
 
 @protocol ImageDisplayRecordingSliderViewDelegate <NSObject>
@@ -19,5 +21,6 @@
 @interface ImageDisplayRecordingSliderView : UIView
 
 @property (nonatomic, weak) id <ImageDisplayRecordingSliderViewDelegate> delegate;
+@property (nonatomic, weak) id <ImageDisplayStoryUpdater> updaterDelegate;
 
 @end
