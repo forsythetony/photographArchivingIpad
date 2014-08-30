@@ -39,6 +39,7 @@ extern NSString * const jsonKeyStories_StoryTeller;
 extern NSString * const jsonKeyStories_RecordingURL;
 extern NSString * const jsonKeyStories_title;
 extern NSString * const jsonKeyStories_stringID;
+extern NSString * const jsonKeyStories_recordingLength;
 
 extern NSString * const APIAddStoryURLParam;
 extern NSString * const APISetupStoryURLParam;

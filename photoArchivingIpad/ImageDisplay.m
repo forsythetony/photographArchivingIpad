@@ -31,6 +31,8 @@
     TFDataCommunicator *mainCom;
     StoriesDisplayTableview *storiesList;
     
+    Story *storySlatedForDeletion;
+    
     NSArray *currentStories;
 }
 
@@ -112,6 +114,8 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [storiesList reloadData];
+    [self setSaveButtonToDisabled];
+    
 }
 -(void)aestheticsConfiguration
 {
@@ -218,7 +222,7 @@
     
     currentStory.audioRecording = currentRecording;
     
-    [saveStoryButton setEnabled:YES];
+    [self performSelectorOnMainThread:@selector(setSaveButtonToEnabled) withObject:nil waitUntilDone:NO];
     
 }
 -(void)finishedPullingImageFromUrl:(UIImage *)image
@@ -311,10 +315,12 @@
 {
     if (responseCode == 201) {
         
-        [self addStoryToList:currentStory];
+        [self performSelectorOnMainThread:@selector(addStoryToList:) withObject:currentStory waitUntilDone:NO];
+//        [self addStoryToList:currentStory];
         
         currentStory = nil;
         currentRecording = nil;
+        
     }
     else
     {
@@ -326,6 +332,7 @@
 -(void)addStoryToList:(Story*) newStory
 {
     NSMutableArray *storiesarr;
+    
     if (currentStories) {
         storiesarr = [NSMutableArray arrayWithArray:currentStories];
     }
@@ -336,12 +343,22 @@
     
     
     
+    NSInteger rowOfNewStory = [storiesarr count];
+    
+    NSIndexPath *newIndex = [NSIndexPath indexPathForRow:rowOfNewStory inSection:0];
+    
+    [storiesList beginUpdates];
     
     [storiesarr addObject:newStory];
     
+    
+    
+    
     currentStories = [NSArray arrayWithArray:storiesarr];
     
-    [storiesList reloadData];
+    [storiesList insertRowsAtIndexPaths:@[newIndex] withRowAnimation:UITableViewRowAnimationFade];
+    
+    [storiesList endUpdates];
     
 }
 -(void)removeStoryFromView
@@ -420,6 +437,14 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
+        
+        Story *storyToRemove = [currentStories objectAtIndex:indexPath.row];
+        
+        storySlatedForDeletion = storyToRemove;
+        
+        [mainCom removeStoryFromImage:imageInformation withStoryID:storyToRemove.stringId];
+        
+        /*
         NSInteger cellIndex = indexPath.row;
         
         NSMutableArray *stories = [NSMutableArray arrayWithArray:currentStories];
@@ -430,17 +455,106 @@
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         [tableView endUpdates];
-        
+        */
         
     }
+}
+
+-(void)finishedDeletingStoryWithStatusCode:(NSInteger)statusCode
+{
+    if (statusCode == 200) {
+        
+        [self performSelectorOnMainThread:@selector(removeStorySlatedForDeletion) withObject:nil waitUntilDone:NO];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Server Error" message:@"Could not delete the story" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alert show];
+        storySlatedForDeletion = nil;
+        
+    }
+}
+-(void)removeStorySlatedForDeletion
+{
+    
+    
+
+    [storiesList beginUpdates];
+    
+    NSMutableArray *storiesArr = [NSMutableArray arrayWithArray:currentStories];
+    
+    NSInteger storyIndexPath = [storiesArr indexOfObject:storySlatedForDeletion];
+    
+    NSIndexPath *deletionIndexPath = [NSIndexPath indexPathForRow:storyIndexPath inSection:0];
+    
+    [storiesArr removeObjectAtIndex:storyIndexPath];
+    
+    currentStories = [NSArray arrayWithArray:storiesArr];
+        [storiesList deleteRowsAtIndexPaths:@[deletionIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+    
+    storySlatedForDeletion = nil;
+    
+    
+    [storiesList endUpdates];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == storiesList) {
-        return 174.0;
+        return 162.0;
     }
     
     return 10.0;
     
 }
+-(void)shouldChangeButtonToState:(ButtonState)newState
+{
+    switch (newState) {
+        case ButtonStateEnabled: {
+         
+            [self performSelectorOnMainThread:@selector(setSaveButtonToEnabled) withObject:nil waitUntilDone:NO];
+        }
+            break;
+            
+        case ButtonStateUploading: {
+            
+            [self performSelectorOnMainThread:@selector(setSaveButtonUploading) withObject:nil waitUntilDone:NO];
+            
+        }
+            break;
+            
+        case ButtonStateDisabled: {
+            
+            [self performSelectorOnMainThread:@selector(setSaveButtonToDisabled) withObject:nil waitUntilDone:NO];
+            
+        }
+            break;
+        default:
+            break;
+    }
+}
+-(void)setSaveButtonToEnabled
+{
+    [saveStoryButton setTitle:@"Save" forState:UIControlStateNormal];
+    [saveStoryButton setTitle:@"Save" forState:UIControlStateDisabled];
+    
+    [saveStoryButton setEnabled:YES];
+    
+}
+-(void)setSaveButtonToDisabled
+{
+    [saveStoryButton setTitle:@"Save" forState:UIControlStateNormal];
+    [saveStoryButton setEnabled:NO];
+}
+-(void)setSaveButtonUploading
+{
+    //[saveStoryButton setTitle:@"Uploading..." forState:UIControlStateNormal];
+    [saveStoryButton setTitle:@"Uploading" forState:UIControlStateDisabled];
+    [saveStoryButton setEnabled:NO];
+}
+
+- (IBAction)iWantToGoBack:(id)sender {
+    
+    [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
 @end

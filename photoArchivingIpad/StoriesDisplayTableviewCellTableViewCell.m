@@ -14,17 +14,50 @@
 @interface StoriesDisplayTableviewCellTableViewCell () <AVAudioPlayerDelegate> {
     
     AVAudioPlayer *player;
+    
+    UIView *progressViewSlider;
+    
+    CGPoint firstPoint;
+
 }
 
 @end
 @implementation StoriesDisplayTableviewCellTableViewCell
 
 @synthesize storyDateTitle, storyDateValue, storyLengthTitle, storylengthValue, storytellerTitle, storytellerValue, storyTitleValue;
+@synthesize mediaControlsContainer;
+@synthesize progressView;
 
 - (void)awakeFromNib
 {
     [self aestheticsConfiguration];
     
+    [self addSliderToProgressView];
+    
+    [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
+}
+-(void)addSliderToProgressView
+{
+    CGRect sliderFrame;
+    
+    sliderFrame.size.width = 10.0;
+    sliderFrame.size.height = progressView.frame.size.height;
+    
+    sliderFrame.origin = CGPointMake(0.0, 0.0);
+    
+    progressViewSlider = [[UIView alloc] initWithFrame:sliderFrame];
+    
+    progressViewSlider.backgroundColor = [UIColor RedHat];
+    
+    UIPanGestureRecognizer *gest = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(didSlideSlider:)];
+    
+    [progressViewSlider addGestureRecognizer:gest];
+    
+    
+    
+    
+    [progressView addSubview:progressViewSlider];
     
 }
 -(void)aestheticsConfiguration
@@ -85,6 +118,39 @@
     storylengthValue.font = valueFont;
     storylengthValue.textColor = valueColor;
     storylengthValue.textAlignment = NSTextAlignmentLeft;
+    
+    //  Media Controls Configuration
+    /*
+    mediaControlsContainer.backgroundColor = [UIColor black25PercentColor];
+    
+    [pauseButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [playButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    */
+    /*
+    controlsView = [[AudioControlsView alloc] initWithFrame:CGRectMake(0.0, 0.0, 30.0, 30.0)];
+    
+    [mediaControlsContainer addSubview:controlsView];
+    */
+    
+}
+-(void)didSlideSlider:(UIPanGestureRecognizer*) sender
+{
+        
+        
+        CGPoint trans = [sender translationInView:self];
+        
+        
+        
+        if ([sender state] == UIGestureRecognizerStateBegan) {
+            
+            firstPoint.x = [[sender view] center].x;
+            firstPoint.y = [[sender view] center].y;
+            
+        }
+        
+        CGFloat newXTrans = firstPoint.x + trans.x;
+    
+        [[sender view] setCenter:trans];
     
     
 }

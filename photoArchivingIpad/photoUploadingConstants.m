@@ -37,6 +37,7 @@ NSString * const jsonKeyStories_Date = @"date";
 NSString * const jsonKeyStories_StoryTeller = @"storyTeller";
 NSString * const jsonKeyStories_RecordingURL = @"recordingUrl";
 NSString * const jsonKeyStories_title = @"title";
+NSString * const jsonKeyStories_recordingLength = @"recordingLength";
 
 NSString * const APIAddStoryURLParam = @"?addStory=true";
 NSString * const APISetupStoryURLParam = @"?addStory=setup";

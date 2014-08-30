@@ -362,10 +362,14 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
         
     });
     
+    [self.updaterDelegate shouldChangeButtonToState:ButtonStateDisabled];
+    
+
 }
 -(void)stoppedRecording
 {
     [self stopTimer];
+    [self.updaterDelegate shouldChangeButtonToState:ButtonStateUploading];
 }
 -(void)stopTimer
 {
@@ -529,6 +533,7 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
         [recSliderLabel.layer pop_addAnimation:shrinkAni forKey:@"shrinkMe1"];
         [recSlider pop_addAnimation:colorChange forKey:@"changeCOLOR2"];
         recSliderLabel.text = @"Slide to Record";
+        
         
         
         releaseToRecord = NO;

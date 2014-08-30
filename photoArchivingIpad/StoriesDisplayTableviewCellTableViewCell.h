@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Story.h"
 
+
 @interface StoriesDisplayTableviewCellTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) Story *myStory;
@@ -23,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *storytellerValue;
 @property (weak, nonatomic) IBOutlet UILabel *storylengthValue;
 
-@property (weak, nonatomic) IBOutlet UIButton *playButton;
+@property (weak, nonatomic) IBOutlet UIView *mediaControlsContainer;
+@property (weak, nonatomic) IBOutlet UIView *progressView;
 
 @end

@@ -10,7 +10,7 @@
 #import "NSDate+timelineStuff.h"
 
 //  Constants
-
+NSString * const KEYImageID = @"_id";
 //  Image Information
 NSString * const KEYImageInformation    = @"imageInformation";
 
@@ -36,6 +36,7 @@ NSString * const KEYStories             = @"Stories";
     NSString * const KEYStories_RecordingURL = @"recordingUrl";
     NSString * const KEYStories_StringID = @"stringId";
     NSString * const KEYStories_Date    = @"date";
+    NSString * const KEYStories_RecordingLength = @"recordingLength";
 
 //  Other Information
 NSString * const KEYImageURL            = @"imageURL";
@@ -58,7 +59,7 @@ NSString * const KEYThumbnailURL        = @"thumbnailURL";
     storiesArray            = [self objectForKey:KEYStories];
     
     //  Set Properties
-    
+    newObject.id = [self objectForKey:KEYImageID];
     newObject.title = imageInfoDictionary[KEYImageInformation_Title];
     newObject.date  = [NSDate dateWithv1String:imageInfoDictionary[KEYImageInformation_DateTaken][KEYImageInformation_DateTaken_DateString]];
     newObject.confidence = imageInfoDictionary[KEYImageInformation_DateTaken][KEYImageInformation_DateTaken_Confidence];
@@ -88,11 +89,13 @@ NSString * const KEYThumbnailURL        = @"thumbnailURL";
         newStory.recordingS3Url = [NSURL URLWithString:dict[KEYStories_RecordingURL]];
         
         PAARecording *newRec = [PAARecording new];
+        
         newRec.s3URL = [NSURL URLWithString:dict[KEYStories_RecordingURL]];
+        newRec.recordingLength = [dict[KEYStories_RecordingLength] integerValue];
         
         newStory.audioRecording = newRec;
         
-        newStory.storyTeller = [NSURL URLWithString:dict[KEYStories_Storyteller]];
+        newStory.storyTeller = dict[KEYStories_Storyteller];
         newStory.stringId = dict[KEYStories_StringID];
         
         newStory.storyDate = [NSDate dateWithv1String:dict[KEYStories_Date]];

@@ -33,15 +33,17 @@
     [imageScrollView setContentSize:displayedImage.size];
     
     displayImageView = [[UIImageView alloc] initWithImage:displayedImage];
+    displayImageView.frame = imageScrollView.bounds;
+    
     [imageScrollView addSubview:displayImageView];
     
     [self addSubview:imageScrollView];
     imageScrollView.zoomScale = self.frame.size.width / displayedImage.size.width;
     imageScrollView.maximumZoomScale = 2.0;
-    imageScrollView.minimumZoomScale = 0.5;
+    imageScrollView.minimumZoomScale = 1.0;
     
     //[displayImageView setCenter:[imageScrollView center]];
-    imageScrollView.zoomScale = 0.9;
+    imageScrollView.zoomScale = 1.0;
     
     
     
