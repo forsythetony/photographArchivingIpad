@@ -78,7 +78,7 @@
     sliderView.delegate = self;
     sliderView.updaterDelegate = self;
     
-    
+    [imageDisplaySliderCont setBackgroundColor:[UIColor clearColor]];
     [imageDisplaySliderCont addSubview:sliderView];
     
     _testLabel.text = @"";

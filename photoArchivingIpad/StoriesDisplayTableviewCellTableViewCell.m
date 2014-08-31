@@ -11,6 +11,13 @@
 #import "NSDate+timelineStuff.h"
 #import <AVFoundation/AVFoundation.h>
 
+typedef struct sBounds {
+    
+    CGFloat leftBound;
+    CGFloat rightBound;
+    
+} TFBounds;
+
 @interface StoriesDisplayTableviewCellTableViewCell () <AVAudioPlayerDelegate> {
     
     AVAudioPlayer *player;
@@ -18,6 +25,8 @@
     UIView *progressViewSlider;
     
     CGPoint firstPoint;
+    
+    TFBounds progressSliderBounds;
 
 }
 
@@ -54,7 +63,8 @@
     
     [progressViewSlider addGestureRecognizer:gest];
     
-    
+    progressSliderBounds.leftBound = sliderFrame.size.width / 2.0;
+ 
     
     
     [progressView addSubview:progressViewSlider];
@@ -135,22 +145,43 @@
 }
 -(void)didSlideSlider:(UIPanGestureRecognizer*) sender
 {
+   progressSliderBounds.rightBound = progressView.frame.size.width - ( progressViewSlider.frame.size.width / 2.0);
+    
+    if( sender.state == UIGestureRecognizerStateBegan )
+    {
         
+        firstPoint.x = [[sender view] center].x;
+        firstPoint.y = [[sender view] center].y;
         
-        CGPoint trans = [sender translationInView:self];
+    }
+    else if( sender.state == UIGestureRecognizerStateChanged )
+    {
+        CGPoint transPoint = [sender translationInView:progressView];
         
+        CGPoint newCenter;
         
+        newCenter.x = transPoint.x;
+        newCenter.y = firstPoint.y;
         
-        if ([sender state] == UIGestureRecognizerStateBegan) {
+        NSLog(@"( left, right ) : ( %f , %f )", progressSliderBounds.leftBound , progressSliderBounds.rightBound);
+        NSLog(@"New Center: %@", NSStringFromCGPoint(newCenter));
+        
+        if (transPoint.x >= progressSliderBounds.leftBound && transPoint.x <= progressSliderBounds.rightBound) {
             
-            firstPoint.x = [[sender view] center].x;
-            firstPoint.y = [[sender view] center].y;
+            [[sender view] setCenter:newCenter];
             
         }
         
-        CGFloat newXTrans = firstPoint.x + trans.x;
-    
-        [[sender view] setCenter:trans];
+    }
+    else if( sender.state == UIGestureRecognizerStateEnded )
+    {
+
+        CGPoint trans = [sender translationInView:self.progressView];
+        
+        
+        NSLog(@"Ended: %@", NSStringFromCGPoint(trans));
+
+    }
     
     
 }
@@ -164,7 +195,7 @@
     
     if (myStory.audioRecording) {
 
-        storylengthValue.text = [NSString stringWithFormat:@"%d sec.", myStory.audioRecording.recordingLength];
+        storylengthValue.text = [NSString stringWithFormat:@"%ld sec.", (long)myStory.audioRecording.recordingLength];
     }
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -211,5 +242,4 @@
         }
     }
 }
-
 @end

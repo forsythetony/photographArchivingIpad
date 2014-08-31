@@ -80,7 +80,7 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
 //  View Creation
 -(void)setupViews
 {
-    self.backgroundColor = [UIColor grayColor];
+    self.backgroundColor = [UIColor clearColor];
     
     recSliderLine = [self createSliderLine];
     recSlider = [self createRecordingSlider];
