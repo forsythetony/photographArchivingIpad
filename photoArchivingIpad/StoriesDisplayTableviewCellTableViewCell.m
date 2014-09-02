@@ -10,6 +10,7 @@
 #import <Colours.h>
 #import "NSDate+timelineStuff.h"
 #import <AVFoundation/AVFoundation.h>
+#import <POP.h>
 
 typedef struct sBounds {
     
@@ -30,6 +31,9 @@ typedef struct sBounds {
     
     CGFloat sliderPercentage;
     
+    BOOL isShowingScrubbingTime;
+    
+    UILabel *sliderScrubbingLabel;
 
 }
 
@@ -48,6 +52,11 @@ typedef struct sBounds {
     
     [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     
+
+}
+-(void)variableSetup
+{
+    isShowingScrubbingTime = NO;
 }
 -(void)addSliderToProgressView
 {
@@ -67,8 +76,36 @@ typedef struct sBounds {
     [progressViewSlider addGestureRecognizer:gest];
     
     progressSliderBounds.leftBound = sliderFrame.size.width / 2.0;
- 
     
+    CGRect sliderScrubbingFrame;
+    CGPoint sliderScrubbingCenter;
+    
+    sliderScrubbingFrame.origin = CGPointMake(0.0, sliderFrame.size.height + 10.0);
+    sliderScrubbingFrame.size = CGSizeMake(40.0, 20.0);
+    
+    sliderScrubbingLabel = [[UILabel alloc] initWithFrame:sliderScrubbingFrame];
+    [progressView addSubview:sliderScrubbingLabel];
+    
+    //  Set slider scrubbing time label's properties
+    
+    CGFloat fontSize = 10.0;
+    NSString *fontFamily = @"DINAlternate-Bold";
+    
+    UIColor *fontColor = [UIColor whiteColor];
+    
+    UIFont *scrubbingTimeFont = [UIFont fontWithName:fontFamily size:fontSize];
+    
+    sliderScrubbingLabel.font = scrubbingTimeFont;
+    sliderScrubbingLabel.textColor = fontColor;
+    sliderScrubbingLabel.alpha = 0.0;
+    
+    sliderScrubbingLabel.text = @"00:00";
+    [sliderScrubbingLabel sizeToFit];
+    sliderScrubbingCenter.x = [progressViewSlider center].x;
+    sliderScrubbingCenter.y = [sliderScrubbingLabel center].y;
+    
+    [sliderScrubbingLabel setCenter:sliderScrubbingCenter];
+
     
     [progressView addSubview:progressViewSlider];
     
@@ -173,14 +210,12 @@ typedef struct sBounds {
             
             [[sender view] setCenter:newCenter];
             
+            CGFloat xCenter = [[sender view] center].x;
+            
+            [self updatePercentageWithXValue:xCenter];
+            [self updateScrubbingTimeWithNewCenter:newCenter];
+            
         }
-        
-        
-        
-        CGFloat xCenter = [[sender view] center].x;
-        
-        [self updatePercentageWithXValue:xCenter];
-        [self calculateScrubbingTimeWithPercentage];
         
     }
     else if( sender.state == UIGestureRecognizerStateEnded )
@@ -188,7 +223,8 @@ typedef struct sBounds {
 
         CGPoint trans = [sender translationInView:self.progressView];
         NSLog(@"Ended: %@", NSStringFromCGPoint(trans));
-
+        
+        [self removeScrubbingLabel];
     }
     
     
@@ -262,11 +298,69 @@ typedef struct sBounds {
     
     NSLog(@"Slider Percentage: %f", sliderPercentage);
 }
--(void)calculateScrubbingTimeWithPercentage
+-(void)updateScrubbingTimeWithNewCenter:(CGPoint) newCenter
 {
     NSString *timeString = [_myStory.audioRecording.recordingLength getTimeWithPercentage:sliderPercentage];
     
     NSLog(@"Scrubbing: %@" ,timeString);
     
+    CGPoint newScrubbingLabelCenter;
+    
+    newScrubbingLabelCenter.x = newCenter.x;
+    newScrubbingLabelCenter.y = sliderScrubbingLabel.center.y;
+    
+    if (!isShowingScrubbingTime) {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            sliderScrubbingLabel.alpha = 1.0;
+            sliderScrubbingLabel.text = timeString;
+            
+            POPSpringAnimation *sizePop = [POPSpringAnimation animation];
+            
+            sizePop.property = [POPAnimatableProperty propertyWithName:kPOPLayerSize];
+            
+            sizePop.fromValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+            sizePop.toValue = [NSValue valueWithCGSize:sliderScrubbingLabel.frame.size];
+            
+            [sliderScrubbingLabel.layer pop_addAnimation:sizePop forKey:@"sizePopAnimation"];
+            
+            isShowingScrubbingTime = YES;
+        });
+        
+    }
+    else
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [sliderScrubbingLabel setCenter:newScrubbingLabelCenter];
+            sliderScrubbingLabel.text = timeString;
+            
+        });
+    }
+    
+    
+}
+-(void)removeScrubbingLabel
+{
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        POPSpringAnimation *goAway = [POPSpringAnimation animation];
+        
+        goAway.property = [POPAnimatableProperty propertyWithName:kPOPLayerSize];
+        
+        goAway.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+        
+        [goAway setCompletionBlock:^(POPAnimation *ani , BOOL maybe ) {
+            
+            sliderScrubbingLabel.alpha = 0.0;
+        }];
+        
+        [sliderScrubbingLabel.layer pop_addAnimation:goAway forKey:@"goAwayAni"];
+        
+    });
+    
+    isShowingScrubbingTime = NO;
 }
 @end

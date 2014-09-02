@@ -289,7 +289,7 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
 
-        recordingTimeLabel.text = [NSString stringWithFormat:@"%d %@", recording.recordingLength, @"seconds"];
+        recordingTimeLabel.text = [recording.recordingLength getDisplayStringOfType:DurationDisplayTypeMinSec];
         
         recordingTimeLabel.alpha = 1.0;
         recordingTimeTitle.alpha = 1.0;
@@ -330,6 +330,11 @@
     NSString *nameString = [namesArray objectAtIndex:nameIndex];
     
     currentTextField.text = nameString;
+    
+    
+    [currentTextField resignFirstResponder];
+    currentTextField = nil;
+    
     
 }
 -(NSArray*)createArrayOfButtonsFromNamesArray
