@@ -8,6 +8,7 @@
 
 #import "NSDictionary+ObjectCreationHelpers.h"
 #import "NSDate+timelineStuff.h"
+#import "photoUploadingConstants.h"
 
 //  Constants
 NSString * const KEYImageID = @"_id";
@@ -91,7 +92,7 @@ NSString * const KEYThumbnailURL        = @"thumbnailURL";
         PAARecording *newRec = [PAARecording new];
         
         newRec.s3URL = [NSURL URLWithString:dict[KEYStories_RecordingURL]];
-        newRec.recordingLength = [dict[KEYStories_RecordingLength] integerValue];
+        newRec.recordingLength = [self convertRecLengthDictToObject:dict[KEYStories_RecordingLength]];
         
         newStory.audioRecording = newRec;
         
@@ -107,5 +108,16 @@ NSString * const KEYThumbnailURL        = @"thumbnailURL";
     newStoriesArray = [NSArray arrayWithArray:storiesArr];
     
     return newStoriesArray;
+}
+-(TADuration*)convertRecLengthDictToObject:(NSDictionary*) dict
+{
+    TADuration *newDuration = [TADuration new];
+    
+    newDuration.milliseconds = [dict[jsonKeyStories_AudioLength_milliseconds] integerValue];
+    newDuration.seconds = [ dict[jsonKeyStories_AudioLength_seconds] integerValue];
+    newDuration.minutes = [ dict[jsonKeyStories_AudioLength_minutes] integerValue];
+    newDuration.hours = [ dict[jsonKeyStories_AudioLength_hours] integerValue];
+    
+    return newDuration;
 }
 @end

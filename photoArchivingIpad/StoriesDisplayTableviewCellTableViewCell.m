@@ -27,6 +27,9 @@ typedef struct sBounds {
     CGPoint firstPoint;
     
     TFBounds progressSliderBounds;
+    
+    CGFloat sliderPercentage;
+    
 
 }
 
@@ -162,23 +165,28 @@ typedef struct sBounds {
         
         newCenter.x = transPoint.x;
         newCenter.y = firstPoint.y;
-        
+        /*
         NSLog(@"( left, right ) : ( %f , %f )", progressSliderBounds.leftBound , progressSliderBounds.rightBound);
         NSLog(@"New Center: %@", NSStringFromCGPoint(newCenter));
-        
+        */
         if (transPoint.x >= progressSliderBounds.leftBound && transPoint.x <= progressSliderBounds.rightBound) {
             
             [[sender view] setCenter:newCenter];
             
         }
         
+        
+        
+        CGFloat xCenter = [[sender view] center].x;
+        
+        [self updatePercentageWithXValue:xCenter];
+        [self calculateScrubbingTimeWithPercentage];
+        
     }
     else if( sender.state == UIGestureRecognizerStateEnded )
     {
 
         CGPoint trans = [sender translationInView:self.progressView];
-        
-        
         NSLog(@"Ended: %@", NSStringFromCGPoint(trans));
 
     }
@@ -195,14 +203,16 @@ typedef struct sBounds {
     
     if (myStory.audioRecording) {
 
-        storylengthValue.text = [NSString stringWithFormat:@"%ld sec.", (long)myStory.audioRecording.recordingLength];
+        NSString *lengthString = [myStory.audioRecording.recordingLength getDisplayStringOfType:DurationDisplayTypeMinSec];
+
+        storylengthValue.text = lengthString;
+        
     }
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
 }
 -(void)setupStreamer
 {
@@ -241,5 +251,22 @@ typedef struct sBounds {
             [player pause];
         }
     }
+}
+-(void)updatePercentageWithXValue:(CGFloat) xVal
+{
+    CGFloat totalLength = progressSliderBounds.rightBound - progressSliderBounds.leftBound;
+    
+    CGFloat adjustedX = xVal - progressSliderBounds.leftBound;
+    
+    sliderPercentage = adjustedX / totalLength;
+    
+    NSLog(@"Slider Percentage: %f", sliderPercentage);
+}
+-(void)calculateScrubbingTimeWithPercentage
+{
+    NSString *timeString = [_myStory.audioRecording.recordingLength getTimeWithPercentage:sliderPercentage];
+    
+    NSLog(@"Scrubbing: %@" ,timeString);
+    
 }
 @end

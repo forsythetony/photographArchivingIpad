@@ -18,5 +18,4 @@
 
 -(imageObject*)convertToImageObject;
 
-
 @end

@@ -27,6 +27,7 @@
 		BA365AA31996BBA4008E6975 /* dummyData.json in Resources */ = {isa = PBXBuildFile; fileRef = BA365AA21996BBA4008E6975 /* dummyData.json */; };
 		BA365AA719996992008E6975 /* StoryRecordingMeter.m in Sources */ = {isa = PBXBuildFile; fileRef = BA365AA619996992008E6975 /* StoryRecordingMeter.m */; };
 		BA365AAD19998DF9008E6975 /* UploadingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BA365AAC19998DF9008E6975 /* UploadingButton.m */; };
+		BA4769AA19B3E8D70030EBE3 /* TADuration.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4769A919B3E8D70030EBE3 /* TADuration.m */; };
 		BA4C4BCA19ADCB46009C9C16 /* PAARecording.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4C4BC919ADCB46009C9C16 /* PAARecording.m */; };
 		BA4C4BD219ADF553009C9C16 /* StoriesDisplayTableview.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4C4BD119ADF553009C9C16 /* StoriesDisplayTableview.m */; };
 		BA4C4BD719ADF58D009C9C16 /* StoriesDisplayTableviewCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4C4BD519ADF58D009C9C16 /* StoriesDisplayTableviewCellTableViewCell.m */; };
@@ -162,6 +163,8 @@
 		BA365AA619996992008E6975 /* StoryRecordingMeter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryRecordingMeter.m; sourceTree = "<group>"; };
 		BA365AAB19998DF9008E6975 /* UploadingButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadingButton.h; sourceTree = "<group>"; };
 		BA365AAC19998DF9008E6975 /* UploadingButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadingButton.m; sourceTree = "<group>"; };
+		BA4769A819B3E8D70030EBE3 /* TADuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TADuration.h; sourceTree = "<group>"; };
+		BA4769A919B3E8D70030EBE3 /* TADuration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TADuration.m; sourceTree = "<group>"; };
 		BA4C4BC719ADC6A5009C9C16 /* ImageDisplayStoryUpdater.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageDisplayStoryUpdater.h; sourceTree = "<group>"; };
 		BA4C4BC819ADCB46009C9C16 /* PAARecording.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAARecording.h; sourceTree = "<group>"; };
 		BA4C4BC919ADCB46009C9C16 /* PAARecording.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAARecording.m; sourceTree = "<group>"; };
@@ -711,6 +714,8 @@
 			children = (
 				BA4C4BC819ADCB46009C9C16 /* PAARecording.h */,
 				BA4C4BC919ADCB46009C9C16 /* PAARecording.m */,
+				BA4769A819B3E8D70030EBE3 /* TADuration.h */,
+				BA4769A919B3E8D70030EBE3 /* TADuration.m */,
 				BAD9F368199D851D00107D3A /* ImageDisplay.h */,
 				BAD9F369199D851D00107D3A /* ImageDisplay.m */,
 				BA4C4BD919ADFAA4009C9C16 /* ImageDisplay+testThingies.h */,
@@ -929,6 +934,7 @@
 				BA67F1C2193666210056DD00 /* ViewController.m in Sources */,
 				BA9531BB194E51BB005E0F10 /* socialInformationVC.m in Sources */,
 				BA9531AD194E2CC6005E0F10 /* pagerInformationVC.m in Sources */,
+				BA4769AA19B3E8D70030EBE3 /* TADuration.m in Sources */,
 				BA89B383195B33B100DA0FCC /* datePickingThing.m in Sources */,
 				BAD9F36F199D890700107D3A /* ImageDisplayRecordingSliderView.m in Sources */,
 				BA365AAD19998DF9008E6975 /* UploadingButton.m in Sources */,

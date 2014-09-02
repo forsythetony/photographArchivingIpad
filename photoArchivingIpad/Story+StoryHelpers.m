@@ -19,14 +19,16 @@
     NSString *storyTeller = (self.storyTeller ? self.storyTeller : @"Noone");
     NSString *titleString = (self.title ? self.title : @"Untitled");
     NSString *stringID = self.stringId;
-    NSString *recordingLength = [NSString stringWithFormat:@"%d", self.audioRecording.recordingLength];
+    
+    NSDictionary *recLengthInfo = [self.audioRecording.recordingLength convertToDictionary];
+    
     
     NSDictionary *mainDict = @{jsonKeyStories_Date: dateString,
                                jsonKeyStories_RecordingURL: recordingURL,
                                jsonKeyStories_StoryTeller: storyTeller,
                                jsonKeyStories_title : titleString,
                                jsonKeyStories_stringID : stringID,
-                               jsonKeyStories_recordingLength : recordingLength};
+                               jsonKeyStories_recordingLength : (recLengthInfo ? recLengthInfo : @"noLengthInformation")};
     
     return mainDict;
     

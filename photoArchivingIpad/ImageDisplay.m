@@ -186,7 +186,7 @@
 
     
 }
--(void)didUnlockSliderWithRecordingTime:(NSInteger)recordingTime
+-(void)didUnlockSliderWithRecordingTime:(RecordingDuration*) recDuration
 {
     
     _testLabel.text = @"Stopped Recording";
@@ -201,14 +201,13 @@
     
     currentRecording = [PAARecording new];
     
+    currentRecording.recordingLength = [TADuration createWithMilliseconds:recDuration->milliseconds Seconds:recDuration->seconds Minutes:recDuration->minutes andHours:recDuration->hours];
+    
     currentRecording.title = @"Some title";
-    currentRecording.recordingLength = recordingTime;
     
     [mainCom uploadAudioFileWithUrl:recorder.url andKey:[[NSDate date] displayDateOfType:sdatetypeURL]];
     [sliderView stoppedRecording];
-    
 
-    
 }
 /*
     Data communicator delegate methods

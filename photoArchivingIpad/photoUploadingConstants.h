@@ -41,6 +41,11 @@ extern NSString * const jsonKeyStories_title;
 extern NSString * const jsonKeyStories_stringID;
 extern NSString * const jsonKeyStories_recordingLength;
 
+extern NSString * const jsonKeyStories_AudioLength_milliseconds;
+extern NSString * const jsonKeyStories_AudioLength_seconds;
+extern NSString * const jsonKeyStories_AudioLength_minutes;
+extern NSString * const jsonKeyStories_AudioLength_hours;
+
 extern NSString * const APIAddStoryURLParam;
 extern NSString * const APISetupStoryURLParam;
 extern NSString * const APIDeleteStoryWithID;

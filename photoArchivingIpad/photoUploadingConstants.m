@@ -44,6 +44,10 @@ NSString * const APISetupStoryURLParam = @"?addStory=setup";
 NSString * const APIDeleteStoryWithID = @"?deleteStoryWithID=";
 NSString * const jsonKeyStories_stringID = @"stringId";
 
+NSString * const jsonKeyStories_AudioLength_milliseconds = @"milliseconds";
+NSString * const jsonKeyStories_AudioLength_seconds = @"seconds";
+NSString * const jsonKeyStories_AudioLength_minutes = @"minutes";
+NSString * const jsonKeyStories_AudioLength_hours = @"hours";
 
 @implementation photoUploadingConstants
 

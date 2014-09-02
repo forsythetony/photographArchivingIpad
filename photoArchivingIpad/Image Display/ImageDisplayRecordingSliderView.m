@@ -51,8 +51,8 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
     UILabel *recSliderTimeLabel;
     
     NSTimer *recordingTimer;
-    NSInteger secondsPassed;
     
+    RecordingDuration audioDuration;
 }
 
 @end
@@ -71,6 +71,7 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
 {
     isSliderLocker = NO;
     releaseToRecord = NO;
+    
 }
 -(void)aestheticsConfiguration
 {
@@ -381,26 +382,26 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
 -(void)startTimer
 {
     recSliderTimeLabel.alpha = 1.0;
-    secondsPassed = 0;
+    [self resetAudioDuration];
     
-    recordingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimer:) userInfo:nil repeats:YES];
+    recordingTimer = [NSTimer scheduledTimerWithTimeInterval:0.001 target:self selector:@selector(updateTimer:) userInfo:nil repeats:YES];
 }
 -(void)updateTimer:(id) sender
 {
-    secondsPassed += 1;
+    
+    [self addMillisecondToDuration: &audioDuration];
+
+    NSString *displayString = [self convertRecodringDuration:&audioDuration ToDisplayType:DurationDisplayTypeMinSec];
+    
+    NSString *loginString = [self convertRecodringDuration:&audioDuration ToDisplayType:DurationDisplayTypeFull];
     
     
-    NSString *timerText = [NSString stringWithFormat:@"%d", secondsPassed];
-    
-    NSString *labelText = [NSString stringWithFormat:@"%@s", timerText];
+    NSLog(@"%@", loginString);
     
     dispatch_async(dispatch_get_main_queue(), ^{
-    
-        [recSliderTimeLabel setText:labelText];
-        
+        [recSliderTimeLabel setText:displayString];
     });
-    
-    
+
 }
 -(void)sendRecSliderBackToStart:(id) sender
 {
@@ -495,7 +496,8 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
     if (isSliderLocker) {
         
         [self performSelectorOnMainThread:@selector(sendRecSliderBackToStart:) withObject:nil waitUntilDone:NO];
-        [self.delegate didUnlockSliderWithRecordingTime:secondsPassed];
+        
+        [self.delegate didUnlockSliderWithRecordingTime:&audioDuration];
         
         POPSpringAnimation *shrinkAni = [POPSpringAnimation animation];
         shrinkAni.property = [POPAnimatableProperty propertyWithName:kPOPLayerScaleXY];
@@ -650,14 +652,9 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
     ani.springSpeed = 20.0;
     ani.springBounciness = 6.0;
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
+
+#pragma mark Utility Methods - 
+
 -(CGFloat)calculateAlphaValueForPoint:(CGFloat) thePoint
 {
     CGFloat leftBound = firstPoint.x;
@@ -673,4 +670,95 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
     return 1 - (thePoint / totalSpace);
 }
 
+-(void)addMillisecondToDuration:(RecordingDuration*) recDuration
+{
+    recDuration->milliseconds++;
+    
+    if (recDuration->milliseconds == 1000) {
+        
+        recDuration->milliseconds = 0;
+        recDuration->seconds++;
+        
+        if (recDuration->seconds == 60) {
+            
+            recDuration->seconds = 0;
+            recDuration->minutes++;
+            
+            if (recDuration->minutes == 60) {
+                
+                recDuration->minutes = 0;
+                recDuration->hours++;
+            }
+        }
+    }
+}
+-(void)resetAudioDuration
+{
+    
+    audioDuration.milliseconds = 0;
+    audioDuration.seconds = 0;
+    audioDuration.minutes = 0;
+    audioDuration.hours  = 0;
+
+}
+-(NSString*)convertRecodringDuration:(RecordingDuration*) recDuration ToDisplayType:(DurationDisplayType) type
+{
+    NSString *durationDisplayString;
+    
+    NSString    *secondsString,
+                *minutesString;
+    
+    switch (type) {
+            
+        case DurationDisplayTypeMinSec: {
+            
+            if (recDuration->seconds < 10) {
+                
+                secondsString = [NSString stringWithFormat:@"0%1d", recDuration->seconds];
+                
+            }
+            else
+            {
+                secondsString = [NSString stringWithFormat:@"%2d", recDuration->seconds];
+                
+            }
+            
+            if (recDuration->minutes < 10) {
+                
+                minutesString = [NSString stringWithFormat:@"0%1d", recDuration->minutes];
+                
+            }
+            else
+            {
+                minutesString = [NSString stringWithFormat:@"%2d", recDuration->minutes];
+            }
+            
+            
+            durationDisplayString = [NSString stringWithFormat:@"%@:%@", minutesString , secondsString];
+            
+        }
+            break;
+        
+        case DurationDisplayTypeHrMinSec: {
+            
+            durationDisplayString = [NSString stringWithFormat:@"%2d:%2d.%4d", recDuration->minutes , recDuration->seconds , recDuration->milliseconds];
+            
+        }
+            break;
+            
+        case DurationDisplayTypeFull: {
+            
+            durationDisplayString = [NSString stringWithFormat:@"%1d:%2d:%2d.%4d", recDuration->hours , recDuration->minutes , recDuration->seconds , recDuration->milliseconds];
+        }
+            break;
+            
+        default: {
+            
+            durationDisplayString = @"noType";
+        }
+            break;
+    }
+    
+    return durationDisplayString;
+}
 @end
