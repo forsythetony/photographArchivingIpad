@@ -378,6 +378,25 @@
 			name = "Story Creation";
 			sourceTree = "<group>";
 		};
+		BA4769BC19B5BCD40030EBE3 /* Data Objects */ = {
+			isa = PBXGroup;
+			children = (
+				BA7525D219A7F3AD007DD95E /* Story.h */,
+				BA7525D319A7F3AD007DD95E /* Story.m */,
+				BA7525D019A7F3AD007DD95E /* imageObject.h */,
+				BA7525D119A7F3AD007DD95E /* imageObject.m */,
+				BABF16B5195372A800FF01C0 /* ImagePackage.h */,
+				BABF16B6195372A800FF01C0 /* ImagePackage.m */,
+				BA4C4BC819ADCB46009C9C16 /* PAARecording.h */,
+				BA4C4BC919ADCB46009C9C16 /* PAARecording.m */,
+				BA6694321999CAFF00412313 /* DateRange.h */,
+				BA6694331999CAFF00412313 /* DateRange.m */,
+				BA4769A819B3E8D70030EBE3 /* TADuration.h */,
+				BA4769A919B3E8D70030EBE3 /* TADuration.m */,
+			);
+			name = "Data Objects";
+			sourceTree = "<group>";
+		};
 		BA4C4BD319ADF573009C9C16 /* Stories Table View */ = {
 			isa = PBXGroup;
 			children = (
@@ -448,10 +467,6 @@
 		BA67F1B1193666210056DD00 /* photoArchivingIpad */ = {
 			isa = PBXGroup;
 			children = (
-				BA7525D019A7F3AD007DD95E /* imageObject.h */,
-				BA7525D119A7F3AD007DD95E /* imageObject.m */,
-				BA7525D219A7F3AD007DD95E /* Story.h */,
-				BA7525D319A7F3AD007DD95E /* Story.m */,
 				BA67F1BD193666210056DD00 /* Main.storyboard */,
 				BA67F1BA193666210056DD00 /* AppDelegate.h */,
 				BA67F1BB193666210056DD00 /* AppDelegate.m */,
@@ -477,9 +492,8 @@
 				BA6F5EEC194F192900E1E1FC /* UIImage+imageAdditions.m */,
 				BABF1614195247FD00FF01C0 /* audioManagrer.h */,
 				BABF1615195247FD00FF01C0 /* audioManagrer.m */,
-				BA6694321999CAFF00412313 /* DateRange.h */,
-				BA6694331999CAFF00412313 /* DateRange.m */,
 				BA67F1C3193666210056DD00 /* Images.xcassets */,
+				BA4769BC19B5BCD40030EBE3 /* Data Objects */,
 				BAD9F365199D847F00107D3A /* Data */,
 				BACF080319A2B94100F5F3E3 /* Categories */,
 				BA89B37B195B227400DA0FCC /* Attributes Dictionary */,
@@ -635,8 +649,6 @@
 				BA1194B41990B4F60032DEC6 /* PreviewView.h */,
 				BA1194B51990B4F60032DEC6 /* PreviewView.m */,
 				BA0F6465197893A7000588A8 /* v2.0 */,
-				BABF16B5195372A800FF01C0 /* ImagePackage.h */,
-				BABF16B6195372A800FF01C0 /* ImagePackage.m */,
 				BABF16B2195368FE00FF01C0 /* photoUploadingConstants.h */,
 				BABF16B3195368FE00FF01C0 /* photoUploadingConstants.m */,
 				BABF16AC19533B7C00FF01C0 /* photoUploadingCell.h */,
@@ -712,10 +724,6 @@
 		BAD9F367199D84F700107D3A /* Image Display */ = {
 			isa = PBXGroup;
 			children = (
-				BA4C4BC819ADCB46009C9C16 /* PAARecording.h */,
-				BA4C4BC919ADCB46009C9C16 /* PAARecording.m */,
-				BA4769A819B3E8D70030EBE3 /* TADuration.h */,
-				BA4769A919B3E8D70030EBE3 /* TADuration.m */,
 				BAD9F368199D851D00107D3A /* ImageDisplay.h */,
 				BAD9F369199D851D00107D3A /* ImageDisplay.m */,
 				BA4C4BD919ADFAA4009C9C16 /* ImageDisplay+testThingies.h */,
