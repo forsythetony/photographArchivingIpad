@@ -21,7 +21,6 @@ PODS:
   - LiveFrost (1.1.2)
   - pop (1.0.6)
   - SBJson (4.0.1)
-  - TheAmazingAudioEngine (1.4.2)
 
 DEPENDENCIES:
   - Colours (from `https://github.com/forsythetony/Colours.git`)
@@ -31,7 +30,6 @@ DEPENDENCIES:
   - LiveFrost
   - pop (~> 1.0)
   - SBJson (~> 4.0.0)
-  - TheAmazingAudioEngine
 
 EXTERNAL SOURCES:
   Colours:
@@ -47,6 +45,5 @@ SPEC CHECKSUMS:
   LiveFrost: 8c7e447e6833902ddc2a639faa27e71e091b5062
   pop: e518794da38942c05255eb64b36d894e70cb4f00
   SBJson: d71212c078abf4679d54b0d0565260c474e46235
-  TheAmazingAudioEngine: d5a503ad7455329eb4877cfb57acd32498ef12c9
 
 COCOAPODS: 0.33.1
