@@ -30,6 +30,7 @@
 		BA4769AA19B3E8D70030EBE3 /* TADuration.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4769A919B3E8D70030EBE3 /* TADuration.m */; };
 		BA4769BF19B5EC900030EBE3 /* TAProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4769BE19B5EC900030EBE3 /* TAProgressView.m */; };
 		BA4769C219B5F0670030EBE3 /* TATriggerFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4769C119B5F0670030EBE3 /* TATriggerFrame.m */; };
+		BA4769C519B61B380030EBE3 /* TAStyler.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4769C419B61B380030EBE3 /* TAStyler.m */; };
 		BA4C4BCA19ADCB46009C9C16 /* PAARecording.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4C4BC919ADCB46009C9C16 /* PAARecording.m */; };
 		BA4C4BD219ADF553009C9C16 /* StoriesDisplayTableview.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4C4BD119ADF553009C9C16 /* StoriesDisplayTableview.m */; };
 		BA4C4BD719ADF58D009C9C16 /* StoriesDisplayTableviewCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4C4BD519ADF58D009C9C16 /* StoriesDisplayTableviewCellTableViewCell.m */; };
@@ -171,6 +172,8 @@
 		BA4769BE19B5EC900030EBE3 /* TAProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAProgressView.m; sourceTree = "<group>"; };
 		BA4769C019B5F0670030EBE3 /* TATriggerFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TATriggerFrame.h; sourceTree = "<group>"; };
 		BA4769C119B5F0670030EBE3 /* TATriggerFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TATriggerFrame.m; sourceTree = "<group>"; };
+		BA4769C319B61B380030EBE3 /* TAStyler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAStyler.h; sourceTree = "<group>"; };
+		BA4769C419B61B380030EBE3 /* TAStyler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAStyler.m; sourceTree = "<group>"; };
 		BA4C4BC719ADC6A5009C9C16 /* ImageDisplayStoryUpdater.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageDisplayStoryUpdater.h; sourceTree = "<group>"; };
 		BA4C4BC819ADCB46009C9C16 /* PAARecording.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAARecording.h; sourceTree = "<group>"; };
 		BA4C4BC919ADCB46009C9C16 /* PAARecording.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAARecording.m; sourceTree = "<group>"; };
@@ -506,6 +509,8 @@
 				BA365AA41999696D008E6975 /* Story Creation */,
 				BAD9F367199D84F700107D3A /* Image Display */,
 				BA0F645419787FEF000588A8 /* Landing Page */,
+				BA4769C319B61B380030EBE3 /* TAStyler.h */,
+				BA4769C419B61B380030EBE3 /* TAStyler.m */,
 			);
 			path = photoArchivingIpad;
 			sourceTree = "<group>";
@@ -977,6 +982,7 @@
 				BA365A9319969545008E6975 /* StoryCellTableViewCell.m in Sources */,
 				BA66942C19999CA300412313 /* StoriesDisplayTable.m in Sources */,
 				7F03D0D3194E805C00558278 /* basicInfoCell.m in Sources */,
+				BA4769C519B61B380030EBE3 /* TAStyler.m in Sources */,
 				BA67F21C193BC4AA0056DD00 /* NSDate+timelineStuff.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

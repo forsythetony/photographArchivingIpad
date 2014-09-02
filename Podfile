@@ -1,4 +1,5 @@
 pod 'pop', '~> 1.0'
+pod 'Masonry'
 pod 'ChameleonFramework'
 pod 'Colours', :git => 'https://github.com/forsythetony/Colours.git'
 pod 'CRToast', '~> 0.0.7'

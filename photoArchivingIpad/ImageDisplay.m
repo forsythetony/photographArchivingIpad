@@ -14,6 +14,7 @@
 #import "StoriesDisplayTableview.h"
 #import "ImageDisplay+testThingies.h"
 #import <VBFPopFlatButton/VBFPopFlatButton.h>
+#import "TAStyler.h"
 
 @interface ImageDisplay () <ImageDisplayRecordingSliderViewDelegate, TFCommunicatorDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITableViewDataSource, UITableViewDelegate> {
     
@@ -562,8 +563,9 @@
     
     VBFPopFlatButton *backButton = [[VBFPopFlatButton alloc] initWithFrame:backButtonFrame buttonType:buttonBackType buttonStyle:buttonRoundedStyle];
     
-    backButton.roundBackgroundColor = [UIColor whiteColor];
-    backButton.linesColor = [UIColor blueberryColor];
+    backButton.roundBackgroundColor = [TAStyler getButtonBackgroundColor];
+    backButton.linesColor = [TAStyler getButtonForegroundColor];
+    
     backButton.lineThickness = 2.0;
     [backButton addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backButton];

@@ -1,4 +1,5 @@
 PODS:
+  - ChameleonFramework (1.1.1)
   - Colours (5.4.0)
   - CRToast (0.0.7)
   - FontAwesomeKit (2.1.7):
@@ -25,6 +26,7 @@ PODS:
     - pop
 
 DEPENDENCIES:
+  - ChameleonFramework
   - Colours (from `https://github.com/forsythetony/Colours.git`)
   - CRToast (~> 0.0.7)
   - FontAwesomeKit (~> 2.1.0)
@@ -41,6 +43,7 @@ EXTERNAL SOURCES:
     :git: https://github.com/forsythetony/ImageTaker.git
 
 SPEC CHECKSUMS:
+  ChameleonFramework: c60096686e3771f5d78f26cfbfd08955a8a88cbd
   Colours: 0c3497cef9e3aafd07e338fb62885b1bcf57ac50
   CRToast: f9f2c4b29776d68ba24c4d621cba59a83fea921b
   FontAwesomeKit: af6eef70d23986349284d2feb4e959459621587d
