@@ -32,7 +32,7 @@ typedef struct tScrollTriggerArea {
 NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
 
 
-@interface WorkspaceViewController () <StoryTellerCreationFormDelegate, UIAlertViewDelegate, UIScrollViewDelegate, CustomProgressViewDelegate> {
+@interface WorkspaceViewController () <StoryTellerCreationFormDelegate, UIAlertViewDelegate, UIScrollViewDelegate, TATriggerFrameDelegate> {
     
     float   TLSpacing;
     
@@ -84,7 +84,9 @@ NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
     BOOL triggerLocked;
     
     TAProgressView *customProgressView;
-    TATriggerFrame *trigFrame;
+    TATriggerFrame *rightTrigFrame, *leftTrigFrame;
+    
+    float triggerTimeFloat;
     
 }
 
@@ -93,6 +95,13 @@ NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
 @implementation WorkspaceViewController
 @synthesize timelineDateRange;
 
+-(void)variableSetup
+{
+    triggerWidth = 60.0;
+    triggerLocked = NO;
+    triggerTimeFloat = 1.5;
+    
+}
 -(void)setupTriggerViews
 {
  
@@ -102,11 +111,10 @@ NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
     leftFrame.size.width = triggerWidth;
     leftFrame.size.height = mainScrollView.frame.size.height;
     
-    leftTriggerView = [[UIView alloc] initWithFrame:leftFrame];
-    leftTriggerView.alpha = 0.0;
-    leftTriggerView.backgroundColor = [UIColor dangerColor];
     
-    [self.view addSubview:leftTriggerView];
+    leftTrigFrame = [[TATriggerFrame alloc] initWithFrame:leftFrame];
+    [leftTrigFrame setTotalTime:triggerTimeFloat];
+    [leftTrigFrame setTriggerColor:[UIColor chartreuseColor]];
     
     
     CGRect rightFrame;
@@ -115,22 +123,23 @@ NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
     rightFrame.origin.y = 0.0;
     rightFrame.size.width = triggerWidth;
     rightFrame.size.height = leftFrame.size.height;
+
+    rightTrigFrame = [[TATriggerFrame alloc] initWithFrame:rightFrame];
     
-    rightTriggerView = [[UIView alloc] initWithFrame:rightFrame];
-    rightTriggerView.alpha = 0.0;
-    rightTriggerView.backgroundColor = [UIColor dangerColor];
+    [rightTrigFrame setTotalTime:triggerTimeFloat];
+    [rightTrigFrame setTriggerColor:[UIColor chartreuseColor]];
+    rightTrigFrame.delegate = self;
     
-    trigFrame = [[TATriggerFrame alloc] initWithFrame:rightFrame];
-    [trigFrame setTotalTime:3.0];
+    [self.view addSubview:rightTrigFrame];
     
-    [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(trigUpdate) userInfo:nil repeats:NO];
     
-    [self.view addSubview:trigFrame];
-    [self blurEdgeOfView:rightTriggerView];
     
-    [self.view addSubview:rightTriggerView];
-    [self.view bringSubviewToFront:rightTriggerView];
-    
+   // [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(trigUpdate) userInfo:nil repeats:NO];
+        
+}
+-(void)didFinishAnimation:(TATriggerFrame *)progressView
+{
+    [self goRight:nil];
 }
 -(void)finishedAddingStory
 {
@@ -202,7 +211,7 @@ NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
 }
 -(void)trigUpdate
 {
-    [trigFrame start];
+    [rightTrigFrame start];
 }
 -(void)initialSetup
 {
@@ -235,12 +244,6 @@ NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
     finishedMoving = NO;
   
 
-    
-}
--(void)variableSetup
-{
-    triggerWidth = 100.0;
-    triggerLocked = NO;
     
 }
 -(void)finishedPullingPhotoList:(NSArray *)list
@@ -1703,8 +1706,8 @@ NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
 }
 -(void)findPointInView:(CGPoint) point
 {
-    if(!triggerLocked)
-    {
+//    if(!triggerLocked)
+//    {
         CGPoint newPoint = [self.view convertPoint:point fromView:mainScrollView];
         
         //NSLog(@"The Point: %@", NSStringFromCGPoint(newPoint));
@@ -1719,6 +1722,11 @@ NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
         {
             //NSLog(@"%@", @"RIGHT TRIGGER");
             
+            
+            
+            [rightTrigFrame start];
+            
+            /*
             if (scrollTrigger.isRightTriggered == NO) {
                 
                 scrollTrigger.isRightTriggered = YES;
@@ -1733,22 +1741,20 @@ NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
                 moveScreenTimer = [NSTimer scheduledTimerWithTimeInterval:0.001 target:self selector:@selector(updateTriggerTimer:) userInfo:nil repeats:YES];
                 
             }
-            
+         */
         }
         else
         {
             //NSLog(@"NO TRIGGER");
+            [rightTrigFrame stop];
             scrollTrigger.isLeftTriggered = NO;
             scrollTrigger.isRightTriggered = NO;
         }
-    }
+//    }
 }
 -(void)goRight:(id)sender
 {
-        
-        
-        if (scrollTrigger.isRightTriggered == YES) {
-            
+    
             CGRect scrollToFrame;
             
             
@@ -1786,7 +1792,6 @@ NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
 
             
             scrollTrigger.isRightTriggered = NO;
-        }
        
 }
 -(void)updateTriggerTimer:(id) sender

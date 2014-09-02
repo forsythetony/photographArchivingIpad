@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, TriggerOrientation) {
+    TriggerOrientationLeft,
+    TriggerOrientationRight
+};
 @interface TATriggerFrame : UIView {
     
     float current_value;
@@ -25,7 +29,9 @@
 @property id delegate;
 @property float current_value;
 @property float totalTime;
+@property TriggerOrientation orientation;
 
+@property (nonatomic, strong) UIColor *triggerColor;
 
 - (void)setProgress:(NSNumber*)value;
 
@@ -35,6 +41,6 @@
 
 @end
 
-@protocol CustomProgressViewDelegate
+@protocol TATriggerFrameDelegate
 - (void)didFinishAnimation:(TATriggerFrame*)progressView;
 @end

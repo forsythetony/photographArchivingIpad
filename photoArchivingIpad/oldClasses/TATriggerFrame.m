@@ -32,31 +32,13 @@
         new_to_value = 0.0;
         IsAnimationInProgress = NO;
         animationDuration = 0.01;
+        boxLayer = nil;
         
         self.alpha = 1.0;
         self.backgroundColor = [UIColor clearColor];
         
-        [self setupBoxLayer];
-        
     }
     return self;
-}
--(void)setProgressValue:(float)to_value withAnimationTime:(float)animation_time
-{
-    float timer = 0;
-    
-    float step = 0.1;
-    
-    float value_step = (to_value-self.current_value)*step/animation_time;
-    int final_value = self.current_value*100;
-    
-    while (timer<animation_time-step) {
-        final_value += floor(value_step*100);
-        [self performSelector:@selector(UpdateLabelsWithValue:) withObject:[NSString stringWithFormat:@"%i%%", final_value] afterDelay:timer];
-        timer += step;
-    }
-    
-    [self performSelector:@selector(UpdateLabelsWithValue:) withObject:[NSString stringWithFormat:@"%.0f%%", to_value*100] afterDelay:animation_time];
 }
 -(void)SetAnimationDone
 {
@@ -148,7 +130,19 @@
 {
     boxLayer = [CALayer layer];
     
-    boxLayer.backgroundColor = [[UIColor redColor] CGColor];
+    CGColorRef triggerColor;
+    
+    if (_triggerColor) {
+        triggerColor = [_triggerColor CGColor];
+    }
+    else
+    {
+        triggerColor = [[UIColor redColor] CGColor];
+    }
+    
+    
+    boxLayer.backgroundColor = triggerColor;
+    
     
     CGRect boxFrame;
     
@@ -205,9 +199,28 @@
     
     
 }
+-(void)stop
+{
+    IsAnimationInProgress = NO;
+    [self tearDownTimer];
+    [boxLayer removeFromSuperlayer];
+    boxLayer = nil;
+    [self setupBoxLayer];
+
+}
 -(void)start
 {
-    [self startTimer];
+    if (!IsAnimationInProgress) {
+        if (!boxLayer) {
+            [self setupBoxLayer];
+        }
+        IsAnimationInProgress = YES;
+        [self startTimer];
+        
+    }
+    
+
+    
 }
 -(void)startTimer
 {
@@ -218,6 +231,7 @@
 {
     [triggerTimer invalidate];
     triggerTimer = nil;
+    
 }
 -(void)updateTrigger
 {
@@ -225,9 +239,11 @@
     
     CGSize newSize = [self calculateNewSizeWithTime:current_value];
     
-    [self resizeBoxToSize:newSize];
+        [self resizeBoxToSize:newSize];
     
-    if (current_value / animationDuration == _totalTime) {
+    NSLog(@"Current: %f / Total: %f", current_value, _totalTime);
+    
+    if (current_value * animationDuration == _totalTime) {
         
         [self didFinish];
     }
@@ -235,6 +251,7 @@
 }
 -(void)didFinish
 {
+    IsAnimationInProgress = NO;
     [self tearDownTimer];
     
     [self.delegate didFinishAnimation:self];
