@@ -10,6 +10,7 @@
 
 #import "imageHandling.h"
 
+
 typedef NS_ENUM(NSInteger, pLabelType) {
     
     pLabelTypeTitle,
@@ -30,6 +31,10 @@ typedef NS_ENUM(NSInteger, pLabelType) {
 
 
 + (id) createFrame;
+
+-(void)addPanGestureRecognizerWithObject:(id) someObject;
+
+-(void)removePanGestureRecognizer;
 
 -(void)resize;
 

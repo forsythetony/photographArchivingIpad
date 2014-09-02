@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "NSDate+timelineStuff.h"
-
 #import "pictureFrame.h"
 
 @class timelineManager;
@@ -16,6 +15,7 @@
 @protocol timelineManagerDelegate <NSObject>
 
 @optional
+
 -(void)finishedUpdatedFrame:(pictureFrame*) frame withNewInformation:(NSDictionary*) info;
 
 @end

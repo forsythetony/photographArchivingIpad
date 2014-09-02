@@ -28,6 +28,8 @@
 		BA365AA719996992008E6975 /* StoryRecordingMeter.m in Sources */ = {isa = PBXBuildFile; fileRef = BA365AA619996992008E6975 /* StoryRecordingMeter.m */; };
 		BA365AAD19998DF9008E6975 /* UploadingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BA365AAC19998DF9008E6975 /* UploadingButton.m */; };
 		BA4769AA19B3E8D70030EBE3 /* TADuration.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4769A919B3E8D70030EBE3 /* TADuration.m */; };
+		BA4769BF19B5EC900030EBE3 /* TAProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4769BE19B5EC900030EBE3 /* TAProgressView.m */; };
+		BA4769C219B5F0670030EBE3 /* TATriggerFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4769C119B5F0670030EBE3 /* TATriggerFrame.m */; };
 		BA4C4BCA19ADCB46009C9C16 /* PAARecording.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4C4BC919ADCB46009C9C16 /* PAARecording.m */; };
 		BA4C4BD219ADF553009C9C16 /* StoriesDisplayTableview.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4C4BD119ADF553009C9C16 /* StoriesDisplayTableview.m */; };
 		BA4C4BD719ADF58D009C9C16 /* StoriesDisplayTableviewCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4C4BD519ADF58D009C9C16 /* StoriesDisplayTableviewCellTableViewCell.m */; };
@@ -165,6 +167,10 @@
 		BA365AAC19998DF9008E6975 /* UploadingButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadingButton.m; sourceTree = "<group>"; };
 		BA4769A819B3E8D70030EBE3 /* TADuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TADuration.h; sourceTree = "<group>"; };
 		BA4769A919B3E8D70030EBE3 /* TADuration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TADuration.m; sourceTree = "<group>"; };
+		BA4769BD19B5EC900030EBE3 /* TAProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAProgressView.h; sourceTree = "<group>"; };
+		BA4769BE19B5EC900030EBE3 /* TAProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAProgressView.m; sourceTree = "<group>"; };
+		BA4769C019B5F0670030EBE3 /* TATriggerFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TATriggerFrame.h; sourceTree = "<group>"; };
+		BA4769C119B5F0670030EBE3 /* TATriggerFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TATriggerFrame.m; sourceTree = "<group>"; };
 		BA4C4BC719ADC6A5009C9C16 /* ImageDisplayStoryUpdater.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageDisplayStoryUpdater.h; sourceTree = "<group>"; };
 		BA4C4BC819ADCB46009C9C16 /* PAARecording.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAARecording.h; sourceTree = "<group>"; };
 		BA4C4BC919ADCB46009C9C16 /* PAARecording.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAARecording.m; sourceTree = "<group>"; };
@@ -425,6 +431,8 @@
 		BA67F19F193666200056DD00 = {
 			isa = PBXGroup;
 			children = (
+				BA4769BD19B5EC900030EBE3 /* TAProgressView.h */,
+				BA4769BE19B5EC900030EBE3 /* TAProgressView.m */,
 				BA67F1B1193666210056DD00 /* photoArchivingIpad */,
 				BA67F1B2193666210056DD00 /* Supporting Files */,
 				BA67F1D0193666210056DD00 /* photoArchivingIpadTests */,
@@ -592,6 +600,8 @@
 				BA9531B4194E4DF9005E0F10 /* Page View Controller */,
 				BA67F1F9193667140056DD00 /* WorkspaceViewController.h */,
 				BA67F1FA193667140056DD00 /* WorkspaceViewController.m */,
+				BA4769C019B5F0670030EBE3 /* TATriggerFrame.h */,
+				BA4769C119B5F0670030EBE3 /* TATriggerFrame.m */,
 				BA0BE0B61943B3E40054F7C7 /* workspaceAuxView.h */,
 				BA0BE0B71943B3E40054F7C7 /* workspaceAuxView.m */,
 				BA67F1F3193667140056DD00 /* dummyDataProvider.h */,
@@ -939,6 +949,7 @@
 				BAD9F36F199D890700107D3A /* ImageDisplayRecordingSliderView.m in Sources */,
 				BA365AAD19998DF9008E6975 /* UploadingButton.m in Sources */,
 				BA4C4BD219ADF553009C9C16 /* StoriesDisplayTableview.m in Sources */,
+				BA4769C219B5F0670030EBE3 /* TATriggerFrame.m in Sources */,
 				BA32997319489A730002EBFD /* landingPageViewController.m in Sources */,
 				BA6F5EDD194ED5B100E1E1FC /* NSMutableDictionary+attributesDictionary.m in Sources */,
 				BA3299761948B91E0002EBFD /* showServerData.m in Sources */,
@@ -952,6 +963,7 @@
 				BA1194B61990B4F60032DEC6 /* PreviewView.m in Sources */,
 				BA7525D419A7F3AD007DD95E /* imageObject.m in Sources */,
 				BA6F5EDA194ED05700E1E1FC /* attributesDictionary.m in Sources */,
+				BA4769BF19B5EC900030EBE3 /* TAProgressView.m in Sources */,
 				BA4C4BD719ADF58D009C9C16 /* StoriesDisplayTableviewCellTableViewCell.m in Sources */,
 				BA6694341999CAFF00412313 /* DateRange.m in Sources */,
 				BA67F209193667140056DD00 /* dummyDataProvider.m in Sources */,

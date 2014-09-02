@@ -11,16 +11,28 @@
 #import "StoriesDisplayTable.h"
 #import "ImageDisplay.h"
 #import "NSDictionary+ObjectCreationHelpers.h"
+#import <QuartzCore/QuartzCore.h>
+#import "TAProgressView.h"
+#import "TATriggerFrame.h"
 
 #define TLWALLSPACING 100.0
 #define MAINSCROLLVIEWSIZE 10000.0
 
+typedef struct tScrollTriggerArea {
+    
+    CGRect leftTrigger;
+    CGRect rightTrigger;
+    BOOL isRightTriggered;
+    BOOL isLeftTriggered;
+    
+
+} ScrollTriggers;
 //  Segue Constants
 
 NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
 
 
-@interface WorkspaceViewController () <StoryTellerCreationFormDelegate, UIAlertViewDelegate> {
+@interface WorkspaceViewController () <StoryTellerCreationFormDelegate, UIAlertViewDelegate, UIScrollViewDelegate, CustomProgressViewDelegate> {
     
     float   TLSpacing;
     
@@ -51,7 +63,28 @@ NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
     
     UIView *buttonsContainerView;
     
+    NSTimer *moveScreenTimer;
     
+    ScrollTriggers scrollTrigger;
+    
+    pictureFrame *grabbedFrame;
+    CGPoint newGrabbedCenter;
+    
+    BOOL finishedMoving;
+    BOOL justWentRight;
+    
+    NSUInteger triggerTime;
+    
+    UIView *rightTriggerView, *leftTriggerView;
+    
+    CGFloat triggerWidth;
+    
+    
+    NSTimer *triggerLockTimer;
+    BOOL triggerLocked;
+    
+    TAProgressView *customProgressView;
+    TATriggerFrame *trigFrame;
     
 }
 
@@ -60,6 +93,45 @@ NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
 @implementation WorkspaceViewController
 @synthesize timelineDateRange;
 
+-(void)setupTriggerViews
+{
+ 
+    CGRect leftFrame;
+    
+    leftFrame.origin = CGPointMake(0.0, 0.0);
+    leftFrame.size.width = triggerWidth;
+    leftFrame.size.height = mainScrollView.frame.size.height;
+    
+    leftTriggerView = [[UIView alloc] initWithFrame:leftFrame];
+    leftTriggerView.alpha = 0.0;
+    leftTriggerView.backgroundColor = [UIColor dangerColor];
+    
+    [self.view addSubview:leftTriggerView];
+    
+    
+    CGRect rightFrame;
+    
+    rightFrame.origin.x = mainScrollView.frame.size.width - triggerWidth;
+    rightFrame.origin.y = 0.0;
+    rightFrame.size.width = triggerWidth;
+    rightFrame.size.height = leftFrame.size.height;
+    
+    rightTriggerView = [[UIView alloc] initWithFrame:rightFrame];
+    rightTriggerView.alpha = 0.0;
+    rightTriggerView.backgroundColor = [UIColor dangerColor];
+    
+    trigFrame = [[TATriggerFrame alloc] initWithFrame:rightFrame];
+    [trigFrame setTotalTime:3.0];
+    
+    [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(trigUpdate) userInfo:nil repeats:NO];
+    
+    [self.view addSubview:trigFrame];
+    [self blurEdgeOfView:rightTriggerView];
+    
+    [self.view addSubview:rightTriggerView];
+    [self.view bringSubviewToFront:rightTriggerView];
+    
+}
 -(void)finishedAddingStory
 {
     UIAlertView *storyAddedAlert = [[UIAlertView alloc] initWithTitle:@"Story Added!" message:@"The story has been added to the image" delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
@@ -110,6 +182,27 @@ NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
     story.delegate = self;
     storyAddPopover = [[UIPopoverController alloc] initWithContentViewController:story];
     
+
+    
+    CGRect leftTrigger = CGRectMake(0.0, 0.0, triggerWidth, self.view.frame.size.height);
+    CGRect rightTrigger = CGRectMake(self.view.frame.size.width - triggerWidth, 0.0, triggerWidth, self.view.frame.size.height);
+    
+    scrollTrigger.leftTrigger = leftTrigger;
+    scrollTrigger.rightTrigger = rightTrigger;
+    scrollTrigger.isLeftTriggered = NO;
+    scrollTrigger.isRightTriggered = NO;
+    justWentRight = NO;
+    
+    [self setupTriggerViews];
+    
+    //[self testLayer];
+    
+    //[self testProgressView];
+    
+}
+-(void)trigUpdate
+{
+    [trigFrame start];
 }
 -(void)initialSetup
 {
@@ -139,7 +232,16 @@ NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
     
+    finishedMoving = NO;
   
+
+    
+}
+-(void)variableSetup
+{
+    triggerWidth = 100.0;
+    triggerLocked = NO;
+    
 }
 -(void)finishedPullingPhotoList:(NSArray *)list
 {
@@ -262,18 +364,21 @@ NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
 {
     
     [TLManager setInitialPhotographs:photoList];
-            [TLManager bringSubyearsToFront];
+    
+    [TLManager bringSubyearsToFront];
+    
     [self addGestureRecognizers];
     
 }
 - (void)viewDidLoad
 {
+    [self variableSetup];
+    
     shouldLoadAgain = YES;
     
     [super viewDidLoad];
     
     [self initialSetup];
-    
     
     [mainDataCom saveImageToCameraRoll];
     
@@ -578,6 +683,7 @@ NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
     
     [self.view addSubview:auxView];
     
+    [self.view sendSubviewToBack:auxView];
     // Create Main Label
     
     UILabel *auxLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 100.0, 50.0)];
@@ -1037,13 +1143,14 @@ NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
     for (pictureFrame* theFrame in photoList)
     {
         
-        UIPanGestureRecognizer *panRecog = [UIPanGestureRecognizer new];
+//        UIPanGestureRecognizer *panRecog = [UIPanGestureRecognizer new];
+//        
+//        [panRecog addTarget:self
+//                     action:@selector(handlePanFrom:)];
+//        
+//        [theFrame addGestureRecognizer:panRecog];
         
-        [panRecog addTarget:self
-                     action:@selector(handlePanFrom:)];
-        
-        [theFrame addGestureRecognizer:panRecog];
-        
+        [theFrame addPanGestureRecognizerWithObject:self];
         
         
         UITapGestureRecognizer *tapRecog = [UITapGestureRecognizer new];
@@ -1103,11 +1210,21 @@ NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
         firstX = [[sender view] center].x;
         firstY = [[sender view] center].y;
         
+        grabbedFrame = (pictureFrame*)[sender view];
+        
     }
+    
+    //NSLog(@"\n\nTrans Point: %@", NSStringFromCGPoint(translatedPoint));
     
     translatedPoint = CGPointMake(firstX+translatedPoint.x, firstY + translatedPoint.y);
     
+    if (!finishedMoving) {
+        
     [[sender view] setCenter:translatedPoint];
+    
+    }
+    
+    [self findPointInView:translatedPoint];
     
     if ([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateEnded)
     {
@@ -1158,6 +1275,8 @@ NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
             }
         }
         
+        
+        
         CGFloat animationDuration = (ABS(velocityX) * .0002) + .2;
         
         NSLog(@"the duration is: %f", animationDuration);
@@ -1173,6 +1292,7 @@ NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
         
         [TLManager updateDateForPicture:frame];
         
+        grabbedFrame = nil;
     }
     
 }
@@ -1349,8 +1469,6 @@ NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
                               kCRToastAnimationOutTypeKey           : @(CRToastAnimationTypeGravity),
                               kCRToastAnimationInDirectionKey       : @(CRToastAnimationDirectionTop),
                               kCRToastAnimationOutDirectionKey      : @(CRToastAnimationDirectionBottom),
-                              kCRToastAnimationInTimeIntervalKey    : @(2.0),
-                              kCRToastAnimationOutTimeIntervalKey   : @(1.0),
                               kCRToastTimeIntervalKey               : @(2.0)
                               };
     
@@ -1583,5 +1701,251 @@ NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
     [self dismissViewControllerAnimated:YES completion:nil];
     
 }
+-(void)findPointInView:(CGPoint) point
+{
+    if(!triggerLocked)
+    {
+        CGPoint newPoint = [self.view convertPoint:point fromView:mainScrollView];
+        
+        //NSLog(@"The Point: %@", NSStringFromCGPoint(newPoint));
+        
+        if (CGRectContainsPoint(scrollTrigger.leftTrigger, newPoint)) {
+            
+           // NSLog(@"%@", @"LEFT TRIGGER");
+            
+            
+        }
+        else if (CGRectContainsPoint(scrollTrigger.rightTrigger, newPoint))
+        {
+            //NSLog(@"%@", @"RIGHT TRIGGER");
+            
+            if (scrollTrigger.isRightTriggered == NO) {
+                
+                scrollTrigger.isRightTriggered = YES;
+                
+                
+                triggerTime = 0;
+                
+                [moveScreenTimer invalidate];
+                moveScreenTimer = nil;
+                [self resetTriggerViews];
+                
+                moveScreenTimer = [NSTimer scheduledTimerWithTimeInterval:0.001 target:self selector:@selector(updateTriggerTimer:) userInfo:nil repeats:YES];
+                
+            }
+            
+        }
+        else
+        {
+            //NSLog(@"NO TRIGGER");
+            scrollTrigger.isLeftTriggered = NO;
+            scrollTrigger.isRightTriggered = NO;
+        }
+    }
+}
+-(void)goRight:(id)sender
+{
+        
+        
+        if (scrollTrigger.isRightTriggered == YES) {
+            
+            CGRect scrollToFrame;
+            
+            
+            
+            CGPoint frameCenter = [grabbedFrame center];
+            
+            CGPoint scrollCenter = mainScrollView.center;
+            CGFloat dist = scrollCenter.x - frameCenter.x;
+            
+            CGFloat nudgeDist = 200.0;
+            CGFloat newXOrigin = mainScrollView.frame.origin.x + nudgeDist + mainScrollView.contentOffset.x;
+            
+            scrollToFrame.origin.x = newXOrigin;
+            scrollToFrame.origin.y = 0.0;
+            
+            scrollToFrame.size = mainScrollView.frame.size;
+            
+            CGPoint newCenter = CGPointMake(frameCenter.x + nudgeDist, frameCenter.y);
+            
+            newGrabbedCenter = newCenter;
+            
+            [mainScrollView scrollRectToVisible:scrollToFrame animated:YES];
+            
+            [UIView animateWithDuration:0.3 animations:^{
+                
+                [grabbedFrame setCenter:newGrabbedCenter];
+            }];
+            
+           // NSLog(@"\n\n\n\nMOVED THINGS\n\n\n\n\n");
+            
+            
+            firstX += nudgeDist;
+            
 
+
+            
+            scrollTrigger.isRightTriggered = NO;
+        }
+       
+}
+-(void)updateTriggerTimer:(id) sender
+{
+    triggerTime++;
+    
+    NSUInteger stopPoint = 600;
+    
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [self updateRightAlphaWithMilliseconds:triggerTime andMax:stopPoint];
+        
+    });
+    
+    
+    if (triggerTime == stopPoint) {
+        
+        [self goRight:nil];
+        
+        [moveScreenTimer invalidate];
+        moveScreenTimer = nil;
+        
+        [self dimTriggers];
+        [self resetTriggerViews];
+        [self lockTrigger];
+    }
+}
+-(void)updateRightAlphaWithMilliseconds:(NSUInteger) milli andMax:(NSUInteger) max
+{
+    CGFloat topAlpha = 0.7;
+    
+    CGFloat scalingFactor = topAlpha / (CGFloat)max;
+    
+    CGFloat newAlpha = scalingFactor * (CGFloat)milli;
+    
+    NSLog(@"\n\nNew Alpha: %f", newAlpha);
+    
+    rightTriggerView.alpha = newAlpha;
+    
+    
+}
+-(void)lockTrigger
+{
+    NSTimeInterval triggerLockTime = 2.0;
+    
+    triggerLockTimer = [NSTimer scheduledTimerWithTimeInterval:triggerLockTime target:self selector:@selector(unlockTrigger:) userInfo:nil repeats:NO];
+    
+    triggerLocked = YES;
+    
+}
+-(void)unlockTrigger:(id) sender
+{
+    [triggerLockTimer invalidate];
+    triggerLockTimer = nil;
+    
+    triggerLocked = NO;
+}
+-(void)resetTriggerViews
+{
+    [self dimTriggers];
+    [leftTriggerView removeFromSuperview];
+    [rightTriggerView removeFromSuperview];
+    
+    leftTriggerView = nil;
+    rightTriggerView = nil;
+    
+    [self setupTriggerViews];
+}
+-(void)dimTriggers
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [self dimView:leftTriggerView];
+        [self dimView:rightTriggerView];
+
+    });
+    
+}
+-(void)dimView:(UIView*) viewToDim
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        
+        [viewToDim setAlpha:0.0];
+    }];
+}
+-(void)blurEdgeOfView:(UIView*) theView
+{
+    /*
+    CAGradientLayer *maskLayer = [CAGradientLayer layer];
+    
+    CGColorRef outerColor = [UIColor colorWithWhite:1.0 alpha:1.0].CGColor;
+    CGColorRef innerColor = [UIColor colorWithWhite:1.0 alpha:0.0].CGColor;
+    
+    maskLayer.colors = [NSArray arrayWithObjects: (__bridge id)(outerColor), (__bridge id)(innerColor), (__bridge id)(innerColor), outerColor, nil];
+    
+    maskLayer.locations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0],
+                           [NSNumber numberWithFloat:0.2],
+                           [NSNumber numberWithFloat:0.8],
+                           [NSNumber numberWithFloat:1.0], nil];
+    
+    maskLayer.bounds = CGRectMake(0, 0,
+                                  theView.frame.size.width,
+                                  theView.frame.size.height);
+    
+    maskLayer.anchorPoint = CGPointZero;
+    
+    [theView.layer addSublayer:maskLayer];
+     */
+    CAGradientLayer *l = [CAGradientLayer layer];
+    l.frame = theView.bounds;
+    
+    l.colors = [NSArray arrayWithObjects:(id)[UIColor clearColor].CGColor, (id)[UIColor clearColor].CGColor, nil];
+
+    
+    l.startPoint = CGPointMake(0.9f , 1.0f);
+    l.endPoint = CGPointMake(1.0f, 1.0f);
+    
+    [theView.layer insertSublayer:l above:theView.layer];
+    
+}
+-(void)testLayer
+{
+    CAShapeLayer *layer = [CAShapeLayer new];
+    
+    [layer setBounds:self.view.bounds];
+    [layer setPosition:self.view.center];
+    [layer setFillColor:[[UIColor clearColor] CGColor]];
+    [layer setStrokeColor:[[UIColor redColor] CGColor]];
+    [layer setLineWidth:3.0];
+    [layer setLineJoin:kCALineJoinRound];
+    [layer setLineDashPattern:@[@(10) , @(5)]];
+    
+    
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathMoveToPoint(path, NULL, 100, 100);
+    CGPathAddLineToPoint(path, NULL, 300, 300);
+    
+    [layer setPath:path];
+    CGPathRelease(path);
+    
+    
+    [self.view.layer addSublayer:layer];
+    
+}
+-(void)testProgressView
+{
+    customProgressView = [[TAProgressView alloc] init];
+    
+    customProgressView.delegate = self;
+    
+    [self.view addSubview:customProgressView];
+    [customProgressView setBackgroundColor:[UIColor clearColor]];
+    [self performSelector:@selector(setProgress:) withObject:[NSNumber numberWithFloat:0.3] afterDelay:0.0];
+    [self performSelector:@selector(setProgress:) withObject:[NSNumber numberWithFloat:0.75] afterDelay:2.0];
+    [self performSelector:@selector(setProgress:) withObject:[NSNumber numberWithFloat:1.0] afterDelay:4.0];
+}
+-(void)setProgress:(NSNumber*)value
+{
+    [customProgressView performSelectorOnMainThread:@selector(setProgress:) withObject:value waitUntilDone:NO];
+}
 @end

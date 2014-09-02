@@ -63,11 +63,19 @@ NSString * const KEYThumbnailURL        = @"thumbnailURL";
     newObject.id = [self objectForKey:KEYImageID];
     newObject.title = imageInfoDictionary[KEYImageInformation_Title];
     
-    NSString *dateString = imageInfoDictionary[KEYImageInformation_DateTaken];
+    id dateString = imageInfoDictionary[KEYImageInformation_DateTaken];
     
-    if ([dateString isEqualToString:@"unknown"] ) {
+    if ([dateString isKindOfClass:[NSString class]]) {
         
-        newObject.isDateKnown = NO;
+        if ([(NSString*)dateString isEqualToString:@"unknown"]) {
+            
+            newObject.isDateKnown = NO;
+        }
+        else
+        {
+            newObject.isDateKnown = NO;
+        }
+
     }
     else
     {

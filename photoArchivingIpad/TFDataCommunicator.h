@@ -79,7 +79,6 @@ typedef NS_ENUM(NSInteger, serverResponseType) {
 -(void)getPhotosForTestUser;
 -(void)cleanImages;
 -(void)saveImageToCameraRoll;
--(void)uploadPhoto:(UIImage*) photo withInformation:(NSDictionary*) information;
 -(void)uploadPhoto:(ImagePackage*) photo;
 -(void)mainServerUploadPhoto:(ImagePackage *)photo;
 -(void)deletePhoto:(imageObject*) photo;

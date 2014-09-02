@@ -7,6 +7,7 @@
 //
 
 #import "pictureFrame.h"
+#import "WorkspaceViewController.h"
 
 #define CORNERRAD 4.0
 
@@ -14,6 +15,8 @@
 @implementation pictureFrame {
     
     NSArray *containerViews;
+    
+    UIPanGestureRecognizer *panGest;
     
 }
 + (id)createFrame
@@ -537,5 +540,15 @@
     return ani;
     
 }
-
+-(void)addPanGestureRecognizerWithObject:(id)someObject
+{
+    panGest = [[UIPanGestureRecognizer alloc] initWithTarget:someObject action:@selector(handlePanFrom:)];
+    
+    [self addGestureRecognizer:panGest];
+}
+-(void)removePanGestureRecognizer
+{
+    [self removeGestureRecognizer:panGest];
+    panGest = nil;
+}
 @end

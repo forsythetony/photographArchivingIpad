@@ -62,4 +62,6 @@ typedef NS_ENUM(NSInteger, buttonIconType) {
 
 @property (strong, nonatomic) DateRange *timelineDateRange;
 
+
+-(void)handlePanFrom:(id) sender;
 @end
