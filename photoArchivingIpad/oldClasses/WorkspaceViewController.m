@@ -281,6 +281,7 @@ NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
 #pragma mark Create Views
 -(void)createAuxViews
 {
+    /*
     float auxViewHeight     = self.view.bounds.size.height * 0.4;
     float auxViewYOrg       = self.view.bounds.size.height * 0.6;
     float auxViewWidth      = self.view.bounds.size.width;
@@ -569,7 +570,7 @@ NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
     [addcontentViewContainer addSubview:_addRecording];
     
     buttonsContainerView = addcontentViewContainer;
-    
+    */
     
 }
 -(void)handleStoryAddition:(id) sender
