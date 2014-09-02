@@ -13,6 +13,7 @@
 #import "Story+StoryHelpers.h"
 #import "StoriesDisplayTableview.h"
 #import "ImageDisplay+testThingies.h"
+#import <VBFPopFlatButton/VBFPopFlatButton.h>
 
 @interface ImageDisplay () <ImageDisplayRecordingSliderViewDelegate, TFCommunicatorDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITableViewDataSource, UITableViewDelegate> {
     
@@ -115,6 +116,7 @@
 {
     [storiesList reloadData];
     [self setSaveButtonToDisabled];
+    [self createButtons];
     
 }
 -(void)aestheticsConfiguration
@@ -550,10 +552,29 @@
     [saveStoryButton setTitle:@"Uploading" forState:UIControlStateDisabled];
     [saveStoryButton setEnabled:NO];
 }
-
-- (IBAction)iWantToGoBack:(id)sender {
+-(void)createButtons
+{
+    CGRect backButtonFrame;
     
+    backButtonFrame.origin = CGPointMake(0.0, 0.0);
+    backButtonFrame.size.width = 30.0;
+    backButtonFrame.size.height = 30.0;
+    
+    VBFPopFlatButton *backButton = [[VBFPopFlatButton alloc] initWithFrame:backButtonFrame buttonType:buttonBackType buttonStyle:buttonRoundedStyle];
+    
+    backButton.roundBackgroundColor = [UIColor whiteColor];
+    backButton.linesColor = [UIColor blueberryColor];
+    backButton.lineThickness = 2.0;
+    [backButton addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:backButton];
+
+    [backButton setCenter:CGPointMake(100.0, self.view.bounds.size.height - 50.0)];
+    
+}
+-(void)goBack:(id) sender
+{
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
+
 
 @end
