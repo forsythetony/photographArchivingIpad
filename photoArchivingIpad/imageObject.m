@@ -7,7 +7,7 @@
 //
 
 #import "imageObject.h"
-#import "photoUploadingConstants.h"
+#import "updatedConstants.h"
 
 @implementation imageObject
 
@@ -15,7 +15,7 @@
 {
     return [NSMutableDictionary dictionaryWithObjects:@[(_title ? _title : @"empty")
                                                         ]
-                                              forKeys:@[[photoUploadingConstants getFieldTypeTitle]]];
+                                              forKeys:@[[updatedConstants getFieldTypeTitle]]];
     
 }
 -(void)addStory:(Story *)newStory

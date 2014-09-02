@@ -7,7 +7,7 @@
 //
 
 #import "TADuration.h"
-#import "photoUploadingConstants.h"
+#import "updatedConstants.h"
 
 typedef struct tfDurationS {
     

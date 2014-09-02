@@ -7,7 +7,7 @@
 //
 
 #import "Story+StoryHelpers.h"
-#import "photoUploadingConstants.h"
+#import "updatedConstants.h"
 #import "NSDate+timelineStuff.h"
 
 @implementation Story (StoryHelpers)

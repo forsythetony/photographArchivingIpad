@@ -7,7 +7,7 @@
 //
 
 #import "photoUploadingConstants.h"
-
+/*
 NSString * const keyDateTaken = @"dateTaken";
 NSString * const keyDateConfidence = @"dateConfidence";
 NSString * const keyInformation = @"imageInformation";
@@ -48,12 +48,13 @@ NSString * const jsonKeyStories_AudioLength_milliseconds = @"milliseconds";
 NSString * const jsonKeyStories_AudioLength_seconds = @"seconds";
 NSString * const jsonKeyStories_AudioLength_minutes = @"minutes";
 NSString * const jsonKeyStories_AudioLength_hours = @"hours";
+*/
 
 @implementation photoUploadingConstants
-
 /*
+//
  Keys
- */
+ //
 +(NSString *)getKeyDateTaken
 {
     return @"keyDateTakenJSON";
@@ -74,9 +75,9 @@ NSString * const jsonKeyStories_AudioLength_hours = @"hours";
     return @"keyTitleJSON";
 }
 
-/*
+//
  Labels
- */
+ //
 +(NSString *)getLabelDateTaken
 {
     return @"Date Taken";
@@ -102,9 +103,9 @@ NSString * const jsonKeyStories_AudioLength_hours = @"hours";
     return @"Uploaded By";
 }
 
-/*
+//
  Image Information Constants
- */
+ //
 
 +(NSString *)getFieldTypeTitle
 {
@@ -118,4 +119,5 @@ NSString * const jsonKeyStories_AudioLength_hours = @"hours";
 {
     return @"fieldTypeHasEdited";
 }
+*/
 @end

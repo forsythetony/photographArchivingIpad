@@ -8,7 +8,7 @@
 
 #import "NSDictionary+ObjectCreationHelpers.h"
 #import "NSDate+timelineStuff.h"
-#import "photoUploadingConstants.h"
+#import "updatedConstants.h"
 
 //  Constants
 NSString * const KEYImageID = @"_id";

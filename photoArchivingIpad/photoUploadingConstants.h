@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+/*
 extern NSString * const keyDateTaken;
 extern NSString * const keyDateConfidence;
 extern NSString * const keyInformation;
@@ -50,11 +50,11 @@ extern NSString * const APIAddStoryURLParam;
 extern NSString * const APISetupStoryURLParam;
 extern NSString * const APIDeleteStoryWithID;
 
-
+*/
 @class photoUploadingConstants;
 
 @interface photoUploadingConstants : NSObject
-
+/*
 
 +(NSString*)getLabelDateTaken;
 +(NSString*)getLabelDateUploaded;
@@ -69,12 +69,11 @@ extern NSString * const APIDeleteStoryWithID;
 +(NSString*)getKeyTitle;
 
 
-/*
+
  Image Information Constants
- */
+
 +(NSString*)getFieldTypeTitle;
 +(NSString*)getFieldTypeDateTaken;
 +(NSString*)getFieldTypeHasEdited;
-
-
+*/
 @end

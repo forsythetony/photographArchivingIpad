@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "imageHandling.h"
 #import "NSDate+timelineStuff.h"
-#import "photoUploadingConstants.h"
+#import "updatedConstants.h"
 #import <AWSRuntime/AWSRuntime.h>
 #import <AWSS3/AWSS3.h>
 #import "ImagePackage.h"

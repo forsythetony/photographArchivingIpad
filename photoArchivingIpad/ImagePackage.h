@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "NSDate+timelineStuff.h"
 #import "UIImage+imageAdditions.h"
-#import "photoUploadingConstants.h"
+#import "updatedConstants.h"
 #import "imageObject.h"
 
 
