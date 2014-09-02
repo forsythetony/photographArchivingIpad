@@ -15,6 +15,7 @@
 #import "ImageDisplay+testThingies.h"
 #import <VBFPopFlatButton/VBFPopFlatButton.h>
 #import "TAStyler.h"
+#import <Masonry/Masonry.h>
 
 @interface ImageDisplay () <ImageDisplayRecordingSliderViewDelegate, TFCommunicatorDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITableViewDataSource, UITableViewDelegate> {
     
@@ -558,25 +559,61 @@
     CGRect backButtonFrame;
     
     backButtonFrame.origin = CGPointMake(0.0, 0.0);
-    backButtonFrame.size.width = 30.0;
-    backButtonFrame.size.height = 30.0;
+    backButtonFrame.size.width = 50.0;
+    backButtonFrame.size.height = 50.0;
     
     VBFPopFlatButton *backButton = [[VBFPopFlatButton alloc] initWithFrame:backButtonFrame buttonType:buttonBackType buttonStyle:buttonRoundedStyle];
     
     backButton.roundBackgroundColor = [TAStyler getButtonBackgroundColor];
     backButton.linesColor = [TAStyler getButtonForegroundColor];
     
-    backButton.lineThickness = 2.0;
+    backButton.lineThickness = 1.0;
     [backButton addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:backButton];
-
-    [backButton setCenter:CGPointMake(100.0, self.view.bounds.size.height - 50.0)];
     
+    VBFPopFlatButton *testButton = [[VBFPopFlatButton alloc] initWithFrame:backButtonFrame buttonType:buttonAddType buttonStyle:buttonRoundedStyle];
+    
+    testButton.roundBackgroundColor = [UIColor successColor];
+    testButton.linesColor = [TAStyler getButtonForegroundColor];
+    
+    testButton.lineThickness = 2.0;
+    
+    [testButton addTarget:self action:@selector(testingThings:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:testButton];
+    [self.view addSubview:backButton];
+    
+    float padding = 10.0;
+    
+    
+    
+    [backButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.bottom.lessThanOrEqualTo(self.view.mas_bottom).with.offset(- ((backButtonFrame.size.height / 2.0) + padding + 10.0)).with.priorityMedium();
+        make.leading.equalTo(largeImageDisplayContainer.mas_leading).with.priorityMedium();
+        
+    }];
+  
+    
+    [testButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.size.equalTo(backButton);
+        make.top.lessThanOrEqualTo(sliderView.mas_bottom).with.offset(20.0);
+        make.centerX.equalTo(sliderView.mas_centerX);
+        
+        
+    }];
 }
 -(void)goBack:(id) sender
 {
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
-
+-(void)testingThings:(id) sender
+{
+    
+}
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
 
 @end

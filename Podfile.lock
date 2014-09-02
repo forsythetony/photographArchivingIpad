@@ -20,6 +20,7 @@ PODS:
   - ImageTaker (0.1.5):
     - Colours
   - LiveFrost (1.1.2)
+  - Masonry (0.5.3)
   - pop (1.0.6)
   - SBJson (4.0.1)
   - VBFPopFlatButton (0.0.2):
@@ -32,6 +33,7 @@ DEPENDENCIES:
   - FontAwesomeKit (~> 2.1.0)
   - ImageTaker (from `https://github.com/forsythetony/ImageTaker.git`)
   - LiveFrost
+  - Masonry
   - pop (~> 1.0)
   - SBJson (~> 4.0.0)
   - VBFPopFlatButton
@@ -49,6 +51,7 @@ SPEC CHECKSUMS:
   FontAwesomeKit: af6eef70d23986349284d2feb4e959459621587d
   ImageTaker: 05ff371f181676fe753c8acca3c3e7c622077c8a
   LiveFrost: 8c7e447e6833902ddc2a639faa27e71e091b5062
+  Masonry: 35368c2ca9577ca87722c12fc52c4bad9b1c1516
   pop: e518794da38942c05255eb64b36d894e70cb4f00
   SBJson: d71212c078abf4679d54b0d0565260c474e46235
   VBFPopFlatButton: cfcf19a4ca46ca2b3e3ca377aa326040559a72f2
