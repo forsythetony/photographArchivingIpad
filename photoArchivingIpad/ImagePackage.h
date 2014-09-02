@@ -34,6 +34,8 @@
 
 @property (nonatomic, strong) NSString* imageID;
 
+
+
 -(void)setDateWithString:(NSString*) dateString;
 -(void)setDateConfidenceWithInt:(NSInteger) dateConfidence;
 -(void)setThumbnailURLWithString:(NSString*) urlString;

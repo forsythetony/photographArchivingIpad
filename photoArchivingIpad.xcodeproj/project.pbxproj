@@ -470,8 +470,6 @@
 				BA67F1BD193666210056DD00 /* Main.storyboard */,
 				BA67F1BA193666210056DD00 /* AppDelegate.h */,
 				BA67F1BB193666210056DD00 /* AppDelegate.m */,
-				BA669454199A1C1300412313 /* Story+StoryHelpers.h */,
-				BA669455199A1C1300412313 /* Story+StoryHelpers.m */,
 				BA6F5EDE194EEFB200E1E1FC /* updatedConstants.h */,
 				BA6F5EDF194EEFB200E1E1FC /* updatedConstants.m */,
 				BA3299A31948BA430002EBFD /* TFPerson.h */,
@@ -495,7 +493,6 @@
 				BA67F1C3193666210056DD00 /* Images.xcassets */,
 				BA4769BC19B5BCD40030EBE3 /* Data Objects */,
 				BAD9F365199D847F00107D3A /* Data */,
-				BACF080319A2B94100F5F3E3 /* Categories */,
 				BA89B37B195B227400DA0FCC /* Attributes Dictionary */,
 				BA67F1F2193667140056DD00 /* oldClasses */,
 				BA365AA41999696D008E6975 /* Story Creation */,
@@ -657,15 +654,6 @@
 			name = "Photo Uploading";
 			sourceTree = "<group>";
 		};
-		BACF080319A2B94100F5F3E3 /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				BACF080419A2B96400F5F3E3 /* NSDictionary+ObjectCreationHelpers.h */,
-				BACF080519A2B96400F5F3E3 /* NSDictionary+ObjectCreationHelpers.m */,
-			);
-			name = Categories;
-			sourceTree = "<group>";
-		};
 		BAD3C569195A10BA004CE905 /* Image Information */ = {
 			isa = PBXGroup;
 			children = (
@@ -711,10 +699,14 @@
 		BAD9F365199D847F00107D3A /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				BA365A9B1996B79E008E6975 /* TFDataCommunicator+Helpers.h */,
-				BA365A9C1996B79E008E6975 /* TFDataCommunicator+Helpers.m */,
 				BA3299A11948BA430002EBFD /* TFDataCommunicator.h */,
 				BA3299A21948BA430002EBFD /* TFDataCommunicator.m */,
+				BA365A9B1996B79E008E6975 /* TFDataCommunicator+Helpers.h */,
+				BA365A9C1996B79E008E6975 /* TFDataCommunicator+Helpers.m */,
+				BACF080419A2B96400F5F3E3 /* NSDictionary+ObjectCreationHelpers.h */,
+				BACF080519A2B96400F5F3E3 /* NSDictionary+ObjectCreationHelpers.m */,
+				BA669454199A1C1300412313 /* Story+StoryHelpers.h */,
+				BA669455199A1C1300412313 /* Story+StoryHelpers.m */,
 				BABF16A8195330CC00FF01C0 /* Photo Uploading */,
 				BAD9F363199D842100107D3A /* Local Data */,
 			);

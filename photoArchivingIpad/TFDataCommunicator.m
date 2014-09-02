@@ -11,8 +11,10 @@
 #import "updatedConstants.h"
 #import "TFDataCommunicator+Helpers.h"
 #import "Story+StoryHelpers.h"
+#import <AWSRuntime/AWSRuntime.h>
+#import <AWSS3/AWSS3.h>
 
-@interface TFDataCommunicator ()
+@interface TFDataCommunicator () <AmazonServiceRequestDelegate>
 
 @property (strong, nonatomic) S3TransferOperation *fileUpload;
 

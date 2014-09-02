@@ -9,8 +9,7 @@
 #import "imageHandling.h"
 #import "NSDate+timelineStuff.h"
 #import "updatedConstants.h"
-#import <AWSRuntime/AWSRuntime.h>
-#import <AWSS3/AWSS3.h>
+
 #import "ImagePackage.h"
 
 typedef NS_ENUM(NSUInteger, photoType) {
@@ -29,6 +28,7 @@ typedef NS_ENUM(NSInteger, serverResponseType) {
     serverResponseTypeOK,
     serverResponseTypeServerError
 };
+
 @class TFDataCommunicator;
 
 @protocol TFCommunicatorDelegate <NSObject>
@@ -47,32 +47,70 @@ typedef NS_ENUM(NSInteger, serverResponseType) {
 @end
 
 
-@interface TFDataCommunicator : NSObject <AmazonServiceRequestDelegate>
+@interface TFDataCommunicator : NSObject
+
+
+//
+//  PROPERTIES
+//
 
 
 @property (nonatomic, weak) id <TFCommunicatorDelegate> delegate;
 
+
+
+//
+//  METHODS
+//
+
+
+//
+//  S3
+//
 -(void)setupTransferManager;
 
--(void)getUserWithUsername:(NSString*) username;
+//
+//  Photos
+//
 -(void)retrieveImageWithURL:(NSString*) url;
 -(void)getPhotoListWithOptions:(NSDictionary*) options;
 -(void)sendImageToServer:(UIImage *)image ofType:(photoType) type withInformation:(NSDictionary*) information;
 -(void)getPhotosForUser:(NSString*) username;
 -(void)getPhotosForTestUser;
 -(void)cleanImages;
--(void)uploadSmallFile;
 -(void)saveImageToCameraRoll;
 -(void)uploadPhoto:(UIImage*) photo withInformation:(NSDictionary*) information;
 -(void)uploadPhoto:(ImagePackage*) photo;
 -(void)mainServerUploadPhoto:(ImagePackage *)photo;
 -(void)deletePhoto:(imageObject*) photo;
 -(void)updatePhoto:(ImagePackage*) photo;
+
+
+//
+//  Audio
+//
 -(void)uploadAudioFileWithUrl:(NSURL*) url andKey:(NSString*) uniqueKey;
--(void)getDummyData;
+
+
+//
+//  Stories
+//
 -(void)dummyUpdateImageWithStory:(imageObject*) image andStory:(Story*) newStory;
 -(void)addStoryToImage:(Story*) aStory imageObject:(imageObject*) theImage;
 -(void)removeStoryFromImage:(imageObject*) theImage withStoryID:(NSString*) storyID;
+
+
+//
+//  Users
+//
+-(void)getUserWithUsername:(NSString*) username;
+
+
+//
+//  Misc.
+//
+-(void)uploadSmallFile;
+-(void)getDummyData;
 
 
 @end

@@ -62,8 +62,21 @@ NSString * const KEYThumbnailURL        = @"thumbnailURL";
     //  Set Properties
     newObject.id = [self objectForKey:KEYImageID];
     newObject.title = imageInfoDictionary[KEYImageInformation_Title];
-    newObject.date  = [NSDate dateWithv1String:imageInfoDictionary[KEYImageInformation_DateTaken][KEYImageInformation_DateTaken_DateString]];
-    newObject.confidence = imageInfoDictionary[KEYImageInformation_DateTaken][KEYImageInformation_DateTaken_Confidence];
+    
+    NSString *dateString = imageInfoDictionary[KEYImageInformation_DateTaken];
+    
+    if ([dateString isEqualToString:@"unknown"] ) {
+        
+        newObject.isDateKnown = NO;
+    }
+    else
+    {
+        newObject.isDateKnown = YES;
+        newObject.date  = [NSDate dateWithv1String:imageInfoDictionary[KEYImageInformation_DateTaken][KEYImageInformation_DateTaken_DateString]];
+        newObject.confidence = imageInfoDictionary[KEYImageInformation_DateTaken][KEYImageInformation_DateTaken_Confidence];
+    }
+    
+    
     
     newObject.photoURL = [NSURL URLWithString:self[KEYImageURL]];
     newObject.thumbNailURL = [NSURL URLWithString:self[KEYThumbnailURL]];

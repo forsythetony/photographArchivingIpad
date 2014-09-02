@@ -27,7 +27,7 @@
 @property (nonatomic, strong) UIImage *thumbnailImage;
 
 @property (nonatomic, strong) NSURL* recordingURL;
-
+@property (nonatomic, assign) BOOL isDateKnown;
 @property (nonatomic, strong) NSDictionary *imageInformation;
 @property (nonatomic, strong) NSNumber* centerXoffset;
 

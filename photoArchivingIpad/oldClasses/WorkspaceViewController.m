@@ -281,7 +281,7 @@ NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
 #pragma mark Create Views
 -(void)createAuxViews
 {
-    /*
+    
     float auxViewHeight     = self.view.bounds.size.height * 0.4;
     float auxViewYOrg       = self.view.bounds.size.height * 0.6;
     float auxViewWidth      = self.view.bounds.size.width;
@@ -290,7 +290,7 @@ NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
                                      0.0            , auxViewYOrg,
                                      auxViewWidth   , auxViewHeight
                                      );
-    
+    /*
     workspaceAuxView* auxView = [[workspaceAuxView alloc] initWithFrame:auxViewFrame];
     
     [self.view addSubview:auxView];
@@ -571,6 +571,31 @@ NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
     
     buttonsContainerView = addcontentViewContainer;
     */
+    
+    UIView *auxView = [[UIView alloc] initWithFrame:auxViewFrame];
+    
+    [auxView setBackgroundColor:[UIColor charcoalColor]];
+    
+    [self.view addSubview:auxView];
+    
+    // Create Main Label
+    
+    UILabel *auxLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 100.0, 50.0)];
+    
+    [auxLabel setText:@"Unknown Dates"];
+    
+    UIFont *auxLabelFont = [UIFont fontWithName:global_font_family size:30.0];
+    
+    auxLabel.font = auxLabelFont;
+    auxLabel.textColor = [UIColor whiteColor];
+    
+    [auxView addSubview:auxLabel];
+    [auxLabel sizeToFit];
+    
+    CGPoint newAuxCenter = CGPointMake(auxView.center.x, auxLabel.center.y);
+    
+    auxLabel.center = newAuxCenter;
+    
     
 }
 -(void)handleStoryAddition:(id) sender
