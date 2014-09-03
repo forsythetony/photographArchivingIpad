@@ -28,12 +28,19 @@ typedef struct tScrollTriggerArea {
     
 
 } ScrollTriggers;
-//  Segue Constants
 
-NSString* const segueDisplayLargeImage = @"showLargeImageDisplay";
-static NSString * kReceiverAppID = @"94B7DFA1";
+static NSString* segueDisplayLargeImage = @"showLargeImageDisplay";
+static NSString* kReceiverAppID         = @"94B7DFA1";
 
-@interface WorkspaceViewController () <StoryTellerCreationFormDelegate, UIAlertViewDelegate, UIScrollViewDelegate, TATriggerFrameDelegate, ImageDisplayDelegate> {
+@interface WorkspaceViewController ()
+<
+    StoryTellerCreationFormDelegate,
+    UIAlertViewDelegate,
+    UIScrollViewDelegate,
+    TATriggerFrameDelegate,
+    ImageDisplayDelegate
+>
+{
     
     float   TLSpacing;
     
@@ -92,8 +99,6 @@ static NSString * kReceiverAppID = @"94B7DFA1";
     
     UIImage *_btnImage;
     UIImage *_btnImageSelected;
-    
-    
 }
 
 @property GCKMediaControlChannel *mediaControlChannel;
@@ -109,6 +114,8 @@ static NSString * kReceiverAppID = @"94B7DFA1";
 @implementation WorkspaceViewController
 @synthesize timelineDateRange;
 
+#pragma mark Initialization Stuff -
+
 -(void)variableSetup
 {
     triggerWidth = 60.0;
@@ -117,32 +124,7 @@ static NSString * kReceiverAppID = @"94B7DFA1";
     
 }
 
--(void)chromecastThings
-{
-    //You can add your own app id here that you get by registering with the Google Cast SDK Developer Console https://cast.google.com/publish
-    kReceiverAppID= @"94B7DFA1";
-    
-    //Create chromecast button
-    _btnImage = [UIImage imageNamed:@"icon-cast-identified.png"];
-    _btnImageSelected = [UIImage imageNamed:@"icon-cast-connected.png"];
-    
-    _chromecastButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [_chromecastButton addTarget:self
-                          action:@selector(chooseDevice:)
-                forControlEvents:UIControlEventTouchDown];
-    _chromecastButton.frame = CGRectMake(0, 0, _btnImage.size.width, _btnImage.size.height);
-    [_chromecastButton setImage:nil forState:UIControlStateNormal];
-    _chromecastButton.hidden = YES;
-    
-    self.navigationItem.rightBarButtonItem =
-    [[UIBarButtonItem alloc] initWithCustomView:_chromecastButton];
-    
-    //Initialize device scanner
-    self.deviceScanner = [[GCKDeviceScanner alloc] init];
-    
-    [self.deviceScanner addListener:self];
-    [self.deviceScanner startScan];
-}
+
 -(void)setupTriggerViews
 {
  
@@ -1525,6 +1507,27 @@ static NSString * kReceiverAppID = @"94B7DFA1";
     
 }
 
+-(void)shouldStopAudio
+{
+    [_mediaControlChannel stop];
+}
+-(void)keyboardDidHide:(NSNotification*) notification
+{
+    self.view.frame = CGRectMake(self.view.frame.origin.x, 0.0, self.view.frame.size.width, self.view.frame.size.height);
+}
+-(void)keyboardDidShow:(NSNotification*) notification
+{
+    //[self.view setFrame:CGRectMake(0.0, -(self.view.frame.size.height / 2.0), self.view.frame.size.width, self.view.frame.size.height)];
+    
+    CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    CGRect newViewRect = self.view.frame;
+    
+    newViewRect.origin.y -= keyboardRect.size.width;
+    
+    NSLog(@"\nKeyboard Frame: %@\nNew View Frame: %@", NSStringFromCGRect(keyboardRect), NSStringFromCGRect(newViewRect));
+    [self.view setFrame:newViewRect];
+}
 #pragma mark Utility Methods -
 
 -(NSTimeInterval)getTimeIntervalWithDate:(NSDate*) date
@@ -1700,23 +1703,7 @@ static NSString * kReceiverAppID = @"94B7DFA1";
     return newLabel;
     
 }
--(void)keyboardDidHide:(NSNotification*) notification
-{
-    self.view.frame = CGRectMake(self.view.frame.origin.x, 0.0, self.view.frame.size.width, self.view.frame.size.height);
-}
--(void)keyboardDidShow:(NSNotification*) notification
-{
-    //[self.view setFrame:CGRectMake(0.0, -(self.view.frame.size.height / 2.0), self.view.frame.size.width, self.view.frame.size.height)];
-    
-    CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    
-    CGRect newViewRect = self.view.frame;
-    
-    newViewRect.origin.y -= keyboardRect.size.width;
-    
-    NSLog(@"\nKeyboard Frame: %@\nNew View Frame: %@", NSStringFromCGRect(keyboardRect), NSStringFromCGRect(newViewRect));
-    [self.view setFrame:newViewRect];
-}
+
 -(UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
     NSUInteger index = [imageInformationVClist indexOfObject:viewController];
@@ -2004,53 +1991,65 @@ static NSString * kReceiverAppID = @"94B7DFA1";
     [_mediaControlChannel stop];
 }
 
-#pragma mark Chromecast Things - 
+#pragma mark - Chromecast Things
 
--(void)sendImage:(imageObject*) image
+#pragma mark Setup
+-(void)chromecastThings
 {
+    //You can add your own app id here that you get by registering with the Google Cast SDK Developer Console https://cast.google.com/publish
+    kReceiverAppID= @"94B7DFA1";
     
-    NSString *urlString = [[image photoURL] absoluteString];
+    //Create chromecast button
+    _btnImage = [UIImage imageNamed:@"icon-cast-identified.png"];
+    _btnImageSelected = [UIImage imageNamed:@"icon-cast-connected.png"];
     
-    //Show alert if not connected
-    if (!self.deviceManager || !self.deviceManager.isConnected) {
-        UIAlertView *alert =
-        [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Not Connected", nil)
-                                   message:NSLocalizedString(@"Please connect to Cast device", nil)
-                                  delegate:nil
-                         cancelButtonTitle:NSLocalizedString(@"OK", nil)
-                         otherButtonTitles:nil];
-        [alert show];
-        return;
+    _chromecastButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [_chromecastButton addTarget:self
+                          action:@selector(chooseDevice:)
+                forControlEvents:UIControlEventTouchDown];
+    _chromecastButton.frame = CGRectMake(0, 0, _btnImage.size.width, _btnImage.size.height);
+    [_chromecastButton setImage:nil forState:UIControlStateNormal];
+    _chromecastButton.hidden = YES;
+    
+    self.navigationItem.rightBarButtonItem =
+    [[UIBarButtonItem alloc] initWithCustomView:_chromecastButton];
+    
+    //Initialize device scanner
+    self.deviceScanner = [[GCKDeviceScanner alloc] init];
+    
+    [self.deviceScanner addListener:self];
+    [self.deviceScanner startScan];
+}
+
+#pragma mark Updating Things
+- (void)updateStatsFromDevice {
+    
+    if (self.mediaControlChannel && self.isConnected) {
+        _mediaInformation = self.mediaControlChannel.mediaStatus.mediaInformation;
+    }
+}
+- (void)updateButtonStates {
+    if (self.deviceScanner.devices.count == 0) {
+        //Hide the cast button
+        _chromecastButton.hidden = YES;
+    } else {
+        //Show cast button
+        [_chromecastButton setImage:_btnImage forState:UIControlStateNormal];
+        _chromecastButton.hidden = NO;
+        
+        if (self.deviceManager && self.deviceManager.isConnected) {
+            //Show cast button in enabled state
+            [_chromecastButton setTintColor:[UIColor blueColor]];
+        } else {
+            //Show cast button in disabled state
+            [_chromecastButton setTintColor:[UIColor grayColor]];
+            
+        }
     }
     
-    //Define Media metadata
-    GCKMediaMetadata *metadata = [[GCKMediaMetadata alloc] init];
-    
-    [metadata setString:([image title] ? [image title] : @"untitled") forKey:kGCKMetadataKeyTitle];
-    
-    
-//    [metadata addImage:[[GCKImage alloc]
-//                        initWithURL:[[NSURL alloc] initWithString:@"http://commondatastorage.googleapis.com/"
-//                                     "gtv-videos-bucket/sample/images/BigBuckBunny.jpg"]
-//                        width:480
-//                        height:360]];
-    
-    //define Media information
-    GCKMediaInformation *mediaInformation =
-    [[GCKMediaInformation alloc] initWithContentID:
-     urlString
-                                        streamType:GCKMediaStreamTypeUnknown
-                                       contentType:@"image/jpg"
-                                          metadata:metadata
-                                    streamDuration:0
-                                        customData:nil];
-    
-    
-    
-    //cast video
-    [_mediaControlChannel loadMedia:mediaInformation autoplay:TRUE playPosition:0];
-    
 }
+
+#pragma mark Device Connection
 
 - (void)chooseDevice:(id)sender {
     //Choose device
@@ -2097,12 +2096,7 @@ static NSString * kReceiverAppID = @"94B7DFA1";
     }
 }
 
-- (void)updateStatsFromDevice {
-    
-    if (self.mediaControlChannel && self.isConnected) {
-        _mediaInformation = self.mediaControlChannel.mediaStatus.mediaInformation;
-    }
-}
+
 
 - (BOOL)isConnected {
     return self.deviceManager.isConnected;
@@ -2127,28 +2121,107 @@ static NSString * kReceiverAppID = @"94B7DFA1";
     self.selectedDevice = nil;
 }
 
-- (void)updateButtonStates {
-    if (self.deviceScanner.devices.count == 0) {
-        //Hide the cast button
-        _chromecastButton.hidden = YES;
-    } else {
-        //Show cast button
-        [_chromecastButton setImage:_btnImage forState:UIControlStateNormal];
-        _chromecastButton.hidden = NO;
-        
-        if (self.deviceManager && self.deviceManager.isConnected) {
-            //Show cast button in enabled state
-            [_chromecastButton setTintColor:[UIColor blueColor]];
-        } else {
-            //Show cast button in disabled state
-            [_chromecastButton setTintColor:[UIColor grayColor]];
-            
-        }
+#pragma mark Media Sending
+
+-(void)sendImage:(imageObject*) image
+{
+    
+    NSString *urlString = [[image photoURL] absoluteString];
+    
+    if (!self.deviceManager || !self.deviceManager.isConnected) {
+        UIAlertView *alert =
+        [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Not Connected", nil)
+                                   message:NSLocalizedString(@"Please connect to Cast device", nil)
+                                  delegate:nil
+                         cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                         otherButtonTitles:nil];
+        [alert show];
+        return;
     }
     
+    GCKMediaMetadata *metadata = [[GCKMediaMetadata alloc] init];
+    
+    [metadata setString:([image title] ? [image title] : @"untitled") forKey:kGCKMetadataKeyTitle];
+    
+    
+    GCKMediaInformation *mediaInformation =
+    [[GCKMediaInformation alloc] initWithContentID:
+     urlString
+                                        streamType:GCKMediaStreamTypeUnknown
+                                       contentType:@"image/jpg"
+                                          metadata:metadata
+                                    streamDuration:0
+                                        customData:nil];
+    
+    
+    
+    [_mediaControlChannel loadMedia:mediaInformation autoplay:TRUE playPosition:0];
+    
 }
-
-//Cast video
+-(void)playAudioFromStory:(Story*) audioStory
+{
+    
+    NSLog(@"\nCast audio stream");
+    
+    //Show alert if not connected
+    if (!self.deviceManager || !self.deviceManager.isConnected) {
+        UIAlertView *alert =
+        [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Not Connected", nil)
+                                   message:NSLocalizedString(@"Please connect to Cast device", nil)
+                                  delegate:nil
+                         cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                         otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    GCKMediaMetadata *metadata = [[GCKMediaMetadata alloc] init];
+    
+    [metadata setString:( audioStory.title ? audioStory.title : @"Untitled") forKey:kGCKMetadataKeyTitle];
+    
+    [metadata setString:( audioStory.storyDate ? [audioStory.storyDate displayDateOfType:sDateTypPretty] : @"")
+                 forKey:kGCKMetadataKeySubtitle];
+    
+    
+    CGSize displayImageSize = CGSizeMake(360, 360);
+    
+    if (_displayImageInformation.thumbnailImage) {
+        
+        displayImageSize = _displayImageInformation.thumbnailImage.size;
+        
+    }
+    
+    [metadata addImage:[[GCKImage alloc]
+                        initWithURL:[[NSURL alloc] initWithString:_displayImageInformation.thumbNailURL.absoluteString]
+                        width:displayImageSize.width
+                        height:displayImageSize.height]];
+    
+    NSString *urlString;
+    
+    if (audioStory.audioRecording.s3URL.absoluteString != nil) {
+        urlString = audioStory.audioRecording.s3URL.absoluteString;
+    }
+    else if(audioStory.recordingS3Url.absoluteString != nil)
+    {
+        urlString = audioStory.recordingS3Url.absoluteString;
+    }
+    else
+    {
+        return;
+    }
+    
+    
+    GCKMediaInformation *mediaInformation =
+    [[GCKMediaInformation alloc] initWithContentID:urlString
+                                        streamType:GCKMediaStreamTypeUnknown
+                                       contentType:@"audio/mp4"
+                                          metadata:metadata
+                                    streamDuration:0
+                                        customData:nil];
+    
+    [_mediaControlChannel loadMedia:mediaInformation autoplay:TRUE playPosition:0];
+    
+}
 - (IBAction)castVideo:(id)sender {
     NSLog(@"Cast Video");
     
@@ -2198,7 +2271,7 @@ static NSString * kReceiverAppID = @"94B7DFA1";
 
 }
 
-#pragma mark - GCKDeviceScannerListener
+#pragma mark GCKDeviceScannerListener
 - (void)deviceDidComeOnline:(GCKDevice *)device {
     NSLog(@"device found!! %@", device.friendlyName);
     [self updateButtonStates];
@@ -2235,7 +2308,7 @@ static NSString * kReceiverAppID = @"94B7DFA1";
     }
 }
 
-#pragma mark - GCKDeviceManagerDelegate
+#pragma mark GCKDeviceManagerDelegate
 
 - (void)deviceManagerDidConnect:(GCKDeviceManager *)deviceManager {
     NSLog(@"connected!!");
@@ -2305,72 +2378,7 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
     [self playAudioFromStory:audioStory];
     
 }
--(void)playAudioFromStory:(Story*) audioStory
-{
-    
-    NSLog(@"\nCast audio stream");
-    
-    //Show alert if not connected
-    if (!self.deviceManager || !self.deviceManager.isConnected) {
-        UIAlertView *alert =
-        [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Not Connected", nil)
-                                   message:NSLocalizedString(@"Please connect to Cast device", nil)
-                                  delegate:nil
-                         cancelButtonTitle:NSLocalizedString(@"OK", nil)
-                         otherButtonTitles:nil];
-        [alert show];
-        return;
-    }
-    
-    GCKMediaMetadata *metadata = [[GCKMediaMetadata alloc] init];
-    
-    [metadata setString:( audioStory.title ? audioStory.title : @"Untitled") forKey:kGCKMetadataKeyTitle];
-    
-    [metadata setString:( audioStory.storyDate ? [audioStory.storyDate displayDateOfType:sDateTypPretty] : @"")
-                 forKey:kGCKMetadataKeySubtitle];
-    
-    
-    CGSize displayImageSize = CGSizeMake(360, 360);
-    
-    if (_displayImageInformation.thumbnailImage) {
-        
-        displayImageSize = _displayImageInformation.thumbnailImage.size;
-        
-    }
-    
-    [metadata addImage:[[GCKImage alloc]
-                        initWithURL:[[NSURL alloc] initWithString:_displayImageInformation.thumbNailURL.absoluteString]
-                        width:displayImageSize.width
-                        height:displayImageSize.height]];
-    
-    NSString *urlString;
-    
-    if (audioStory.audioRecording.s3URL.absoluteString != nil) {
-        urlString = audioStory.audioRecording.s3URL.absoluteString;
-    }
-    else if(audioStory.recordingS3Url.absoluteString != nil)
-    {
-        urlString = audioStory.recordingS3Url.absoluteString;
-    }
-    else
-    {
-        return;
-    }
 
-    
-    GCKMediaInformation *mediaInformation =
-    [[GCKMediaInformation alloc] initWithContentID:urlString
-                                        streamType:GCKMediaStreamTypeUnknown
-                                       contentType:@"audio/mp4"
-                                          metadata:metadata
-                                    streamDuration:0
-                                        customData:nil];
-    
-    [_mediaControlChannel loadMedia:mediaInformation autoplay:TRUE playPosition:0];
 
-}
--(void)shouldStopAudio
-{
-    [_mediaControlChannel stop];
-}
+
 @end
