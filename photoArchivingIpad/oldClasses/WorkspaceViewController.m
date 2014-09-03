@@ -2222,54 +2222,6 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     [_mediaControlChannel loadMedia:mediaInformation autoplay:TRUE playPosition:0];
     
 }
-- (IBAction)castVideo:(id)sender {
-    NSLog(@"Cast Video");
-    
-    //Show alert if not connected
-    if (!self.deviceManager || !self.deviceManager.isConnected) {
-        UIAlertView *alert =
-        [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Not Connected", nil)
-                                   message:NSLocalizedString(@"Please connect to Cast device", nil)
-                                  delegate:nil
-                         cancelButtonTitle:NSLocalizedString(@"OK", nil)
-                         otherButtonTitles:nil];
-        [alert show];
-        return;
-    }
-    
-    //Define Media metadata
-    GCKMediaMetadata *metadata = [[GCKMediaMetadata alloc] init];
-    
-    [metadata setString:@"Big Buck Bunny (2008)" forKey:kGCKMetadataKeyTitle];
-    
-    [metadata setString:@"Big Buck Bunny tells the story of a giant rabbit with a heart bigger than "
-     "himself. When one sunny day three rodents rudely harass him, something "
-     "snaps... and the rabbit ain't no bunny anymore! In the typical cartoon "
-     "tradition he prepares the nasty rodents a comical revenge."
-                 forKey:kGCKMetadataKeySubtitle];
-    
-    [metadata addImage:[[GCKImage alloc]
-                        initWithURL:[[NSURL alloc] initWithString:@"http://commondatastorage.googleapis.com/"
-                                     "gtv-videos-bucket/sample/images/BigBuckBunny.jpg"]
-                        width:480
-                        height:360]];
-    
-    //define Media information
-    GCKMediaInformation *mediaInformation =
-    [[GCKMediaInformation alloc] initWithContentID:
-     @"https://s3-us-west-2.amazonaws.com/s3-bucket-test-akiajm7qsxpiizfs4iuq/forsytheTony/Pictures/IMG_2425.JPG"
-                                        streamType:GCKMediaStreamTypeUnknown
-                                       contentType:@"image/jpg"
-                                          metadata:metadata
-                                    streamDuration:0
-                                        customData:nil];
-    
-    
-    
-    //cast video
-    [_mediaControlChannel loadMedia:mediaInformation autoplay:TRUE playPosition:0];
-
-}
 
 #pragma mark GCKDeviceScannerListener
 - (void)deviceDidComeOnline:(GCKDevice *)device {
