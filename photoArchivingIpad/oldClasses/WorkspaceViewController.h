@@ -27,6 +27,7 @@
 #import "updatedConstants.h"
 #import "ImageInformationDisplayer.h"
 #import "DateRange.h"
+#import <GoogleCast/GoogleCast.h>
 
 @class imageInfoPagerVC;
 
@@ -44,7 +45,10 @@ typedef NS_ENUM(NSInteger, buttonIconType) {
     buttonIconTypeOther
 };
 
-@interface WorkspaceViewController : UIViewController < UIGestureRecognizerDelegate, timelineManagerDelegate, TFCommunicatorDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate,largeImageViewerDelegate, UIScrollViewDelegate >
+@interface WorkspaceViewController : UIViewController < UIGestureRecognizerDelegate, timelineManagerDelegate, TFCommunicatorDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate,largeImageViewerDelegate, UIScrollViewDelegate, GCKDeviceScannerListener,
+GCKDeviceManagerDelegate,
+GCKMediaControlChannelDelegate,
+UIActionSheetDelegate>
 
 @property (strong, nonatomic) NSDictionary* rangeInformation;
 
@@ -61,6 +65,7 @@ typedef NS_ENUM(NSInteger, buttonIconType) {
 @property (strong, nonatomic) UIPageViewController* infoPager;
 
 @property (strong, nonatomic) DateRange *timelineDateRange;
+
 
 
 -(void)handlePanFrom:(id) sender;

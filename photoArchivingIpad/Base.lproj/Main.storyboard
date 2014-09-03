@@ -112,7 +112,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" patternImage="BC10CEF9-1D0A-4041-9F75-540A338889C0" colorSpace="pattern"/>
+                                        <color key="backgroundColor" patternImage="36538706-3433-4BA7-B643-0B35A32C04E8" colorSpace="pattern"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -290,7 +290,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="omx-Cc-ctW">
-                                <rect key="frame" x="785" y="705" width="101" height="30"/>
+                                <rect key="frame" x="934" y="738" width="101" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -299,6 +299,11 @@
                                     <action selector="didTapSaveStory:" destination="KBA-GO-szo" eventType="touchUpInside" id="A5u-Dt-qv3"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4sF-N6-KPI">
+                                <rect key="frame" x="775" y="660" width="70" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -307,6 +312,7 @@
                     <connections>
                         <outlet property="imageDisplaySliderCont" destination="1fh-NW-Hn7" id="toK-G2-3qD"/>
                         <outlet property="largeImageDisplayContainer" destination="PDw-Js-aYn" id="rrR-rp-tu5"/>
+                        <outlet property="plusButtonContainer" destination="4sF-N6-KPI" id="5pV-iB-tud"/>
                         <outlet property="saveStoryButton" destination="omx-Cc-ctW" id="dgd-g7-wns"/>
                         <outlet property="storyCreationContainer" destination="wgj-Qe-PKb" id="t63-pC-nzG"/>
                         <outlet property="testLabel" destination="Et8-K3-4FU" id="rp7-yy-xo6"/>
@@ -391,7 +397,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BC10CEF9-1D0A-4041-9F75-540A338889C0" width="320" height="460">
+        <image name="36538706-3433-4BA7-B643-0B35A32C04E8" width="320" height="460">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

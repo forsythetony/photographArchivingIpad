@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		7F03D0D3194E805C00558278 /* basicInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F03D0D2194E805C00558278 /* basicInfoCell.m */; };
-		BA0183E219A7ECA200416EB9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA0183E119A7ECA200416EB9 /* libPods.a */; };
 		BA0BE0B81943B3E40054F7C7 /* workspaceAuxView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0BE0B71943B3E40054F7C7 /* workspaceAuxView.m */; };
 		BA0F645719788101000588A8 /* PhotoUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0F645619788101000588A8 /* PhotoUploadManager.m */; };
 		BA1194B61990B4F60032DEC6 /* PreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1194B51990B4F60032DEC6 /* PreviewView.m */; };
@@ -31,6 +30,11 @@
 		BA4769BF19B5EC900030EBE3 /* TAProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4769BE19B5EC900030EBE3 /* TAProgressView.m */; };
 		BA4769C219B5F0670030EBE3 /* TATriggerFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4769C119B5F0670030EBE3 /* TATriggerFrame.m */; };
 		BA4769C519B61B380030EBE3 /* TAStyler.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4769C419B61B380030EBE3 /* TAStyler.m */; };
+		BA4769D619B67CD70030EBE3 /* icon-cast-connected.png in Resources */ = {isa = PBXBuildFile; fileRef = BA4769D219B67CD70030EBE3 /* icon-cast-connected.png */; };
+		BA4769D719B67CD70030EBE3 /* icon-cast-connected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA4769D319B67CD70030EBE3 /* icon-cast-connected@2x.png */; };
+		BA4769D819B67CD70030EBE3 /* icon-cast-identified.png in Resources */ = {isa = PBXBuildFile; fileRef = BA4769D419B67CD70030EBE3 /* icon-cast-identified.png */; };
+		BA4769D919B67CD70030EBE3 /* icon-cast-identified@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA4769D519B67CD70030EBE3 /* icon-cast-identified@2x.png */; };
+		BA4769DC19B67E590030EBE3 /* HTGCTextChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4769DB19B67E590030EBE3 /* HTGCTextChannel.m */; };
 		BA4C4BCA19ADCB46009C9C16 /* PAARecording.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4C4BC919ADCB46009C9C16 /* PAARecording.m */; };
 		BA4C4BD219ADF553009C9C16 /* StoriesDisplayTableview.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4C4BD119ADF553009C9C16 /* StoriesDisplayTableview.m */; };
 		BA4C4BD719ADF58D009C9C16 /* StoriesDisplayTableviewCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4C4BD519ADF58D009C9C16 /* StoriesDisplayTableviewCellTableViewCell.m */; };
@@ -112,6 +116,9 @@
 		BABF16AE19533B7C00FF01C0 /* photoUploadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BABF16AD19533B7C00FF01C0 /* photoUploadingCell.m */; };
 		BABF16B4195368FE00FF01C0 /* photoUploadingConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BABF16B3195368FE00FF01C0 /* photoUploadingConstants.m */; };
 		BABF16B7195372A800FF01C0 /* ImagePackage.m in Sources */ = {isa = PBXBuildFile; fileRef = BABF16B6195372A800FF01C0 /* ImagePackage.m */; };
+		BAC659F619B6847400496D48 /* GoogleCast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAC659F519B6847400496D48 /* GoogleCast.framework */; };
+		BAC659F819B684BD00496D48 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAC659F719B684BD00496D48 /* Security.framework */; };
+		BAC659FA19B6851100496D48 /* MediaAccessibility.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAC659F919B6851100496D48 /* MediaAccessibility.framework */; };
 		BACF0802199DB53B00F5F3E3 /* LargeImageDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = BACF0801199DB53B00F5F3E3 /* LargeImageDisplayView.m */; };
 		BACF080619A2B96400F5F3E3 /* NSDictionary+ObjectCreationHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = BACF080519A2B96400F5F3E3 /* NSDictionary+ObjectCreationHelpers.m */; };
 		BAD16301194A581A008144A0 /* UIView+Glow.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD16300194A581A008144A0 /* UIView+Glow.m */; };
@@ -119,6 +126,7 @@
 		BAD9F36A199D851D00107D3A /* ImageDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD9F369199D851D00107D3A /* ImageDisplay.m */; };
 		BAD9F36F199D890700107D3A /* ImageDisplayRecordingSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD9F36E199D890700107D3A /* ImageDisplayRecordingSliderView.m */; };
 		BAD9F372199DABCF00107D3A /* StoryCreationForm.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD9F371199DABCF00107D3A /* StoryCreationForm.m */; };
+		BD01AFB0B3724D119A2CFC8A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61ECDBD286AB45A0BA37A749 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,7 +143,6 @@
 		61ECDBD286AB45A0BA37A749 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F03D0D1194E805C00558278 /* basicInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = basicInfoCell.h; sourceTree = "<group>"; };
 		7F03D0D2194E805C00558278 /* basicInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = basicInfoCell.m; sourceTree = "<group>"; };
-		BA0183E119A7ECA200416EB9 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		BA0BE0B61943B3E40054F7C7 /* workspaceAuxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = workspaceAuxView.h; sourceTree = "<group>"; };
 		BA0BE0B71943B3E40054F7C7 /* workspaceAuxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = workspaceAuxView.m; sourceTree = "<group>"; };
 		BA0F645519788101000588A8 /* PhotoUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoUploadManager.h; sourceTree = "<group>"; };
@@ -174,6 +181,12 @@
 		BA4769C119B5F0670030EBE3 /* TATriggerFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TATriggerFrame.m; sourceTree = "<group>"; };
 		BA4769C319B61B380030EBE3 /* TAStyler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAStyler.h; sourceTree = "<group>"; };
 		BA4769C419B61B380030EBE3 /* TAStyler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAStyler.m; sourceTree = "<group>"; };
+		BA4769D219B67CD70030EBE3 /* icon-cast-connected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-cast-connected.png"; sourceTree = "<group>"; };
+		BA4769D319B67CD70030EBE3 /* icon-cast-connected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-cast-connected@2x.png"; sourceTree = "<group>"; };
+		BA4769D419B67CD70030EBE3 /* icon-cast-identified.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-cast-identified.png"; sourceTree = "<group>"; };
+		BA4769D519B67CD70030EBE3 /* icon-cast-identified@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-cast-identified@2x.png"; sourceTree = "<group>"; };
+		BA4769DA19B67E590030EBE3 /* HTGCTextChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTGCTextChannel.h; sourceTree = "<group>"; };
+		BA4769DB19B67E590030EBE3 /* HTGCTextChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTGCTextChannel.m; sourceTree = "<group>"; };
 		BA4C4BC719ADC6A5009C9C16 /* ImageDisplayStoryUpdater.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageDisplayStoryUpdater.h; sourceTree = "<group>"; };
 		BA4C4BC819ADCB46009C9C16 /* PAARecording.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAARecording.h; sourceTree = "<group>"; };
 		BA4C4BC919ADCB46009C9C16 /* PAARecording.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAARecording.m; sourceTree = "<group>"; };
@@ -302,6 +315,9 @@
 		BABF16B3195368FE00FF01C0 /* photoUploadingConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = photoUploadingConstants.m; sourceTree = "<group>"; };
 		BABF16B5195372A800FF01C0 /* ImagePackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePackage.h; sourceTree = "<group>"; };
 		BABF16B6195372A800FF01C0 /* ImagePackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePackage.m; sourceTree = "<group>"; };
+		BAC659F519B6847400496D48 /* GoogleCast.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleCast.framework; path = photoArchivingIpad/GoogleCast.framework; sourceTree = "<group>"; };
+		BAC659F719B684BD00496D48 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		BAC659F919B6851100496D48 /* MediaAccessibility.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaAccessibility.framework; path = System/Library/Frameworks/MediaAccessibility.framework; sourceTree = SDKROOT; };
 		BACF0800199DB53B00F5F3E3 /* LargeImageDisplayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LargeImageDisplayView.h; sourceTree = "<group>"; };
 		BACF0801199DB53B00F5F3E3 /* LargeImageDisplayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LargeImageDisplayView.m; sourceTree = "<group>"; };
 		BACF080419A2B96400F5F3E3 /* NSDictionary+ObjectCreationHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+ObjectCreationHelpers.h"; path = "Categories/NSDictionary+ObjectCreationHelpers.h"; sourceTree = "<group>"; };
@@ -326,10 +342,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA0183E219A7ECA200416EB9 /* libPods.a in Frameworks */,
+				BAC659FA19B6851100496D48 /* MediaAccessibility.framework in Frameworks */,
+				BABF161819526A0400FF01C0 /* CFNetwork.framework in Frameworks */,
+				BAC659F819B684BD00496D48 /* Security.framework in Frameworks */,
+				BAC659F619B6847400496D48 /* GoogleCast.framework in Frameworks */,
 				BABF162019526A3500FF01C0 /* MediaPlayer.framework in Frameworks */,
 				BABF161C19526A1600FF01C0 /* AudioToolbox.framework in Frameworks */,
-				BABF161819526A0400FF01C0 /* CFNetwork.framework in Frameworks */,
 				BABF161219523BC900FF01C0 /* AWSRuntime.framework in Frameworks */,
 				BABF161319523BC900FF01C0 /* AWSS3.framework in Frameworks */,
 				BA3299AA1948DF430002EBFD /* ImageIO.framework in Frameworks */,
@@ -337,6 +355,7 @@
 				BA67F1AE193666210056DD00 /* CoreGraphics.framework in Frameworks */,
 				BA67F1B0193666210056DD00 /* UIKit.framework in Frameworks */,
 				BA67F1AC193666210056DD00 /* Foundation.framework in Frameworks */,
+				BD01AFB0B3724D119A2CFC8A /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +425,17 @@
 			name = "Data Objects";
 			sourceTree = "<group>";
 		};
+		BA4769D119B67CCB0030EBE3 /* Chromecast */ = {
+			isa = PBXGroup;
+			children = (
+				BA4769D219B67CD70030EBE3 /* icon-cast-connected.png */,
+				BA4769D319B67CD70030EBE3 /* icon-cast-connected@2x.png */,
+				BA4769D419B67CD70030EBE3 /* icon-cast-identified.png */,
+				BA4769D519B67CD70030EBE3 /* icon-cast-identified@2x.png */,
+			);
+			name = Chromecast;
+			sourceTree = "<group>";
+		};
 		BA4C4BD319ADF573009C9C16 /* Stories Table View */ = {
 			isa = PBXGroup;
 			children = (
@@ -457,7 +487,9 @@
 		BA67F1AA193666210056DD00 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BA0183E119A7ECA200416EB9 /* libPods.a */,
+				BAC659F919B6851100496D48 /* MediaAccessibility.framework */,
+				BAC659F719B684BD00496D48 /* Security.framework */,
+				BAC659F519B6847400496D48 /* GoogleCast.framework */,
 				BABF161F19526A3500FF01C0 /* MediaPlayer.framework */,
 				BABF161D19526A2B00FF01C0 /* libxml2.dylib */,
 				BABF161B19526A1600FF01C0 /* AudioToolbox.framework */,
@@ -478,6 +510,8 @@
 		BA67F1B1193666210056DD00 /* photoArchivingIpad */ = {
 			isa = PBXGroup;
 			children = (
+				BA4769DA19B67E590030EBE3 /* HTGCTextChannel.h */,
+				BA4769DB19B67E590030EBE3 /* HTGCTextChannel.m */,
 				BA67F1BD193666210056DD00 /* Main.storyboard */,
 				BA67F1BA193666210056DD00 /* AppDelegate.h */,
 				BA67F1BB193666210056DD00 /* AppDelegate.m */,
@@ -551,6 +585,7 @@
 		BA67F1E0193667140056DD00 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				BA4769D119B67CCB0030EBE3 /* Chromecast */,
 				BA67F1E1193667140056DD00 /* oldPhotos */,
 				BA67F1EF193667140056DD00 /* textures */,
 			);
@@ -850,6 +885,7 @@
 				BA67F203193667140056DD00 /* garden_tn.png in Resources */,
 				BA67F201193667140056DD00 /* fredAndFreddie_tn.png in Resources */,
 				BA67F2181937B9D80056DD00 /* subtle_carbon_@2X.png in Resources */,
+				BA4769D719B67CD70030EBE3 /* icon-cast-connected@2x.png in Resources */,
 				BA365AA11996B85D008E6975 /* data.json in Resources */,
 				BA67F207193667140056DD00 /* tweed.png in Resources */,
 				BA67F1C4193666210056DD00 /* Images.xcassets in Resources */,
@@ -858,15 +894,18 @@
 				BA67F1B6193666210056DD00 /* InfoPlist.strings in Resources */,
 				BA67F1FD193667140056DD00 /* freddie.JPG in Resources */,
 				BA67F1FF193667140056DD00 /* martin.JPG in Resources */,
+				BA4769D819B67CD70030EBE3 /* icon-cast-identified.png in Resources */,
 				BA67F202193667140056DD00 /* freddie_tn.png in Resources */,
 				BA67F1FE193667140056DD00 /* garden.JPG in Resources */,
 				BA67F205193667140056DD00 /* unknown_tn.png in Resources */,
 				BA67F1FB193667140056DD00 /* christmas.JPG in Resources */,
 				BA6F5EEA194F12B700E1E1FC /* greyzz.png in Resources */,
 				BA67F1BF193666210056DD00 /* Main.storyboard in Resources */,
+				BA4769D619B67CD70030EBE3 /* icon-cast-connected.png in Resources */,
 				BA67F2141937B5470056DD00 /* textured_paper_@2X.png in Resources */,
 				BA365A8A19964C43008E6975 /* AddStoryForm.xib in Resources */,
 				BA6F5EE5194EFEFF00E1E1FC /* largeImageViewer.xib in Resources */,
+				BA4769D919B67CD70030EBE3 /* icon-cast-identified@2x.png in Resources */,
 				BA4C4BD819ADF58D009C9C16 /* StoriesDisplayTableviewCellTableViewCell.xib in Resources */,
 				BA365AA31996BBA4008E6975 /* dummyData.json in Resources */,
 				BA67F204193667140056DD00 /* martin_tn.png in Resources */,
@@ -932,6 +971,7 @@
 				BA4C4BCA19ADCB46009C9C16 /* PAARecording.m in Sources */,
 				BABF16B4195368FE00FF01C0 /* photoUploadingConstants.m in Sources */,
 				BABF1616195247FD00FF01C0 /* audioManagrer.m in Sources */,
+				BA4769DC19B67E590030EBE3 /* HTGCTextChannel.m in Sources */,
 				BA365AA719996992008E6975 /* StoryRecordingMeter.m in Sources */,
 				BA3299A61948BA430002EBFD /* TFPerson.m in Sources */,
 				BA67F21F193BCC3A0056DD00 /* timelineManager.m in Sources */,
@@ -1118,6 +1158,10 @@
 					/Users/Tonyf/Desktop/Coding/PhotoArchivingV4/PhotoArchivingV4,
 					"$(PROJECT_DIR)/photoArchivingIpad",
 					"/Users/Tonyf/Downloads/aws-ios-sdk-1.7.1",
+					"/Users/Tonyf/Downloads/GoogleCastFramework-2.3.0-Release",
+					"/Users/Tonyf/Downloads/GoogleCastFramework-2.3.0-Release",
+					2,
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "photoArchivingIpad/photoArchivingIpad-Prefix.pch";
@@ -1145,6 +1189,10 @@
 					/Users/Tonyf/Desktop/Coding/PhotoArchivingV4/PhotoArchivingV4,
 					"$(PROJECT_DIR)/photoArchivingIpad",
 					"/Users/Tonyf/Downloads/aws-ios-sdk-1.7.1",
+					"/Users/Tonyf/Downloads/GoogleCastFramework-2.3.0-Release",
+					"/Users/Tonyf/Downloads/GoogleCastFramework-2.3.0-Release",
+					2,
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "photoArchivingIpad/photoArchivingIpad-Prefix.pch";

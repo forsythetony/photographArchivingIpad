@@ -9,10 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "Story.h"
 
+@protocol StoriesCellDelegate <NSObject>
+
+-(void)playAudioStreamWithStory:(Story*) audioStory;
+-(void)shouldStopAudio;
+
+@end
 
 @interface StoriesDisplayTableviewCellTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) Story *myStory;
+
+@property (weak, nonatomic) id <StoriesCellDelegate> delegate;
 
 @property (weak, nonatomic) IBOutlet UILabel *storyTitleValue;
 @property (weak, nonatomic) IBOutlet UILabel *storyDateTitle;

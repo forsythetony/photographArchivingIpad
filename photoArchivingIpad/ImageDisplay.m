@@ -17,7 +17,7 @@
 #import "TAStyler.h"
 #import <Masonry/Masonry.h>
 
-@interface ImageDisplay () <ImageDisplayRecordingSliderViewDelegate, TFCommunicatorDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITableViewDataSource, UITableViewDelegate> {
+@interface ImageDisplay () <ImageDisplayRecordingSliderViewDelegate, TFCommunicatorDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITableViewDataSource, UITableViewDelegate, StoriesCellDelegate> {
     
     //  Audio stuff
     
@@ -37,7 +37,11 @@
     Story *storySlatedForDeletion;
     
     NSArray *currentStories;
+
+    VBFPopFlatButton *zeSaveButton;
 }
+
+
 
 
 @end
@@ -110,9 +114,9 @@
     [saveStoryButton setEnabled:NO];
     
     
-
+    [saveStoryButton setAlpha:0.0];
     [self audioPlayerSetup];
-    
+     [_plusButtonContainer setBackgroundColor:[UIColor clearColor]];
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -422,6 +426,7 @@
     }
     
     cell = (StoriesDisplayTableviewCellTableViewCell*)[tableView dequeueReusableCellWithIdentifier:storiesListCellID];
+    [cell setDelegate:self];
     
     [cell setMyStory:[currentStories objectAtIndex:indexPath.row]];
     
@@ -537,22 +542,33 @@
 }
 -(void)setSaveButtonToEnabled
 {
-    [saveStoryButton setTitle:@"Save" forState:UIControlStateNormal];
-    [saveStoryButton setTitle:@"Save" forState:UIControlStateDisabled];
+//    [saveStoryButton setTitle:@"Save" forState:UIControlStateNormal];
+//    [saveStoryButton setTitle:@"Save" forState:UIControlStateDisabled];
+//    
+//    [saveStoryButton setEnabled:YES];
     
-    [saveStoryButton setEnabled:YES];
+    [zeSaveButton animateToType:buttonAddType];
+    [zeSaveButton setRoundBackgroundColor:[UIColor successColor]];
+    [zeSaveButton setEnabled:YES];
     
 }
 -(void)setSaveButtonToDisabled
 {
-    [saveStoryButton setTitle:@"Save" forState:UIControlStateNormal];
-    [saveStoryButton setEnabled:NO];
+//    [saveStoryButton setTitle:@"Save" forState:UIControlStateNormal];
+//    [saveStoryButton setEnabled:NO];
+    
+    [zeSaveButton setEnabled:NO];
+    [zeSaveButton setRoundBackgroundColor:[UIColor grayColor]];
 }
 -(void)setSaveButtonUploading
 {
     //[saveStoryButton setTitle:@"Uploading..." forState:UIControlStateNormal];
-    [saveStoryButton setTitle:@"Uploading" forState:UIControlStateDisabled];
-    [saveStoryButton setEnabled:NO];
+//    [saveStoryButton setTitle:@"Uploading" forState:UIControlStateDisabled];
+//    [saveStoryButton setEnabled:NO];
+    
+    [zeSaveButton setEnabled:NO];
+    [zeSaveButton setRoundBackgroundColor:[UIColor grayColor]];
+    
 }
 -(void)createButtons
 {
@@ -570,7 +586,7 @@
     backButton.lineThickness = 1.0;
     [backButton addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
     
-    VBFPopFlatButton *testButton = [[VBFPopFlatButton alloc] initWithFrame:backButtonFrame buttonType:buttonAddType buttonStyle:buttonRoundedStyle];
+    VBFPopFlatButton *testButton = [[VBFPopFlatButton alloc] initWithFrame:backButtonFrame buttonType:buttonDefaultType buttonStyle:buttonRoundedStyle];
     
     testButton.roundBackgroundColor = [UIColor successColor];
     testButton.linesColor = [TAStyler getButtonForegroundColor];
@@ -592,28 +608,65 @@
         make.leading.equalTo(largeImageDisplayContainer.mas_leading).with.priorityMedium();
         
     }];
-  
     
+    CGFloat xPos = self.view.bounds.size.width - 60.0;
+    CGFloat yPos = self.view.bounds.size.height - 60.0;
+    
+    [testButton setCenter:CGPointMake(xPos, yPos)];
+   // testButton.layer.mask.anchorPoint = CGPointMake(0.5, 0.5);
+   // testButton.layer.mask.position = [_plusButtonContainer center];
+/*
     [testButton mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.size.equalTo(backButton);
-        make.top.lessThanOrEqualTo(sliderView.mas_bottom).with.offset(20.0);
-        make.centerX.equalTo(sliderView.mas_centerX);
+        make.center.equalTo(_plusButtonContainer).priorityHigh();
         
         
     }];
+
+
+    CGFloat testButtonX = sliderView.center.x - (backButtonFrame.size.width / 2.0);
+    CGFloat testButtonY = sliderView.frame.origin.y + sliderView.frame.size.height + 30.0;
+    
+    CGFloat testButtonWidth = backButtonFrame.size.width;
+    CGFloat testButtonHeight = backButtonFrame.size.height;
+    
+    CGRect testButtonFrame = CGRectMake(testButtonX, testButtonY, testButtonWidth, testButtonHeight);
+    
+    [testButton setFrame:testButtonFrame];
+    */
+
+    [testButton setEnabled:NO];
+    [testButton setRoundBackgroundColor:[UIColor grayColor]];
+    zeSaveButton = testButton;
 }
 -(void)goBack:(id) sender
 {
-    [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+    //[[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+    [self.delegate shouldDismiss];
 }
 -(void)testingThings:(id) sender
 {
+    NSLog(@"Data For Current Story\nTitle: %@\nStoryTeller: %@\nDate: %@", currentStory.title, currentStory.storyTeller, [currentStory.storyDate description]);
     
+    currentStory.audioRecording = currentRecording;
+    
+    [mainCom addStoryToImage:currentStory imageObject:imageInformation];
+    
+    
+    
+    
+    [self removeStoryFromView];
 }
 -(UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
 }
-
+-(void)playAudioStreamWithStory:(Story *)audioStory
+{
+    [self.delegate playAudioWithStory:audioStory];
+}
+-(void)shouldStopAudio
+{
+    [self.delegate shouldStopAudio];
+}
 @end

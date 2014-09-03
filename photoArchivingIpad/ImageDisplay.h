@@ -12,13 +12,23 @@
 
 #import "ImageDispaySubviews.h"
 
+@protocol ImageDisplayDelegate <NSObject>
+
+-(void)shouldDismiss;
+-(void)playAudioWithStory:(Story*) audioStory;
+-(void)shouldStopAudio;
+
+
+@end
 @interface ImageDisplay : UIViewController <ImageDisplayStoryUpdater>
 
 
+@property (weak, nonatomic) IBOutlet UIView *plusButtonContainer;
 @property (nonatomic, strong) imageObject* imageInformation;
 @property (nonatomic, strong) Story* currentStory;
 @property (nonatomic, strong) PAARecording* currentRecording;
 
+@property (nonatomic, weak) id <ImageDisplayDelegate> delegate;
 
 @property (weak, nonatomic) IBOutlet UIView *imageDisplaySliderCont;
 @property (weak, nonatomic) IBOutlet UILabel *testLabel;

@@ -272,6 +272,7 @@ typedef struct sBounds {
 }
 - (IBAction)tappedPlay:(id)sender {
     
+    /*
     if (!player) {
         [self setupStreamer];
     }
@@ -279,14 +280,12 @@ typedef struct sBounds {
         
         [player play];
         
+     */
+    [self.delegate playAudioStreamWithStory:_myStory];
 }
 - (IBAction)tappedPause:(id)sender {
     
-    if (player) {
-        if (player.isPlaying) {
-            [player pause];
-        }
-    }
+    [self.delegate shouldStopAudio];
 }
 -(void)updatePercentageWithXValue:(CGFloat) xVal
 {
