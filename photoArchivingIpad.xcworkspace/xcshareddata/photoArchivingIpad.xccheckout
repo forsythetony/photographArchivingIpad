@@ -10,29 +10,29 @@
 	<string>photoArchivingIpad</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>DD7C7071-0E47-482E-8551-79D13B88DF27</key>
+		<key>C9394947E2762FB7C12661BF697EBAD23FA2F92A</key>
 		<string>https://github.com/forsythetony/photographArchivingIpad.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>photoArchivingIpad.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>DD7C7071-0E47-482E-8551-79D13B88DF27</key>
+		<key>C9394947E2762FB7C12661BF697EBAD23FA2F92A</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/forsythetony/photographArchivingIpad.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>DD7C7071-0E47-482E-8551-79D13B88DF27</string>
+	<string>C9394947E2762FB7C12661BF697EBAD23FA2F92A</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>DD7C7071-0E47-482E-8551-79D13B88DF27</string>
+			<string>C9394947E2762FB7C12661BF697EBAD23FA2F92A</string>
 			<key>IDESourceControlWCCName</key>
 			<string>photoArchivingIpad</string>
 		</dict>

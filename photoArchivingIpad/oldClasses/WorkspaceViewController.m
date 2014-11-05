@@ -1482,7 +1482,10 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     [self performSegueWithIdentifier:segueDisplayLargeImage sender:obj];
     
 }
-#pragma mark Delegate Methods
+#pragma mark - Delegate Methods
+
+#pragma mark Timeline Manager
+
 -(void)finishedUpdatedFrame:(pictureFrame *)frame withNewInformation:(NSDictionary *)info
 {
     
@@ -1507,18 +1510,26 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
 }
 
+#pragma mark Playing Audio
+
+-(void)playAudioWithStory:(Story *)audioStory
+{
+    [self playAudioFromStory:audioStory];
+    
+}
+
 -(void)shouldStopAudio
 {
     [_mediaControlChannel stop];
 }
+
+#pragma mark Keyboard
 -(void)keyboardDidHide:(NSNotification*) notification
 {
     self.view.frame = CGRectMake(self.view.frame.origin.x, 0.0, self.view.frame.size.width, self.view.frame.size.height);
 }
 -(void)keyboardDidShow:(NSNotification*) notification
 {
-    //[self.view setFrame:CGRectMake(0.0, -(self.view.frame.size.height / 2.0), self.view.frame.size.width, self.view.frame.size.height)];
-    
     CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     
     CGRect newViewRect = self.view.frame;
@@ -1528,7 +1539,15 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     NSLog(@"\nKeyboard Frame: %@\nNew View Frame: %@", NSStringFromCGRect(keyboardRect), NSStringFromCGRect(newViewRect));
     [self.view setFrame:newViewRect];
 }
-#pragma mark Utility Methods -
+
+#pragma mark Large Image Viewer
+
+-(void)shouldDismissImageViewer:(id)imageViewer
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Utility Methods
 
 -(NSTimeInterval)getTimeIntervalWithDate:(NSDate*) date
 {
@@ -1728,13 +1747,6 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     else{
         return [imageInformationVClist objectAtIndex:index - 1];
     }
-}
--(void)shouldDismissImageViewer:(id)imageViewer
-{
-    largeImageViewer *imgViewer = (largeImageViewer*)imageViewer;
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
 }
 -(void)findPointInView:(CGPoint) point
 {
@@ -2315,7 +2327,8 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
     self.applicationMetadata = applicationMetadata;
 }
 
-#pragma mark - misc
+#pragma mark - Misc.
+
 - (void)showError:(NSError *)error {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
                                                     message:NSLocalizedString(error.description, nil)
@@ -2324,13 +2337,4 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
                                           otherButtonTitles:nil];
     [alert show];
 }
-
--(void)playAudioWithStory:(Story *)audioStory
-{
-    [self playAudioFromStory:audioStory];
-    
-}
-
-
-
 @end
