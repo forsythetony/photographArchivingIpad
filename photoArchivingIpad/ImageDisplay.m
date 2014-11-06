@@ -103,7 +103,7 @@
     
 
     displayView = [[LargeImageDisplayView alloc] initWithFrame:largeImageDisplayContainer.bounds];
-    
+    NSLog(@"The size of the image frame is...%@", NSStringFromCGRect(largeImageDisplayContainer.bounds));
     [largeImageDisplayContainer addSubview:displayView];
     [mainCom retrieveImageWithURL:[imageInformation.photoURL absoluteString]];
     
@@ -663,10 +663,20 @@
 }
 -(void)playAudioStreamWithStory:(Story *)audioStory
 {
+    //  The delegate method would have gone through the chromecast
+    //  but instead we're going to play the audio locally through
+    //  the device.
     [self.delegate playAudioWithStory:audioStory];
+    
+    
 }
 -(void)shouldStopAudio
 {
+    //  The delegate method would have originally gone through the
+    //  chromecast but now we're executing the player commands on
+    //  the device itself.
     [self.delegate shouldStopAudio];
+    
 }
+
 @end

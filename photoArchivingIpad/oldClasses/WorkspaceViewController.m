@@ -704,7 +704,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     [addcontentViewContainer addSubview:_addRecording];
     
     buttonsContainerView = addcontentViewContainer;
-    */
+
     
     UIView *auxView = [[UIView alloc] initWithFrame:auxViewFrame];
     
@@ -730,7 +730,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     CGPoint newAuxCenter = CGPointMake(auxView.center.x, auxLabel.center.y);
     
     auxLabel.center = newAuxCenter;
-    
+  */  
     
 }
 -(void)handleStoryAddition:(id) sender
@@ -864,16 +864,19 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
 
 -(void)createScrollView
 {
-    float scrollViewHeight = (self.view.bounds.size.height * .6);
+    //  MIRAME: THIS FEELS A BIT HACKED TOGETHER AND SHOULD BE FIXED SOON
+    float navBarHeight = self.navigationController.navigationBar.frame.size.height - 20.0;
+    
+    float scrollViewHeight = (self.view.bounds.size.height - navBarHeight);
     
     CGRect scrollViewFrame = CGRectMake(
-                                        0.0                 , 0.0,
+                                        0.0                 , navBarHeight,
                                         MAINSCROLLVIEWSIZE  , scrollViewHeight
                                         );
     
     
     CGRect screenRect   = CGRectMake(
-                                     0.0                          , 0.0,
+                                     0.0                          , navBarHeight,
                                      self.view.bounds.size.width  , scrollViewHeight
                                      );
     
@@ -882,11 +885,12 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
     
     mainScrollView.contentSize      = scrollViewFrame.size;
+    //mainScrollView.contentSize      = CGSizeMake(mainScrollView.contentSize.width, mainScrollView.frame.size.height);
     mainScrollView.scrollEnabled    = YES;
     mainScrollView.backgroundColor  = [UIColor colorWithPatternImage:[UIImage imageNamed:@"subtle_carbon.png"]];
     mainScrollView.showsHorizontalScrollIndicator  = NO;
-    mainScrollView.maximumZoomScale = 4.0;
-    mainScrollView.minimumZoomScale = 1.0;
+    //mainScrollView.maximumZoomScale = 4.0;
+    //mainScrollView.minimumZoomScale = 1.0;
     mainScrollView.delegate = self;
     
     
@@ -1395,7 +1399,10 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         }
     }
     
+    //  This function sends the image to the chromecast
     [self sendImage:frame.imageObject];
+    
+     
     [self displayInformationForImage:frame.imageObject];
     [_infPager updateImageInformation:frame.imageObject];
 
@@ -2115,6 +2122,8 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
 }
 
 - (void)connectToDevice {
+    
+    
     if (self.selectedDevice == nil)
         return;
     
@@ -2124,6 +2133,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
                            clientPackageName:[info objectForKey:@"CFBundleIdentifier"]];
     self.deviceManager.delegate = self;
     [self.deviceManager connect];
+    
     
 }
 
@@ -2197,14 +2207,21 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
     CGSize displayImageSize = CGSizeMake(360, 360);
     
+    NSURL *imageURL;
+    
     if (_displayImageInformation.thumbnailImage) {
         
         displayImageSize = _displayImageInformation.thumbnailImage.size;
+        imageURL = _displayImageInformation.thumbNailURL;
         
+    } else
+    {
+        displayImageSize = _displayImageInformation.largeImage.size;
+        imageURL = _displayImageInformation.photoURL;
     }
     
     [metadata addImage:[[GCKImage alloc]
-                        initWithURL:[[NSURL alloc] initWithString:_displayImageInformation.thumbNailURL.absoluteString]
+                        initWithURL:imageURL
                         width:displayImageSize.width
                         height:displayImageSize.height]];
     
@@ -2247,6 +2264,8 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
 
 #pragma mark UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    
     if (self.selectedDevice == nil) {
         if (buttonIndex < self.deviceScanner.devices.count) {
             self.selectedDevice = self.deviceScanner.devices[buttonIndex];
@@ -2254,7 +2273,11 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
             [self connectToDevice];
         }
     } else {
+        
         if (buttonIndex == 1) {  //Disconnect button
+            
+            //  Somehow the disconnect is breaking everything
+            /*
             NSLog(@"Disconnecting device:%@", self.selectedDevice.friendlyName);
             // New way of doing things: We're not going to stop the applicaton. We're just going
             // to leave it.
@@ -2265,6 +2288,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
             
             [self deviceDisconnected];
             [self updateButtonStates];
+            */
         } else if (buttonIndex == 0) {
             // Join the existing session.
             
@@ -2304,10 +2328,12 @@ didFailToConnectToApplicationWithError:(NSError *)error {
 
 - (void)deviceManager:(GCKDeviceManager *)deviceManager
 didFailToConnectWithError:(GCKError *)error {
+    
     [self showError:error];
     
     [self deviceDisconnected];
     [self updateButtonStates];
+    
 }
 
 - (void)deviceManager:(GCKDeviceManager *)deviceManager didDisconnectWithError:(GCKError *)error {
@@ -2330,6 +2356,7 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
 #pragma mark - Misc.
 
 - (void)showError:(NSError *)error {
+    
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
                                                     message:NSLocalizedString(error.description, nil)
                                                    delegate:nil

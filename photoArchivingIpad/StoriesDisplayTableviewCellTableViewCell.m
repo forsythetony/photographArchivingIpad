@@ -34,6 +34,11 @@ typedef struct sBounds {
     BOOL isShowingScrubbingTime;
     
     UILabel *sliderScrubbingLabel;
+    
+    NSTimer *progressTimer;
+    
+    NSInteger   totalTime,
+                timeElapsed;
 
 }
 
@@ -57,6 +62,8 @@ typedef struct sBounds {
 -(void)variableSetup
 {
     isShowingScrubbingTime = NO;
+    totalTime = 0.0;
+    timeElapsed = 0.0;
 }
 -(void)addSliderToProgressView
 {
@@ -69,7 +76,7 @@ typedef struct sBounds {
     
     progressViewSlider = [[UIView alloc] initWithFrame:sliderFrame];
     
-    progressViewSlider.backgroundColor = [UIColor RedHat];
+    progressViewSlider.backgroundColor = [UIColor fadedBlueColor];
     
     UIPanGestureRecognizer *gest = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(didSlideSlider:)];
     
@@ -272,20 +279,22 @@ typedef struct sBounds {
 }
 - (IBAction)tappedPlay:(id)sender {
     
-    /*
+   /*
     if (!player) {
         [self setupStreamer];
     }
         
         
         [player play];
-        
-     */
+    */
+     
     [self.delegate playAudioStreamWithStory:_myStory];
 }
 - (IBAction)tappedPause:(id)sender {
     
-    [self.delegate shouldStopAudio];
+    [player pause];
+    
+    //[self.delegate shouldStopAudio];
 }
 -(void)updatePercentageWithXValue:(CGFloat) xVal
 {
@@ -361,5 +370,16 @@ typedef struct sBounds {
     });
     
     isShowingScrubbingTime = NO;
+}
+-(void)updateProgressView {
+    
+    timeElapsed += 1;
+    
+    
+}
+
+-(void)startProgressTimer {
+    
+    progressTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateProgressView) userInfo:nil repeats:YES];
 }
 @end
