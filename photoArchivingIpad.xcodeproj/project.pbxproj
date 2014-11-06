@@ -101,6 +101,7 @@
 		BA89B37F195B29E700DA0FCC /* imageInformationConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BA89B37E195B29E700DA0FCC /* imageInformationConstants.m */; };
 		BA89B383195B33B100DA0FCC /* datePickingThing.m in Sources */ = {isa = PBXBuildFile; fileRef = BA89B381195B33B100DA0FCC /* datePickingThing.m */; };
 		BA89B384195B33B100DA0FCC /* datePickingThing.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA89B382195B33B100DA0FCC /* datePickingThing.xib */; };
+		BA90C1661A0B2C13009CFA78 /* CollageThing_light.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BA90C1651A0B2C13009CFA78 /* CollageThing_light.jpg */; };
 		BA9531AD194E2CC6005E0F10 /* pagerInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9531AC194E2CC6005E0F10 /* pagerInformationVC.m */; };
 		BA9531B0194E2E28005E0F10 /* pagerSocialVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9531AF194E2E28005E0F10 /* pagerSocialVC.m */; };
 		BA9531B3194E4A27005E0F10 /* imageInfoPagerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9531B2194E4A27005E0F10 /* imageInfoPagerVC.m */; };
@@ -287,6 +288,7 @@
 		BA89B380195B33B100DA0FCC /* datePickingThing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = datePickingThing.h; sourceTree = "<group>"; };
 		BA89B381195B33B100DA0FCC /* datePickingThing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = datePickingThing.m; sourceTree = "<group>"; };
 		BA89B382195B33B100DA0FCC /* datePickingThing.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = datePickingThing.xib; sourceTree = "<group>"; };
+		BA90C1651A0B2C13009CFA78 /* CollageThing_light.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = CollageThing_light.jpg; path = photoArchivingIpad/images/backgrounds/CollageThing_light.jpg; sourceTree = SOURCE_ROOT; };
 		BA9531AB194E2CC6005E0F10 /* pagerInformationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pagerInformationVC.h; sourceTree = "<group>"; };
 		BA9531AC194E2CC6005E0F10 /* pagerInformationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pagerInformationVC.m; sourceTree = "<group>"; };
 		BA9531AE194E2E28005E0F10 /* pagerSocialVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pagerSocialVC.h; sourceTree = "<group>"; };
@@ -585,6 +587,7 @@
 		BA67F1E0193667140056DD00 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				BA90C1651A0B2C13009CFA78 /* CollageThing_light.jpg */,
 				BA4769D119B67CCB0030EBE3 /* Chromecast */,
 				BA67F1E1193667140056DD00 /* oldPhotos */,
 				BA67F1EF193667140056DD00 /* textures */,
@@ -893,6 +896,7 @@
 				BA6F5EE9194F12B700E1E1FC /* greyzz@2X.png in Resources */,
 				BA67F1B6193666210056DD00 /* InfoPlist.strings in Resources */,
 				BA67F1FD193667140056DD00 /* freddie.JPG in Resources */,
+				BA90C1661A0B2C13009CFA78 /* CollageThing_light.jpg in Resources */,
 				BA67F1FF193667140056DD00 /* martin.JPG in Resources */,
 				BA4769D819B67CD70030EBE3 /* icon-cast-identified.png in Resources */,
 				BA67F202193667140056DD00 /* freddie_tn.png in Resources */,

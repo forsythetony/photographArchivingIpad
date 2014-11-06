@@ -17,35 +17,53 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QFr-Lr-KCM">
-                                <rect key="frame" x="407" y="91" width="210" height="63"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="Go to Timeline">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="goToTimeline:" destination="veY-Iz-my8" eventType="touchUpInside" id="sFT-jl-rq2"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xHa-YK-Yl0">
-                                <rect key="frame" x="407" y="162" width="219" height="63"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="Request Server Data">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="8yv-Je-3LX" kind="push" id="vRI-sA-7op"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XKn-kh-asH">
-                                <rect key="frame" x="404" y="233" width="225" height="41"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="Photo Uploading">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
+                            <imageView userInteractionEnabled="NO" alpha="0.79999999999999982" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CollageThing_light.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Onz-fz-Whp">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                            </imageView>
+                            <view alpha="0.74999999999999978" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z73-LX-c71">
+                                <rect key="frame" x="346" y="122" width="333" height="278"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QFr-Lr-KCM">
+                                        <rect key="frame" x="61" y="40" width="210" height="63"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <state key="normal" title="Go to Timeline">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="goToTimeline:" destination="veY-Iz-my8" eventType="touchUpInside" id="sFT-jl-rq2"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xHa-YK-Yl0">
+                                        <rect key="frame" x="57" y="111" width="219" height="63"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <state key="normal" title="Request Server Data">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="8yv-Je-3LX" kind="push" id="vRI-sA-7op"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XKn-kh-asH">
+                                        <rect key="frame" x="54" y="197" width="225" height="41"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <state key="normal" title="Photo Uploading">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Onz-fz-Whp" secondAttribute="bottom" id="0uo-PX-t0M"/>
+                            <constraint firstAttribute="trailing" secondItem="Onz-fz-Whp" secondAttribute="trailing" id="Utb-cz-nJK"/>
+                            <constraint firstItem="Onz-fz-Whp" firstAttribute="top" secondItem="ZpZ-5B-6fK" secondAttribute="top" id="a8z-Dy-5Yu"/>
+                            <constraint firstItem="Onz-fz-Whp" firstAttribute="leading" secondItem="ZpZ-5B-6fK" secondAttribute="leading" id="u11-iL-yV1"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="rMz-bn-5K0"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -108,7 +126,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" patternImage="64CF7D3D-A85D-4C50-B2F4-EFF1B67CEF2C" colorSpace="pattern"/>
+                                        <color key="backgroundColor" patternImage="EA223472-B322-430E-B798-6B0FD7FD4838" colorSpace="pattern"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -376,7 +394,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="64CF7D3D-A85D-4C50-B2F4-EFF1B67CEF2C" width="320" height="460">
+        <image name="CollageThing_light.jpg" width="1920" height="1080"/>
+        <image name="EA223472-B322-430E-B798-6B0FD7FD4838" width="320" height="460">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

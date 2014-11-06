@@ -292,9 +292,9 @@ typedef struct sBounds {
 }
 - (IBAction)tappedPause:(id)sender {
     
-    [player pause];
+    //[player pause];
     
-    //[self.delegate shouldStopAudio];
+    [self.delegate shouldStopAudio];
 }
 -(void)updatePercentageWithXValue:(CGFloat) xVal
 {

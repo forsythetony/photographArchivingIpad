@@ -50,7 +50,6 @@
 -(void)setAppearance
 {
     [[UINavigationBar appearance] setBarTintColor:[UIColor blackColor]];
-    
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                           [UIColor whiteColor], NSForegroundColorAttributeName,
                                                           [UIFont fontWithName:TABBARFONT size:20.0], NSFontAttributeName,

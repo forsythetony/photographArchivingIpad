@@ -204,7 +204,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
     if (shouldLoadAgain == YES) {
         [self createScrollView];
-        [self createAuxViews];
+        //[self createAuxViews];
 
         [mainDataCom getPhotosForUser:@"forsytheTony"];
         shouldLoadAgain = NO;
@@ -865,18 +865,18 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
 -(void)createScrollView
 {
     //  MIRAME: THIS FEELS A BIT HACKED TOGETHER AND SHOULD BE FIXED SOON
-    float navBarHeight = self.navigationController.navigationBar.frame.size.height - 20.0;
+    float navBarHeight = self.navigationController.navigationBar.frame.size.height;
     
-    float scrollViewHeight = (self.view.bounds.size.height - navBarHeight);
+    float scrollViewHeight = (self.view.bounds.size.height);
     
     CGRect scrollViewFrame = CGRectMake(
-                                        0.0                 , navBarHeight,
+                                        0.0                 , 0.0,
                                         MAINSCROLLVIEWSIZE  , scrollViewHeight
                                         );
     
     
     CGRect screenRect   = CGRectMake(
-                                     0.0                          , navBarHeight,
+                                     0.0                          , 0.0,
                                      self.view.bounds.size.width  , scrollViewHeight
                                      );
     
@@ -885,7 +885,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
     
     mainScrollView.contentSize      = scrollViewFrame.size;
-    //mainScrollView.contentSize      = CGSizeMake(mainScrollView.contentSize.width, mainScrollView.frame.size.height);
+    mainScrollView.contentSize      = CGSizeMake(mainScrollView.contentSize.width, mainScrollView.frame.size.height);
     mainScrollView.scrollEnabled    = YES;
     mainScrollView.backgroundColor  = [UIColor colorWithPatternImage:[UIImage imageNamed:@"subtle_carbon.png"]];
     mainScrollView.showsHorizontalScrollIndicator  = NO;
@@ -899,15 +899,15 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     [self createTimelineWithValues];
     
 }
--(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
-{
-    return TLManager.TLView;
-    
-}
--(void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale
-{
-    
-}
+//-(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+//{
+//    return TLManager.TLView;
+//    
+//}
+//-(void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale
+//{
+//    
+//}
 -(void)createTimelineWithValues
 {
     startDate   = timelineDateRange.startDate;
@@ -926,7 +926,6 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
                                              scrollViewRect.origin.x     ,  scrollViewRect.origin.y,
                                              scrollViewContentSize.width ,  scrollViewContentSize.height
                                              );
-    
     UIView *timelineView = [[UIView alloc] initWithFrame:timelineViewFrame];
     
     
@@ -1498,7 +1497,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
     NSString *notificationString = [NSString stringWithFormat:@"The date for the frame has been updated to %@", [info[@"newDate"] displayDateOfType:sDateTypeMonthAndYear]];
     
-    
+    /*
     NSDictionary *options = @{
                               kCRToastTextKey                       : notificationString,
                               kCRToastTextAlignmentKey              : @(NSTextAlignmentCenter),
@@ -1514,20 +1513,34 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
     [CRToastManager showNotificationWithOptions:options
                                 completionBlock:nil];
+    */
     
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Updated!" message:notificationString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    
+    [alert show];
 }
 
 #pragma mark Playing Audio
 
 -(void)playAudioWithStory:(Story *)audioStory
 {
-    [self playAudioFromStory:audioStory];
+    if(_mediaControlChannel.mediaStatus.playerState == GCKMediaPlayerStatePaused) {
+        
+        [_mediaControlChannel play];
+    }
+    else {
+        [self playAudioFromStory:audioStory];
+    }
+
     
 }
 
 -(void)shouldStopAudio
 {
-    [_mediaControlChannel stop];
+    if (_mediaControlChannel.mediaStatus.playerState == GCKMediaPlayerStatePlaying) {
+        [_mediaControlChannel pause];
+    }
+
 }
 
 #pragma mark Keyboard
@@ -2058,7 +2071,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         
         if (self.deviceManager && self.deviceManager.isConnected) {
             //Show cast button in enabled state
-            [_chromecastButton setTintColor:[UIColor blueColor]];
+            [_chromecastButton setTintColor:[UIColor fadedBlueColor]];
         } else {
             //Show cast button in disabled state
             [_chromecastButton setTintColor:[UIColor grayColor]];
@@ -2086,7 +2099,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         }
         
         [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
-        sheet.cancelButtonIndex = sheet.numberOfButtons - 1;
+        sheet.cancelButtonIndex = sheet.numberOfButtons;
         
         //show device selection
         [sheet showInView:_chromecastButton];
@@ -2096,6 +2109,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         
         NSString *friendlyName = [NSString stringWithFormat:NSLocalizedString(@"Casting to %@", nil),
                                   self.selectedDevice.friendlyName];
+        
         NSString *mediaTitle = [self.mediaInformation.metadata stringForKey:kGCKMetadataKeyTitle];
         
         UIActionSheet *sheet = [[UIActionSheet alloc] init];
@@ -2204,8 +2218,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     [metadata setString:( audioStory.storyDate ? [audioStory.storyDate displayDateOfType:sDateTypPretty] : @"")
                  forKey:kGCKMetadataKeySubtitle];
     
-    
-    CGSize displayImageSize = CGSizeMake(360, 360);
+    CGSize displayImageSize;
     
     NSURL *imageURL;
     
@@ -2277,7 +2290,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         if (buttonIndex == 1) {  //Disconnect button
             
             //  Somehow the disconnect is breaking everything
-            /*
+            
             NSLog(@"Disconnecting device:%@", self.selectedDevice.friendlyName);
             // New way of doing things: We're not going to stop the applicaton. We're just going
             // to leave it.
@@ -2288,7 +2301,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
             
             [self deviceDisconnected];
             [self updateButtonStates];
-            */
+            
         } else if (buttonIndex == 0) {
             // Join the existing session.
             

@@ -106,9 +106,9 @@ NSString* const keyTimeline = @"keyTimeline";
     //  Set the 'Go to Timeline' button's visual properties
     
     
-    [_buttonTimeline setTitleColor:[UIColor tonyColor] forState:UIControlStateNormal];
-    [_buttonServer setTitleColor:buttonStyle[keyTextColor] forState:UIControlStateNormal];
-    [_buttonUploading setTitleColor:buttonStyle[keyTextColor] forState:UIControlStateNormal];
+    //[_buttonTimeline setTitleColor:[UIColor tonyColor] forState:UIControlStateNormal];
+    //[_buttonServer setTitleColor:buttonStyle[keyTextColor] forState:UIControlStateNormal];
+    //[_buttonUploading setTitleColor:buttonStyle[keyTextColor] forState:UIControlStateNormal];
     
     
     _buttonTimeline.titleLabel.font = buttonStyle[keyFont];
