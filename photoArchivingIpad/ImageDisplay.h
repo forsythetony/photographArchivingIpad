@@ -36,4 +36,7 @@
 @property (weak, nonatomic) IBOutlet UIView *largeImageDisplayContainer;
 @property (weak, nonatomic) IBOutlet UIButton *saveStoryButton;
 
+
+@property (assign, nonatomic) BOOL useChromecast;
+
 @end

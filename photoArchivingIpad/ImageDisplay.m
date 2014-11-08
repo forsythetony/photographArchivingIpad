@@ -51,7 +51,7 @@
 @synthesize imageDisplaySliderCont, largeImageDisplayContainer;
 @synthesize currentStory, currentRecording;
 @synthesize saveStoryButton;
-
+@synthesize useChromecast;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -117,6 +117,13 @@
     [saveStoryButton setAlpha:0.0];
     [self audioPlayerSetup];
      [_plusButtonContainer setBackgroundColor:[UIColor clearColor]];
+    
+    
+    
+    //  Variable setup
+    
+    useChromecast = NO;
+    
 }
 -(void)viewDidAppear:(BOOL)animated
 {

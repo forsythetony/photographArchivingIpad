@@ -35,4 +35,6 @@
 @property (weak, nonatomic) IBOutlet UIView *mediaControlsContainer;
 @property (weak, nonatomic) IBOutlet UIView *progressView;
 
+@property (assign, nonatomic) BOOL  useChromecast;
+
 @end

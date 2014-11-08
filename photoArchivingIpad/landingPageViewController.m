@@ -57,6 +57,9 @@ NSString* const keyTimeline = @"keyTimeline";
     
     timelineDateRange = [DateRange createRangeWithStartYear:1850 andEndYear:1900];
     
+    //[self setNeedsStatusBarAppearanceUpdate];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    
 }
 - (IBAction)goToTimeline:(id)sender {
     
@@ -259,5 +262,9 @@ NSString* const keyTimeline = @"keyTimeline";
     [self performSegueWithIdentifier:timelineSegue sender:nil];
         
     }
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 @end

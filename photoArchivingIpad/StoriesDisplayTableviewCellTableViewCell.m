@@ -48,6 +48,7 @@ typedef struct sBounds {
 @synthesize storyDateTitle, storyDateValue, storyLengthTitle, storylengthValue, storytellerTitle, storytellerValue, storyTitleValue;
 @synthesize mediaControlsContainer;
 @synthesize progressView;
+@synthesize useChromecast;
 
 - (void)awakeFromNib
 {
@@ -64,6 +65,8 @@ typedef struct sBounds {
     isShowingScrubbingTime = NO;
     totalTime = 0.0;
     timeElapsed = 0.0;
+    useChromecast = NO;
+    
 }
 -(void)addSliderToProgressView
 {
