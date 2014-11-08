@@ -76,7 +76,7 @@
     [mainCom setupTransferManager];
     mainCom.delegate = self;
     
-    
+    [(WorkspaceViewController*)self.presentingViewController printFrameData];
     // Do any additional setup after loading the view.
     
     NSLog(@"%@", imageInformation.title);

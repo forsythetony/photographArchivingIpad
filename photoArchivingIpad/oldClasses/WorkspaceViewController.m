@@ -15,6 +15,7 @@
 #import "TAProgressView.h"
 #import "TATriggerFrame.h"
 #import "HTGCTextChannel.h"
+#import <AVFoundation/AVFoundation.h>
 
 #define TLWALLSPACING 100.0
 #define MAINSCROLLVIEWSIZE 10000.0
@@ -38,7 +39,8 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     UIAlertViewDelegate,
     UIScrollViewDelegate,
     TATriggerFrameDelegate,
-    ImageDisplayDelegate
+    ImageDisplayDelegate,
+    AVAudioPlayerDelegate
 >
 {
     
@@ -99,6 +101,14 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
     UIImage *_btnImage;
     UIImage *_btnImageSelected;
+    
+    AVAudioPlayer *player;
+    
+    imageObject *prevImage;
+    
+    BOOL imageSent;
+    NSInteger sentNum;
+    
 }
 
 @property GCKMediaControlChannel *mediaControlChannel;
@@ -121,6 +131,9 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     triggerWidth = 60.0;
     triggerLocked = NO;
     triggerTimeFloat = 1.5;
+    prevImage = nil;
+    imageSent = NO;
+    sentNum = 0;
     
 }
 
@@ -199,6 +212,14 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
 }
 */
+-(void)printFrameData {
+    
+    NSLog(@"\nScroll view content size is...%@\n", NSStringFromCGSize(mainScrollView.contentSize));
+    
+    NSLog(@"\nScroll view frame is...%@\n", NSStringFromCGRect(mainScrollView.frame));
+    
+}
+
 -(void)viewDidAppear:(BOOL)animated
 {
     
@@ -207,9 +228,18 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         //[self createAuxViews];
 
         [mainDataCom getPhotosForUser:@"forsytheTony"];
+        [self printFrameData];
         shouldLoadAgain = NO;
     }
-    
+    else {
+        CGSize newContentSize = mainScrollView.contentSize;
+        
+        newContentSize.height -= self.navigationController.navigationBar.frame.size.height + 20.0;
+        
+        [mainScrollView setContentSize:newContentSize];
+        [self printFrameData];
+    }
+    /*
     StoryCreationViewController *story = [[StoryCreationViewController alloc] initWithNibName:@"AddStoryForm" bundle:[NSBundle mainBundle]];
     story.delegate = self;
     storyAddPopover = [[UIPopoverController alloc] initWithContentViewController:story];
@@ -230,7 +260,9 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     //[self testLayer];
     
     //[self testProgressView];
+    */
     
+//    [mainScrollView setContentSize:CGSizeMake(MAINSCROLLVIEWSIZE, 768)];
 }
 -(void)trigUpdate
 {
@@ -396,6 +428,9 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     [self addGestureRecognizers];
     
 }
+-(void)viewWillAppear:(BOOL)animated {
+//    [mainScrollView setContentOffset:CGPointZero];
+}
 - (void)viewDidLoad
 {
     [self variableSetup];
@@ -410,8 +445,15 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
     [self chromecastThings];
     
+    NSLog(@"ViewdidLoad");
+    [self printFrameData];
     
+//    self.automaticallyAdjustsScrollViewInsets = YES;
+    
+    self.view.autoresizesSubviews = YES;
 }
+
+
 #pragma mark Create Views
 -(void)createAuxViews
 {
@@ -892,6 +934,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     //mainScrollView.maximumZoomScale = 4.0;
     //mainScrollView.minimumZoomScale = 1.0;
     mainScrollView.delegate = self;
+    mainScrollView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     
     
     [self.view addSubview:mainScrollView];
@@ -1399,7 +1442,10 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     }
     
     //  This function sends the image to the chromecast
-    [self sendImage:frame.imageObject];
+    
+    if (self.deviceManager.isConnected) {
+        [self sendImage:frame.imageObject];
+    }
     
      
     [self displayInformationForImage:frame.imageObject];
@@ -1537,10 +1583,19 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
 
 -(void)shouldStopAudio
 {
-    if (_mediaControlChannel.mediaStatus.playerState == GCKMediaPlayerStatePlaying) {
-        [_mediaControlChannel pause];
+    if(!self.deviceManager || !self.deviceManager.isConnected) {
+        
+        if (player) {
+            if(player.isPlaying) {
+                [player pause];
+            }
+        }
     }
-
+    else {
+        if (_mediaControlChannel.mediaStatus.playerState == GCKMediaPlayerStatePlaying) {
+            [_mediaControlChannel pause];
+        }
+    }
 }
 
 #pragma mark Keyboard
@@ -1564,6 +1619,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
 
 -(void)shouldDismissImageViewer:(id)imageViewer
 {
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -2019,8 +2075,12 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
 }
 -(void)shouldDismiss
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
-    [_mediaControlChannel stop];
+    
+//    NSLog(@"Current media status...%@", _mediaControlChannel.mediaStatus)
+    [self dismissViewControllerAnimated:YES completion:^{
+        [_mediaControlChannel stop];
+        [_deviceManager removeChannel:_mediaControlChannel];
+    }];
 }
 
 #pragma mark - Chromecast Things
@@ -2192,6 +2252,10 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
     
     [_mediaControlChannel loadMedia:mediaInformation autoplay:TRUE playPosition:0];
+
+    imageSent = YES;
+    prevImage = image;
+
     
 }
 -(void)playAudioFromStory:(Story*) audioStory
@@ -2201,6 +2265,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
     //Show alert if not connected
     if (!self.deviceManager || !self.deviceManager.isConnected) {
+        /*
         UIAlertView *alert =
         [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Not Connected", nil)
                                    message:NSLocalizedString(@"Please connect to Cast device", nil)
@@ -2209,7 +2274,25 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
                          otherButtonTitles:nil];
         [alert show];
         return;
+         */
+        NSData *_objectData = [NSData dataWithContentsOfURL:audioStory.audioRecording.s3URL];
+        
+        NSError *error;
+        
+        
+        player = [[AVAudioPlayer alloc] initWithData:_objectData error:&error];
+        player.delegate = self;
+        
+        
+        player.numberOfLoops = 0.0;
+        player.volume = 1.0;
+        [player prepareToPlay];
+        [player play];
+
+        
     }
+    else {
+        
     
     GCKMediaMetadata *metadata = [[GCKMediaMetadata alloc] init];
     
@@ -2262,7 +2345,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
                                         customData:nil];
     
     [_mediaControlChannel loadMedia:mediaInformation autoplay:TRUE playPosition:0];
-    
+    }
 }
 
 #pragma mark GCKDeviceScannerListener
@@ -2363,11 +2446,42 @@ didFailToConnectWithError:(GCKError *)error {
 
 - (void)deviceManager:(GCKDeviceManager *)deviceManager
 didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
+    
     self.applicationMetadata = applicationMetadata;
+   // NSLog(@"\nNew Metadata is...\n%@\n", applicationMetadata.);
+    
+    
 }
 
+-(void)mediaControlChannelDidUpdateStatus:(GCKMediaControlChannel *)mediaControlChannel {
+    //NSLog(@"\nMedia Status is...\n%@\n", mediaControlChannel.mediaStatus.idleReason);
+    
+    if( mediaControlChannel.mediaStatus.idleReason == GCKMediaPlayerIdleReasonFinished) {
+        
+        if (imageSent) {
+            if (prevImage) {
+                
+                NSLog(@"Sending the image");
+                
+                if (sentNum == 0) {
+                    sentNum += 1;
+                    [self sendImage:prevImage];
+                }
+                else {
+                    sentNum = 0;
+                }
+                 
+               
+            }
+        }
+        
+    }
+}
 #pragma mark - Misc.
 
+-(void)sendTheImage {
+    [self sendImage:prevImage];
+}
 - (void)showError:(NSError *)error {
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)

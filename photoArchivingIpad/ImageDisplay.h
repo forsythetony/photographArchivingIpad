@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "imageObject.h"
 #import "PAARecording.h"
-
+#import "WorkspaceViewController.h"
 #import "ImageDispaySubviews.h"
 
 @protocol ImageDisplayDelegate <NSObject>

@@ -93,27 +93,40 @@
 }
 -(void)aestheticsConfig
 {
+    
+    UIColor *backgroundColor = [UIColor ghostWhiteColor];
+    UIColor *textColor = [UIColor black25PercentColor];
+    
     [titleLabel setFont:labelFont];
     [storytellerLabel setFont:labelFont];
-    [dateLabel setFont:labelFont];
     
-    [datePickerView setDatePickerMode:UIDatePickerModeDate];
+    dateLabel.font = labelFont;
+    dateLabel.textColor = textColor;
+    
+    datePickerView.datePickerMode = UIDatePickerModeDate;
     
     
     titleValue.autocapitalizationType = UITextAutocapitalizationTypeWords;
     titleValue.inputAccessoryView = [self createInputAccessoryViewForTextFieldType:textFieldTypeTitle];
     [titleValue setDelegate:self];
     titleValue.placeholder = @"Story Title";
+    titleLabel.textColor = textColor;
+    
     
     storytellerValue.autocapitalizationType = UITextAutocapitalizationTypeWords;
     [storytellerValue setDelegate:self];
     storytellerValue.placeholder = @"Name";
     storytellerValue.inputAccessoryView = [self createInputAccessoryViewForTextFieldType:textFieldTypeStoryteller];
+    storytellerLabel.textColor = textColor;
     
     recordingTitle.text = @"New Recording";
     recordingTitle.alpha = 0.0;
     
     recordingTimeLabel.text = @"0";
+    recordingTimeTitle.backgroundColor = backgroundColor;
+    recordingTimeLabel.backgroundColor = backgroundColor;
+    recordingContainer.backgroundColor = backgroundColor;
+    
     recordingTimeLabel.alpha = 0.0;
     
     UIFont *titleTitleFont = [UIFont fontWithName:@"DINAlternate-Bold" size:9.0];
@@ -121,15 +134,18 @@
     
     recordingTitleTitle.font = titleTitleFont;
     
-    recordingTitleTitle.backgroundColor = [UIColor clearColor];
-    recordingTitleTitle.textColor = [UIColor charcoalColor];
+    recordingTitleTitle.backgroundColor = backgroundColor;
+    recordingTitleTitle.textColor = textColor;
     recordingTitleTitle.alpha = 0.0;
     
+    recordingTitle.textColor = textColor;
+    
     recordingTimeTitle.font = titleTitleFont;
-    recordingTimeTitle.backgroundColor = [UIColor clearColor];
-    recordingTimeTitle.textColor = [UIColor charcoalColor];
+    recordingTimeTitle.backgroundColor = backgroundColor;
+    recordingTimeTitle.textColor = textColor;
     recordingTimeTitle.alpha = 0.0;
     
+    recordingTimeLabel.textColor = textColor;
     
     UIFont *valueFont = [UIFont fontWithName:@"DINAlternate-Bold" size:15.0];
 
@@ -137,6 +153,9 @@
     
     recordingTimeLabel.font = valueFont;
     
+    self.view.backgroundColor = backgroundColor;
+    self.view.layer.cornerRadius = 9.0;
+    recordingContainer.layer.cornerRadius = 10.0;
 }
 #pragma mark - AVAudioPlayerDelegate
 -(BOOL)textFieldShouldReturn:(UITextField *)textField

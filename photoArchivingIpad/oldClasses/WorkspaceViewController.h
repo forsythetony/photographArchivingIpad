@@ -69,4 +69,6 @@ UIActionSheetDelegate>
 
 
 -(void)handlePanFrom:(id) sender;
+-(void)printFrameData;
+
 @end
