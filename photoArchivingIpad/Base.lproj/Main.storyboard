@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.79999999999999982" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="revised_collage_thing_light.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Onz-fz-Whp">
+                            <imageView userInteractionEnabled="NO" alpha="0.79999999999999982" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CollageThing_light.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Onz-fz-Whp">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                             </imageView>
                             <view alpha="0.74999999999999978" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z73-LX-c71">
@@ -127,7 +127,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" patternImage="A6298D57-B13D-402C-91F9-1E99B8E1F0B3" colorSpace="pattern"/>
+                                        <color key="backgroundColor" patternImage="495B9A69-C143-4640-9695-B3520DAFCB26" colorSpace="pattern"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -395,7 +395,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="A6298D57-B13D-402C-91F9-1E99B8E1F0B3" width="320" height="460">
+        <image name="495B9A69-C143-4640-9695-B3520DAFCB26" width="320" height="460">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -10282,7 +10282,7 @@ CQq/AAkKxAAJCswACQrPAAkK1AAJCtwACQrfAAkK8QAJCvQACQr5AAAAAAAABAEAAAAAAAAAQgAAAAAA
 AAAAAAAAAAAJCvs
 </mutableData>
         </image>
-        <image name="revised_collage_thing_light.jpg" width="1920" height="1080"/>
+        <image name="CollageThing_light.jpg" width="1920" height="1080"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
