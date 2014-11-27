@@ -17,5 +17,7 @@
 //  Methods
 
 -(imageObject*)convertToImageObject;
+-(imageObject*)convertToBabbageImageObject;
+-(Story*)convertToBabbageStoryObject;
 
 @end

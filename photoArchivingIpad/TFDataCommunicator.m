@@ -481,26 +481,62 @@
 -(void)getPhotosForUser:(NSString *)username
 {
     
-    NSString        *urlString  = [NSString stringWithFormat:@"%@%@?forUser=%@", (USELOCALHOST ? api_localhostBaseURL : api_ec2BaseURL), api_photosEndpoint, username];
+//    NSString        *urlString  = [NSString stringWithFormat:@"%@%@?forUser=%@", (USELOCALHOST ? api_localhostBaseURL : api_ec2BaseURL), api_photosEndpoint, username];
+    username = @"forsythetony";
+    
+    NSString *babbage_urlString = [NSString stringWithFormat:@"%@%@?user_id=%@", api_babbage_baseURL, api_babbage_photos_endpoint, username];
+    
    // NSString *urlString = @"http://localhost:3000/photos?forUser=forsythetony";
     
     
-    NSURL           *url        = [NSURL URLWithString:urlString];
-    NSURLRequest    *urlRequest = [[NSURLRequest alloc] initWithURL:url];
+    NSURL           *url        = [NSURL URLWithString:babbage_urlString];
+    NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:url];
+    req.HTTPMethod = @"GET";
     
     NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
     
-    [NSURLConnection sendAsynchronousRequest:urlRequest queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+    [NSURLConnection sendAsynchronousRequest:req queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
         
-        if (httpResponse.statusCode == 200) {
+        if (httpResponse.statusCode == 201 && data ) {
             [self parsePhotosFromData:data];
         }
         
     }];
 }
+-(void)pullStoriesListForPhoto:(NSString *)photo_id
+{
+    NSString *babbage_urlString = [NSString stringWithFormat:@"%@%@?photo_id=%@", api_babbage_baseURL, api_babbage_stories_endpoint, photo_id];
+    
+    NSURL           *url        = [NSURL URLWithString:babbage_urlString];
+    NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:url];
+    req.HTTPMethod = @"GET";
+    
+    NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
+    
+    [NSURLConnection sendAsynchronousRequest:req queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        
+        if (httpResponse.statusCode == 201 && data ) {
+            [self parseStoriesFromData:data];
+        }
+        
+    }];
 
+}
+-(void)parseStoriesFromData:(NSData*) data
+{
+    NSError *error;
+    
+    NSArray *rootDict = [NSJSONSerialization JSONObjectWithData:data
+                                                        options:0
+                                                          error:&error];
+    
+    
+    [self.delegate finishedPullingStoriesList:rootDict];
+}
 -(void)parsePhotosFromData:(NSData*) data
 {
     NSError *error;
@@ -750,5 +786,29 @@
     }];
     
     
+}
+-(void)updateBabbagePhotoDateWithImagePackage:(ImagePackage*)photo
+{
+    NSString *reqString = [updatedConstants getURLForBabbageUpdateWithID:photo.imageID andNewDate:[[photo dateTaken] displayDateOfType:sDateTypeBabbageURL]];
+    
+    NSURL *urlObject = [NSURL URLWithString:reqString];
+    
+    NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:urlObject];
+    
+    req.HTTPMethod = @"GET";
+    
+    NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
+    
+    [NSURLConnection sendAsynchronousRequest:req queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*) response;
+        
+        if (httpResponse.statusCode == 200) {
+            
+            [self.delegate finishedUpdatingPhotoDateWithStatusCode:httpResponse.statusCode];
+        }
+        
+    }];
+
 }
 @end

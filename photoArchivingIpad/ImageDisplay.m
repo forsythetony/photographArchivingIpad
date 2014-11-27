@@ -16,6 +16,7 @@
 #import <VBFPopFlatButton/VBFPopFlatButton.h>
 #import "TAStyler.h"
 #import <Masonry/Masonry.h>
+#import "NSDictionary+ObjectCreationHelpers.h"
 
 @interface ImageDisplay () <ImageDisplayRecordingSliderViewDelegate, TFCommunicatorDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITableViewDataSource, UITableViewDelegate, StoriesCellDelegate> {
     
@@ -76,6 +77,8 @@
     [mainCom setupTransferManager];
     mainCom.delegate = self;
     
+    [mainCom pullStoriesListForPhoto:self.imageInformation.id];
+    
     [(WorkspaceViewController*)self.presentingViewController printFrameData];
     // Do any additional setup after loading the view.
     
@@ -123,6 +126,23 @@
     //  Variable setup
     
     useChromecast = NO;
+    
+}
+-(void)finishedPullingStoriesList:(NSArray *)list
+{
+    NSMutableArray *storiesArr = [NSMutableArray new];
+    
+    for (NSDictionary* dict in list) {
+        
+        Story *newStory = [dict convertToBabbageStoryObject];
+        
+        
+        [storiesArr addObject:newStory];
+        
+    }
+    
+    currentStories = [NSArray arrayWithArray:storiesArr];
+    [storiesList reloadData];
     
 }
 -(void)viewDidAppear:(BOOL)animated
@@ -243,7 +263,31 @@
 {
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [displayView setDisplayedImage:image];
+        displayView.alpha = 0.0;
+        
+        POPSpringAnimation *alphaAni = [POPSpringAnimation animation];
+        
+        alphaAni.property = [POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+        
+        alphaAni.fromValue = @(0.0);
+        alphaAni.toValue = @(1.0);
+        
+        
+        POPSpringAnimation *sizeAni = [POPSpringAnimation animation];
+        
+        sizeAni.property = [POPAnimatableProperty propertyWithName:kPOPViewSize];
+        
+        sizeAni.fromValue = [NSValue valueWithCGSize:CGSizeMake(40.0, 40.0)];
+        sizeAni.toValue = [NSValue valueWithCGSize:displayView.frame.size];
+        
+        [UIView animateWithDuration:0.25 animations:^{
+            [displayView setAlpha:1.0];
+            [displayView setDisplayedImage:image];
+        }];
+        
+        
+        //[displayView pop_addAnimation:sizeAni forKey:@"sizeAnimation"];
+        //[displayView.layer pop_addAnimation:alphaAni forKey:@"alphaAnimation"];
     });
 }
 /*

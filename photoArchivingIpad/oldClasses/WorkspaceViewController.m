@@ -124,6 +124,10 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
     imageObject *updatingImageObject;
     ImagePackage *updatingImagePackage;
+    
+    BOOL isDateUpdateLockOn;
+    
+    NSTimer *updateLineColorTimer, *incompleteTimer;
 }
 
 @property GCKMediaControlChannel *mediaControlChannel;
@@ -149,7 +153,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     prevImage = nil;
     imageSent = NO;
     sentNum = 0;
-    
+    isDateUpdateLockOn = NO;
 }
 
 
@@ -389,7 +393,9 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
              */
             
             
-            imageObject *newImage = [dict convertToImageObject];
+            imageObject *newImage = [dict convertToBabbageImageObject];
+           
+            
             pictureFrame *frame = [pictureFrame createFrame];
             
 
@@ -456,7 +462,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
     [self initialSetup];
     
-    [mainDataCom saveImageToCameraRoll];
+    //[mainDataCom saveImageToCameraRoll];
     
     [self chromecastThings];
     
@@ -1291,6 +1297,9 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
 }
 -(void)handlePanFrom:(id) sender
 {
+    if (isDateUpdateLockOn)
+        return;
+    
     
     [self.view bringSubviewToFront:[(UIPanGestureRecognizer*)sender view]];
     
@@ -1386,8 +1395,10 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         
         //[TLManager updateDateForPicture:frame];
         [self updateDateForFrame:frame];
-        [self tearDownDateLine];
-        [self tearDownDateUpdaterLabel];
+        //[self tearDownDateLine];
+        //[self tearDownDateUpdaterLabel];
+        
+        isDateUpdateLockOn = YES;
         grabbedFrame = nil;
     }
     
@@ -1564,7 +1575,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
     NSString *notificationString = [NSString stringWithFormat:@"The date for the frame has been updated to %@", [info[@"newDate"] displayDateOfType:sDateTypeMonthAndYear]];
     
-    /*
+    
     NSDictionary *options = @{
                               kCRToastTextKey                       : notificationString,
                               kCRToastTextAlignmentKey              : @(NSTextAlignmentCenter),
@@ -1580,7 +1591,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
     [CRToastManager showNotificationWithOptions:options
                                 completionBlock:nil];
-    */
+    
     
     //UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Updated!" message:notificationString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
     
@@ -2597,8 +2608,23 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
 -(void)tearDownDateUpdaterLabel
 {
     if (dateUpdaterLabel) {
-        [dateUpdaterLabel removeFromSuperview];
-        dateUpdaterLabel = nil;
+        
+        POPSpringAnimation *tearDown = [POPSpringAnimation animation];
+        
+        tearDown.property = [POPAnimatableProperty propertyWithName:kPOPViewAlpha];
+        
+        tearDown.toValue = @(0.0);
+        tearDown.springBounciness = 14.0;
+        tearDown.springSpeed = 14.0;
+        
+        
+        [tearDown setCompletionBlock:^(POPAnimation *hi, BOOL basdf) {
+            [dateUpdaterLabel removeFromSuperview];
+            dateUpdaterLabel = nil;
+        }];
+        
+        [dateUpdaterLabel pop_addAnimation:tearDown forKey:@"labelTear"];
+        
     }
 }
 -(NSString*)getUpdatedDateLabelTextForFrame:(pictureFrame*) Pframe
@@ -2626,7 +2652,7 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
     CGFloat frameCenterX = Pframe.center.x;
     
     
-    CGFloat offsetValue = 0.0;
+    CGFloat offsetValue = 15.0;
     
     CGFloat centerYDiff = frameCenterY - timelineCenterY;
     
@@ -2635,13 +2661,14 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
     CGFloat labelShowRange = 20.0;
     
     if (centerYDiff < labelShowRange) {
-        offsetValue = 10.0;
+        
     }
     else if( centerYDiff > (0.0 - labelShowRange))
     {
-        offsetValue = -10.0;
+        offsetValue = (0 - offsetValue);
     }
     else{
+        offsetValue = 0.0;
         shouldShowTime = NO;
     }
     
@@ -2684,8 +2711,24 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
 -(void)tearDownDateLine
 {
     if (dateUpdaterLine) {
-        [dateUpdaterLine removeFromSuperview];
-        dateUpdaterLine = nil;
+        
+        
+        POPSpringAnimation *tearDown = [POPSpringAnimation animation];
+        
+        tearDown.property = [POPAnimatableProperty propertyWithName:kPOPViewScaleY];
+        
+        tearDown.toValue = @(0.01);
+        tearDown.velocity = @(14.0);
+        tearDown.springBounciness = 2.0;
+        
+        [tearDown setCompletionBlock:^(POPAnimation *adf, BOOL asdf) {
+            [dateUpdaterLine removeFromSuperview];
+            dateUpdaterLine = nil;
+        }];
+        
+        [dateUpdaterLine pop_addAnimation:tearDown forKey:@"tearDownLine"];
+        
+        
     }
 }
 -(void)updateDateLineWithFrame:(pictureFrame*) Pframe
@@ -2719,6 +2762,7 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
 }
 -(void)showTempAlertWithTitle:(NSString*) title andMessage:(NSString*) message
 {
+    /*
     CGFloat timeInterval = 1.0;
     
     NSTimer *alertTimer = [NSTimer scheduledTimerWithTimeInterval:timeInterval target:self selector:@selector(tearDownAlertView) userInfo:nil repeats:NO];
@@ -2736,18 +2780,34 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
     alertView = [self createAlertViewWithTitle:title andMessage:message];
     
     [self showAlertView];
+    //[self performSelectorOnMainThread:@selector(showAlertView) withObject:nil waitUntilDone:NO];
+    */
+    
+    NSDictionary *options = @{
+                              kCRToastTextKey : message,
+                              kCRToastTextAlignmentKey : @(NSTextAlignmentCenter),
+                              kCRToastBackgroundColorKey : [UIColor redColor],
+                              kCRToastAnimationInTypeKey : @(CRToastAnimationTypeGravity),
+                              kCRToastAnimationOutTypeKey : @(CRToastAnimationTypeGravity),
+                              kCRToastAnimationInDirectionKey : @(CRToastAnimationDirectionLeft),
+                              kCRToastAnimationOutDirectionKey : @(CRToastAnimationDirectionRight)
+                              };
+    [CRToastManager showNotificationWithOptions:options
+                                completionBlock:^{
+                                    NSLog(@"Completed");
+                                }];
     
 }
 
 -(void)showAlertView
 {
     if (alertView) {
-        alertView.alpha = 0.0;
+        //alertView.alpha = 0.0;
         
-        [self.view addSubview:alertView];
-        [self.view bringSubviewToFront:alertView];
+        [mainScrollView addSubview:alertView];
+        [mainScrollView bringSubviewToFront:alertView];
         [alertView setCenter:CGPointMake(self.view.center.x, (alertView.frame.size.height) + 40.0)];
-
+        /*
         POPSpringAnimation *animation = [POPSpringAnimation animation];
         
         animation.property = [POPAnimatableProperty propertyWithName:kPOPViewAlpha];
@@ -2755,7 +2815,7 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
         animation.toValue = @(1.0);
         
         [alertView pop_addAnimation:animation forKey:@"AlphaSpring"];
-    
+         */
     }
 }
 -(void)tearDownAlertView
@@ -2868,6 +2928,15 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
 }
 -(void)updateDateForFrame:(pictureFrame*) Pframe
 {
+    
+    UIColor *progress = [UIColor warningColor];
+    
+    [dateUpdaterLabel setTextColor:progress];
+    [dateUpdaterLine setBackgroundColor:progress];
+    
+    updateLineColorTimer = [NSTimer scheduledTimerWithTimeInterval:7.0 target:self selector:@selector(changeToRed) userInfo:nil repeats:NO];
+    
+    
     NSDate *newDate = [TLManager getNewDateForFrame:Pframe];
     
     imageObject *pFrameData = Pframe.imageObject;
@@ -2880,29 +2949,47 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
     
     updatingImageObject = pFrameData;
     
-    [mainDataCom updatePhotoDateWithImagePackage:newPackage];
+    [mainDataCom updateBabbagePhotoDateWithImagePackage:newPackage];
     
 }
--(void)finishedUpdatingPhotoWithStatusCode:(NSInteger)statusCode
+-(void)changeToGreen
 {
-    if (statusCode == 200) {
-        if (updatingImageObject) {
-            updatingImageObject.date = updatingImagePackage.dateTaken;
-            updatingImageObject = nil;
-            updatingImagePackage = nil;
-            
-            [self showTempAlertWithTitle:@"Success!" andMessage:@"We did it!"];
-        }
-    }
-    else
-    {
-        updatingImageObject = nil;
-        updatingImagePackage = nil;
-        
-        [self showTempAlertWithTitle:@"UHOH!" andMessage:@"We did NOT do it!"];
-    }
+    NSTimeInterval aniDur = 1.0;
+    
+    UIColor *green = [UIColor Evernote];
+    
+    POPSpringAnimation *ani = [POPSpringAnimation animation];
+    POPSpringAnimation *aniLine = [POPSpringAnimation animation];
+    
+    ani.property = [POPAnimatableProperty propertyWithName:kPOPLabelTextColor];
+    aniLine.property = [POPAnimatableProperty propertyWithName:kPOPViewBackgroundColor];
+    
+    ani.toValue = green;
+    aniLine.toValue = green;
+    
+    [dateUpdaterLine pop_addAnimation:aniLine forKey:@"ani"];
+    [dateUpdaterLabel pop_addAnimation:ani forKey:@"aniLabel"];
+    incompleteTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(tearItAllDown) userInfo:nil repeats:NO];
 }
-
+-(void)changeToRed
+{
+    [dateUpdaterLine setBackgroundColor:[UIColor dangerColor]];
+    [dateUpdaterLabel setTextColor:[UIColor dangerColor]];
+    [updateLineColorTimer invalidate];
+    updateLineColorTimer = nil;
+    
+    incompleteTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(tearItAllDown) userInfo:nil repeats:NO];
+}
+-(void)tearItAllDown
+{
+    [self tearDownDateLine];
+    [self tearDownDateUpdaterLabel];
+    
+    [incompleteTimer invalidate];
+    incompleteTimer = nil;
+    
+    isDateUpdateLockOn = NO;
+}
 -(void)didFinishUpdatingImageWithCode:(NSInteger)code
 {
     if (code == 200) {
@@ -2911,6 +2998,36 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
     else
     {
         [self showTempAlertWithTitle:@"Error" andMessage:@"uhoh"];
+    }
+}
+-(void)finishedUpdatingPhotoDateWithStatusCode:(NSInteger)statusCode
+{
+    [updateLineColorTimer invalidate];
+    updateLineColorTimer = nil;
+    
+    [incompleteTimer invalidate];
+    incompleteTimer = nil;
+    
+    
+    if (statusCode == 200) {
+        
+        
+        [self performSelectorOnMainThread:@selector(changeToGreen) withObject:nil waitUntilDone:NO];
+        if (updatingImageObject) {
+            updatingImageObject.date = updatingImagePackage.dateTaken;
+            updatingImageObject = nil;
+            updatingImagePackage = nil;
+            
+            //[self showTempAlertWithTitle:@"Success!" andMessage:@"We did it!"];
+        }
+    }
+    else
+    {
+        [self changeToRed];
+        updatingImageObject = nil;
+        updatingImagePackage = nil;
+        
+        //[self showTempAlertWithTitle:@"UHOH!" andMessage:@"We did NOT do it!"];
     }
 }
 @end

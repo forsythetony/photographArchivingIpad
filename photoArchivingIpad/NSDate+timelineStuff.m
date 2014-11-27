@@ -39,6 +39,24 @@
     return returnDate;
 }
 
++(NSDate *)dateWithv2String:(NSString *)v2String
+{
+    NSString *formatString = @"yyyy-MM-dd";
+    
+    NSDateFormatter *fm     = [NSDateFormatter new];
+    
+    [fm setDateFormat:formatString];
+    
+    NSDate *returnDate = [fm dateFromString:v2String];
+    
+    NSString *dateDescription = [returnDate description];
+    
+    NSLog(@"\nDescription of the date is: %@\n", dateDescription);
+    
+    return returnDate;
+}
+
+
 +(NSDate*)dateWithYear:(NSNumber*) year
 {
     
@@ -111,6 +129,11 @@
             
         case sdatetypeURL:
             dateFormat = @"M-dd-yyyy-hh-mm";
+            break;
+
+        case sDateTypeBabbageURL:
+            dateFormat = @"yyyy-MM-dd";
+            break;
             
         default:
             break;

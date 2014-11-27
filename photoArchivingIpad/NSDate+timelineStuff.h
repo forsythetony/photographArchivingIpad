@@ -15,7 +15,8 @@ typedef NS_ENUM(NSInteger, sDateType) {
     sDateTypeWithTime,
     sDateTypeMonthAndYear,
     sDateTypeYearOnly,
-    sdatetypeURL
+    sdatetypeURL,
+    sDateTypeBabbageURL
     
 };
 
@@ -25,6 +26,7 @@ typedef NS_ENUM(NSInteger, sDateType) {
 +(NSDate*)dateWithv1String:(NSString*) v1String;
 +(NSDate*)dateWithYear:(NSNumber*) year;
 +(NSDate*)dateWithTimeIntervalSinceUserReferencePoint:(NSTimeInterval) interval;
++(NSDate *)dateWithv2String:(NSString *)v2String;
 
 -(NSTimeInterval)timeIntervalSinceBeginning;
 

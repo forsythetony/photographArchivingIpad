@@ -41,7 +41,11 @@ extern NSString * const APISetupStoryURLParam;
 extern NSString * const APIDeleteStoryWithID;
 extern NSString * const APIUpdatePhotoDateWithID;
 
+//  Babbage API
 
+extern NSString * const api_babbage_baseURL;
+extern NSString * const api_babbage_photos_endpoint;
+extern NSString * const api_babbage_stories_endpoint;
 //
 //  API Package Keys
 //
@@ -160,5 +164,5 @@ extern NSString * const contentTypePNG;
 +(NSString*)getFieldTypeHasEdited;
 
 +(NSString*)getURLForUpdatingPhotoWithID:(NSString*) photoID andNewDate:(NSString*) newDateString;
-
++(NSString*)getURLForBabbageUpdateWithID:(NSString*) photoID andNewDate:(NSString*) newDateString;
 @end

@@ -38,6 +38,7 @@ typedef NS_ENUM(NSInteger, serverResponseType) {
 -(void)finishedParsingPeople:(NSArray*) people;
 -(void)finishedPullingImageFromUrl:(UIImage*) image;
 -(void)finishedPullingPhotoList:(NSArray*) list;
+-(void)finishedPullingStoriesList:(NSArray*) list;
 -(void)finishedServerCleanup:(NSDictionary*) results;
 -(void)finishedUploadingRequestWithData:(NSDictionary*) data;
 -(void)finishedUploadingPhotoInfoToServer;
@@ -85,6 +86,8 @@ typedef NS_ENUM(NSInteger, serverResponseType) {
 -(void)deletePhoto:(imageObject*) photo;
 -(void)updatePhoto:(ImagePackage*) photo;
 -(void)updatePhotoDateWithImagePackage:(ImagePackage*)photo;
+-(void)updateBabbagePhotoDateWithImagePackage:(ImagePackage*)photo;
+-(void)finishedPullingStoriesList:(NSArray*) storiesList;
 
 //
 //  Audio
@@ -97,7 +100,7 @@ typedef NS_ENUM(NSInteger, serverResponseType) {
 -(void)dummyUpdateImageWithStory:(imageObject*) image andStory:(Story*) newStory;
 -(void)addStoryToImage:(Story*) aStory imageObject:(imageObject*) theImage;
 -(void)removeStoryFromImage:(imageObject*) theImage withStoryID:(NSString*) storyID;
-
+-(void)pullStoriesListForPhoto:(NSString*) photo_id;
 
 //
 //  Users

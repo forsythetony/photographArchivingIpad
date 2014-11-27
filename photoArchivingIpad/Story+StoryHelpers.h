@@ -14,5 +14,4 @@
 -(void)setRandomId;
 
 +(id)setupWithRandomID;
-
 @end

@@ -45,6 +45,7 @@
 
 
 -(NSMutableDictionary*)informationAsMutableDictionary;
+
 -(void)addStory:(Story*) newStory;
 
 @end

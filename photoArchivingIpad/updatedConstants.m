@@ -43,6 +43,13 @@ NSString * const respKeys_responseStatus = @"responseStatus";
 NSString * const respKeys_responseMessage = @"responseMessage";
 
 
+//
+//  Babbage
+//
+
+NSString * const api_babbage_baseURL = @"http://babbage.cs.missouri.edu/~arfv2b/photoArchiving";
+NSString * const api_babbage_photos_endpoint = @"/photos";
+NSString * const api_babbage_stories_endpoint = @"/stories";
 
 //
 //  API Keys
@@ -176,6 +183,12 @@ NSString * const contentTypePNG = @"image/PNG";
 +(NSString*)getURLForUpdatingPhotoWithID:(NSString*) photoID andNewDate:(NSString*) newDateString
 {
     NSString *url = [NSString stringWithFormat:@"%@%@/%@?updateFlag=date&newValue=%@", api_ec2BaseURL , api_photosEndpoint , photoID , newDateString ];
+    
+    return url;
+}
++(NSString*)getURLForBabbageUpdateWithID:(NSString*) photoID andNewDate:(NSString*) newDateString
+{
+    NSString *url = [NSString stringWithFormat:@"%@%@?photo_id=%@&action=update_date&new_date=%@", api_babbage_baseURL, api_babbage_photos_endpoint, photoID, newDateString];
     
     return url;
 }

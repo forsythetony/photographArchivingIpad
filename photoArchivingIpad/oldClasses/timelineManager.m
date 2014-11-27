@@ -120,6 +120,8 @@
         
         imageObject *img    = theFrame.imageObject;
         
+        NSLog(@"Show me the date: %@", [[img date] displayDateOfType:sDateTypeSimple]);
+        
         
         CGPoint theCenter   = [self createPointWithDate:[img date]];
         
