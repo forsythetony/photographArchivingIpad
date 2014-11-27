@@ -20,6 +20,13 @@
 #define TLWALLSPACING 100.0
 #define MAINSCROLLVIEWSIZE 10000.0
 
+typedef struct tDateLineLayout {
+    
+    CGPoint center;
+    CGFloat height;
+    BOOL shouldShow;
+    
+} DateLineLayoutVals;
 typedef struct tScrollTriggerArea {
     
     CGRect leftTrigger;
@@ -40,7 +47,8 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     UIScrollViewDelegate,
     TATriggerFrameDelegate,
     ImageDisplayDelegate,
-    AVAudioPlayerDelegate
+    AVAudioPlayerDelegate,
+    imageObjectDelegate
 >
 {
     
@@ -109,6 +117,13 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     BOOL imageSent;
     NSInteger sentNum;
     
+    UIView *dateUpdaterLine;
+    UILabel *dateUpdaterLabel;
+    
+    UIView *alertView;
+    
+    imageObject *updatingImageObject;
+    ImagePackage *updatingImagePackage;
 }
 
 @property GCKMediaControlChannel *mediaControlChannel;
@@ -874,6 +889,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         
         pictureFrame *frame = [pictureFrame createFrame];
         
+        obj.delegate = self;
         
         CGPoint frameCenter = centerOfView;
         
@@ -1287,6 +1303,8 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         
         grabbedFrame = (pictureFrame*)[sender view];
         
+        [self drawLineFromFrame:grabbedFrame];
+        [self addDateUpdateLabelForFrame:grabbedFrame];
     }
     
     //NSLog(@"\n\nTrans Point: %@", NSStringFromCGPoint(translatedPoint));
@@ -1295,8 +1313,9 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
     if (!finishedMoving) {
         
-    [[sender view] setCenter:translatedPoint];
-    
+        [[sender view] setCenter:translatedPoint];
+        [self updateDateLineWithFrame:(pictureFrame*)[(UIPanGestureRecognizer*)sender view]];
+        [self updateDateUpdaterLabelWithFrame:(pictureFrame*)[(UIPanGestureRecognizer*)sender view]];
     }
     
     [self findPointInView:translatedPoint];
@@ -1365,8 +1384,10 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         
         pictureFrame *frame = (pictureFrame*)[sender view];
         
-        [TLManager updateDateForPicture:frame];
-        
+        //[TLManager updateDateForPicture:frame];
+        [self updateDateForFrame:frame];
+        [self tearDownDateLine];
+        [self tearDownDateUpdaterLabel];
         grabbedFrame = nil;
     }
     
@@ -1561,9 +1582,14 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
                                 completionBlock:nil];
     */
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Updated!" message:notificationString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    //UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Updated!" message:notificationString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
     
-    [alert show];
+    //[alert show];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self showTempAlertWithTitle:@"Updated" andMessage:notificationString];
+    });
+
 }
 
 #pragma mark Playing Audio
@@ -2307,7 +2333,8 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
     if (_displayImageInformation.thumbnailImage) {
         
-        displayImageSize = _displayImageInformation.thumbnailImage.size;
+//        displayImageSize = _displayImageInformation.thumbnailImage.size;
+        displayImageSize = CGSizeMake(700.0, 700.0);
         imageURL = _displayImageInformation.thumbNailURL;
         
     } else
@@ -2315,11 +2342,14 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         displayImageSize = _displayImageInformation.largeImage.size;
         imageURL = _displayImageInformation.photoURL;
     }
-    
+        imageURL = _displayImageInformation.photoURL;
+        displayImageSize = _displayImageInformation.largeImage.size;
+        
     [metadata addImage:[[GCKImage alloc]
                         initWithURL:imageURL
                         width:displayImageSize.width
-                        height:displayImageSize.height]];
+                        height:displayImageSize.height
+                        ]];
     
     NSString *urlString;
     
@@ -2470,7 +2500,7 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
                 else {
                     sentNum = 0;
                 }
-                 
+                
                
             }
         }
@@ -2491,5 +2521,396 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
                                           cancelButtonTitle:NSLocalizedString(@"OK", nil)
                                           otherButtonTitles:nil];
     [alert show];
+}
+
+
+#pragma makr - Date Updater Methods
+-(void)addDateUpdateLabelForFrame:(pictureFrame*) Pframe
+{
+   
+    DateLineLayoutVals newVals = [self getNewLabelCenterForFrame:Pframe];
+    NSString *labelString = [self getUpdatedDateLabelTextForFrame:Pframe];
+    
+    if (!dateUpdaterLabel) {
+        [dateUpdaterLabel removeFromSuperview];
+        dateUpdaterLabel = nil;
+    }
+    
+    NSString *fontFamily = @"DINAlternate-Bold";
+    CGFloat fontSize = 15.1;
+    
+    UIFont *labelFont = [UIFont fontWithName:fontFamily size:fontSize];
+    UIColor *fontcolor = [UIColor whiteColor];
+    
+    UILabel *newLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 200.0, 100.0)];
+    
+    [newLabel setFont:labelFont];
+    [newLabel setTextColor:fontcolor];
+    [newLabel setTextAlignment:NSTextAlignmentCenter];
+    
+    [newLabel setText:labelString];
+    
+    [newLabel sizeToFit];
+    
+    [newLabel setCenter:newVals.center];
+    
+    if (newVals.shouldShow) {
+        newLabel.alpha = 1.0;
+    }
+    else{
+        newLabel.alpha = 0.0;
+    }
+    
+    if (dateUpdaterLine) {
+        [mainScrollView insertSubview:newLabel aboveSubview:dateUpdaterLine];
+    }
+    else
+    {
+        [mainScrollView addSubview:newLabel];
+    }
+    
+    dateUpdaterLabel = newLabel;
+    
+    
+}
+-(void)updateDateUpdaterLabelWithFrame:(pictureFrame*) Pframe
+{
+    DateLineLayoutVals newVals = [self getNewLabelCenterForFrame:Pframe];
+    NSString *newTime = [self getUpdatedDateLabelTextForFrame:Pframe];
+    
+    
+    if (dateUpdaterLabel) {
+        
+        [dateUpdaterLabel setText:newTime];
+        [dateUpdaterLabel sizeToFit];
+        [dateUpdaterLabel setCenter:newVals.center];
+        
+        if (newVals.shouldShow) {
+            dateUpdaterLabel.alpha = 1.0;
+        }
+        else
+        {
+            dateUpdaterLabel.alpha = 0.0;
+        }
+    }
+}
+-(void)tearDownDateUpdaterLabel
+{
+    if (dateUpdaterLabel) {
+        [dateUpdaterLabel removeFromSuperview];
+        dateUpdaterLabel = nil;
+    }
+}
+-(NSString*)getUpdatedDateLabelTextForFrame:(pictureFrame*) Pframe
+{
+    NSString *newDateString = @"";
+    NSDate *newDate;
+    CGPoint newPoint = CGPointMake(0.0, 0.0);
+    
+    if (Pframe) {
+        newPoint = Pframe.center;
+    }
+    
+    if (TLManager) {
+        newDate = [TLManager createDateObjectFromPoint:newPoint];
+        
+        newDateString = [newDate displayDateOfType:sDateTypeMonthAndYear];
+    }
+    
+    return newDateString;
+}
+-(DateLineLayoutVals)getNewLabelCenterForFrame:(pictureFrame*) Pframe
+{
+    CGFloat timelineCenterY = mainScrollView.center.y;
+    CGFloat frameCenterY = Pframe.center.y;
+    CGFloat frameCenterX = Pframe.center.x;
+    
+    
+    CGFloat offsetValue = 0.0;
+    
+    CGFloat centerYDiff = frameCenterY - timelineCenterY;
+    
+    BOOL shouldShowTime = YES;
+    
+    CGFloat labelShowRange = 20.0;
+    
+    if (centerYDiff < labelShowRange) {
+        offsetValue = 10.0;
+    }
+    else if( centerYDiff > (0.0 - labelShowRange))
+    {
+        offsetValue = -10.0;
+    }
+    else{
+        shouldShowTime = NO;
+    }
+    
+    CGFloat newYCenter = timelineCenterY + offsetValue;
+    
+    DateLineLayoutVals newVals;
+    
+    newVals.center = CGPointMake(frameCenterX, newYCenter);
+    newVals.shouldShow = shouldShowTime;
+    
+    return newVals;
+    
+}
+-(void)drawLineFromFrame:(pictureFrame*) Pframe
+{
+    CGPoint initialPoint, finalPoint;
+    
+    initialPoint = [Pframe center];
+    
+    finalPoint = CGPointMake([Pframe center].x, [mainScrollView center].y);
+    
+    UIView *line = [self createLineFromStartPoint:initialPoint toEndPoint:finalPoint];
+    
+    [mainScrollView insertSubview:line belowSubview:Pframe.theImage];
+    
+    dateUpdaterLine = line;
+}
+-(UIView*)createLineFromStartPoint:(CGPoint) startPoint toEndPoint:(CGPoint) endPoint
+{
+    CGFloat yDistance = (CGFloat)fabsf(startPoint.y - endPoint.x);
+    
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1.0, yDistance)];
+    
+    [line setBackgroundColor:[UIColor whiteColor]];
+    
+    [line setCenter:CGPointMake(startPoint.x, ((startPoint.y + endPoint.y) / 2.0))];
+    
+    return line;
+}
+-(void)tearDownDateLine
+{
+    if (dateUpdaterLine) {
+        [dateUpdaterLine removeFromSuperview];
+        dateUpdaterLine = nil;
+    }
+}
+-(void)updateDateLineWithFrame:(pictureFrame*) Pframe
+{
+    DateLineLayoutVals newLayout = [self getNewCenterForDateUpdateLineWithFrame:Pframe];
+    if (dateUpdaterLine) {
+        
+        [dateUpdaterLine setFrame:CGRectMake(0.0, 0.0, 1.0, newLayout.height)];
+        [dateUpdaterLine setCenter:newLayout.center];
+        [mainScrollView insertSubview:Pframe belowSubview:Pframe.theImage];
+        
+    }
+    else{
+        
+        [self drawLineFromFrame:Pframe];
+    }
+}
+-(DateLineLayoutVals)getNewCenterForDateUpdateLineWithFrame:(pictureFrame*) Pframe
+{
+    
+    CGFloat scrollviewCenterY = mainScrollView.center.y;
+    CGFloat pFrameCenterY = Pframe.center.y;
+    CGFloat centerX = Pframe.center.x;
+    
+    DateLineLayoutVals newVals;
+    
+    newVals.center = CGPointMake(centerX, ((scrollviewCenterY + pFrameCenterY) / 2.0));
+    newVals.height = fabsf(scrollviewCenterY - pFrameCenterY);
+    
+    return newVals;
+}
+-(void)showTempAlertWithTitle:(NSString*) title andMessage:(NSString*) message
+{
+    CGFloat timeInterval = 1.0;
+    
+    NSTimer *alertTimer = [NSTimer scheduledTimerWithTimeInterval:timeInterval target:self selector:@selector(tearDownAlertView) userInfo:nil repeats:NO];
+    
+    
+    if (alertView) {
+        [alertView removeFromSuperview];
+        alertView = nil;
+    }
+    
+    
+    
+    
+    
+    alertView = [self createAlertViewWithTitle:title andMessage:message];
+    
+    [self showAlertView];
+    
+}
+
+-(void)showAlertView
+{
+    if (alertView) {
+        alertView.alpha = 0.0;
+        
+        [self.view addSubview:alertView];
+        [self.view bringSubviewToFront:alertView];
+        [alertView setCenter:CGPointMake(self.view.center.x, (alertView.frame.size.height) + 40.0)];
+
+        POPSpringAnimation *animation = [POPSpringAnimation animation];
+        
+        animation.property = [POPAnimatableProperty propertyWithName:kPOPViewAlpha];
+        
+        animation.toValue = @(1.0);
+        
+        [alertView pop_addAnimation:animation forKey:@"AlphaSpring"];
+    
+    }
+}
+-(void)tearDownAlertView
+{
+    if (alertView) {
+        
+//        POPSpringAnimation *ani = [POPSpringAnimation animation];
+//        
+//        ani.property = [POPAnimatableProperty propertyWithName:kPOPViewAlpha];
+//        
+//        ani.toValue = @(0.0);
+//        
+//        [ani setCompletionBlock:^(POPAnimation * an, BOOL b) {
+//            [alertView removeFromSuperview];
+//            alertView = nil;
+//        }];
+
+        [UIView animateWithDuration:0.3 animations:^{
+            [alertView setAlpha:0.0];
+        } completion:^(BOOL finished) {
+            [alertView removeFromSuperview];
+            alertView = nil;
+        }];
+        
+        
+    }
+}
+-(UIView*)createAlertViewWithTitle:(NSString*) title andMessage:(NSString*) message
+{
+    CGFloat titleSpacingY = 5.0;
+    
+    CGFloat cornerRad = 10.0;
+    
+    CGFloat alertHeight = 140.0,
+    alertWidth  = 300.0;
+    
+    CGFloat titleHeight = alertHeight * 0.35 - titleSpacingY;
+    CGFloat messageHeight = alertHeight - titleHeight;
+    
+    
+    CGRect alertFrame, titleFrame, messageFrame;
+    
+    alertFrame = CGRectMake(mainScrollView.center.x, mainScrollView.center.y, alertWidth, alertHeight);
+    
+    titleFrame = CGRectMake(0.0, titleSpacingY, alertWidth, titleHeight);
+    
+    messageFrame = CGRectMake(0.0, titleHeight, alertWidth, messageHeight);
+    
+    
+    NSString *fontFamily = @"DINAlternate-Bold";
+    
+    UIColor *titleBackgroundColor = [UIColor Evernote];
+    UIColor *messageBackgroundColor = [UIColor charcoalColor];
+    
+    
+    //  Create the view
+    
+    UIView *aView = [[UIView alloc] initWithFrame:alertFrame];
+    aView.layer.cornerRadius = cornerRad;
+    
+    aView.backgroundColor = [UIColor charcoalColor];
+    
+    
+    //  Title label
+    CGFloat titleFontSize = 20.0;
+    
+    UIFont *titleFont = [UIFont fontWithName:fontFamily size:titleFontSize];
+    
+    UIColor *titleFontColor = [UIColor whiteColor];
+    
+    
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:titleFrame];
+    
+    titleLabel.textColor = titleFontColor;
+    titleLabel.font = titleFont;
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+
+    titleLabel.text = title;
+    
+    titleLabel.backgroundColor = titleBackgroundColor;
+    
+    
+    //  Message Label
+    
+    CGFloat messageFontSize = titleFontSize * .75;
+    
+    UIFont *messageFont = [UIFont fontWithName:fontFamily size:messageFontSize];
+    
+    UIColor *messageFontColor = [UIColor whiteColor];
+    
+    
+    UILabel *messageLabel = [[UILabel alloc] initWithFrame:messageFrame];
+
+
+    messageLabel.textColor = messageFontColor;
+    messageLabel.font = messageFont;
+    messageLabel.textAlignment = NSTextAlignmentCenter;
+    messageLabel.numberOfLines = 0;
+    
+    messageLabel.text = message;
+    
+    messageLabel.backgroundColor = messageBackgroundColor;
+    
+    //  Add views
+    
+    [aView addSubview:titleLabel];
+    [aView addSubview:messageLabel];
+    
+    return aView;
+}
+-(void)updateDateForFrame:(pictureFrame*) Pframe
+{
+    NSDate *newDate = [TLManager getNewDateForFrame:Pframe];
+    
+    imageObject *pFrameData = Pframe.imageObject;
+    
+    ImagePackage *newPackage = [ImagePackage new];
+    
+    [newPackage setContentsWithImageObject:pFrameData];
+    
+    newPackage.dateTaken = newDate;
+    
+    updatingImageObject = pFrameData;
+    
+    [mainDataCom updatePhotoDateWithImagePackage:newPackage];
+    
+}
+-(void)finishedUpdatingPhotoWithStatusCode:(NSInteger)statusCode
+{
+    if (statusCode == 200) {
+        if (updatingImageObject) {
+            updatingImageObject.date = updatingImagePackage.dateTaken;
+            updatingImageObject = nil;
+            updatingImagePackage = nil;
+            
+            [self showTempAlertWithTitle:@"Success!" andMessage:@"We did it!"];
+        }
+    }
+    else
+    {
+        updatingImageObject = nil;
+        updatingImagePackage = nil;
+        
+        [self showTempAlertWithTitle:@"UHOH!" andMessage:@"We did NOT do it!"];
+    }
+}
+
+-(void)didFinishUpdatingImageWithCode:(NSInteger)code
+{
+    if (code == 200) {
+        [self showTempAlertWithTitle:@"Updated!" andMessage:@"All good"];
+    }
+    else
+    {
+        [self showTempAlertWithTitle:@"Error" andMessage:@"uhoh"];
+    }
 }
 @end

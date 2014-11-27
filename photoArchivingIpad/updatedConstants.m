@@ -171,4 +171,12 @@ NSString * const contentTypePNG = @"image/PNG";
 {
     return @"fieldTypeHasEdited";
 }
+
+
++(NSString*)getURLForUpdatingPhotoWithID:(NSString*) photoID andNewDate:(NSString*) newDateString
+{
+    NSString *url = [NSString stringWithFormat:@"%@%@/%@?updateFlag=date&newValue=%@", api_ec2BaseURL , api_photosEndpoint , photoID , newDateString ];
+    
+    return url;
+}
 @end

@@ -9,7 +9,19 @@
 #import <Foundation/Foundation.h>
 #import "Story.h"
 
+
+@protocol imageObjectDelegate <NSObject>
+
+
+
+-(void)didFinishUpdatingImageWithCode:(NSInteger) code;
+
+
+@end
 @interface imageObject : NSObject
+
+
+@property (nonatomic, weak) id<imageObjectDelegate> delegate;
 
 @property (nonatomic, strong) Story* myStory;
 
@@ -30,6 +42,7 @@
 @property (nonatomic, assign) BOOL isDateKnown;
 @property (nonatomic, strong) NSDictionary *imageInformation;
 @property (nonatomic, strong) NSNumber* centerXoffset;
+
 
 -(NSMutableDictionary*)informationAsMutableDictionary;
 -(void)addStory:(Story*) newStory;

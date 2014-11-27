@@ -132,6 +132,14 @@
     }
     
 }
+-(NSDate *)getNewDateForFrame:(pictureFrame *)Pframe
+{
+    CGPoint newCenter = [Pframe center];
+    
+    NSDate *pointDate = [self createDateObjectFromPoint:newCenter];
+    
+    return pointDate;
+}
 -(void)updateDateForPicture:(pictureFrame *)picture
 {
     
@@ -139,10 +147,8 @@
     
     NSDate *pointDate = [self createDateObjectFromPoint:newCenter];
     
-    picture.imageObject.date = pointDate;
+//    picture.imageObject.date = pointDate;
     
-    [self.delegate finishedUpdatedFrame:picture
-                     withNewInformation:@{@"newDate": pointDate}];
     
 }
 -(NSDate*)createDateObjectFromPoint:(CGPoint) point

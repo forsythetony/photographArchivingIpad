@@ -39,7 +39,7 @@ extern NSString * const api_cleanFlagValue;
 extern NSString * const APIAddStoryURLParam;
 extern NSString * const APISetupStoryURLParam;
 extern NSString * const APIDeleteStoryWithID;
-
+extern NSString * const APIUpdatePhotoDateWithID;
 
 
 //
@@ -158,5 +158,7 @@ extern NSString * const contentTypePNG;
 +(NSString*)getFieldTypeTitle;
 +(NSString*)getFieldTypeDateTaken;
 +(NSString*)getFieldTypeHasEdited;
+
++(NSString*)getURLForUpdatingPhotoWithID:(NSString*) photoID andNewDate:(NSString*) newDateString;
 
 @end

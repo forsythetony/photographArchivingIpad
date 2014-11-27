@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "NSDate+timelineStuff.h"
 #import "pictureFrame.h"
+#import "TFDataCommunicator.h"
 
 @class timelineManager;
 
@@ -53,6 +54,6 @@
 -(void)setStartDate:(NSDate*) startDate andEndDate:(NSDate*) endDate andView:(UIView*) tlview andXOffsert:(float) offset;
 -(void)setInitialPhotographs:(NSArray*) thePhotographs;
 -(void)updateDateForPicture:(pictureFrame*) picture;
-
-
+-(NSDate*)createDateObjectFromPoint:(CGPoint) point;
+-(NSDate*)getNewDateForFrame:(pictureFrame*) Pframe;
 @end

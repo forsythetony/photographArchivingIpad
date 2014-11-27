@@ -171,9 +171,10 @@
             
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
             
+            [self.delegate finishedUpdatingPhotoWithStatusCode:httpResponse.statusCode];
             if (httpResponse.statusCode == 200) {
                 
-                NSLog(@"Deleted");
+                
                 
                 
             }
@@ -728,4 +729,26 @@
     }];
 }
 
+-(void)updatePhotoDateWithImagePackage:(ImagePackage *)photo
+{
+    NSString *reqString = [updatedConstants getURLForUpdatingPhotoWithID:photo.imageID andNewDate:[[photo dateTaken] displayDateOfType:sdatetypeURL]];
+    
+    NSURL *urlObject = [NSURL URLWithString:reqString];
+    
+    NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:urlObject];
+    
+    req.HTTPMethod = @"GET";
+    
+    NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
+    
+    [NSURLConnection sendAsynchronousRequest:req queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*) response;
+        
+        [self.delegate finishedUpdatingPhotoWithStatusCode:httpResponse.statusCode];
+        
+    }];
+    
+    
+}
 @end

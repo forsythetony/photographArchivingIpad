@@ -43,7 +43,8 @@ typedef NS_ENUM(NSInteger, serverResponseType) {
 -(void)finishedUploadingPhotoInfoToServer;
 -(void)finishedAddingStoryWithHTTPResponseCode:(NSInteger) responseCode;
 -(void)finishedDeletingStoryWithStatusCode:(NSInteger) statusCode;
-
+-(void)finishedUpdatingPhotoWithStatusCode:(NSInteger) statusCode;
+-(void)finishedUpdatingPhotoDateWithStatusCode:(NSInteger) statusCode;
 @end
 
 
@@ -83,7 +84,7 @@ typedef NS_ENUM(NSInteger, serverResponseType) {
 -(void)mainServerUploadPhoto:(ImagePackage *)photo;
 -(void)deletePhoto:(imageObject*) photo;
 -(void)updatePhoto:(ImagePackage*) photo;
-
+-(void)updatePhotoDateWithImagePackage:(ImagePackage*)photo;
 
 //
 //  Audio
