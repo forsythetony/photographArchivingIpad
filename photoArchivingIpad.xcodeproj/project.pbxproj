@@ -469,8 +469,8 @@
 				BA4769BD19B5EC900030EBE3 /* TAProgressView.h */,
 				BA4769BE19B5EC900030EBE3 /* TAProgressView.m */,
 				BA67F1B1193666210056DD00 /* photoArchivingIpad */,
-				BA67F1B2193666210056DD00 /* Supporting Files */,
 				BA67F1D0193666210056DD00 /* photoArchivingIpadTests */,
+				BA67F1B2193666210056DD00 /* Supporting Files */,
 				BA67F1AA193666210056DD00 /* Frameworks */,
 				BA67F1A9193666210056DD00 /* Products */,
 				D480C1DDB6EC466E8C8C3EAD /* Pods.xcconfig */,
@@ -1155,6 +1155,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1170,12 +1171,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "photoArchivingIpad/photoArchivingIpad-Prefix.pch";
 				INFOPLIST_FILE = "photoArchivingIpad/photoArchivingIpad-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1186,6 +1189,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1201,6 +1205,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "photoArchivingIpad/photoArchivingIpad-Prefix.pch";
 				INFOPLIST_FILE = "photoArchivingIpad/photoArchivingIpad-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",

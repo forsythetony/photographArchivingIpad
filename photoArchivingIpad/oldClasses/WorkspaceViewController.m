@@ -2079,7 +2079,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
 //    NSLog(@"Current media status...%@", _mediaControlChannel.mediaStatus)
     [self dismissViewControllerAnimated:YES completion:^{
         [_mediaControlChannel stop];
-        [_deviceManager removeChannel:_mediaControlChannel];
+        //[_deviceManager removeChannel:_mediaControlChannel];
     }];
 }
 
@@ -2476,6 +2476,7 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
         }
         
     }
+     
 }
 #pragma mark - Misc.
 
