@@ -100,6 +100,63 @@
                               sinceDate:refDate];
     
 }
+-(NSString*)findSuffixForDay:(NSString*) day
+{
+    NSInteger dayInt = [day integerValue];
+    
+    NSString *suffixString;
+    
+    if (dayInt >= 10 && dayInt <= 20) {
+
+        suffixString = @"th";
+        
+    }
+    else
+    {
+        while( dayInt > 10 )
+        {
+            dayInt -= 10;
+        }
+        
+        switch (dayInt) {
+            case 1:
+            {
+                suffixString = @"st";
+            }
+            break;
+                
+            case 2:
+            {
+                suffixString = @"nd";
+            }
+            break;
+                
+                case 3:
+            {
+                suffixString = @"rd";
+            }
+                break;
+                
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+            {
+                suffixString = @"th";
+            }
+                break;
+                
+            default:
+                suffixString = @"";
+                break;
+        }
+        
+    }
+    
+    return suffixString;
+}
 -(NSString*)displayDateOfType:(sDateType) dateType
 {
     
@@ -134,7 +191,9 @@
         case sDateTypeBabbageURL:
             dateFormat = @"yyyy-MM-dd";
             break;
-            
+        case sDateTypeDayOnly:
+            dateFormat = @"d";
+            break;
         default:
             break;
     }
@@ -161,4 +220,26 @@
     return [NSNumber numberWithInteger:year];
     
 }
+-(NSString*)dayFromDateWithType:(sDayType) type
+{
+    NSString *dayString = [self displayDateOfType:sDateTypeDayOnly];
+    
+    
+    switch (type) {
+        case sDayTypePure:
+            
+            break;
+        case sDayTypeSuffix:
+        {
+            NSString *suffixString = [self findSuffixForDay:dayString];
+            
+            dayString = [NSString stringWithFormat:@"%@%@", dayString, suffixString];
+        }
+        default:
+            break;
+    }
+    
+    return dayString;
+}
+
 @end

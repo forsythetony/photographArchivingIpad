@@ -118,6 +118,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     NSInteger sentNum;
     
     UIView *dateUpdaterLine;
+    UILabel *dateUpdaterDayLabel;
     UILabel *dateUpdaterLabel;
     
     UIView *alertView;
@@ -462,14 +463,10 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
     [self initialSetup];
     
-    //[mainDataCom saveImageToCameraRoll];
-    
     [self chromecastThings];
     
     NSLog(@"ViewdidLoad");
     [self printFrameData];
-    
-//    self.automaticallyAdjustsScrollViewInsets = YES;
     
     self.view.autoresizesSubviews = YES;
 }
@@ -1305,6 +1302,10 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
     CGPoint translatedPoint = [(UIPanGestureRecognizer*)sender translationInView:self.view];
     
+    CGFloat dampF = [self findDampFactorWithYPoint:[(UIPanGestureRecognizer*)sender view].center.y];
+    
+    //translatedPoint = [self dampenPoint:translatedPoint withFactor:dampF];
+    
     if ([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateBegan) {
         
         firstX = [[sender view] center].x;
@@ -1314,17 +1315,28 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         
         [self drawLineFromFrame:grabbedFrame];
         [self addDateUpdateLabelForFrame:grabbedFrame];
+        [self addDateUpdateDayLabelForFrame:grabbedFrame];
     }
     
-    //NSLog(@"\n\nTrans Point: %@", NSStringFromCGPoint(translatedPoint));
+    //CGFloat transMod = 1.0;
     
-    translatedPoint = CGPointMake(firstX+translatedPoint.x, firstY + translatedPoint.y);
+    translatedPoint = CGPointMake(firstX + translatedPoint.x, firstY + translatedPoint.y);
+    
+   // NSLog(@"\n\nOld point:\t%@\n", NSStringFromCGPoint(translatedPoint));
+
+    
+    
+    //NSLog(@"New point:\t%@\n", NSStringFromCGPoint(translatedPoint));
+    
     
     if (!finishedMoving) {
+        pictureFrame *newFrame = (pictureFrame*)[(UIPanGestureRecognizer*)sender view];
         
         [[sender view] setCenter:translatedPoint];
-        [self updateDateLineWithFrame:(pictureFrame*)[(UIPanGestureRecognizer*)sender view]];
-        [self updateDateUpdaterLabelWithFrame:(pictureFrame*)[(UIPanGestureRecognizer*)sender view]];
+        [self updateDateLineWithFrame:newFrame];
+        [self updateDateUpdaterLabelWithFrame:newFrame];
+        [self updateDayLabelForFrame:newFrame];
+        ;
     }
     
     [self findPointInView:translatedPoint];
@@ -1332,7 +1344,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     if ([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateEnded)
     {
         
-        CGFloat velocityX   = (0.2*[(UIPanGestureRecognizer*)sender velocityInView:self.view].x);
+        CGFloat velocityX   = (([(UIPanGestureRecognizer*)sender velocityInView:self.view].x) / 1);
         
         CGFloat finalX      = translatedPoint.x;// + velocityX;
         CGFloat finalY      = translatedPoint.y;// + (.35*[(UIPanGestureRecognizer*)sender velocityInView:self.view].y);
@@ -1382,7 +1394,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         
         CGFloat animationDuration = (ABS(velocityX) * .0002) + .2;
         
-        NSLog(@"the duration is: %f", animationDuration);
+        //NSLog(@"the duration is: %f", animationDuration);
         
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:animationDuration];
@@ -1393,10 +1405,8 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         
         pictureFrame *frame = (pictureFrame*)[sender view];
         
-        //[TLManager updateDateForPicture:frame];
         [self updateDateForFrame:frame];
-        //[self tearDownDateLine];
-        //[self tearDownDateUpdaterLabel];
+        [self updateDayLabelForFrame:frame];
         
         isDateUpdateLockOn = YES;
         grabbedFrame = nil;
@@ -1411,7 +1421,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
 
     NSInteger touchNum = [gestRecog numberOfTouches];
     
-    NSLog(@"\nNumber of touches: %d", touchNum);
+    //NSLog(@"\nNumber of touches: %d", touchNum);
     
     
     pictureFrame *frame = (pictureFrame*)recognizer.view;
@@ -1648,7 +1658,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
     newViewRect.origin.y -= keyboardRect.size.width;
     
-    NSLog(@"\nKeyboard Frame: %@\nNew View Frame: %@", NSStringFromCGRect(keyboardRect), NSStringFromCGRect(newViewRect));
+    //NSLog(@"\nKeyboard Frame: %@\nNew View Frame: %@", NSStringFromCGRect(keyboardRect), NSStringFromCGRect(newViewRect));
     [self.view setFrame:newViewRect];
 }
 
@@ -1667,7 +1677,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
     NSTimeInterval interval = [date timeIntervalSinceDate:[NSDate referenceDate]];
     
-    NSLog(@"\nThe time interval is: %f\n", interval);
+    //NSLog(@"\nThe time interval is: %f\n", interval);
     
     return interval;
     
@@ -1985,7 +1995,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
     CGFloat newAlpha = scalingFactor * (CGFloat)milli;
     
-    NSLog(@"\n\nNew Alpha: %f", newAlpha);
+    //NSLog(@"\n\nNew Alpha: %f", newAlpha);
     
     rightTriggerView.alpha = newAlpha;
     
@@ -2489,14 +2499,10 @@ didFailToConnectWithError:(GCKError *)error {
 didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
     
     self.applicationMetadata = applicationMetadata;
-   // NSLog(@"\nNew Metadata is...\n%@\n", applicationMetadata.);
-    
-    
 }
 
 -(void)mediaControlChannelDidUpdateStatus:(GCKMediaControlChannel *)mediaControlChannel {
-    //NSLog(@"\nMedia Status is...\n%@\n", mediaControlChannel.mediaStatus.idleReason);
-    
+
     if( mediaControlChannel.mediaStatus.idleReason == GCKMediaPlayerIdleReasonFinished) {
         
         if (imageSent) {
@@ -2535,7 +2541,9 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
 }
 
 
-#pragma makr - Date Updater Methods
+#pragma mark - Date Updater Methods
+
+#pragma mark Setup Methods
 -(void)addDateUpdateLabelForFrame:(pictureFrame*) Pframe
 {
    
@@ -2584,6 +2592,57 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
     
     
 }
+
+-(void)addDateUpdateDayLabelForFrame:(pictureFrame*) Pframe
+{
+    
+    if(dateUpdaterDayLabel)
+    {
+        [dateUpdaterDayLabel removeFromSuperview];
+        dateUpdaterDayLabel = nil;
+    }
+    
+    NSString *fontFamily = @"DINAlternate-Bold";
+    CGFloat fontSize = 125.0;
+    
+    UIFont *labelFont = [UIFont fontWithName:fontFamily size:fontSize];
+    UIColor *fontColor = [UIColor whiteColor];
+    
+    CGFloat labelWidth, labelHeight;
+    
+    CGFloat timelineCenter = mainScrollView.center.y;
+    
+    labelHeight = timelineCenter * 0.75;
+    
+    labelWidth = labelHeight * 1.2;
+    
+    CGRect dayLabelFrame = CGRectMake(0.0, 0.0, labelWidth, labelHeight);
+    
+    dateUpdaterDayLabel = [[UILabel alloc] initWithFrame:dayLabelFrame];
+    
+    CGFloat dayLabelFrameCenter = timelineCenter / 2.0;
+    
+    
+    
+    dateUpdaterDayLabel.font = labelFont;
+    dateUpdaterDayLabel.textColor = fontColor;
+    dateUpdaterDayLabel.numberOfLines = 1.0;
+    dateUpdaterDayLabel.minimumScaleFactor = 8.0 / dateUpdaterDayLabel.font.pointSize;
+    dateUpdaterDayLabel.adjustsFontSizeToFitWidth = YES;
+    dateUpdaterDayLabel.textAlignment = NSTextAlignmentCenter;
+    
+    NSString *newDayString = [self getUpdatedDayLabelTextForFrame:Pframe];
+    CGFloat newDayAlpha = [self getAlphaValueForFrame:Pframe];
+    
+    dateUpdaterDayLabel.text = newDayString;
+    dateUpdaterDayLabel.alpha = newDayAlpha;
+    
+    [self.view addSubview:dateUpdaterDayLabel];
+    
+    dateUpdaterDayLabel.center = CGPointMake(self.view.center.x, dayLabelFrameCenter);
+    
+}
+#pragma mark Update Methods
 -(void)updateDateUpdaterLabelWithFrame:(pictureFrame*) Pframe
 {
     DateLineLayoutVals newVals = [self getNewLabelCenterForFrame:Pframe];
@@ -2643,7 +2702,77 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
         newDateString = [newDate displayDateOfType:sDateTypeMonthAndYear];
     }
     
+    
     return newDateString;
+}
+
+-(NSString*)getUpdatedDayLabelTextForFrame:(pictureFrame*) Pframe
+{
+    NSString *newDayString = @"";
+    NSDate *newDate;
+    
+    CGPoint newPoint = CGPointMake(0.0, 0.0);
+    
+    if (Pframe) {
+        newPoint = Pframe.center;
+    }
+    
+    if (TLManager) {
+        newDate = [TLManager createDateObjectFromPoint:newPoint];
+        
+        newDayString = [newDate dayFromDateWithType:sDayTypeSuffix];
+    }
+    //NSLog(@"\nNew Day String:\t%@\n", newDayString);
+    return newDayString;
+}
+-(CGFloat)getAlphaValueForFrame:(pictureFrame*) Pframe
+{
+    CGFloat scrollViewCenterY, newAlpha, frameCenterY;
+    
+    frameCenterY = Pframe.center.y;
+    scrollViewCenterY = mainScrollView.center.y;
+    
+    
+    CGFloat dist = fabsf(scrollViewCenterY - frameCenterY);
+    
+    newAlpha = 1 - ((dist / scrollViewCenterY) * 1) ;
+    
+    //NSLog(@"\nScrollview center:\t%f\nframeCenterY:\t%f\ndist:\t%f\nnewAlpha:\t%f\n", scrollViewCenterY, frameCenterY, dist, newAlpha);
+    
+    return newAlpha;
+    
+}
+-(void)updateDayLabelForFrame:(pictureFrame*) Pframe
+{
+    CGFloat newAlpha = [self getAlphaValueForFrame:Pframe];
+    NSString *newText = [self getUpdatedDayLabelTextForFrame:Pframe];
+    
+
+    
+    [mainScrollView bringSubviewToFront:dateUpdaterDayLabel];
+    dateUpdaterDayLabel.alpha = newAlpha;
+    dateUpdaterDayLabel.text = newText;
+}
+-(void)tearDownDayLabel
+{
+    if (dateUpdaterDayLabel) {
+        
+        POPSpringAnimation *tearDown = [POPSpringAnimation animation];
+        
+        tearDown.property = [POPAnimatableProperty propertyWithName:kPOPViewScaleY];
+        
+        tearDown.toValue = @(0.01);
+        tearDown.velocity = @(20.0);
+        tearDown.springBounciness = 2.0;
+        
+        [tearDown setCompletionBlock:^(POPAnimation *adf, BOOL asdf) {
+            [dateUpdaterDayLabel removeFromSuperview];
+            dateUpdaterDayLabel = nil;
+        }];
+        
+        [dateUpdaterDayLabel pop_addAnimation:tearDown forKey:@"tearDownDayLabel"];
+
+    }
 }
 -(DateLineLayoutVals)getNewLabelCenterForFrame:(pictureFrame*) Pframe
 {
@@ -2762,27 +2891,7 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
 }
 -(void)showTempAlertWithTitle:(NSString*) title andMessage:(NSString*) message
 {
-    /*
-    CGFloat timeInterval = 1.0;
-    
-    NSTimer *alertTimer = [NSTimer scheduledTimerWithTimeInterval:timeInterval target:self selector:@selector(tearDownAlertView) userInfo:nil repeats:NO];
-    
-    
-    if (alertView) {
-        [alertView removeFromSuperview];
-        alertView = nil;
-    }
-    
-    
-    
-    
-    
-    alertView = [self createAlertViewWithTitle:title andMessage:message];
-    
-    [self showAlertView];
-    //[self performSelectorOnMainThread:@selector(showAlertView) withObject:nil waitUntilDone:NO];
-    */
-    
+
     NSDictionary *options = @{
                               kCRToastTextKey : message,
                               kCRToastTextAlignmentKey : @(NSTextAlignmentCenter),
@@ -2802,36 +2911,16 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
 -(void)showAlertView
 {
     if (alertView) {
-        //alertView.alpha = 0.0;
         
         [mainScrollView addSubview:alertView];
         [mainScrollView bringSubviewToFront:alertView];
         [alertView setCenter:CGPointMake(self.view.center.x, (alertView.frame.size.height) + 40.0)];
-        /*
-        POPSpringAnimation *animation = [POPSpringAnimation animation];
-        
-        animation.property = [POPAnimatableProperty propertyWithName:kPOPViewAlpha];
-        
-        animation.toValue = @(1.0);
-        
-        [alertView pop_addAnimation:animation forKey:@"AlphaSpring"];
-         */
+
     }
 }
 -(void)tearDownAlertView
 {
     if (alertView) {
-        
-//        POPSpringAnimation *ani = [POPSpringAnimation animation];
-//        
-//        ani.property = [POPAnimatableProperty propertyWithName:kPOPViewAlpha];
-//        
-//        ani.toValue = @(0.0);
-//        
-//        [ani setCompletionBlock:^(POPAnimation * an, BOOL b) {
-//            [alertView removeFromSuperview];
-//            alertView = nil;
-//        }];
 
         [UIView animateWithDuration:0.3 animations:^{
             [alertView setAlpha:0.0];
@@ -2984,6 +3073,7 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
 {
     [self tearDownDateLine];
     [self tearDownDateUpdaterLabel];
+    [self tearDownDayLabel];
     
     [incompleteTimer invalidate];
     incompleteTimer = nil;
@@ -3014,11 +3104,11 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
         
         [self performSelectorOnMainThread:@selector(changeToGreen) withObject:nil waitUntilDone:NO];
         if (updatingImageObject) {
+            
             updatingImageObject.date = updatingImagePackage.dateTaken;
             updatingImageObject = nil;
             updatingImagePackage = nil;
             
-            //[self showTempAlertWithTitle:@"Success!" andMessage:@"We did it!"];
         }
     }
     else
@@ -3026,8 +3116,41 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
         [self changeToRed];
         updatingImageObject = nil;
         updatingImagePackage = nil;
-        
-        //[self showTempAlertWithTitle:@"UHOH!" andMessage:@"We did NOT do it!"];
     }
+}
+-(CGPoint)dampenPoint:(CGPoint) point withFactor:(CGFloat) factor
+{
+    CGPoint dampenedPoint;
+    
+    CGFloat pointX = point.x;
+    CGFloat pointY = point.y;
+    
+    
+    pointX *= factor;
+    pointY *= factor;
+    
+    dampenedPoint.x = pointX;
+    dampenedPoint.y = pointY;
+    
+    return dampenedPoint;
+}
+
+-(CGFloat)findDampFactorWithYPoint:(CGFloat) point
+{
+    CGFloat newPoint = 1.0;
+    
+    CGFloat center = [mainScrollView center].y;
+    
+    CGFloat dist = fabsf(center - point);
+    
+    if (dist >= 20.0) {
+        
+        newPoint = dist / center;
+    }
+    
+    
+    NSLog(@"\nDamp Factor:\t%f\n", newPoint);
+    
+    return newPoint;
 }
 @end

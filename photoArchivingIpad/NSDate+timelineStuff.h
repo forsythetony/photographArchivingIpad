@@ -16,8 +16,15 @@ typedef NS_ENUM(NSInteger, sDateType) {
     sDateTypeMonthAndYear,
     sDateTypeYearOnly,
     sdatetypeURL,
-    sDateTypeBabbageURL
+    sDateTypeBabbageURL,
+    sDateTypeDayOnly
     
+};
+
+typedef NS_ENUM(NSInteger, sDayType) {
+    
+    sDayTypePure,
+    sDayTypeSuffix
 };
 
 @interface NSDate (timelineStuff)
@@ -34,5 +41,6 @@ typedef NS_ENUM(NSInteger, sDateType) {
 
 -(NSNumber*)yearAsNumber;
 
+-(NSString*)dayFromDateWithType:(sDayType) type;
 
 @end
