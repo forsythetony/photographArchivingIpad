@@ -16,9 +16,6 @@ NSString * const notify_userDidReturn = @"userDidReturnTextfieldCustomNotificati
 //  S3 Stuff
 //
 
-NSString * const S3_secret_key = @"tXi3+4Ve3jjlFO5m39x81qTXqA8ry8JXCWOhndZF";
-NSString * const S3_access_Key_ID = @"AKIAJM7QSXPIIZFS4IUQ";
-
 NSString * const s3_bucket_name;
 NSString * const s3_bucket_key;
 
@@ -107,7 +104,8 @@ NSString * const contentTypePNG = @"image/PNG";
 
 + (NSString *)transferManagerBucket
 {
-    return [[NSString stringWithFormat:@"%@-%@", S3TRANSFERMANAGER_BUCKET, S3_access_Key_ID] lowercaseString];
+    NSDictionary *environment = [[NSProcessInfo processInfo] environment];
+    return [[NSString stringWithFormat:@"%@-%@", S3TRANSFERMANAGER_BUCKET, environment[@"AMAZON_ACCESS_KEY"]] lowercaseString];
 }
 
 

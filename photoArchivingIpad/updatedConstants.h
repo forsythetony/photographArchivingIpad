@@ -104,8 +104,6 @@ extern NSString * const global_font_family;
 //
 //  S3
 //
-extern NSString * const S3_secret_key;
-extern NSString * const S3_access_Key_ID;
 
 extern NSString * const s3_bucket_name;
 extern NSString * const s3_bucket_key;

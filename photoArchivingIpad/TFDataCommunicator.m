@@ -253,7 +253,9 @@
 }
 -(void)setupTransferManager
 {
-    AmazonS3Client *s3 = [[AmazonS3Client alloc] initWithAccessKey:S3_access_Key_ID withSecretKey:S3_secret_key];
+    NSDictionary *environment = [[NSProcessInfo processInfo] environment];
+    
+    AmazonS3Client *s3 = [[AmazonS3Client alloc] initWithAccessKey:environment[@"AMAZON_ACCESS_KEY"] withSecretKey:environment[@"AMAZON_SECRET_KEY"]];
     
     s3.endpoint = [AmazonEndpoints s3Endpoint:US_WEST_2];
     

@@ -67,6 +67,18 @@
             ReferencedContainer = "container:photoArchivingIpad.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "AMAZON_SECRET_KEY"
+            value = "tXi3+4Ve3jjlFO5m39x81qTXqA8ry8JXCWOhndZF"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "AMAZON_ACCESS_KEY"
+            value = "AKIAJM7QSXPIIZFS4IUQ"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
