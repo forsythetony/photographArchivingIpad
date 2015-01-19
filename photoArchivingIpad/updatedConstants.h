@@ -26,7 +26,6 @@ extern NSString * const notify_userDidReturn;
 //  API
 //
 extern NSString * const api_localhostBaseURL;
-extern NSString * const api_ec2BaseURL;
 
 extern NSString * const api_photosEndpoint;
 extern NSString * const api_usersEndpoint;
@@ -43,7 +42,6 @@ extern NSString * const APIUpdatePhotoDateWithID;
 
 //  Babbage API
 
-extern NSString * const api_babbage_baseURL;
 extern NSString * const api_babbage_photos_endpoint;
 extern NSString * const api_babbage_stories_endpoint;
 //
@@ -127,6 +125,11 @@ extern NSString * const contentTypePNG;
 
 
 @interface updatedConstants : NSObject
+
+
+//  API
++ (NSString*)api_babbage_baseURL;
++ (NSString*)api_ec2_baseURL;
 
 //
 //  S3

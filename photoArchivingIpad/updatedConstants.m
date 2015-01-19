@@ -27,7 +27,6 @@ NSString * const s3_error_already_owned = @"BucketAlreadyOwnedByYou";
 //
 
 NSString * const api_localhostBaseURL = @"http://localhost:3000";
-NSString * const api_ec2BaseURL = @"http://54.187.204.201:3000";
 NSString * const api_photosEndpoint = @"/photos";
 NSString * const api_testUser = @"forsythetony";
 NSString * const global_font_family = @"DINAlternate-Bold";
@@ -44,7 +43,7 @@ NSString * const respKeys_responseMessage = @"responseMessage";
 //  Babbage
 //
 
-NSString * const api_babbage_baseURL = @"http://babbage.cs.missouri.edu/~arfv2b/photoArchiving";
+
 NSString * const api_babbage_photos_endpoint = @"/photos";
 NSString * const api_babbage_stories_endpoint = @"/stories";
 
@@ -180,14 +179,27 @@ NSString * const contentTypePNG = @"image/PNG";
 
 +(NSString*)getURLForUpdatingPhotoWithID:(NSString*) photoID andNewDate:(NSString*) newDateString
 {
-    NSString *url = [NSString stringWithFormat:@"%@%@/%@?updateFlag=date&newValue=%@", api_ec2BaseURL , api_photosEndpoint , photoID , newDateString ];
+    NSString *url = [NSString stringWithFormat:@"%@%@/%@?updateFlag=date&newValue=%@", [self api_ec2_baseURL] , api_photosEndpoint , photoID , newDateString ];
     
     return url;
 }
 +(NSString*)getURLForBabbageUpdateWithID:(NSString*) photoID andNewDate:(NSString*) newDateString
 {
-    NSString *url = [NSString stringWithFormat:@"%@%@?photo_id=%@&action=update_date&new_date=%@", api_babbage_baseURL, api_babbage_photos_endpoint, photoID, newDateString];
+    NSString *url = [NSString stringWithFormat:@"%@%@?photo_id=%@&action=update_date&new_date=%@", [self api_babbage_baseURL], api_babbage_photos_endpoint, photoID, newDateString];
     
     return url;
+}
++(NSString*)api_babbage_baseURL
+{
+    NSDictionary *env = [[NSProcessInfo processInfo] environment];
+    
+    return env[@"BABBAGE_API_URL"];
+
+}
++(NSString*)ec2_api_baseURL
+{
+    NSDictionary *env = [[NSProcessInfo processInfo] environment];
+    
+    return env[@"EC2_API_URL"];
 }
 @end

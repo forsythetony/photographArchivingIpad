@@ -87,7 +87,7 @@
 -(void)deletePhoto:(imageObject *)photo
 {
     if (photo.id) {
-        NSString        *urlString  = [NSString stringWithFormat:@"%@%@/%@", (USELOCALHOST ? api_localhostBaseURL : api_ec2BaseURL), api_photosEndpoint, photo.id];
+        NSString        *urlString  = [NSString stringWithFormat:@"%@%@/%@", (USELOCALHOST ? api_localhostBaseURL : [updatedConstants api_ec2_baseURL]), api_photosEndpoint, photo.id];
         NSURL           *urlObject  = [NSURL URLWithString:urlString];
         
         
@@ -148,7 +148,7 @@
     
     
     if (photo.imageID) {
-        NSString        *urlString  = [NSString stringWithFormat:@"%@%@/%@", (USELOCALHOST ? api_localhostBaseURL : api_ec2BaseURL), api_photosEndpoint, photo.imageID];
+        NSString        *urlString  = [NSString stringWithFormat:@"%@%@/%@", (USELOCALHOST ? api_localhostBaseURL : [updatedConstants api_ec2_baseURL]), api_photosEndpoint, photo.imageID];
         
         NSURL           *urlObject  = [NSURL URLWithString:urlString];
         
@@ -185,7 +185,7 @@
 }
 -(void)mainServerUploadPhoto:(ImagePackage *)photo
 {
-    NSString        *urlString  = [NSString stringWithFormat:@"%@%@", (USELOCALHOST ? api_localhostBaseURL : api_ec2BaseURL), api_photosEndpoint];
+    NSString        *urlString  = [NSString stringWithFormat:@"%@%@", (USELOCALHOST ? api_localhostBaseURL : [updatedConstants api_ec2_baseURL]), api_photosEndpoint];
     NSURL           *urlObject  = [NSURL URLWithString:urlString];
 
     
@@ -232,7 +232,7 @@
 -(void)getUserWithUsername:(NSString *)username
 {
     
-    NSString *apiEndpoint = [NSString stringWithFormat:@"%@%@/%@", (USELOCALHOST ? api_localhostBaseURL : api_ec2BaseURL), api_usersEndpoint, username];
+    NSString *apiEndpoint = [NSString stringWithFormat:@"%@%@/%@", (USELOCALHOST ? api_localhostBaseURL : [updatedConstants api_ec2_baseURL]), api_usersEndpoint, username];
     
     NSString        *urlString  = [NSString stringWithString:apiEndpoint];
     NSURL           *url        = [NSURL URLWithString:urlString];
@@ -283,7 +283,7 @@
 }
 -(void)getPhotosForTestUser
 {
-    NSString        *urlString  = [NSString stringWithFormat:@"%@/%@?forUser=%@", (USELOCALHOST ? api_localhostBaseURL : api_ec2BaseURL), api_photosEndpoint, api_testUser];
+    NSString        *urlString  = [NSString stringWithFormat:@"%@/%@?forUser=%@", (USELOCALHOST ? api_localhostBaseURL : [updatedConstants api_ec2_baseURL]), api_photosEndpoint, api_testUser];
     NSURL           *url        = [NSURL URLWithString:urlString];
     NSURLRequest    *urlRequest = [[NSURLRequest alloc] initWithURL:url];
     
@@ -354,7 +354,7 @@
 -(void)getPhotoListWithOptions:(NSDictionary *)options
 {
     
-    NSString        *urlString  = [NSString stringWithFormat:@"%@%@", (USELOCALHOST ? api_localhostBaseURL : api_ec2BaseURL), api_photosEndpoint];
+    NSString        *urlString  = [NSString stringWithFormat:@"%@%@", (USELOCALHOST ? api_localhostBaseURL : [updatedConstants api_ec2_baseURL]), api_photosEndpoint];
     NSURL           *urlObject  = [NSURL URLWithString:urlString];
     NSURLRequest    *urlRequest = [[NSURLRequest alloc] initWithURL:urlObject];
     
@@ -374,7 +374,7 @@
 -(void)cleanImages
 {
     
-    NSString        *urlString  = [NSString stringWithFormat:@"%@%@?%@=%@", (USELOCALHOST ? api_localhostBaseURL : api_ec2BaseURL), api_photosEndpoint, api_cleanFlagKey, api_cleanFlagValue];
+    NSString        *urlString  = [NSString stringWithFormat:@"%@%@?%@=%@", (USELOCALHOST ? api_localhostBaseURL : [updatedConstants api_ec2_baseURL]), api_photosEndpoint, api_cleanFlagKey, api_cleanFlagValue];
     
     NSURL           *urlObject  = [NSURL URLWithString:urlString];
     NSURLRequest    *urlRequest = [[NSURLRequest alloc] initWithURL:urlObject];
@@ -464,7 +464,7 @@
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     
     request.HTTPMethod  = @"POST";
-    request.URL         = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", (USELOCALHOST ? api_localhostBaseURL : api_ec2BaseURL), api_photosEndpoint]];
+    request.URL         = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", (USELOCALHOST ? api_localhostBaseURL : [updatedConstants api_ec2_baseURL]), api_photosEndpoint]];
     request.HTTPBody    = postDataData;
     
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -483,10 +483,10 @@
 -(void)getPhotosForUser:(NSString *)username
 {
     
-//    NSString        *urlString  = [NSString stringWithFormat:@"%@%@?forUser=%@", (USELOCALHOST ? api_localhostBaseURL : api_ec2BaseURL), api_photosEndpoint, username];
+//    NSString        *urlString  = [NSString stringWithFormat:@"%@%@?forUser=%@", (USELOCALHOST ? api_localhostBaseURL : [updatedConstants api_ec2_baseURL]), api_photosEndpoint, username];
     username = @"forsythetony";
     
-    NSString *babbage_urlString = [NSString stringWithFormat:@"%@%@?user_id=%@", api_babbage_baseURL, api_babbage_photos_endpoint, username];
+    NSString *babbage_urlString = [NSString stringWithFormat:@"%@%@?user_id=%@", [updatedConstants api_babbage_baseURL], api_babbage_photos_endpoint, username];
     
    // NSString *urlString = @"http://localhost:3000/photos?forUser=forsythetony";
     
@@ -509,7 +509,7 @@
 }
 -(void)pullStoriesListForPhoto:(NSString *)photo_id
 {
-    NSString *babbage_urlString = [NSString stringWithFormat:@"%@%@?photo_id=%@", api_babbage_baseURL, api_babbage_stories_endpoint, photo_id];
+    NSString *babbage_urlString = [NSString stringWithFormat:@"%@%@?photo_id=%@", [updatedConstants api_babbage_baseURL], api_babbage_stories_endpoint, photo_id];
     
     NSURL           *url        = [NSURL URLWithString:babbage_urlString];
     NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:url];
@@ -720,7 +720,7 @@
 -(void)addStoryToImage:(Story *)aStory imageObject:(imageObject *)theImage
 {
     
-    NSString        *urlString  = [NSString stringWithFormat:@"%@%@/%@%@", (USELOCALHOST ? api_localhostBaseURL : api_ec2BaseURL), api_photosEndpoint, theImage.id, APIAddStoryURLParam];
+    NSString        *urlString  = [NSString stringWithFormat:@"%@%@/%@%@", (USELOCALHOST ? api_localhostBaseURL : [updatedConstants api_ec2_baseURL]), api_photosEndpoint, theImage.id, APIAddStoryURLParam];
     
     NSURL           *urlObject  = [NSURL URLWithString:urlString];
     
@@ -748,7 +748,7 @@
 }
 -(void)removeStoryFromImage:(imageObject *)theImage withStoryID:(NSString *)storyID
 {
-    NSString        *urlString  = [NSString stringWithFormat:@"%@%@/%@%@%@", (USELOCALHOST ? api_localhostBaseURL : api_ec2BaseURL), api_photosEndpoint, theImage.id, APIDeleteStoryWithID, storyID];
+    NSString        *urlString  = [NSString stringWithFormat:@"%@%@/%@%@%@", (USELOCALHOST ? api_localhostBaseURL : [updatedConstants api_ec2_baseURL]), api_photosEndpoint, theImage.id, APIDeleteStoryWithID, storyID];
     
     NSURL           *urlObject  = [NSURL URLWithString:urlString];
     

@@ -74,6 +74,16 @@
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
+            key = "EC2_API_URL"
+            value = "http://54.187.204.201:3000"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "BABBAGE_API_URL"
+            value = "http://babbage.cs.missouri.edu/~arfv2b/photoArchiving"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
             key = "AMAZON_ACCESS_KEY"
             value = "AKIAJM7QSXPIIZFS4IUQ"
             isEnabled = "YES">
