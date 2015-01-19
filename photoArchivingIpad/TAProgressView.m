@@ -8,7 +8,11 @@
 
 #import "TAProgressView.h"
 
+
 @implementation TAProgressView
+
+@synthesize delegate,
+            current_value;
 
 - (id)initWithFrame:(CGRect)frame
 {

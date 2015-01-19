@@ -10,14 +10,9 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface TAProgressView : UIView {
-    
-    float current_value;
+
     float new_to_value;
-    
     UILabel *ProgressLbl;
-    
-    id delegate;
-    
     BOOL IsAnimationInProgress;
     
 }
