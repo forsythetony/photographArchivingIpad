@@ -10,6 +10,10 @@
 		256B72511A6CE6750079B12C /* GoogleCast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 256B72501A6CE6750079B12C /* GoogleCast.framework */; };
 		256B72521A6CE6E00079B12C /* AWSRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA625C211A6CD20C0037AE6A /* AWSRuntime.framework */; };
 		256B72531A6CE6F40079B12C /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA625C221A6CD20C0037AE6A /* AWSS3.framework */; };
+		256B72561A6CFE950079B12C /* AboutPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 256B72551A6CFE950079B12C /* AboutPageViewController.m */; };
+		256B72581A6CFEC30079B12C /* aboutInformation.json in Resources */ = {isa = PBXBuildFile; fileRef = 256B72571A6CFEC30079B12C /* aboutInformation.json */; };
+		256B725B1A6D040E0079B12C /* AboutMeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 256B725A1A6D040E0079B12C /* AboutMeCell.m */; };
+		256B725E1A6D079C0079B12C /* AboutInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 256B725D1A6D079C0079B12C /* AboutInfo.m */; };
 		7F03D0D3194E805C00558278 /* basicInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F03D0D2194E805C00558278 /* basicInfoCell.m */; };
 		BA0BE0B81943B3E40054F7C7 /* workspaceAuxView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0BE0B71943B3E40054F7C7 /* workspaceAuxView.m */; };
 		BA0F645719788101000588A8 /* PhotoUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0F645619788101000588A8 /* PhotoUploadManager.m */; };
@@ -141,6 +145,13 @@
 
 /* Begin PBXFileReference section */
 		256B72501A6CE6750079B12C /* GoogleCast.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleCast.framework; path = photoArchivingIpad/GoogleCast.framework; sourceTree = "<group>"; };
+		256B72541A6CFE950079B12C /* AboutPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutPageViewController.h; sourceTree = "<group>"; };
+		256B72551A6CFE950079B12C /* AboutPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutPageViewController.m; sourceTree = "<group>"; };
+		256B72571A6CFEC30079B12C /* aboutInformation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = aboutInformation.json; sourceTree = "<group>"; };
+		256B72591A6D040E0079B12C /* AboutMeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutMeCell.h; sourceTree = "<group>"; };
+		256B725A1A6D040E0079B12C /* AboutMeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutMeCell.m; sourceTree = "<group>"; };
+		256B725C1A6D079C0079B12C /* AboutInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutInfo.h; sourceTree = "<group>"; };
+		256B725D1A6D079C0079B12C /* AboutInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutInfo.m; sourceTree = "<group>"; };
 		61ECDBD286AB45A0BA37A749 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F03D0D1194E805C00558278 /* basicInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = basicInfoCell.h; sourceTree = "<group>"; };
 		7F03D0D2194E805C00558278 /* basicInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = basicInfoCell.m; sourceTree = "<group>"; };
@@ -377,6 +388,13 @@
 			children = (
 				BA32997119489A730002EBFD /* landingPageViewController.h */,
 				BA32997219489A730002EBFD /* landingPageViewController.m */,
+				256B72541A6CFE950079B12C /* AboutPageViewController.h */,
+				256B72551A6CFE950079B12C /* AboutPageViewController.m */,
+				256B72571A6CFEC30079B12C /* aboutInformation.json */,
+				256B72591A6D040E0079B12C /* AboutMeCell.h */,
+				256B725A1A6D040E0079B12C /* AboutMeCell.m */,
+				256B725C1A6D079C0079B12C /* AboutInfo.h */,
+				256B725D1A6D079C0079B12C /* AboutInfo.m */,
 			);
 			name = "Landing Page";
 			sourceTree = "<group>";
@@ -895,6 +913,7 @@
 				BA67F201193667140056DD00 /* fredAndFreddie_tn.png in Resources */,
 				BA67F2181937B9D80056DD00 /* subtle_carbon_@2X.png in Resources */,
 				BA4769D719B67CD70030EBE3 /* icon-cast-connected@2x.png in Resources */,
+				256B72581A6CFEC30079B12C /* aboutInformation.json in Resources */,
 				BA365AA11996B85D008E6975 /* data.json in Resources */,
 				BA67F207193667140056DD00 /* tweed.png in Resources */,
 				BA67F1C4193666210056DD00 /* Images.xcassets in Resources */,
@@ -989,10 +1008,12 @@
 				BA67F21F193BCC3A0056DD00 /* timelineManager.m in Sources */,
 				BA625C331A6CD7A50037AE6A /* LargeImageDisplayView.m in Sources */,
 				BABF16AB195339DD00FF01C0 /* photoUploadingViewController.m in Sources */,
+				256B725E1A6D079C0079B12C /* AboutInfo.m in Sources */,
 				BA67F211193670D60056DD00 /* timelineLabelView.m in Sources */,
 				BABF16B7195372A800FF01C0 /* ImagePackage.m in Sources */,
 				BA6F5EC9194EBCE300E1E1FC /* attributesDictionaryConstants.m in Sources */,
 				BA67F20C193667140056DD00 /* WorkspaceViewController.m in Sources */,
+				256B725B1A6D040E0079B12C /* AboutMeCell.m in Sources */,
 				BA6F5ECC194EC3D400E1E1FC /* dateInfoCell.m in Sources */,
 				BABF16AE19533B7C00FF01C0 /* photoUploadingCell.m in Sources */,
 				BAD16301194A581A008144A0 /* UIView+Glow.m in Sources */,
@@ -1001,6 +1022,7 @@
 				BA67F1C2193666210056DD00 /* ViewController.m in Sources */,
 				BA9531BB194E51BB005E0F10 /* socialInformationVC.m in Sources */,
 				BA9531AD194E2CC6005E0F10 /* pagerInformationVC.m in Sources */,
+				256B72561A6CFE950079B12C /* AboutPageViewController.m in Sources */,
 				BA4769AA19B3E8D70030EBE3 /* TADuration.m in Sources */,
 				BA89B383195B33B100DA0FCC /* datePickingThing.m in Sources */,
 				BAD9F36F199D890700107D3A /* ImageDisplayRecordingSliderView.m in Sources */,

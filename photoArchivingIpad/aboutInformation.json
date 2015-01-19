@@ -1,0 +1,12 @@
+ [
+  {
+  "name": "Tony",
+  "age": 21,
+  "thanks": "hello",
+  "infoType": "personal"
+  },
+  {
+  "infoType": "project",
+  "startDate": "3/4/2012"
+  }
+  ]

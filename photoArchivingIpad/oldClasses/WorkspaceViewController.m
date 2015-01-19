@@ -129,6 +129,8 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     BOOL isDateUpdateLockOn;
     
     NSTimer *updateLineColorTimer, *incompleteTimer;
+    
+    AVAudioSession* currentAudioSession;
 }
 
 @property GCKMediaControlChannel *mediaControlChannel;
@@ -316,7 +318,9 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
     finishedMoving = NO;
   
-
+    self.navigationController.navigationBar.tintColor = [UIColor black75PercentColor];
+    self.navigationController.navigationBar.translucent = NO;
+    
     
 }
 -(void)finishedPullingPhotoList:(NSArray *)list
@@ -1998,7 +2002,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
 -(void)playAudioFromStory:(Story*) audioStory
 {
     
-    NSLog(@"\nCast audio stream");
+    
     
     //Show alert if not connected
     if (!self.deviceManager || !self.deviceManager.isConnected) {
@@ -2025,12 +2029,14 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         player.volume = 1.0;
         [player prepareToPlay];
         [player play];
+        
+    
 
         
     }
     else {
         
-    
+    NSLog(@"\nCast audio stream");
     GCKMediaMetadata *metadata = [[GCKMediaMetadata alloc] init];
     
     [metadata setString:( audioStory.title ? audioStory.title : @"Untitled") forKey:kGCKMetadataKeyTitle];
@@ -2086,9 +2092,50 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
                                         customData:nil];
     
     [_mediaControlChannel loadMedia:mediaInformation autoplay:TRUE playPosition:0];
+        
+        currentAudioSession = [[AVAudioSession alloc] init];
+        NSError* error;
+        
+        [currentAudioSession setActive:YES error:&error];
+        [currentAudioSession addObserver:self forKeyPath:@"outputVolume" options:0 context:nil];
+        
+        if (error) {
+            NSLog(@"There was an error settup up the chromecast audio session:\n%@", error);
+        }
     }
 }
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"outputVolume"]) {
+        
+        if (currentAudioSession) {
+            float newVolume = [currentAudioSession outputVolume];
 
+            if (newVolume <= 1.0 && newVolume >= 0) {
+                NSLog(@"I'm setting the stream volume to %lf", newVolume);
+                [_mediaControlChannel setStreamVolume:newVolume];
+            }
+            else
+            {
+                NSLog(@"The stream volume was weird: %lf", newVolume);
+            }
+            
+        }
+    }
+}
+-(void)updatePlayerVolumeTo:(float)newVolume
+{
+    BOOL connectedToChromecast = !(!self.deviceManager || !self.deviceManager.isConnected);
+    
+    if (connectedToChromecast) {
+        
+        [_mediaControlChannel setStreamVolume:newVolume];
+    }
+    else
+    {
+        player.volume = newVolume;
+    }
+}
 #pragma mark GCKDeviceScannerListener
 - (void)deviceDidComeOnline:(GCKDevice *)device {
     NSLog(@"device found!! %@", device.friendlyName);

@@ -65,14 +65,24 @@
                             <constraint firstItem="Onz-fz-Whp" firstAttribute="leading" secondItem="ZpZ-5B-6fK" secondAttribute="leading" id="u11-iL-yV1"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="rMz-bn-5K0"/>
+                    <navigationItem key="navigationItem" id="rMz-bn-5K0">
+                        <barButtonItem key="rightBarButtonItem" id="T0B-5A-S8e">
+                            <connections>
+                                <action selector="clickedInfoButton:" destination="veY-Iz-my8" id="JM0-sv-Hp5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
+                        <outlet property="aboutButton" destination="T0B-5A-S8e" id="EGU-yF-jVK"/>
                         <outlet property="buttonServer" destination="xHa-YK-Yl0" id="OMC-S6-fpl"/>
                         <outlet property="buttonTimeline" destination="QFr-Lr-KCM" id="02G-2J-ToO"/>
                         <outlet property="buttonUploading" destination="XKn-kh-asH" id="wPl-mS-nBi"/>
                         <segue destination="FWd-UJ-IIP" kind="push" identifier="showTimeline" id="oB1-qc-sMe"/>
+                        <segue destination="wmD-AR-auf" kind="popover" identifier="showAboutInformation" popoverAnchorBarButtonItem="T0B-5A-S8e" id="lIw-oi-N2Q">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ffp-Xn-g8M" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -93,6 +103,50 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j7r-Pg-baI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1195" y="-305"/>
+        </scene>
+        <!--About Page View Controller-->
+        <scene sceneID="Sq5-uP-rfk">
+            <objects>
+                <viewController id="wmD-AR-auf" customClass="AboutPageViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fBY-wo-0ad"/>
+                        <viewControllerLayoutGuide type="bottom" id="3uV-s1-1T9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SIy-8i-Vmz">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="h3a-gi-cHR">
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="58" id="TY8-KY-JQT" customClass="AboutMeCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TY8-KY-JQT" id="wKO-1x-qh8">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="h3a-gi-cHR" secondAttribute="trailing" id="GtX-NJ-5mW"/>
+                            <constraint firstItem="h3a-gi-cHR" firstAttribute="top" secondItem="SIy-8i-Vmz" secondAttribute="top" id="g5k-Li-Sc1"/>
+                            <constraint firstItem="h3a-gi-cHR" firstAttribute="bottom" secondItem="3uV-s1-1T9" secondAttribute="top" id="uku-rP-Zqu"/>
+                            <constraint firstItem="h3a-gi-cHR" firstAttribute="leading" secondItem="SIy-8i-Vmz" secondAttribute="leading" id="veh-Ft-o9j"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="300" height="400"/>
+                    <connections>
+                        <outlet property="infoTableView" destination="h3a-gi-cHR" id="NEL-EP-brJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pVP-jQ-arz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-122" y="95"/>
         </scene>
         <!--Show Server Data-->
         <scene sceneID="seL-ab-hAd">
@@ -127,7 +181,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" patternImage="D8D128EF-5291-41C7-B508-8662FAAD887A" colorSpace="pattern"/>
+                                        <color key="backgroundColor" patternImage="3D0B60A7-0EF8-4E8C-8B54-90F4B53CE142" colorSpace="pattern"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -270,8 +324,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CollageThing_light.jpg" width="1920" height="1080"/>
-        <image name="D8D128EF-5291-41C7-B508-8662FAAD887A" width="320" height="460">
+        <image name="3D0B60A7-0EF8-4E8C-8B54-90F4B53CE142" width="320" height="460">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -10158,6 +10211,7 @@ CQq/AAkKxAAJCswACQrPAAkK1AAJCtwACQrfAAkK8QAJCvQACQr5AAAAAAAABAEAAAAAAAAAQgAAAAAA
 AAAAAAAAAAAJCvs
 </mutableData>
         </image>
+        <image name="CollageThing_light.jpg" width="1920" height="1080"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

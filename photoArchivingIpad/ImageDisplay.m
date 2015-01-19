@@ -17,6 +17,7 @@
 #import "TAStyler.h"
 #import <Masonry/Masonry.h>
 #import "NSDictionary+ObjectCreationHelpers.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface ImageDisplay () <ImageDisplayRecordingSliderViewDelegate, TFCommunicatorDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITableViewDataSource, UITableViewDelegate, StoriesCellDelegate> {
     
@@ -120,10 +121,6 @@
     [saveStoryButton setAlpha:0.0];
     [self audioPlayerSetup];
      [_plusButtonContainer setBackgroundColor:[UIColor clearColor]];
-    
-    
-    
-    //  Variable setup
     
     useChromecast = NO;
     
@@ -316,8 +313,26 @@
     recorder.delegate = self;
     recorder.meteringEnabled = YES;
     [recorder prepareToRecord];
+    
 
+   // [session setActive:YES error:nil];
+    //[session addObserver:self forKeyPath:@"outputVolume" options:0 context:nil];
 }
+//-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+//{
+//    if ([keyPath isEqualToString:@"outputVolume"]) {
+//        
+//        
+//        
+//        AVAudioSession *session = (AVAudioSession*)object;
+//        
+//        if (session) {
+//            float volume = [session outputVolume];
+//            
+//        }
+//        
+//    }
+//}
 
 /*
     Story Updater Delegate Methods

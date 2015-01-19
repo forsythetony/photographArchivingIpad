@@ -9,6 +9,7 @@
 #import "landingPageViewController.h"
 #import "DateRange.h"
 #import "WorkspaceViewController.h"
+#import <FontAwesomeKit/FontAwesomeKit.h>
 
 NSString* const timelineSegue = @"showTimeline";
 
@@ -80,6 +81,7 @@ NSString* const keyTimeline = @"keyTimeline";
         dest.timelineDateRange = timelineDateRange;
         
     }
+    
 }
 -(void)initialSetup
 {
@@ -190,7 +192,21 @@ NSString* const keyTimeline = @"keyTimeline";
     }
      
      */
+    UIColor *navBarButtonColor = [UIColor black75PercentColor];
     
+    CGFloat heightMod = 0.6;
+    
+    CGSize questionIconSize = CGSizeMake(   self.navigationController.navigationBar.frame.size.height * heightMod,
+                                            self.navigationController.navigationBar.frame.size.height * heightMod);
+
+    FAKFoundationIcons *infoIcon = [FAKFoundationIcons infoIconWithSize:questionIconSize.height];
+    [infoIcon setAttributes:@{NSForegroundColorAttributeName : navBarButtonColor}];
+    
+    [self.aboutButton setImage:[infoIcon imageWithSize:questionIconSize]];
+    
+    
+    self.navigationController.navigationBar.tintColor = navBarButtonColor;
+    self.navigationController.navigationBar.translucent = NO;
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -266,5 +282,8 @@ NSString* const keyTimeline = @"keyTimeline";
 
 -(UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
+}
+- (IBAction)clickedInfoButton:(id)sender {
+    [self performSegueWithIdentifier:@"showAboutInformation" sender:nil];
 }
 @end

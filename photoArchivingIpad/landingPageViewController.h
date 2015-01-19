@@ -28,6 +28,7 @@ typedef NS_ENUM(NSInteger, testingSegueType) {
 @property (weak, nonatomic) IBOutlet UIButton *buttonServer;
 @property (weak, nonatomic) IBOutlet UIButton *buttonUploading;
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *aboutButton;
 @property (nonatomic, assign) testingSegueType testType;
 
 @end

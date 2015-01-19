@@ -17,7 +17,7 @@
 -(void)shouldDismiss;
 -(void)playAudioWithStory:(Story*) audioStory;
 -(void)shouldStopAudio;
-
+-(void)updatePlayerVolumeTo:(float) newVolume;
 
 @end
 @interface ImageDisplay : UIViewController <ImageDisplayStoryUpdater>
