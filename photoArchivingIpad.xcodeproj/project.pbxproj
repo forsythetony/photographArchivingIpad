@@ -15,7 +15,6 @@
 		BA3299761948B91E0002EBFD /* showServerData.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3299751948B91E0002EBFD /* showServerData.m */; };
 		BA3299A51948BA430002EBFD /* TFDataCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3299A21948BA430002EBFD /* TFDataCommunicator.m */; };
 		BA3299A61948BA430002EBFD /* TFPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3299A41948BA430002EBFD /* TFPerson.m */; };
-		BA3299A81948DE850002EBFD /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA3299A71948DE850002EBFD /* SDWebImage.framework */; };
 		BA3299AA1948DF430002EBFD /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA3299A91948DF430002EBFD /* ImageIO.framework */; };
 		BA365A88199649B8008E6975 /* StoryCreationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA365A87199649B8008E6975 /* StoryCreationViewController.m */; };
 		BA365A8A19964C43008E6975 /* AddStoryForm.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA365A8919964C43008E6975 /* AddStoryForm.xib */; };
@@ -40,8 +39,9 @@
 		BA4C4BD719ADF58D009C9C16 /* StoriesDisplayTableviewCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4C4BD519ADF58D009C9C16 /* StoriesDisplayTableviewCellTableViewCell.m */; };
 		BA4C4BD819ADF58D009C9C16 /* StoriesDisplayTableviewCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4C4BD619ADF58D009C9C16 /* StoriesDisplayTableviewCellTableViewCell.xib */; };
 		BA4C4BDB19ADFAA4009C9C16 /* ImageDisplay+testThingies.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4C4BDA19ADFAA4009C9C16 /* ImageDisplay+testThingies.m */; };
-		BA625B4B1A6CD1170037AE6A /* AWSRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA625B4A1A6CD1170037AE6A /* AWSRuntime.framework */; };
-		BA625C1E1A6CD1380037AE6A /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA625B561A6CD12D0037AE6A /* AWSS3.framework */; };
+		BA625C201A6CD1FE0037AE6A /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA625C1F1A6CD1FE0037AE6A /* SDWebImage.framework */; };
+		BA625C231A6CD20C0037AE6A /* AWSRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA625C211A6CD20C0037AE6A /* AWSRuntime.framework */; };
+		BA625C241A6CD20C0037AE6A /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA625C221A6CD20C0037AE6A /* AWSS3.framework */; };
 		BA66942C19999CA300412313 /* StoriesDisplayTable.m in Sources */ = {isa = PBXBuildFile; fileRef = BA66942A19999CA300412313 /* StoriesDisplayTable.m */; };
 		BA66942D19999CA300412313 /* StoriesDisplayTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA66942B19999CA300412313 /* StoriesDisplayTable.xib */; };
 		BA6694311999C72400412313 /* dummy2.json in Resources */ = {isa = PBXBuildFile; fileRef = BA6694301999C72400412313 /* dummy2.json */; };
@@ -397,6 +397,9 @@
 		BA625C1B1A6CD12E0037AE6A /* UploadingButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploadingButton.m; sourceTree = "<group>"; };
 		BA625C1C1A6CD12E0037AE6A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		BA625C1D1A6CD12E0037AE6A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		BA625C1F1A6CD1FE0037AE6A /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = photoArchivingIpad/Dependencies/SDWebImage.framework; sourceTree = "<group>"; };
+		BA625C211A6CD20C0037AE6A /* AWSRuntime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSRuntime.framework; path = photoArchivingIpad/Dependencies/Amazon/AWSRuntime.framework; sourceTree = "<group>"; };
+		BA625C221A6CD20C0037AE6A /* AWSS3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSS3.framework; path = photoArchivingIpad/Dependencies/Amazon/AWSS3.framework; sourceTree = "<group>"; };
 		BA66942919999CA300412313 /* StoriesDisplayTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoriesDisplayTable.h; sourceTree = "<group>"; };
 		BA66942A19999CA300412313 /* StoriesDisplayTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoriesDisplayTable.m; sourceTree = "<group>"; };
 		BA66942B19999CA300412313 /* StoriesDisplayTable.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoriesDisplayTable.xib; sourceTree = "<group>"; };
@@ -541,8 +544,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA625C1E1A6CD1380037AE6A /* AWSS3.framework in Frameworks */,
-				BA625B4B1A6CD1170037AE6A /* AWSRuntime.framework in Frameworks */,
+				BA625C231A6CD20C0037AE6A /* AWSRuntime.framework in Frameworks */,
+				BA625C241A6CD20C0037AE6A /* AWSS3.framework in Frameworks */,
+				BA625C201A6CD1FE0037AE6A /* SDWebImage.framework in Frameworks */,
 				BAC659FA19B6851100496D48 /* MediaAccessibility.framework in Frameworks */,
 				BABF161819526A0400FF01C0 /* CFNetwork.framework in Frameworks */,
 				BAC659F819B684BD00496D48 /* Security.framework in Frameworks */,
@@ -550,7 +554,6 @@
 				BABF162019526A3500FF01C0 /* MediaPlayer.framework in Frameworks */,
 				BABF161C19526A1600FF01C0 /* AudioToolbox.framework in Frameworks */,
 				BA3299AA1948DF430002EBFD /* ImageIO.framework in Frameworks */,
-				BA3299A81948DE850002EBFD /* SDWebImage.framework in Frameworks */,
 				BA67F1AE193666210056DD00 /* CoreGraphics.framework in Frameworks */,
 				BA67F1B0193666210056DD00 /* UIKit.framework in Frameworks */,
 				BA67F1AC193666210056DD00 /* Foundation.framework in Frameworks */,
@@ -963,6 +966,9 @@
 		BA67F1AA193666210056DD00 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BA625C211A6CD20C0037AE6A /* AWSRuntime.framework */,
+				BA625C221A6CD20C0037AE6A /* AWSS3.framework */,
+				BA625C1F1A6CD1FE0037AE6A /* SDWebImage.framework */,
 				BA625B4C1A6CD12D0037AE6A /* photoArchivingIpad */,
 				BA625B4A1A6CD1170037AE6A /* AWSRuntime.framework */,
 				BAC659F919B6851100496D48 /* MediaAccessibility.framework */,
@@ -1657,6 +1663,8 @@
 					"/Users/Tonyf/Downloads/GoogleCastFramework-2.3.0-Release",
 					2,
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/photoArchivingIpad/Dependencies",
+					"$(PROJECT_DIR)/photoArchivingIpad/Dependencies/Amazon",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "photoArchivingIpad/photoArchivingIpad-Prefix.pch";
@@ -1692,6 +1700,8 @@
 					"/Users/Tonyf/Downloads/GoogleCastFramework-2.3.0-Release",
 					2,
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/photoArchivingIpad/Dependencies",
+					"$(PROJECT_DIR)/photoArchivingIpad/Dependencies/Amazon",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "photoArchivingIpad/photoArchivingIpad-Prefix.pch";
