@@ -21,7 +21,11 @@
 }
 
 @end
+
 @implementation TATriggerFrame
+
+@synthesize delegate,
+            current_value;
 
 - (id)initWithFrame:(CGRect)frame
 {

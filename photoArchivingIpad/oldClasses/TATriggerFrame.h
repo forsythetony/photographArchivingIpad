@@ -14,12 +14,9 @@ typedef NS_ENUM(NSInteger, TriggerOrientation) {
 };
 @interface TATriggerFrame : UIView {
     
-    float current_value;
     float new_to_value;
     
     UILabel *ProgressLbl;
-    
-    id delegate;
     
     BOOL IsAnimationInProgress;
 

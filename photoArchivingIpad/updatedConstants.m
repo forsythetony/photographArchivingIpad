@@ -196,7 +196,7 @@ NSString * const contentTypePNG = @"image/PNG";
     return env[@"BABBAGE_API_URL"];
 
 }
-+(NSString*)ec2_api_baseURL
++(NSString*)api_ec2_baseURL
 {
     NSDictionary *env = [[NSProcessInfo processInfo] environment];
     

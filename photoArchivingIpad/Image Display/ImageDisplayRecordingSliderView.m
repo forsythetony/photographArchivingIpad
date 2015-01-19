@@ -289,10 +289,8 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
     if ([sender state] == UIGestureRecognizerStateEnded)
     {
         
-        CGFloat velocityX   = (0.2*[(UIPanGestureRecognizer*)sender velocityInView:self].x);
-        
-        CGFloat finalX      = trans.x;// + velocityX;
-        CGFloat finalY      = trans.y;// + (.35*[(UIPanGestureRecognizer*)sender velocityInView:self.view].y);
+        CGFloat finalX      = trans.x;
+        CGFloat finalY      = trans.y;
         
         if (UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation])) {
             
@@ -316,15 +314,6 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
             
         } else {
             
-            if (finalX < 0) {
-                
-                //finalX = 0;
-                
-            } else if (finalX > 1024) {
-                
-                //finalX = 768;
-            }
-            
             if (finalY < 0) {
                 
                 finalY = 0;
@@ -334,12 +323,6 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
                 finalY = 1024;
             }
         }
-        /*
-        NSLog(@"\nRecording Area Bounds are: {%f , %f}", recSliderBounds.recordingAreaLeftBound, recSliderBounds.rightBound);
-        
-        NSLog(@"\nFinal X: %f\nFinal Y: %f", finalX, finalY);
-        NSLog(@"\nNew X trans %f", newXTrans);
-        */
         
         if (newXTrans >= recSliderBounds.recordingAreaLeftBound) {
             [self performSelectorOnMainThread:@selector(lockRecSliderAtEnd:) withObject:nil waitUntilDone:NO];
@@ -491,7 +474,6 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
 }
 -(void)tappedSliderButton:(id) sender
 {
-    UITapGestureRecognizer *gest = (UITapGestureRecognizer*)sender;
     
     if (isSliderLocker) {
         

@@ -87,7 +87,6 @@ typedef NS_ENUM(NSInteger, serverResponseType) {
 -(void)updatePhoto:(ImagePackage*) photo;
 -(void)updatePhotoDateWithImagePackage:(ImagePackage*)photo;
 -(void)updateBabbagePhotoDateWithImagePackage:(ImagePackage*)photo;
--(void)finishedPullingStoriesList:(NSArray*) storiesList;
 
 //
 //  Audio

@@ -33,7 +33,7 @@ struct pixel {
                                                      8,
                                                      self.size.width * 4,
                                                      CGImageGetColorSpace(self.CGImage),
-                                                     kCGImageAlphaPremultipliedLast
+                                                     (CGBitmapInfo)kCGImageAlphaPremultipliedLast
                                                      );
         
         if (context != NULL)

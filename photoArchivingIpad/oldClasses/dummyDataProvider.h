@@ -11,8 +11,6 @@
 
 @interface dummyDataProvider : NSObject
 
-
--(NSArray*)getImageObjects;
 -(NSDictionary*)getDummyRange;
 
 @end

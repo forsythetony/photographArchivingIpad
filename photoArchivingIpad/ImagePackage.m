@@ -29,7 +29,7 @@
 }
 -(void)setImageIDWithNumber:(NSInteger)idNumber
 {
-    _imageID = [NSNumber numberWithInteger:idNumber];
+    _imageID = [[NSNumber numberWithInteger:idNumber] stringValue];
     
 }
 -(void)setContentsWithImageObject:(imageObject *)imageObject

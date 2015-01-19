@@ -10,5 +10,7 @@
 
 @protocol largeImageViewerDelegate <NSObject>
 
+@optional
 -(void)shouldDismissImageViewer:(id) imageViewer;
+
 @end
