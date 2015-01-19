@@ -9,8 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface PhotoUploadingViewControllerv2 : UIViewController
-@property (weak, nonatomic) IBOutlet UIView *controlPanelContainer;
-@property (weak, nonatomic) IBOutlet UITableView *photosToUpload;
-@property (weak, nonatomic) IBOutlet UIButton *takePhotoButton;
 
 @end

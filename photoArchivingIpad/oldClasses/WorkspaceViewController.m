@@ -1168,6 +1168,8 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     }];
      */
     
+    NSString *deviceType = [UIDevice currentDevice].model;
+    
     for (pictureFrame* frm in photoList) {
         
         if (frm != frame) {
@@ -1185,8 +1187,10 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         [self sendImage:frame.imageObject];
     }
     
-     
-    [self displayInformationForImage:frame.imageObject];
+    if (![deviceType isEqualToString:@"iPhone"]) {
+        [self displayInformationForImage:frame.imageObject];
+    }
+    
     [_infPager updateImageInformation:frame.imageObject];
 
     
