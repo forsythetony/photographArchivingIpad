@@ -58,6 +58,9 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="clickedPhotoUploading:" destination="veY-Iz-my8" eventType="touchUpInside" id="oHS-bk-Bd2"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
@@ -102,6 +105,7 @@
                         <segue destination="wmD-AR-auf" kind="popover" identifier="showAboutInformation" popoverAnchorBarButtonItem="T0B-5A-S8e" id="lIw-oi-N2Q">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
+                        <segue destination="9m8-2D-w4m" kind="push" identifier="pushToPhotoUploading" id="jHj-tz-O1U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ffp-Xn-g8M" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -200,7 +204,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" patternImage="21FFCD6D-7422-494D-9342-2FDF7CFCFD32" colorSpace="pattern"/>
+                                        <color key="backgroundColor" patternImage="29439FBA-5676-4DD8-A2A8-DADB7C6F8BD5" colorSpace="pattern"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -237,7 +241,50 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bz3-vR-drn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1208" y="-156"/>
+            <point key="canvasLocation" x="1326" y="-490"/>
+        </scene>
+        <!--Photo Uploading View Controllerv2-->
+        <scene sceneID="DLf-PI-Tyq">
+            <objects>
+                <viewController id="9m8-2D-w4m" customClass="PhotoUploadingViewControllerv2" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pRO-aq-zbn"/>
+                        <viewControllerLayoutGuide type="bottom" id="eAm-4d-f3l"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ySj-h6-PpU">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view autoresizesSubviews="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eOI-8a-Nrs">
+                                <rect key="frame" x="0.0" y="549" width="1024" height="219"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4mk-FN-lCO">
+                                        <rect key="frame" x="861" y="49" width="124" height="122"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <tableView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="MDF-qB-nFc">
+                                <rect key="frame" x="0.0" y="64" width="1024" height="485"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="wTL-Sq-yvL"/>
+                    <connections>
+                        <outlet property="controlPanelContainer" destination="eOI-8a-Nrs" id="7mv-56-YCm"/>
+                        <outlet property="photosToUpload" destination="MDF-qB-nFc" id="IlE-cy-uX0"/>
+                        <outlet property="takePhotoButton" destination="4mk-FN-lCO" id="cxR-M4-OCn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IAi-BY-8zH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1223" y="565"/>
         </scene>
         <!--Story Creation View Controller-->
         <scene sceneID="IVn-uQ-gUw">
@@ -343,7 +390,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="21FFCD6D-7422-494D-9342-2FDF7CFCFD32" width="320" height="460">
+        <image name="29439FBA-5676-4DD8-A2A8-DADB7C6F8BD5" width="320" height="460">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

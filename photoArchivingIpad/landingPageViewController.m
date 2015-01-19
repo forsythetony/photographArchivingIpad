@@ -64,6 +64,10 @@ NSString* const keyTimeline = @"keyTimeline";
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     
 }
+- (IBAction)clickedPhotoUploading:(id)sender {
+    
+    [self performSegueWithIdentifier:@"pushToPhotoUploading" sender:nil];
+}
 -(void)applyMasonryConstraints
 {
     CGFloat topInset = 30.0;
