@@ -1109,6 +1109,30 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
     __weak typeof(self) weakSelf = self;
     
+    [_displayedImage sd_setImageWithURL:fullSizeURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        float sizeDelta = 10.0;
+        
+        
+        POPSpringAnimation *imageSizeChange = [POPSpringAnimation animation];
+        
+        imageSizeChange.property = [POPAnimatableProperty propertyWithName:kPOPViewSize];
+        
+        imageSizeChange.fromValue = [NSValue valueWithCGSize:CGSizeMake(displayedImageWidth - sizeDelta, displayedImageHeight - sizeDelta)];
+        
+        imageSizeChange.toValue = [NSValue valueWithCGSize:CGSizeMake(displayedImageWidth, displayedImageHeight)];
+        
+        [weakSelf pop_addAnimation:imageSizeChange forKey:@"imageResizeLarger"];
+        
+        POPSpringAnimation *alphaChange = [POPSpringAnimation animation];
+        
+        alphaChange.property = [POPAnimatableProperty propertyWithName:kPOPViewAlpha];
+        
+        alphaChange.fromValue = @(0.0);
+        alphaChange.toValue = @(1.0);
+        
+        [weakSelf pop_addAnimation:alphaChange forKey:@"alphaChange"];
+    }];
+    /*
     [_displayedImage setImageWithURL:fullSizeURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
         
         float sizeDelta = 10.0;
@@ -1138,6 +1162,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         
         
     }];
+     */
     
     for (pictureFrame* frm in photoList) {
         

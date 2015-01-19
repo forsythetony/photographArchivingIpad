@@ -122,7 +122,7 @@
         
         self.mainTextView.text      = imageDetailText;
         
-        [self.mainImageView setImageWithURL:[NSURL URLWithString:[photoDict objectForKey:@"imageURL"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+        [self.mainImageView sd_setImageWithURL:[NSURL URLWithString:[photoDict objectForKey:@"imageURL"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *url) {
             
             
             POPSpringAnimation* photoSpring = [POPSpringAnimation animation];

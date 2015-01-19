@@ -127,8 +127,8 @@
         
         theFrame.center = theCenter;
         
-        [theFrame.theImage setImageWithURL:img.thumbNailURL];
-        
+//        [theFrame.theImage setImageWithURL:img.thumbNailURL];
+        [theFrame.theImage sd_setImageWithURL:img.thumbNailURL];
         [_TLView addSubview:theFrame];
         
     }

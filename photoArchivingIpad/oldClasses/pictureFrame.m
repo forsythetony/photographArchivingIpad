@@ -441,7 +441,7 @@
 
     //UIImage *picImage       = [picture imageWithSize:CGSizeMake(30.0, 30.0)];
     
-    [self.theImage setImageWithURL:[_imageObject thumbNailURL]];
+    [self.theImage sd_setImageWithURL:[_imageObject thumbNailURL]];
     
 }
 #pragma mark Utility Functions -

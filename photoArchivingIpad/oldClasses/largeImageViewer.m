@@ -58,7 +58,7 @@
     
     [_displayImage addGestureRecognizer:noTappy];
     
-    [_displayImage setImageWithURL:_imageObj.photoURL];
+    [_displayImage sd_setImageWithURL:_imageObj.photoURL];
 
     [self.view bringSubviewToFront:_displayImage];
     

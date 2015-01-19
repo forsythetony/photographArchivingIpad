@@ -127,7 +127,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" patternImage="D12F2DB3-6685-440E-B112-FF86CCE2F453" colorSpace="pattern"/>
+                                        <color key="backgroundColor" patternImage="D8D128EF-5291-41C7-B508-8662FAAD887A" colorSpace="pattern"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -271,7 +271,7 @@
     </scenes>
     <resources>
         <image name="CollageThing_light.jpg" width="1920" height="1080"/>
-        <image name="D12F2DB3-6685-440E-B112-FF86CCE2F453" width="320" height="460">
+        <image name="D8D128EF-5291-41C7-B508-8662FAAD887A" width="320" height="460">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
