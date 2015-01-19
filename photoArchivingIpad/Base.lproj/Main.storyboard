@@ -204,7 +204,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" patternImage="BEEBAD23-EC72-453E-ABFB-231F4BAC4245" colorSpace="pattern"/>
+                                        <color key="backgroundColor" patternImage="E619CF8A-F116-4735-8F59-1A49B95CA3F6" colorSpace="pattern"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -366,7 +366,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BEEBAD23-EC72-453E-ABFB-231F4BAC4245" width="320" height="460">
+        <image name="CollageThing_light.jpg" width="1920" height="1080"/>
+        <image name="E619CF8A-F116-4735-8F59-1A49B95CA3F6" width="320" height="460">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -10253,7 +10254,6 @@ CQq/AAkKxAAJCswACQrPAAkK1AAJCtwACQrfAAkK8QAJCvQACQr5AAAAAAAABAEAAAAAAAAAQgAAAAAA
 AAAAAAAAAAAJCvs
 </mutableData>
         </image>
-        <image name="CollageThing_light.jpg" width="1920" height="1080"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
