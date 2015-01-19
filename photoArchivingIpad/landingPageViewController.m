@@ -10,6 +10,7 @@
 #import "DateRange.h"
 #import "WorkspaceViewController.h"
 #import <FontAwesomeKit/FontAwesomeKit.h>
+#import <Masonry/Masonry.h>
 
 NSString* const timelineSegue = @"showTimeline";
 
@@ -50,6 +51,7 @@ NSString* const keyTimeline = @"keyTimeline";
 
     
     [self initialSetup];
+    [self applyMasonryConstraints];
     
     btnTimelineDidSpring = NO;
     
@@ -62,15 +64,28 @@ NSString* const keyTimeline = @"keyTimeline";
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     
 }
+-(void)applyMasonryConstraints
+{
+    CGFloat topInset = 30.0;
+    CGFloat sideInset = 10.0;
+    
+    [_menuViewContainer mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.lessThanOrEqualTo(self.view).with.offset(topInset);
+        make.right.greaterThanOrEqualTo(self.view).with.offset(sideInset).with.priority(600);
+        make.left.greaterThanOrEqualTo(self.view).with.offset(sideInset).with.priority(600);
+        make.width.lessThanOrEqualTo(@300).with.priority(700);
+        make.height.lessThanOrEqualTo(@250).with.priority(700);
+        
+        make.centerX.equalTo(self.view);
+    }];
+    
+
+
+}
 - (IBAction)goToTimeline:(id)sender {
     
-    
     [timelineChooser showInView:self.view];
-    
-    
-    
-   // [self performSegueWithIdentifier:timelineSegue sender:nil];
-    
 }
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {

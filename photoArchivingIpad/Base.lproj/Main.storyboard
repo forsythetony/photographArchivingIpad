@@ -20,10 +20,10 @@
                             <imageView userInteractionEnabled="NO" alpha="0.79999999999999982" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CollageThing_light.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Onz-fz-Whp">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                             </imageView>
-                            <view alpha="0.74999999999999978" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z73-LX-c71">
+                            <view alpha="0.74999999999999978" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z73-LX-c71">
                                 <rect key="frame" x="346" y="122" width="333" height="278"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QFr-Lr-KCM">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QFr-Lr-KCM">
                                         <rect key="frame" x="61" y="40" width="210" height="63"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="63" id="IKO-Dg-vki"/>
@@ -37,7 +37,7 @@
                                             <action selector="goToTimeline:" destination="veY-Iz-my8" eventType="touchUpInside" id="sFT-jl-rq2"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xHa-YK-Yl0">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xHa-YK-Yl0">
                                         <rect key="frame" x="57" y="111" width="219" height="63"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <state key="normal" title="Request Server Data">
@@ -48,7 +48,7 @@
                                             <segue destination="8yv-Je-3LX" kind="push" id="vRI-sA-7op"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XKn-kh-asH">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XKn-kh-asH">
                                         <rect key="frame" x="54" y="197" width="225" height="41"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="41" id="v8O-Ye-Cke"/>
@@ -78,12 +78,8 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="Onz-fz-Whp" secondAttribute="bottom" id="0uo-PX-t0M"/>
-                            <constraint firstItem="jar-Xf-eTJ" firstAttribute="top" secondItem="Z73-LX-c71" secondAttribute="bottom" constant="368" id="5tj-iW-f88"/>
-                            <constraint firstItem="Z73-LX-c71" firstAttribute="leading" secondItem="ZpZ-5B-6fK" secondAttribute="leading" constant="346" id="NS3-1f-Ip4"/>
                             <constraint firstAttribute="trailing" secondItem="Onz-fz-Whp" secondAttribute="trailing" id="Utb-cz-nJK"/>
-                            <constraint firstAttribute="centerX" secondItem="Z73-LX-c71" secondAttribute="centerX" id="Y4R-Ll-ZFj"/>
                             <constraint firstItem="Onz-fz-Whp" firstAttribute="top" secondItem="ZpZ-5B-6fK" secondAttribute="top" id="a8z-Dy-5Yu"/>
-                            <constraint firstItem="Z73-LX-c71" firstAttribute="top" secondItem="ZpZ-5B-6fK" secondAttribute="top" constant="122" id="oDS-Hf-Rgg"/>
                             <constraint firstItem="Onz-fz-Whp" firstAttribute="leading" secondItem="ZpZ-5B-6fK" secondAttribute="leading" id="u11-iL-yV1"/>
                         </constraints>
                     </view>
@@ -101,6 +97,7 @@
                         <outlet property="buttonServer" destination="xHa-YK-Yl0" id="OMC-S6-fpl"/>
                         <outlet property="buttonTimeline" destination="QFr-Lr-KCM" id="02G-2J-ToO"/>
                         <outlet property="buttonUploading" destination="XKn-kh-asH" id="wPl-mS-nBi"/>
+                        <outlet property="menuViewContainer" destination="Z73-LX-c71" id="Bzq-Su-VtZ"/>
                         <segue destination="FWd-UJ-IIP" kind="push" identifier="showTimeline" id="oB1-qc-sMe"/>
                         <segue destination="wmD-AR-auf" kind="popover" identifier="showAboutInformation" popoverAnchorBarButtonItem="T0B-5A-S8e" id="lIw-oi-N2Q">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
@@ -203,7 +200,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" patternImage="7E0176A8-73F6-4B87-A59B-04242C67C753" colorSpace="pattern"/>
+                                        <color key="backgroundColor" patternImage="21FFCD6D-7422-494D-9342-2FDF7CFCFD32" colorSpace="pattern"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -346,7 +343,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="7E0176A8-73F6-4B87-A59B-04242C67C753" width="320" height="460">
+        <image name="21FFCD6D-7422-494D-9342-2FDF7CFCFD32" width="320" height="460">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

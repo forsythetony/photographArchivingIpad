@@ -30,5 +30,6 @@ typedef NS_ENUM(NSInteger, testingSegueType) {
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *aboutButton;
 @property (nonatomic, assign) testingSegueType testType;
+@property (weak, nonatomic) IBOutlet UIView *menuViewContainer;
 
 @end
