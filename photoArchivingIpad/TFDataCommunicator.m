@@ -475,7 +475,7 @@
         
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
         
-        NSLog(@"\nThe response from the server was: %d", httpResponse.statusCode);
+        NSLog(@"\nThe response from the server was: %ld", (long)httpResponse.statusCode);
         
     }];
 }

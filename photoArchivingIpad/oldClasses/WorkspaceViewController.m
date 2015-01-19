@@ -291,11 +291,9 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
 -(void)initialSetup
 {
     
-    UIColor *MVBackground = [UIColor colorWithPatternImage:[UIImage imageNamed:@"subtle_carbon.png"]];
-    
     self.modalPresentationStyle = UIModalTransitionStylePartialCurl;
     
-    self.view.backgroundColor   =[UIColor clearColor];// MVBackground;
+    self.view.backgroundColor   =[UIColor clearColor];
     self.title                  = @"Timeline";
     
     
@@ -471,328 +469,6 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     self.view.autoresizesSubviews = YES;
 }
 
-
-#pragma mark Create Views
--(void)createAuxViews
-{
-    
-    float auxViewHeight     = self.view.bounds.size.height * 0.4;
-    float auxViewYOrg       = self.view.bounds.size.height * 0.6;
-    float auxViewWidth      = self.view.bounds.size.width;
-    
-    CGRect auxViewFrame = CGRectMake(
-                                     0.0            , auxViewYOrg,
-                                     auxViewWidth   , auxViewHeight
-                                     );
-    /*
-    workspaceAuxView* auxView = [[workspaceAuxView alloc] initWithFrame:auxViewFrame];
-    
-    [self.view addSubview:auxView];
-    
-    float imageContainerViewWidth = auxViewWidth / 3.0;
-    
-    CGRect  imageContainerFrame =   CGRectMake(
-                                               0.0                      , 0.0,
-                                               imageContainerViewWidth  , auxViewHeight
-                                               );
-    
-    UIView *imageContainerView = [[UIView alloc] initWithFrame:imageContainerFrame];
-    
-    imageContainerView.backgroundColor  = [UIColor colorWithPatternImage:[UIImage imageNamed:@"suble_carbon.png"]];
-    
-    [auxView addSubview:imageContainerView];
-    
-    float sideSpacing = 10.0;
-    
-    CGRect imageViewFrame;
-    
-    imageViewFrame.origin.x = sideSpacing;
-    imageViewFrame.origin.y = sideSpacing;
-    imageViewFrame.size.width = imageContainerFrame.size.width - (sideSpacing * 2.0);
-    imageViewFrame.size.height = imageContainerFrame.size.height - (sideSpacing * 2.0);
-    
-    
-    _displayedImage = [[UIImageView alloc] initWithFrame:imageViewFrame];
-    
-    UITapGestureRecognizer *imagetap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleImageSectionFrom:)];
-    
-    imagetap.numberOfTapsRequired =  2.0;
-    
-    [imageContainerView addGestureRecognizer:imagetap];
-    [imageContainerView addSubview:_displayedImage];
-    
-    float addContentContainerWidth = 200.0;
-    
-    CGRect infoViewContainerFrame;
-    
-    infoViewContainerFrame.origin.x = imageViewFrame.size.width;
-    infoViewContainerFrame.origin.y = 0.0;
-    infoViewContainerFrame.size.width = (auxViewWidth - imageContainerViewWidth) - addContentContainerWidth;
-    infoViewContainerFrame.size.height = imageContainerFrame.size.height;
-    
-    UIView *infoViewContainer = [[UIView alloc] initWithFrame:infoViewContainerFrame];
-    
-    infoViewContainer.backgroundColor = [UIColor clearColor];
-    
-    [auxView addSubview:infoViewContainer];
-    
-    
-    float textViewWallSpacing = 15.0;
-    
-    CGRect imageInfoTextFrame;
-    
-    imageInfoTextFrame.origin.x = textViewWallSpacing;
-    imageInfoTextFrame.origin.y = textViewWallSpacing;
-    imageInfoTextFrame.size.width = infoViewContainerFrame.size.width - (textViewWallSpacing * 2.0);
-    imageInfoTextFrame.size.height = infoViewContainerFrame.size.height - (textViewWallSpacing * 2.0);
-    
-    
-    
-    _infoPager = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
-                                                     navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
-                                                                   options:nil];
-    
-    
-    _infoPager.delegate = self;
-    _infoPager.dataSource = self;
-    
-    NSMutableArray *pagerVCs = [NSMutableArray new];
-    
-    pagerInformationVC *imageInformation = [pagerInformationVC new];
-    
-    [pagerVCs addObject:imageInformation];
-    
-    pagerSocialVC *socialInfo = [pagerSocialVC new];
-    
-    StoriesDisplayTable *stories = [StoriesDisplayTable new];
-    [pagerVCs addObject:stories];
-    
-    [pagerVCs addObject:socialInfo];
-
-    imageInformationVClist = [NSArray arrayWithArray:pagerVCs];
-    
-    NSArray *initialVCs = [NSArray arrayWithObject:imageInformation];
-    
-    [_infoPager setViewControllers:initialVCs direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
-    
-    [self addChildViewController:_infoPager];
-    
-    //[infoViewContainer addSubview:_infoPager.view];
-
-    
-    _infoPager.view.frame = imageInfoTextFrame;
-    
-    [_infoPager didMoveToParentViewController:self];
-    
-    
-    
-    _infPager = [[imageInfoPagerVC alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
-    
-    [self addChildViewController:_infPager];
-    
-    [infoViewContainer addSubview:_infPager.view];
-    
-    _infPager.view.frame = imageInfoTextFrame;
-    
-    [_infPager didMoveToParentViewController:self];
-    
-    
-    
-    _imageInfoDisplay = [[UITextView alloc] initWithFrame:imageInfoTextFrame];
-    
-    _imageInfoDisplay.text              = @"";
-    _imageInfoDisplay.backgroundColor   = [UIColor clearColor];
-    _imageInfoDisplay.font              = [UIFont fontWithName:@"CourierNewPSMT" size:13.0];
-    _imageInfoDisplay.textColor         = [UIColor ghostWhiteColor];
-    _imageInfoDisplay.editable          = NO;
-    _imageInfoDisplay.layer.cornerRadius= 8.0;
-    
-    //[infoViewContainer addSubview:_imageInfoDisplay];
-    
-    float addContentWallSpacing = 10.0;
-    
-    CGRect addContentViewContainerFrame;
-    
-    addContentViewContainerFrame.origin.x = infoViewContainerFrame.origin.x + infoViewContainerFrame.size.width;
-    addContentViewContainerFrame.origin.y = addContentWallSpacing;
-    addContentViewContainerFrame.size.width = addContentContainerWidth - addContentWallSpacing;
-    addContentViewContainerFrame.size.height = infoViewContainerFrame.size.height - (addContentWallSpacing * 2);
-
-    UIView *addcontentViewContainer = [[UIView alloc] initWithFrame:addContentViewContainerFrame];
-    
-    addcontentViewContainer.backgroundColor = [UIColor clearColor];//[UIColor colorWithPatternImage:[UIImage imageNamed:@"tweed.png"]];
-    
-    addcontentViewContainer.layer.cornerRadius = 4.0;
-    
-    [auxView addSubview:addcontentViewContainer];
-    
-    float buttonStartHeight = 10.0;
-    float buttonWidth = addContentContainerWidth - 30.0;
-    CGSize buttonSize;
-    buttonSize.width    = buttonWidth;
-    buttonSize.height   = 40.0;
-    
-    
-    UIColor *buttonBackgroundColor = [UIColor whiteColor];
-    UIColor *buttonTextColor = [UIColor black25PercentColor];
-    
-    UIFont *buttonFont = [UIFont fontWithName:@"DINAlternate-Bold" size:18.0];
-    
-    float buttonIconSize = buttonSize.height * .8;
-    
-    CGRect buttonIconRect = CGRectMake(10.0, 0.0, buttonIconSize, buttonIconSize);
-    
-    
-    
-    
-    
-    CGRect addStoryButtonFrame;
-    
-    addStoryButtonFrame.origin.x = (addContentViewContainerFrame.size.width - buttonSize.width) / 2.0;
-    addStoryButtonFrame.origin.y = buttonStartHeight;
-    addStoryButtonFrame.size = buttonSize;
-    
-    _addStoryButton = [[UIButton alloc] initWithFrame:addStoryButtonFrame];
-    
-
-    
-    _addStoryButton.backgroundColor = buttonBackgroundColor;
-    _addStoryButton.layer.cornerRadius = 8.0;
-    _addStoryButton.alpha = 0.0;
-    
-        FAKFontAwesome *storyIcon = [FAKFontAwesome bookIconWithSize:buttonIconSize];
-    
-    
-    UIImageView *addStoryButtonImageView = [[UIImageView alloc] initWithFrame:buttonIconRect];
-    
-    [addStoryButtonImageView setImage:[storyIcon imageWithSize:CGSizeMake(buttonIconSize, buttonIconSize)]];
-    
-    
-    CGSize buttonLabelSize;
-    
-    buttonLabelSize.width = buttonSize.width * 0.75;
-    buttonLabelSize.height = buttonSize.height;
-    
-    CGRect buttonLabelFrame;
-    
-    buttonLabelFrame.size = buttonLabelSize;
-    
-    buttonLabelFrame.origin.x = addStoryButtonImageView.frame.origin.x + addStoryButtonImageView.frame.size.width + 7.0;
-    
-    buttonLabelFrame.origin.y = 0.0;
-
-    
-    UILabel *addStoryText = [[UILabel alloc] initWithFrame:buttonLabelFrame];
-    
-    addStoryText.font = buttonFont;
-    addStoryText.backgroundColor = [UIColor clearColor];
-    addStoryText.textColor = buttonTextColor;
-    addStoryText.text = @"Add Story";
-    
-    CGRect iconRect = CGRectMake(10.0, 4.0, buttonIconSize, buttonIconSize);
-    
-    UIImageView *iconImage = [[UIImageView alloc] initWithFrame:iconRect];
-    
-    [iconImage setBackgroundColor:[UIColor clearColor]];
-    [iconImage setImage:[self getImageViewForStoryType:buttonIconTypeStory withButtonHeight:buttonIconSize]];
-    
-    
-    CGRect addRecordingButtonFrame = addStoryButtonFrame;
-    
-    addRecordingButtonFrame.origin.y += 20.0;
-    
-    _addRecording = [[UIButton alloc ]initWithFrame:addRecordingButtonFrame];
-    
-    _addRecording.backgroundColor = [UIColor whiteColor];
-    _addRecording.alpha = 0.0;
-    _addRecording.layer.cornerRadius = 8.0;
-    
-
-    [_addRecording addSubview:addStoryText];
-    
-    UIImageView *recordingIcon = [[UIImageView alloc] initWithFrame:iconRect];
-    
-    [recordingIcon setImage:[self getImageViewForStoryType:buttonIconTypeRecording withButtonHeight:buttonIconSize]];
-    
-    [_addRecording addSubview:recordingIcon];
-    
-    
-    UILabel *addRecordingText = [self labelCopy:addStoryText];
-    
-    addRecordingText.text = @"Add Recording";
-    
-    [_addRecording addSubview:addRecordingText];
-    
-    [_addStoryButton addSubview:iconImage];
-    
-    [_addStoryButton addSubview:addStoryText];
-    
-    [_addStoryButton addTarget:self action:@selector(handleStoryAddition:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    CGRect addOtherInfoRect = addRecordingButtonFrame;
-    
-    addRecordingButtonFrame.origin.y += 20.0;
-    
-    _addOtherInfo = [[UIButton alloc ] initWithFrame:addOtherInfoRect];
-    
-    _addOtherInfo.backgroundColor = [UIColor whiteColor];
-    
-    _addOtherInfo.layer.cornerRadius = 8.0;
-    _addOtherInfo.alpha = 0.0;
-    
-    UIImageView *addOtherIcon = [[UIImageView alloc] initWithFrame:iconRect];
-    
-    [addOtherIcon setImage:[self getImageViewForStoryType:buttonIconTypeOther withButtonHeight:buttonIconSize]];
-    
-    UILabel *addOtherText = [self labelCopy:addRecordingText];
-    
-    addOtherText.text = @"Add Other";
-    
-    [_addOtherInfo addSubview:addOtherText];
-    [_addOtherInfo addSubview:addOtherIcon];
-    [_addOtherInfo addTarget:self action:@selector(handleOtherInfoClickFromSender:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    
-    
-    [addcontentViewContainer addSubview:_addOtherInfo];
-    
-    
-    [addcontentViewContainer addSubview:_addStoryButton];
-    
-    [addcontentViewContainer addSubview:_addRecording];
-    
-    buttonsContainerView = addcontentViewContainer;
-
-    
-    UIView *auxView = [[UIView alloc] initWithFrame:auxViewFrame];
-    
-    [auxView setBackgroundColor:[UIColor charcoalColor]];
-    
-    [self.view addSubview:auxView];
-    
-    [self.view sendSubviewToBack:auxView];
-    // Create Main Label
-    
-    UILabel *auxLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 100.0, 50.0)];
-    
-    [auxLabel setText:@"Unknown Dates"];
-    
-    UIFont *auxLabelFont = [UIFont fontWithName:global_font_family size:30.0];
-    
-    auxLabel.font = auxLabelFont;
-    auxLabel.textColor = [UIColor whiteColor];
-    
-    [auxView addSubview:auxLabel];
-    [auxLabel sizeToFit];
-    
-    CGPoint newAuxCenter = CGPointMake(auxView.center.x, auxLabel.center.y);
-    
-    auxLabel.center = newAuxCenter;
-  */  
-    
-}
 -(void)handleStoryAddition:(id) sender
 {
     
@@ -926,7 +602,6 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
 -(void)createScrollView
 {
     //  MIRAME: THIS FEELS A BIT HACKED TOGETHER AND SHOULD BE FIXED SOON
-    float navBarHeight = self.navigationController.navigationBar.frame.size.height;
     
     float scrollViewHeight = (self.view.bounds.size.height);
     
@@ -974,9 +649,6 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
 {
     startDate   = timelineDateRange.startDate;
     endDate     = timelineDateRange.endDate;
-    
-    NSNumber *startYear = [startDate yearAsNumber];
-    NSNumber *endYear   = [endDate yearAsNumber];
     
     UIColor *TLbackground = [UIColor midnightBlueColor];
     
@@ -1078,7 +750,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
     float sizeOfTL = contentSize.width - (TLWALLSPACING * 2.0);
     
-    NSInteger yearDiff = abs(startYear - endYear);
+    NSInteger yearDiff = abs((int)startYear - (int)endYear);
     
     TLSpacing = sizeOfTL / (float)yearDiff;
     
@@ -1302,9 +974,6 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
     CGPoint translatedPoint = [(UIPanGestureRecognizer*)sender translationInView:self.view];
     
-    CGFloat dampF = [self findDampFactorWithYPoint:[(UIPanGestureRecognizer*)sender view].center.y];
-    
-    //translatedPoint = [self dampenPoint:translatedPoint withFactor:dampF];
     
     if ([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateBegan) {
         
@@ -1417,13 +1086,6 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
 -(void)handleTapFrom:(UIGestureRecognizer*) recognizer
 {
     
-    UITapGestureRecognizer *gestRecog = (UITapGestureRecognizer*)recognizer;
-
-    NSInteger touchNum = [gestRecog numberOfTouches];
-    
-    //NSLog(@"\nNumber of touches: %d", touchNum);
-    
-    
     pictureFrame *frame = (pictureFrame*)recognizer.view;
 
     [frame resize];
@@ -1442,6 +1104,11 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
     NSURL *fullSizeURL = obj.photoURL;
     
+    CGFloat displayedImageWidth = self.displayedImage.frame.size.width;
+    CGFloat displayedImageHeight = self.displayedImage.frame.size.height;
+    
+    __weak typeof(self) weakSelf = self;
+    
     [_displayedImage setImageWithURL:fullSizeURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
         
         float sizeDelta = 10.0;
@@ -1451,11 +1118,11 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         
         imageSizeChange.property = [POPAnimatableProperty propertyWithName:kPOPViewSize];
         
-        imageSizeChange.fromValue = [NSValue valueWithCGSize:CGSizeMake(self.displayedImage.frame.size.width - sizeDelta, self.displayedImage.frame.size.height - sizeDelta)];
+        imageSizeChange.fromValue = [NSValue valueWithCGSize:CGSizeMake(displayedImageWidth - sizeDelta, displayedImageHeight - sizeDelta)];
         
-        imageSizeChange.toValue = [NSValue valueWithCGSize:CGSizeMake(self.displayedImage.frame.size.width, self.displayedImage.frame.size.height)];
+        imageSizeChange.toValue = [NSValue valueWithCGSize:CGSizeMake(displayedImageWidth, displayedImageHeight)];
         
-        [self.displayedImage pop_addAnimation:imageSizeChange forKey:@"imageResizeLarger"];
+        [weakSelf pop_addAnimation:imageSizeChange forKey:@"imageResizeLarger"];
         
         POPSpringAnimation *alphaChange = [POPSpringAnimation animation];
         
@@ -1464,7 +1131,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         alphaChange.fromValue = @(0.0);
         alphaChange.toValue = @(1.0);
         
-        [self.displayedImage pop_addAnimation:alphaChange forKey:@"alphaChange"];
+        [weakSelf pop_addAnimation:alphaChange forKey:@"alphaChange"];
         
         
         
@@ -1710,7 +1377,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         textColor       = [UIColor warmGrayColor];
         fontSize        = [NSNumber numberWithFloat:75.0];
         heightMod       = [NSNumber numberWithFloat:0.0];
-        yearString      = [NSString stringWithFormat:@"%i", year];
+        yearString      = [NSString stringWithFormat:@"%li", (long)year];
         finalAlpha      = [NSNumber numberWithFloat:0.3];
         backgroundColor = [UIColor clearColor];
         lineHeight      = [NSNumber numberWithFloat:lineHeightPrim];
@@ -1741,7 +1408,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
                 fontSize       = [NSNumber numberWithFloat:30.0];
                 heightMod      = [NSNumber numberWithFloat:lineHeightPrim];
                 lineHeight     = [NSNumber numberWithFloat:lineHeightPrim - 10.0];
-                yearString     = [NSString stringWithFormat:@"%i", year];
+                yearString     = [NSString stringWithFormat:@"%li", (long)year];
                 
             }
             else {
@@ -1751,7 +1418,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
                 textColor      = [UIColor warmGrayColor];
                 fontSize       = [NSNumber numberWithFloat:lineHeightPrim - 5.0];
                 heightMod      = [NSNumber numberWithFloat:lineHeightPrim];
-                yearString     = [NSString stringWithFormat:@"%i", year];
+                yearString     = [NSString stringWithFormat:@"%li", (long)year];
                 lineHeight     = [NSNumber numberWithFloat:lineHeightPrim - 7.5];
                 
             }
@@ -1779,11 +1446,11 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
             
             if (yearCopy >= 10) {
                 
-                yearString = [NSString stringWithFormat:@"'%i", yearCopy];
+                yearString = [NSString stringWithFormat:@"'%li", (long)yearCopy];
             }
             else {
                 
-                yearString = [NSString stringWithFormat:@"'0%i", yearCopy];
+                yearString = [NSString stringWithFormat:@"'0%li", (long)yearCopy];
             }
             
             finalAlpha = [NSNumber numberWithFloat:0.6];
@@ -1928,8 +1595,6 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
             
             CGPoint frameCenter = [grabbedFrame center];
             
-            CGPoint scrollCenter = mainScrollView.center;
-            CGFloat dist = scrollCenter.x - frameCenter.x;
             
             CGFloat nudgeDist = 200.0;
             CGFloat newXOrigin = mainScrollView.frame.origin.x + nudgeDist + mainScrollView.contentOffset.x;
@@ -3043,8 +2708,6 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
 }
 -(void)changeToGreen
 {
-    NSTimeInterval aniDur = 1.0;
-    
     UIColor *green = [UIColor Evernote];
     
     POPSpringAnimation *ani = [POPSpringAnimation animation];

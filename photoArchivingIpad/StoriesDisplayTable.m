@@ -38,7 +38,7 @@
 }
 -(void)showErrorAlertWithStatusCode:(NSInteger) statusCode
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Uh oh" message:[NSString stringWithFormat:@"There was an error deleting the story. Status code %d", statusCode] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Uh oh" message:[NSString stringWithFormat:@"There was an error deleting the story. Status code %ld", (long)statusCode] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
     
     [alert show];
 }

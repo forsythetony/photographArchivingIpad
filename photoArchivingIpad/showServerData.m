@@ -99,7 +99,7 @@
         
         NSDictionary *photograph = [photosList objectAtIndex:rowNumber];
 
-        NSLog(@"The photos list array is %i big.", [photosList count]);
+        NSLog(@"The photos list array is %lu big.", (unsigned long)[photosList count]);
         
         NSLog(@"%@", photograph);
         

@@ -10,6 +10,7 @@
 #import "NSDate+timelineStuff.h"
 #import "pictureFrame.h"
 #import "TFDataCommunicator.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @class timelineManager;
 
@@ -53,7 +54,6 @@
 -(CGPoint)createPointWithDate:(NSDate*) date;
 -(void)setStartDate:(NSDate*) startDate andEndDate:(NSDate*) endDate andView:(UIView*) tlview andXOffsert:(float) offset;
 -(void)setInitialPhotographs:(NSArray*) thePhotographs;
--(void)updateDateForPicture:(pictureFrame*) picture;
 -(NSDate*)createDateObjectFromPoint:(CGPoint) point;
 -(NSDate*)getNewDateForFrame:(pictureFrame*) Pframe;
 @end

@@ -61,7 +61,7 @@
 {
     
     NSString *formatString  = @"MM/dd/yyyy";
-    NSString *dateString    = [NSString stringWithFormat:@"01/01/%i", [year integerValue]];
+    NSString *dateString    = [NSString stringWithFormat:@"01/01/%li", (long)[year integerValue]];
     
     NSDateFormatter *fm     = [NSDateFormatter new];
     

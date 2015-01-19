@@ -15,6 +15,7 @@
 
 #import "largeImageViewerDelegate.h"
 #import "UIImage+imageAdditions.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface largeImageViewer : UIViewController <largeImageViewerDelegate>
 

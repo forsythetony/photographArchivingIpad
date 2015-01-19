@@ -40,10 +40,10 @@ typedef struct tfDurationS {
                 *hourString;
     
     
-    milliString = [NSString stringWithFormat:@"%d", self.milliseconds];
-    secString = [NSString stringWithFormat:@"%d", self.seconds];
-    minString = [NSString stringWithFormat:@"%d", self.minutes];
-    hourString = [NSString stringWithFormat:@"%d", self.hours];
+    milliString = [NSString stringWithFormat:@"%ld", (long)self.milliseconds];
+    secString = [NSString stringWithFormat:@"%ld", (long)self.seconds];
+    minString = [NSString stringWithFormat:@"%ld", (long)self.minutes];
+    hourString = [NSString stringWithFormat:@"%ld", (long)self.hours];
     
     
     
@@ -88,7 +88,7 @@ typedef struct tfDurationS {
             
         case DurationDisplayTypeFull: {
             
-            milliString = [ NSString stringWithFormat:@"%4d", self.milliseconds ];
+            milliString = [ NSString stringWithFormat:@"%4ld", (long)self.milliseconds ];
             secString = [ self stringWithValue:self.seconds];
             minString = [ self stringWithValue:self.minutes];
             hourString = [ self stringWithValue:self.hours];
@@ -117,12 +117,12 @@ typedef struct tfDurationS {
     
     if ( value < 10) {
         
-        newString = [NSString stringWithFormat:@"0%1d", value];
+        newString = [NSString stringWithFormat:@"0%1ld", (long)value];
         
     }
     else
     {
-        newString = [NSString stringWithFormat:@"%2d", value];
+        newString = [NSString stringWithFormat:@"%2ld", (long)value];
     }
     
     return newString;

@@ -696,23 +696,23 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
             
             if (recDuration->seconds < 10) {
                 
-                secondsString = [NSString stringWithFormat:@"0%1d", recDuration->seconds];
+                secondsString = [NSString stringWithFormat:@"0%1ld", (long)recDuration->seconds];
                 
             }
             else
             {
-                secondsString = [NSString stringWithFormat:@"%2d", recDuration->seconds];
+                secondsString = [NSString stringWithFormat:@"%2ld", (long)recDuration->seconds];
                 
             }
             
             if (recDuration->minutes < 10) {
                 
-                minutesString = [NSString stringWithFormat:@"0%1d", recDuration->minutes];
+                minutesString = [NSString stringWithFormat:@"0%1ld", (long)recDuration->minutes];
                 
             }
             else
             {
-                minutesString = [NSString stringWithFormat:@"%2d", recDuration->minutes];
+                minutesString = [NSString stringWithFormat:@"%2ld", (long)recDuration->minutes];
             }
             
             
@@ -723,14 +723,14 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
         
         case DurationDisplayTypeHrMinSec: {
             
-            durationDisplayString = [NSString stringWithFormat:@"%2d:%2d.%4d", recDuration->minutes , recDuration->seconds , recDuration->milliseconds];
+            durationDisplayString = [NSString stringWithFormat:@"%2ld:%2ld.%4ld", (long)recDuration->minutes , (long)recDuration->seconds , (long)recDuration->milliseconds];
             
         }
             break;
             
         case DurationDisplayTypeFull: {
             
-            durationDisplayString = [NSString stringWithFormat:@"%1d:%2d:%2d.%4d", recDuration->hours , recDuration->minutes , recDuration->seconds , recDuration->milliseconds];
+            durationDisplayString = [NSString stringWithFormat:@"%1ld:%2ld:%2ld.%4ld", (long)recDuration->hours , (long)recDuration->minutes , (long)recDuration->seconds , (long)recDuration->milliseconds];
         }
             break;
             
