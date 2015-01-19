@@ -1,3 +1,4 @@
+pod 'google-cast-sdk'
 pod 'pop', '~> 1.0'
 pod 'Masonry'
 pod 'ChameleonFramework'

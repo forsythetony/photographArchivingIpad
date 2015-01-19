@@ -27,7 +27,8 @@
 #import "updatedConstants.h"
 #import "ImageInformationDisplayer.h"
 #import "DateRange.h"
-#import <GoogleCast/GoogleCast.h>
+#import <google-cast-sdk/GoogleCast.h>
+
 
 @class imageInfoPagerVC;
 

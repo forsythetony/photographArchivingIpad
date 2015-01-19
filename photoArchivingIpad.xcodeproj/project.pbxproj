@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		256B72511A6CE6750079B12C /* GoogleCast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 256B72501A6CE6750079B12C /* GoogleCast.framework */; };
 		256B72521A6CE6E00079B12C /* AWSRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA625C211A6CD20C0037AE6A /* AWSRuntime.framework */; };
 		256B72531A6CE6F40079B12C /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA625C221A6CD20C0037AE6A /* AWSS3.framework */; };
 		25C13DC31A6D386100EB83E2 /* PhotoUploadingViewControllerv2.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C13DC21A6D386100EB83E2 /* PhotoUploadingViewControllerv2.m */; };
@@ -141,7 +140,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		256B72501A6CE6750079B12C /* GoogleCast.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleCast.framework; path = photoArchivingIpad/GoogleCast.framework; sourceTree = "<group>"; };
 		25C13DC11A6D386100EB83E2 /* PhotoUploadingViewControllerv2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoUploadingViewControllerv2.h; sourceTree = "<group>"; };
 		25C13DC21A6D386100EB83E2 /* PhotoUploadingViewControllerv2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoUploadingViewControllerv2.m; sourceTree = "<group>"; };
 		61ECDBD286AB45A0BA37A749 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -348,7 +346,6 @@
 			files = (
 				256B72531A6CE6F40079B12C /* AWSS3.framework in Frameworks */,
 				256B72521A6CE6E00079B12C /* AWSRuntime.framework in Frameworks */,
-				256B72511A6CE6750079B12C /* GoogleCast.framework in Frameworks */,
 				BAC659FA19B6851100496D48 /* MediaAccessibility.framework in Frameworks */,
 				BABF161819526A0400FF01C0 /* CFNetwork.framework in Frameworks */,
 				BAC659F819B684BD00496D48 /* Security.framework in Frameworks */,
@@ -499,7 +496,6 @@
 		BA67F1AA193666210056DD00 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				256B72501A6CE6750079B12C /* GoogleCast.framework */,
 				BA625C211A6CD20C0037AE6A /* AWSRuntime.framework */,
 				BA625C221A6CD20C0037AE6A /* AWSS3.framework */,
 				BAC659F919B6851100496D48 /* MediaAccessibility.framework */,

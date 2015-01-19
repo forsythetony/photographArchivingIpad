@@ -13,7 +13,7 @@
 // limitations under the License.
 
 #import <Foundation/Foundation.h>
-#import <GoogleCast/GoogleCast.h>
+#import <google-cast-sdk/GoogleCast.h>
 
 @interface HTGCTextChannel : GCKCastChannel
 

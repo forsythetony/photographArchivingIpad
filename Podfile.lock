@@ -17,6 +17,7 @@ PODS:
     - FontAwesomeKit/Core
   - FontAwesomeKit/Zocial (2.1.7):
     - FontAwesomeKit/Core
+  - google-cast-sdk (2.5.1)
   - ImageTaker (0.1.5):
     - Colours
   - LiveFrost (1.1.2)
@@ -34,6 +35,7 @@ DEPENDENCIES:
   - Colours (from `https://github.com/forsythetony/Colours.git`)
   - CRToast (~> 0.0.7)
   - FontAwesomeKit (~> 2.1.0)
+  - google-cast-sdk
   - ImageTaker (from `https://github.com/forsythetony/ImageTaker.git`)
   - LiveFrost
   - Masonry
@@ -53,6 +55,7 @@ SPEC CHECKSUMS:
   Colours: 0c3497cef9e3aafd07e338fb62885b1bcf57ac50
   CRToast: f9f2c4b29776d68ba24c4d621cba59a83fea921b
   FontAwesomeKit: af6eef70d23986349284d2feb4e959459621587d
+  google-cast-sdk: 140236c945742c883d5b2658ffe5d683709e7781
   ImageTaker: 05ff371f181676fe753c8acca3c3e7c622077c8a
   LiveFrost: 8c7e447e6833902ddc2a639faa27e71e091b5062
   Masonry: 35368c2ca9577ca87722c12fc52c4bad9b1c1516
