@@ -1,4 +1,4 @@
-//
+ //
 //  WorkspaceViewController.m
 //  UniversalAppDemo
 //
@@ -312,6 +312,8 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     mainDataCom = [[TFDataCommunicator alloc] init];
 
     mainDataCom.delegate    = self;
+    
+    [mainDataCom getUserWithUsername:@"forsythetony"];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
@@ -1111,8 +1113,14 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     CGFloat displayedImageWidth = self.displayedImage.frame.size.width;
     CGFloat displayedImageHeight = self.displayedImage.frame.size.height;
     
-    __weak typeof(self) weakSelf = self;
     
+    
+    
+    
+    
+    /*
+    __weak typeof(self) weakSelf = self;
+
     [_displayedImage sd_setImageWithURL:fullSizeURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         float sizeDelta = 10.0;
         
@@ -1136,6 +1144,8 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         
         [weakSelf pop_addAnimation:alphaChange forKey:@"alphaChange"];
     }];
+    */
+    
     /*
     [_displayedImage setImageWithURL:fullSizeURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
         
@@ -1166,7 +1176,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         
         
     }];
-     */
+     
     
     NSString *deviceType = [UIDevice currentDevice].model;
     
@@ -1192,7 +1202,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     }
     
     [_infPager updateImageInformation:frame.imageObject];
-
+     */
     
 }
 -(void)displayInformationForImage:(imageObject*) obj

@@ -3,11 +3,11 @@ PODS:
   - Colours (5.4.0)
   - CRToast (0.0.7)
   - FontAwesomeKit (2.1.7):
-    - FontAwesomeKit/Core
-    - FontAwesomeKit/FontAwesome
-    - FontAwesomeKit/FoundationIcons
-    - FontAwesomeKit/IonIcons
-    - FontAwesomeKit/Zocial
+    - FontAwesomeKit/Core (= 2.1.7)
+    - FontAwesomeKit/FontAwesome (= 2.1.7)
+    - FontAwesomeKit/FoundationIcons (= 2.1.7)
+    - FontAwesomeKit/IonIcons (= 2.1.7)
+    - FontAwesomeKit/Zocial (= 2.1.7)
   - FontAwesomeKit/Core (2.1.7)
   - FontAwesomeKit/FontAwesome (2.1.7):
     - FontAwesomeKit/Core
@@ -25,7 +25,7 @@ PODS:
   - pop (1.0.6)
   - SBJson (4.0.1)
   - SDWebImage (3.7.1):
-    - SDWebImage/Core
+    - SDWebImage/Core (= 3.7.1)
   - SDWebImage/Core (3.7.1)
   - VBFPopFlatButton (0.0.2):
     - pop
@@ -50,18 +50,26 @@ EXTERNAL SOURCES:
   ImageTaker:
     :git: https://github.com/forsythetony/ImageTaker.git
 
-SPEC CHECKSUMS:
-  ChameleonFramework: c60096686e3771f5d78f26cfbfd08955a8a88cbd
-  Colours: 0c3497cef9e3aafd07e338fb62885b1bcf57ac50
-  CRToast: f9f2c4b29776d68ba24c4d621cba59a83fea921b
-  FontAwesomeKit: af6eef70d23986349284d2feb4e959459621587d
-  google-cast-sdk: 140236c945742c883d5b2658ffe5d683709e7781
-  ImageTaker: 05ff371f181676fe753c8acca3c3e7c622077c8a
-  LiveFrost: 8c7e447e6833902ddc2a639faa27e71e091b5062
-  Masonry: 35368c2ca9577ca87722c12fc52c4bad9b1c1516
-  pop: e518794da38942c05255eb64b36d894e70cb4f00
-  SBJson: d71212c078abf4679d54b0d0565260c474e46235
-  SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
-  VBFPopFlatButton: cfcf19a4ca46ca2b3e3ca377aa326040559a72f2
+CHECKOUT OPTIONS:
+  Colours:
+    :commit: f81c121036215647db0177201b9a379d6ae8bd28
+    :git: https://github.com/forsythetony/Colours.git
+  ImageTaker:
+    :commit: 96d8551ee37f19b89c4b62b7b9ffc5ad2ca5d8fa
+    :git: https://github.com/forsythetony/ImageTaker.git
 
-COCOAPODS: 0.34.1
+SPEC CHECKSUMS:
+  ChameleonFramework: f824d2afa52182302ef72c706dfe5a8f0597f644
+  Colours: 841a4da98a2df2db2c4cb06007ecf24bad8aa811
+  CRToast: 99a28f4387def43b439ad88f957ce31357ff7373
+  FontAwesomeKit: 503d708bbd2064f3248f3cafd5e3d988b0d7924e
+  google-cast-sdk: 702408473088f7224abf5d7ae73303d96cc3503e
+  ImageTaker: e0305e15ed6e4baaa7a0282d11ed2f6783c5fc5f
+  LiveFrost: 0631143a00e336ad6a8f183d4b02df93f8900d9d
+  Masonry: 9f515466afe48632562342a40a1c224071a1a022
+  pop: 1d978024a33fcf46426b42e60fb32e685d1f1d2e
+  SBJson: 68f16f446bd6047dc3dd1ec4919a468c2cd7fedd
+  SDWebImage: ed3095af2ff88b436426037444979b917f6c5575
+  VBFPopFlatButton: c772e8061b2cebb0c07b52ccdd73204aed21972a
+
+COCOAPODS: 0.37.0
