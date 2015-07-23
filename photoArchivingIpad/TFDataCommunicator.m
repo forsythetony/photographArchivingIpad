@@ -13,8 +13,12 @@
 #import "Story+StoryHelpers.h"
 #import <AWSRuntime/AWSRuntime.h>
 #import <AWSS3/AWSS3.h>
+#import "Story+Converters.h"
 
 @interface TFDataCommunicator () <AmazonServiceRequestDelegate>
+{
+    NSURL   *currentUploadLocalPath;
+}
 
 @property (strong, nonatomic) S3TransferOperation *fileUpload;
 
@@ -24,11 +28,42 @@
 
 @property (strong, nonatomic) NSDictionary *tempSaveDict;
 
+@property (nonatomic, strong) NSFileManager *fileMan;
+
+@property (nonatomic, strong) NSOperationQueue *dataOpQueue;
 @end
 
 
 @implementation TFDataCommunicator
-
+-(NSOperationQueue *)dataOpQueue
+{
+    if (!_dataOpQueue) {
+        _dataOpQueue = [[NSOperationQueue alloc] init];
+    }
+    
+    return _dataOpQueue;
+}
++(id)sharedCommunicator
+{
+    static TFDataCommunicator *dataCom = nil;
+    
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        dataCom = [[TFDataCommunicator alloc] init];
+        [dataCom setupTransferManager];
+    });
+    
+    return dataCom;
+}
+-(NSFileManager *)fileMan
+{
+    if (!_fileMan) {
+        _fileMan = [[NSFileManager alloc] init];
+    }
+    
+    return _fileMan;
+}
 -(id)init
 {
     self = [super init];
@@ -87,8 +122,9 @@
 -(void)deletePhoto:(imageObject *)photo
 {
     if (photo.id) {
-        NSString        *urlString  = [NSString stringWithFormat:@"%@%@/%@", (USELOCALHOST ? api_localhostBaseURL : [updatedConstants api_ec2_baseURL]), api_photosEndpoint, photo.id];
-        NSURL           *urlObject  = [NSURL URLWithString:urlString];
+       NSString *reqString = [NSString stringWithFormat:@"%@%@?photo_id=%@", [updatedConstants api_babbage_baseURL], api_babbage_photos_endpoint, photo.id];
+        
+        NSURL           *urlObject  = [NSURL URLWithString:reqString];
         
         
         NSMutableURLRequest *mutableReq = [[NSMutableURLRequest alloc] initWithURL:urlObject];
@@ -104,6 +140,9 @@
                 
                 NSLog(@"Deleted");
                 
+                if ([self.delegate respondsToSelector:@selector(finishedDeletingImage:)]) {
+                    [self.delegate finishedDeletingImage:photo];
+                }
                 
             }
         }];
@@ -171,12 +210,9 @@
             
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
             
-            [self.delegate finishedUpdatingPhotoWithStatusCode:httpResponse.statusCode];
+            [self.delegate finishedUpdatingPhotoDateWithStatusCode:httpResponse.statusCode];
             if (httpResponse.statusCode == 200) {
-                
-                
-                
-                
+
             }
         }];
         
@@ -255,7 +291,9 @@
 {
     NSDictionary *environment = [[NSProcessInfo processInfo] environment];
     
-    AmazonS3Client *s3 = [[AmazonS3Client alloc] initWithAccessKey:environment[@"AMAZON_ACCESS_KEY"] withSecretKey:environment[@"AMAZON_SECRET_KEY"]];
+    NSString *secret_key = @"w14s0oUFSLG2Ft5Y4h0aVPrd8p/b62Rm/xUTCPRG";
+    
+    AmazonS3Client *s3 = [[AmazonS3Client alloc] initWithAccessKey:@"AKIAJ7TRHRICO7YAEJNA" withSecretKey:secret_key];
     
     s3.endpoint = [AmazonEndpoints s3Endpoint:US_WEST_2];
     
@@ -532,12 +570,20 @@
 {
     NSError *error;
     
-    NSArray *rootDict = [NSJSONSerialization JSONObjectWithData:data
+    NSArray *rootArray = [NSJSONSerialization JSONObjectWithData:data
                                                         options:0
                                                           error:&error];
     
+    NSMutableArray *stories = [NSMutableArray new];
     
-    [self.delegate finishedPullingStoriesList:rootDict];
+    for (NSDictionary *dict in rootArray) {
+        
+        Story *newStory = [Story StoryFromDictionary:dict];
+        
+        [stories addObject:newStory];
+    }
+    
+    [self.delegate finishedPullingStoriesList:[NSArray arrayWithArray:stories]];
 }
 -(void)parsePhotosFromData:(NSData*) data
 {
@@ -633,20 +679,44 @@
 }
 -(void)request:(AmazonServiceRequest *)request didCompleteWithResponse:(AmazonServiceResponse *)response
 {
+    [self deleteLocalFile];
+    
     NSLog(@"\nImage URL: %@ \n", request.url);
     self.fileUpload = nil;
     
     [self.delegate finishedUploadingRequestWithData:@{keyImageURL: request.url}];
 };
-
+-(void)deleteLocalFile
+{
+    NSLog(@"\n\nFile URL:\t%@\n\n", currentUploadLocalPath.absoluteString);
+    
+    if (currentUploadLocalPath) {
+        
+        if ([self.fileMan fileExistsAtPath:currentUploadLocalPath.filePathURL.absoluteString]) {
+            NSError *error;
+            
+            [self.fileMan removeItemAtPath:currentUploadLocalPath.filePathURL.absoluteString error:&error];
+            
+            if (error) {
+                NSLog(@"\n\nError deleting file\n%@\n", error);
+            }
+            else
+            {
+                NSLog(@"\nSuccessfully deleted file at path %@\n", currentUploadLocalPath.absoluteString);
+                currentUploadLocalPath = nil;
+            }
+        };
+    }
+}
 -(void)uploadAudioFileWithUrl:(NSURL *)url andKey:(NSString *)uniqueKey
 {
+    
     if (self.fileUpload == nil || (self.fileUpload.isFinished && !self.fileUpload.isPaused)) {
-        
+    
         NSData* audioData = [NSData dataWithContentsOfURL:url];
+        currentUploadLocalPath = url;
         
-        
-        NSString *audioFile = [NSString stringWithFormat:@"%@/%@/%@%@%@", @"forsytheTony", @"audio", @"recording_", uniqueKey, @".m4a"];
+        NSString *audioFile = [NSString stringWithFormat:@"%@/%@/%@%@%@", @"forsythetony", @"audio", @"recording_", uniqueKey, @".m4a"];
         
         S3PutObjectRequest* req = [[S3PutObjectRequest alloc] initWithKey:audioFile inBucket:[updatedConstants transferManagerBucket]];
         req.data = audioData;
@@ -720,14 +790,14 @@
 -(void)addStoryToImage:(Story *)aStory imageObject:(imageObject *)theImage
 {
     
-    NSString        *urlString  = [NSString stringWithFormat:@"%@%@/%@%@", (USELOCALHOST ? api_localhostBaseURL : [updatedConstants api_ec2_baseURL]), api_photosEndpoint, theImage.id, APIAddStoryURLParam];
+    NSString        *urlString  = [NSString stringWithFormat:@"%@%@?photo_id=%@",[updatedConstants api_babbage_baseURL], api_babbage_stories_endpoint, theImage.id];
     
     NSURL           *urlObject  = [NSURL URLWithString:urlString];
     
     
     
     NSError *err;
-    NSData *postData = [NSJSONSerialization dataWithJSONObject:[aStory convertToDictionary] options:NSJSONWritingPrettyPrinted error:&err];
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:[aStory ConvertToUploadableDictionary] options:NSJSONWritingPrettyPrinted error:&err];
     
     
     NSMutableURLRequest *mutableReq = [[NSMutableURLRequest alloc] initWithURL:urlObject];
@@ -736,13 +806,25 @@
     mutableReq.HTTPMethod = @"POST";
     [mutableReq setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
+    
     NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
     
     [NSURLConnection sendAsynchronousRequest:mutableReq queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
         
-        [self.delegate finishedAddingStoryWithHTTPResponseCode:httpResponse.statusCode];
+        if (httpResponse.statusCode == 201 || httpResponse.statusCode == 200) {
+            
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            
+            if ([dict[@"status"] isEqualToString:@"success"]) {
+                if ([self.delegate respondsToSelector:@selector(finishedAddingStoryWithNewId:)]) {
+                    [self.delegate finishedAddingStoryWithNewId:dict[@"new_id"]];
+                }
+            }
+        }
+        
+        
         
     }];
 }
@@ -769,13 +851,16 @@
 
 -(void)updatePhotoDateWithImagePackage:(ImagePackage *)photo
 {
-    NSString *reqString = [updatedConstants getURLForUpdatingPhotoWithID:photo.imageID andNewDate:[[photo dateTaken] displayDateOfType:sdatetypeURL]];
+    NSDate *date = [photo dateTaken];
+
+    NSString *urlString = [NSString stringWithFormat:@"%@%@?photo_id=%@&date_taken=%@", [updatedConstants api_babbage_baseURL], api_babbage_photos_endpoint, photo.imageID, [date displayDateOfType:sDateTypeBabbageURL]];
     
-    NSURL *urlObject = [NSURL URLWithString:reqString];
+    
+    NSURL *urlObject = [NSURL URLWithString:urlString];
     
     NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:urlObject];
     
-    req.HTTPMethod = @"GET";
+    req.HTTPMethod = @"PUT";
     
     NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
     
@@ -783,7 +868,7 @@
         
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*) response;
         
-        [self.delegate finishedUpdatingPhotoWithStatusCode:httpResponse.statusCode];
+        [self.delegate finishedUpdatingPhotoDateWithStatusCode:httpResponse.statusCode];
         
     }];
     
@@ -812,5 +897,59 @@
         
     }];
 
+}
+-(void)deleteStoryWithID:(NSString *)story_id
+{
+    NSString *reqString = [NSString stringWithFormat:@"%@%@?story_id=%@", [updatedConstants api_babbage_baseURL], api_babbage_stories_endpoint, story_id];
+    
+    NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:reqString]];
+    
+    req.HTTPMethod = @"DELETE";
+    
+    [NSURLConnection sendAsynchronousRequest:req queue:self.dataOpQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        
+        NSHTTPURLResponse *resp = (NSHTTPURLResponse*)response;
+        
+        if (resp.statusCode == 200 || resp.statusCode == 201) {
+            
+            NSString *deletedID = [(NSDictionary*)[NSJSONSerialization JSONObjectWithData:data options:0 error:nil] objectForKey:@"deleted_id"];
+            
+            if ([self.delegate respondsToSelector:@selector(finishedDeletingStoryWithID:didDelete:)]) {
+                NSLog(@"\nDeleted ID: %@\n", deletedID);
+                [self.delegate finishedDeletingStoryWithID:deletedID didDelete:YES];
+            }
+        }
+        else
+        {
+            if ([self.delegate respondsToSelector:@selector(finishedDeletingStoryWithID:didDelete:)]) {
+                [self.delegate finishedDeletingStoryWithID:nil didDelete:NO];
+            }
+        }
+        
+        
+    }];
+}
+-(void)updateStory:(Story *)story withUpdatedValues:(NSString *)values
+{
+    NSString *reqString = [NSString stringWithFormat:@"%@%@?story_id=%@%@", [updatedConstants api_babbage_baseURL], api_babbage_stories_endpoint, story.stringId, values];
+    
+    NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:reqString]];
+    
+    req.HTTPMethod = @"PUT";
+    
+    [NSURLConnection sendAsynchronousRequest:req queue:self.dataOpQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        
+        NSHTTPURLResponse *resp = (NSHTTPURLResponse*)response;
+        
+        if (resp.statusCode == 200 || resp.statusCode == 201) {
+            [self.delegate didUpdateValuesForStory:story];
+        }
+        else
+        {
+            NSLog(@"\nOOPS\n");
+        }
+        
+        
+    }];
 }
 @end

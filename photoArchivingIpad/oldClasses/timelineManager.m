@@ -8,6 +8,7 @@
 
 #import "timelineManager.h"
 #import <math.h>
+#import <POP.h>
 
 #define HORIZONTALMOD 8.0
 #define DISTANCETHRESHOLD 50.0
@@ -127,9 +128,31 @@
         
         theFrame.center = theCenter;
         
-//        [theFrame.theImage setImageWithURL:img.thumbNailURL];
+        theFrame.alpha = 0.0;
+        
         [theFrame.theImage sd_setImageWithURL:img.thumbNailURL];
+        
         [_TLView addSubview:theFrame];
+        
+        [theFrame.theImage sd_setImageWithURL:img.thumbNailURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+            theFrame.theImage.image = image;
+            
+            
+            POPSpringAnimation *scaleAni = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+            
+            scaleAni.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.3, 0.3)];
+            scaleAni.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+            
+            POPSpringAnimation *alphaAni = [POPSpringAnimation animationWithPropertyNamed:kPOPViewAlpha];
+            
+            alphaAni.toValue = @(1.0);
+            
+            [theFrame.layer pop_addAnimation:scaleAni forKey:@"scaleAni"];
+            [theFrame pop_addAnimation:alphaAni forKey:@"alphaAni"];
+        }];
+        
+        
         
     }
     

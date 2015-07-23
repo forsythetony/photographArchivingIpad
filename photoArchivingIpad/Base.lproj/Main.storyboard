@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="aio-EE-f8L">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="aio-EE-f8L">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Landing Page View Controller-->
@@ -204,7 +205,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" patternImage="E619CF8A-F116-4735-8F59-1A49B95CA3F6" colorSpace="pattern"/>
+                                        <color key="backgroundColor" patternImage="3B55A6A3-C9E9-4D51-BB03-B1CB625458E5" colorSpace="pattern"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -242,6 +243,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bz3-vR-drn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1326" y="-490"/>
+        </scene>
+        <!--Image Displayer-->
+        <scene sceneID="3LC-Nc-gtn">
+            <objects>
+                <viewController storyboardIdentifier="imageDisplayer" id="ODl-1Z-qeJ" customClass="TFImageDisplayer" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3A9-6N-i9p"/>
+                        <viewControllerLayoutGuide type="bottom" id="vBR-Y1-CUj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="k2F-Fa-OXf">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="10" translatesAutoresizingMaskIntoConstraints="NO" id="a5N-cV-CN3">
+                                <rect key="frame" x="20" y="0.0" width="984" height="768"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="a5N-cV-CN3" secondAttribute="trailing" id="Mfw-oh-alf"/>
+                            <constraint firstItem="a5N-cV-CN3" firstAttribute="top" secondItem="k2F-Fa-OXf" secondAttribute="topMargin" id="UeV-59-gOL"/>
+                            <constraint firstItem="vBR-Y1-CUj" firstAttribute="top" secondItem="a5N-cV-CN3" secondAttribute="bottom" id="ohA-Vd-STh"/>
+                            <constraint firstItem="a5N-cV-CN3" firstAttribute="leading" secondItem="k2F-Fa-OXf" secondAttribute="leadingMargin" id="pEe-AR-h0W"/>
+                        </constraints>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="mainScrollView" destination="a5N-cV-CN3" id="Qel-yd-4ih"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iTL-LU-Hj1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2541" y="-551"/>
         </scene>
         <!--Photo Uploading View Controllerv2-->
         <scene sceneID="DLf-PI-Tyq">
@@ -366,8 +401,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CollageThing_light.jpg" width="1920" height="1080"/>
-        <image name="E619CF8A-F116-4735-8F59-1A49B95CA3F6" width="320" height="460">
+        <image name="3B55A6A3-C9E9-4D51-BB03-B1CB625458E5" width="320" height="460">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -10254,6 +10288,7 @@ CQq/AAkKxAAJCswACQrPAAkK1AAJCtwACQrfAAkK8QAJCvQACQr5AAAAAAAABAEAAAAAAAAAQgAAAAAA
 AAAAAAAAAAAJCvs
 </mutableData>
         </image>
+        <image name="CollageThing_light.jpg" width="1920" height="1080"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

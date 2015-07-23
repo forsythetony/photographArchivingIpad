@@ -103,8 +103,7 @@ NSString * const contentTypePNG = @"image/PNG";
 
 + (NSString *)transferManagerBucket
 {
-    NSDictionary *environment = [[NSProcessInfo processInfo] environment];
-    return [[NSString stringWithFormat:@"%@-%@", S3TRANSFERMANAGER_BUCKET, environment[@"AMAZON_ACCESS_KEY"]] lowercaseString];
+    return [[NSString stringWithFormat:@"%@-%@", S3TRANSFERMANAGER_BUCKET, @"AKIAJ7TRHRICO7YAEJNA"] lowercaseString];
 }
 
 
@@ -191,9 +190,7 @@ NSString * const contentTypePNG = @"image/PNG";
 }
 +(NSString*)api_babbage_baseURL
 {
-    NSDictionary *env = [[NSProcessInfo processInfo] environment];
-    
-    return env[@"BABBAGE_API_URL"];
+    return @"http://babbage.cs.missouri.edu/~arfv2b/photoArchiving";
 
 }
 +(NSString*)api_ec2_baseURL

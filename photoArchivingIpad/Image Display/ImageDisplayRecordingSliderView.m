@@ -147,7 +147,7 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
     recSliderLabel = relLabel;
     
     
-    sliderLineView.layer.cornerRadius = CORNERRADIUS;
+    sliderLineView.layer.cornerRadius = sliderLineHeight / 2.0;
     
     return sliderLineView;
 }
@@ -207,7 +207,7 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
     [recordingSlider addGestureRecognizer:panGestureRecognizer];
     [recordingSlider addGestureRecognizer:tapGest];
     
-    recordingSlider.layer.cornerRadius = CORNERRADIUS;
+    recordingSlider.layer.cornerRadius = recSliderHeight / 2.0;
     
     return recordingSlider;
     
@@ -426,10 +426,11 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
     
     
     [recSliderLabel.layer pop_addAnimation:shrinkAni forKey:@"shrinkMe111"];
-    [recSlider pop_addAnimation:colorChange forKey:@"colorC11"];
+    //[recSlider pop_addAnimation:colorChange forKey:@"colorC11"];
     
     recSliderLabel.text = @"Slide to Record";
     
+    [self stopTimer];
     
     isSliderLocker = NO;
     
@@ -469,6 +470,7 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
     
     recSliderLabel.text = @"Recording";
     
+    [self startTimer];
     
     isSliderLocker = YES;
 }

@@ -16,6 +16,10 @@
 #import "TATriggerFrame.h"
 #import "HTGCTextChannel.h"
 #import <AVFoundation/AVFoundation.h>
+#import "TFPopOverBasicView.h"
+#import "TFChromecastManager.h"
+#import "TFImageDisplayer.h"
+
 
 #define TLWALLSPACING 100.0
 #define MAINSCROLLVIEWSIZE 10000.0
@@ -40,6 +44,8 @@ typedef struct tScrollTriggerArea {
 static NSString* segueDisplayLargeImage = @"showLargeImageDisplay";
 static NSString* kReceiverAppID         = @"94B7DFA1";
 
+NSString* const WORKSPACEVC_ANI_SHOW_RIGHT_PANEL = @"showrightpanelanimation";
+
 @interface WorkspaceViewController ()
 <
     StoryTellerCreationFormDelegate,
@@ -48,7 +54,10 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     TATriggerFrameDelegate,
     ImageDisplayDelegate,
     AVAudioPlayerDelegate,
-    imageObjectDelegate
+    imageObjectDelegate,
+TFChromecastManagerDelegate,
+TFPopOverViewDelegate,
+TFImageDisplayerDelegate
 >
 {
     
@@ -131,6 +140,12 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     NSTimer *updateLineColorTimer, *incompleteTimer;
     
     AVAudioSession* currentAudioSession;
+    
+    imageObject *selectedImageObject;
+    
+    BOOL    isShowingRightPanel;
+    
+    TFPopOverBasicView  *rightPanel;
 }
 
 @property GCKMediaControlChannel *mediaControlChannel;
@@ -140,6 +155,8 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
 @property(nonatomic, strong) UIButton *chromecastButton;
 @property(nonatomic, strong) GCKDeviceManager *deviceManager;
 @property(nonatomic, readonly) GCKMediaInformation *mediaInformation;
+
+@property (nonatomic, strong) TFChromecastManager *chromecastman;
 
 @end
 
@@ -298,6 +315,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     self.view.backgroundColor   =[UIColor clearColor];
     self.title                  = @"Timeline";
     
+    isShowingRightPanel = NO;
     
     if (!self.timelineDateRange) {
         
@@ -467,7 +485,9 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
     [self initialSetup];
     
-    [self chromecastThings];
+    if ([TFSettings TFShouldUseChromecast]) {
+        [self chromecastThings];
+    }
     
     NSLog(@"ViewdidLoad");
     [self printFrameData];
@@ -933,6 +953,10 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
                      action:@selector(handleTapFrom:)];
         
         
+        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressFrom:)];
+        longPress.minimumPressDuration = 4.0;
+        
+        [theFrame addGestureRecognizer:longPress];
         
         UITapGestureRecognizer *doubleTap = [UITapGestureRecognizer new];
         
@@ -949,6 +973,18 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         
     }
     
+}
+-(void)handleLongPressFrom:(id) t_sender
+{
+    UILongPressGestureRecognizer *longPress = (UILongPressGestureRecognizer*)t_sender;
+    
+    pictureFrame* frame = (pictureFrame*)[t_sender view];
+    
+
+    if (longPress.state == UIGestureRecognizerStateBegan) {
+        
+        [mainDataCom deletePhoto:frame.imageObject];
+    }
 }
 -(void)handleImageSectionFrom:(id) sender
 {
@@ -978,8 +1014,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     
     [self.view bringSubviewToFront:[(UIPanGestureRecognizer*)sender view]];
     
-    CGPoint translatedPoint = [(UIPanGestureRecognizer*)sender translationInView:self.view];
-    
+    CGPoint translatedPoint = [(UIPanGestureRecognizer*)sender translationInView:mainScrollView];
     
     if ([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateBegan) {
         
@@ -993,25 +1028,52 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         [self addDateUpdateDayLabelForFrame:grabbedFrame];
     }
     
-    //CGFloat transMod = 1.0;
-    
     translatedPoint = CGPointMake(firstX + translatedPoint.x, firstY + translatedPoint.y);
     
    // NSLog(@"\n\nOld point:\t%@\n", NSStringFromCGPoint(translatedPoint));
 
+    CGPoint somePoint = [self.view convertPoint:translatedPoint fromView:mainScrollView];
+
     
-    
-    //NSLog(@"New point:\t%@\n", NSStringFromCGPoint(translatedPoint));
+    NSLog(@"New point:\t%@\n", NSStringFromCGPoint(translatedPoint));
+    NSLog(@"Content Offset:\t%@\n", NSStringFromCGPoint(mainScrollView.contentOffset));
     
     
     if (!finishedMoving) {
         pictureFrame *newFrame = (pictureFrame*)[(UIPanGestureRecognizer*)sender view];
+        /*
+        CGFloat offsetter = 400.0;
         
+        CGPoint contentOffset = mainScrollView.contentOffset;
+        if (somePoint.x >= 0 && somePoint.x <= 200.0) {
+            
+            
+            
+            if ((contentOffset.x - offsetter) >= 0.0) {
+                
+                [UIView animateWithDuration:1.0 animations:^{
+                    [mainScrollView setContentOffset:CGPointMake(contentOffset.x - offsetter, contentOffset.y)];
+                }];
+            }
+        }
+        else if (somePoint.x >= mainScrollView.frame.size.width - 200.0 && somePoint.x <= mainScrollView.frame.size.width)
+        {
+            if ((contentOffset.x + offsetter) < mainScrollView.contentSize.width - mainScrollView.frame.size.width)
+            {
+                [UIView animateWithDuration:1.0 animations:^{
+                    [mainScrollView setContentOffset:CGPointMake(contentOffset.x + offsetter, contentOffset.y)];
+                }];
+                
+            }
+        }
+        */
         [[sender view] setCenter:translatedPoint];
         [self updateDateLineWithFrame:newFrame];
         [self updateDateUpdaterLabelWithFrame:newFrame];
         [self updateDayLabelForFrame:newFrame];
         ;
+        
+        
     }
     
     [self findPointInView:translatedPoint];
@@ -1069,7 +1131,6 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         
         CGFloat animationDuration = (ABS(velocityX) * .0002) + .2;
         
-        //NSLog(@"the duration is: %f", animationDuration);
         
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:animationDuration];
@@ -1102,107 +1163,28 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
 {
     
     pictureFrame *frame = (pictureFrame*)[recognizer view];
-    
+
     [TLManager.TLView bringSubviewToFront:frame];
     
     
     imageObject *obj = frame.imageObject;
+    selectedImageObject = obj;
+    CGPoint centerInView = [self.view convertPoint:frame.center fromView:mainScrollView];
     
-    NSURL *fullSizeURL = obj.photoURL;
-    
-    CGFloat displayedImageWidth = self.displayedImage.frame.size.width;
-    CGFloat displayedImageHeight = self.displayedImage.frame.size.height;
-    
-    
-    
-    
-    
-    
-    /*
-    __weak typeof(self) weakSelf = self;
+    if (!isShowingRightPanel) {
+        if (centerInView.x >= mainScrollView.frame.size.width - 300.0) {
+            
+            CGFloat offsetter = centerInView.x - (mainScrollView.frame.size.width - 300.0) + frame.frame.size.width;
+            
+            [UIView animateWithDuration:0.75 animations:^{
+                [mainScrollView setContentOffset:CGPointMake(mainScrollView.contentOffset.x + offsetter, mainScrollView.contentOffset.y)];
+            }];
+        }
 
-    [_displayedImage sd_setImageWithURL:fullSizeURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        float sizeDelta = 10.0;
-        
-        
-        POPSpringAnimation *imageSizeChange = [POPSpringAnimation animation];
-        
-        imageSizeChange.property = [POPAnimatableProperty propertyWithName:kPOPViewSize];
-        
-        imageSizeChange.fromValue = [NSValue valueWithCGSize:CGSizeMake(displayedImageWidth - sizeDelta, displayedImageHeight - sizeDelta)];
-        
-        imageSizeChange.toValue = [NSValue valueWithCGSize:CGSizeMake(displayedImageWidth, displayedImageHeight)];
-        
-        [weakSelf pop_addAnimation:imageSizeChange forKey:@"imageResizeLarger"];
-        
-        POPSpringAnimation *alphaChange = [POPSpringAnimation animation];
-        
-        alphaChange.property = [POPAnimatableProperty propertyWithName:kPOPViewAlpha];
-        
-        alphaChange.fromValue = @(0.0);
-        alphaChange.toValue = @(1.0);
-        
-        [weakSelf pop_addAnimation:alphaChange forKey:@"alphaChange"];
-    }];
-    */
-    
-    /*
-    [_displayedImage setImageWithURL:fullSizeURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-        
-        float sizeDelta = 10.0;
-        
-        
-        POPSpringAnimation *imageSizeChange = [POPSpringAnimation animation];
-        
-        imageSizeChange.property = [POPAnimatableProperty propertyWithName:kPOPViewSize];
-        
-        imageSizeChange.fromValue = [NSValue valueWithCGSize:CGSizeMake(displayedImageWidth - sizeDelta, displayedImageHeight - sizeDelta)];
-        
-        imageSizeChange.toValue = [NSValue valueWithCGSize:CGSizeMake(displayedImageWidth, displayedImageHeight)];
-        
-        [weakSelf pop_addAnimation:imageSizeChange forKey:@"imageResizeLarger"];
-        
-        POPSpringAnimation *alphaChange = [POPSpringAnimation animation];
-        
-        alphaChange.property = [POPAnimatableProperty propertyWithName:kPOPViewAlpha];
-        
-        alphaChange.fromValue = @(0.0);
-        alphaChange.toValue = @(1.0);
-        
-        [weakSelf pop_addAnimation:alphaChange forKey:@"alphaChange"];
-        
-        
-        
-        
-        
-    }];
-     
-    
-    NSString *deviceType = [UIDevice currentDevice].model;
-    
-    for (pictureFrame* frm in photoList) {
-        
-        if (frm != frame) {
-            [frm stopAllTheGlowing];
-        }
-        else
-        {
-            [frm largeResize];
-        }
     }
     
-    //  This function sends the image to the chromecast
+    [self setPanelImageObject:obj];
     
-    if (self.deviceManager.isConnected) {
-        [self sendImage:frame.imageObject];
-    }
-    
-    if (![deviceType isEqualToString:@"iPhone"]) {
-        [self displayInformationForImage:frame.imageObject];
-    }
-    
-    [_infPager updateImageInformation:frame.imageObject];
-     */
     
 }
 -(void)displayInformationForImage:(imageObject*) obj
@@ -1313,9 +1295,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
                                 completionBlock:nil];
     
     
-    //UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Updated!" message:notificationString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
     
-    //[alert show];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [self showTempAlertWithTitle:@"Updated" andMessage:notificationString];
@@ -1386,8 +1366,6 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
 {
     
     NSTimeInterval interval = [date timeIntervalSinceDate:[NSDate referenceDate]];
-    
-    //NSLog(@"\nThe time interval is: %f\n", interval);
     
     return interval;
     
@@ -1591,13 +1569,13 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         
         if (CGRectContainsPoint(scrollTrigger.leftTrigger, newPoint)) {
             
-           // NSLog(@"%@", @"LEFT TRIGGER");
+            NSLog(@"%@", @"LEFT TRIGGER");
             
             
         }
         else if (CGRectContainsPoint(scrollTrigger.rightTrigger, newPoint))
         {
-            //NSLog(@"%@", @"RIGHT TRIGGER");
+            NSLog(@"%@", @"RIGHT TRIGGER");
             
             
             
@@ -1861,11 +1839,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     self.navigationItem.rightBarButtonItem =
     [[UIBarButtonItem alloc] initWithCustomView:_chromecastButton];
     
-    //Initialize device scanner
-    self.deviceScanner = [[GCKDeviceScanner alloc] init];
-    
-    [self.deviceScanner addListener:self];
-    [self.deviceScanner startScan];
+    [self.chromecastman beginScanning];
 }
 
 #pragma mark Updating Things
@@ -1876,7 +1850,8 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
     }
 }
 - (void)updateButtonStates {
-    if (self.deviceScanner.devices.count == 0) {
+    
+    if (self.chromecastman.deviceCount == 0) {
         //Hide the cast button
         _chromecastButton.hidden = YES;
     } else {
@@ -1884,7 +1859,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         [_chromecastButton setImage:_btnImage forState:UIControlStateNormal];
         _chromecastButton.hidden = NO;
         
-        if (self.deviceManager && self.deviceManager.isConnected) {
+        if (self.chromecastman.isConnected) {
             //Show cast button in enabled state
             [_chromecastButton setTintColor:[UIColor fadedBlueColor]];
         } else {
@@ -1900,7 +1875,7 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
 
 - (void)chooseDevice:(id)sender {
     //Choose device
-    if (self.selectedDevice == nil) {
+    if (self.chromecastman.selectedDevice == nil) {
         //Choose device
         UIActionSheet *sheet =
         [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Connect to Device", nil)
@@ -1909,7 +1884,8 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
                       destructiveButtonTitle:nil
                            otherButtonTitles:nil];
         
-        for (GCKDevice *device in self.deviceScanner.devices) {
+        for (GCKDevice *device in self.chromecastman.devicelist) {
+            NSLog(@"\n\nDevice Name: %@\n\n", device.friendlyName);
             [sheet addButtonWithTitle:device.friendlyName];
         }
         
@@ -1923,8 +1899,8 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         [self updateStatsFromDevice];
         
         NSString *friendlyName = [NSString stringWithFormat:NSLocalizedString(@"Casting to %@", nil),
-                                  self.selectedDevice.friendlyName];
-        
+                                  self.chromecastman.selectedDevice];
+        /*
         NSString *mediaTitle = [self.mediaInformation.metadata stringForKey:kGCKMetadataKeyTitle];
         
         UIActionSheet *sheet = [[UIActionSheet alloc] init];
@@ -1940,7 +1916,9 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
         sheet.destructiveButtonIndex = (mediaTitle != nil ? 1 : 0);
         sheet.cancelButtonIndex = (mediaTitle != nil ? 2 : 1);
         
+
         [sheet showInView:_chromecastButton];
+        */
     }
 }
 
@@ -2164,11 +2142,10 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     
     
-    if (self.selectedDevice == nil) {
-        if (buttonIndex < self.deviceScanner.devices.count) {
-            self.selectedDevice = self.deviceScanner.devices[buttonIndex];
-            NSLog(@"Selecting device:%@", self.selectedDevice.friendlyName);
-            [self connectToDevice];
+    if (self.chromecastman.selectedDevice == nil) {
+        if (buttonIndex < self.chromecastman.deviceCount) {
+            
+            [self.chromecastman selectDeviceAtIndex:buttonIndex];
         }
     } else {
         
@@ -2179,12 +2156,9 @@ static NSString* kReceiverAppID         = @"94B7DFA1";
             NSLog(@"Disconnecting device:%@", self.selectedDevice.friendlyName);
             // New way of doing things: We're not going to stop the applicaton. We're just going
             // to leave it.
-            [self.deviceManager leaveApplication];
-            // If you want to force application to stop, uncomment below
-            //[self.deviceManager stopApplicationWithSessionID:self.applicationMetadata.sessionID];
-            [self.deviceManager disconnect];
             
-            [self deviceDisconnected];
+            [self.chromecastman disconnect];
+            
             [self updateButtonStates];
             
         } else if (buttonIndex == 0) {
@@ -2254,7 +2228,7 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
 
 -(void)mediaControlChannelDidUpdateStatus:(GCKMediaControlChannel *)mediaControlChannel {
 
-    if( mediaControlChannel.mediaStatus.idleReason == GCKMediaPlayerIdleReasonFinished) {
+    if(mediaControlChannel.mediaStatus.idleReason == GCKMediaPlayerIdleReasonFinished) {
         
         if (imageSent) {
             if (prevImage) {
@@ -2789,7 +2763,8 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
     
     updatingImageObject = pFrameData;
     
-    [mainDataCom updateBabbagePhotoDateWithImagePackage:newPackage];
+//    [mainDataCom updateBabbagePhotoDateWithImagePackage:newPackage];
+    [mainDataCom updatePhotoDateWithImagePackage:newPackage];
     
 }
 -(void)changeToGreen
@@ -2807,7 +2782,7 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
     
     [dateUpdaterLine pop_addAnimation:aniLine forKey:@"ani"];
     [dateUpdaterLabel pop_addAnimation:ani forKey:@"aniLabel"];
-    incompleteTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(tearItAllDown) userInfo:nil repeats:NO];
+    incompleteTimer = [NSTimer scheduledTimerWithTimeInterval:0.7 target:self selector:@selector(tearItAllDown) userInfo:nil repeats:NO];
 }
 -(void)changeToRed
 {
@@ -2816,7 +2791,7 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
     [updateLineColorTimer invalidate];
     updateLineColorTimer = nil;
     
-    incompleteTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(tearItAllDown) userInfo:nil repeats:NO];
+    incompleteTimer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(tearItAllDown) userInfo:nil repeats:NO];
 }
 -(void)tearItAllDown
 {
@@ -2883,7 +2858,6 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
     
     return dampenedPoint;
 }
-
 -(CGFloat)findDampFactorWithYPoint:(CGFloat) point
 {
     CGFloat newPoint = 1.0;
@@ -2901,5 +2875,165 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
     NSLog(@"\nDamp Factor:\t%f\n", newPoint);
     
     return newPoint;
+}
+
+
+#pragma mark - TFChromecastManagerThings
+-(void)didConnectToDevice
+{
+    [self updateButtonStates];
+}
+-(void)didUpdateDeviceList:(TFChromecastManager *)t_manager
+{
+    
+    [self updateButtonStates];
+}
+#pragma mark Getter
+-(TFChromecastManager *)chromecastman
+{
+    if (!_chromecastman) {
+        _chromecastman = [TFChromecastManager sharedManager];
+        _chromecastman.delegate = self;
+    }
+    
+    return _chromecastman;
+}
+
+#pragma mark - Panel
+
+#pragma mark Setup
+-(void)setPanelImageObject:(imageObject*) t_img
+{
+    if (isShowingRightPanel) {
+        [rightPanel hideThings];
+        [rightPanel setImg:t_img];
+    }
+    else
+    {
+        [self showRightPanel];
+        [rightPanel animateThings];
+    }
+}
+-(void)showRightPanel
+{
+    if (!isShowingRightPanel) {
+        CGFloat width_panelView = 300.0;
+        
+        CGRect frame_old_scrollview = mainScrollView.frame;
+        
+        CGRect frame_new_scrollView = frame_old_scrollview;
+        
+        frame_new_scrollView.size.width -= width_panelView;
+        
+        
+        POPSpringAnimation *scrollViewWidthAni = [POPSpringAnimation animationWithPropertyNamed:kPOPViewFrame];
+        
+        scrollViewWidthAni.fromValue = [NSValue valueWithCGRect:frame_old_scrollview];
+        scrollViewWidthAni.toValue = [NSValue valueWithCGRect:frame_new_scrollView];
+        
+        
+        //  Create Right Image View
+        CGRect frame_popOver;
+        
+        frame_popOver.origin.x = mainScrollView.frame.origin.x + (mainScrollView.frame.size.width - width_panelView);
+        frame_popOver.origin.y = 0.0;
+        frame_popOver.size.width = width_panelView;
+        frame_popOver.size.height = mainScrollView.frame.size.height;
+        
+        rightPanel = [[TFPopOverBasicView alloc] initWithFrame:frame_popOver];
+        rightPanel.backgroundColor = [UIColor wheatColor];
+        rightPanel.delegate = self;
+        
+        [self.view insertSubview:rightPanel belowSubview:mainScrollView];
+        
+        [rightPanel setImg:selectedImageObject];
+        
+        NSLog(@"\n\nScroll Content Offset:\t%@\n\n", NSStringFromCGPoint(mainScrollView.contentOffset));
+        
+
+        [mainScrollView pop_addAnimation:scrollViewWidthAni forKey:WORKSPACEVC_ANI_SHOW_RIGHT_PANEL];
+        
+        isShowingRightPanel = YES;
+    }
+    
+}
+#pragma mark Delegate
+-(void)shouldHidePanel:(TFPopOverBasicView *)t_panel
+{
+    if (isShowingRightPanel) {
+        
+        POPSpringAnimation *hide_panel_ani = [POPSpringAnimation animationWithPropertyNamed:kPOPViewFrame];
+        
+        CGRect  scroll_old_frame = mainScrollView.frame;
+        CGRect  scroll_new_frame = scroll_old_frame;
+        scroll_new_frame.size.width += 300.0;
+        
+        
+        hide_panel_ani.toValue = [NSValue valueWithCGRect:scroll_new_frame];
+        
+        [self.view bringSubviewToFront:mainScrollView];
+        
+        [hide_panel_ani setCompletionBlock:^(POPAnimation *ani, BOOL yn) {
+            
+            [rightPanel removeFromSuperview];
+            rightPanel = nil;
+            isShowingRightPanel = NO;
+        }];
+        
+        
+        [mainScrollView pop_addAnimation:hide_panel_ani forKey:@"hidepanelani"];
+    }
+}
+-(void)finishedDeletingImage:(imageObject *)t_imageObject
+{
+    pictureFrame *mainframe = nil;
+    
+    for (int i = 0; i < photoList.count; i++) {
+        
+        pictureFrame *frame = photoList[i];
+        
+        if (frame.imageObject == t_imageObject) {
+            mainframe = frame;
+        }
+    }
+    
+    if (mainframe) {
+        [self deleteFrame:mainframe];
+    }
+    
+}
+-(void)deleteFrame:(pictureFrame*) t_frame
+{
+    POPSpringAnimation *scaleAni = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+    
+    scaleAni.toValue = [NSValue valueWithCGSize:CGSizeZero];
+    
+    [scaleAni setCompletionBlock:^(POPAnimation *ani, BOOL y) {
+        
+        NSMutableArray *arr = [NSMutableArray arrayWithArray:photoList];
+        
+        [arr removeObject:t_frame];
+        
+        photoList = [NSArray arrayWithArray:arr];
+    }];
+    
+    [t_frame.layer pop_addAnimation:scaleAni forKey:@"scaleAni"];
+}
+-(void)didDoubleTapImage:(TFPopOverBasicView *)t_panel
+{
+    TFImageDisplayer *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"imageDisplayer"];
+    
+    vc.delegate = self;
+    
+    [self presentViewController:vc animated:YES completion:^{
+        [vc setImage:t_panel.img];
+    }];
+    
+}
+-(void)TFImageDisplayerShouldDismiss:(TFImageDisplayer *)t_displayer
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 @end

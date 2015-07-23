@@ -15,7 +15,10 @@
 
 
 -(void)didFinishUpdatingImageWithCode:(NSInteger) code;
-
+-(void)didFinishPopulatingStories:(id) imgObject;
+-(void)didFinishAddingStoryWithSuccess:(BOOL) t_success;
+-(void)shouldUpdateStories;
+-(void)didFinishDeletingStoryAtIndex:(NSInteger) t_index;
 
 @end
 @interface imageObject : NSObject
@@ -43,9 +46,12 @@
 @property (nonatomic, strong) NSDictionary *imageInformation;
 @property (nonatomic, strong) NSNumber* centerXoffset;
 
+-(void)populateStories;
 
 -(NSMutableDictionary*)informationAsMutableDictionary;
 
 -(void)addStory:(Story*) newStory;
-
+-(void)deleteStoryWithId:(NSString*) t_id;
+-(void)deleteStoryAtIndex:(NSInteger) t_index;
+-(void)localDeleteStoryAtIndex:(NSInteger) t_index;
 @end

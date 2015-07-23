@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="117" id="KGk-i7-Jjw" customClass="TFPopOverStoriesCell">
+            <rect key="frame" x="0.0" y="0.0" width="309" height="117"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZBO-2h-oWg">
+                        <rect key="frame" x="197" y="15" width="77" height="30"/>
+                        <state key="normal" title="Play">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="playToggle:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="pLC-HQ-60d"/>
+                        </connections>
+                    </button>
+                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ujx-uj-DPN">
+                        <rect key="frame" x="0.0" y="0.0" width="309" height="2"/>
+                    </progressView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Uploaded:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jNz-Qp-zfe">
+                        <rect key="frame" x="8" y="48" width="141" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Storyteller:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F3E-UK-yke">
+                        <rect key="frame" x="8" y="77" width="141" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="xx/xx/xx" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XJ8-bC-VQj" userLabel="xx/xx/xx">
+                        <rect key="frame" x="157" y="47" width="144" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sr9-q6-zys">
+                        <rect key="frame" x="8" y="15" width="201" height="30"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FQc-70-2jU">
+                        <rect key="frame" x="157" y="74" width="144" height="30"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="ujx-uj-DPN" secondAttribute="trailing" id="3H6-Te-b4I"/>
+                    <constraint firstItem="ujx-uj-DPN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="b07-2e-01w"/>
+                    <constraint firstItem="ujx-uj-DPN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="pHZ-c2-p1l"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="action_button" destination="ZBO-2h-oWg" id="y7F-Bc-Wdz"/>
+                <outlet property="progress_view" destination="ujx-uj-DPN" id="YNf-dB-QUb"/>
+                <outlet property="title_date_uploaded" destination="jNz-Qp-zfe" id="NIN-mF-aPM"/>
+                <outlet property="title_storyteller" destination="F3E-UK-yke" id="1fs-re-rbg"/>
+                <outlet property="title_text_field" destination="Sr9-q6-zys" id="kx7-Lk-rc5"/>
+                <outlet property="value_date_uploaded" destination="XJ8-bC-VQj" id="F0n-SC-oVi"/>
+                <outlet property="value_storyteller" destination="FQc-70-2jU" id="utQ-Se-4AF"/>
+            </connections>
+            <point key="canvasLocation" x="282.5" y="291.5"/>
+        </tableViewCell>
+    </objects>
+</document>

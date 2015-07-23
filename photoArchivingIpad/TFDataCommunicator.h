@@ -46,11 +46,18 @@ typedef NS_ENUM(NSInteger, serverResponseType) {
 -(void)finishedDeletingStoryWithStatusCode:(NSInteger) statusCode;
 -(void)finishedUpdatingPhotoWithStatusCode:(NSInteger) statusCode;
 -(void)finishedUpdatingPhotoDateWithStatusCode:(NSInteger) statusCode;
+-(void)finishedAddingStoryWithNewId:(NSString*) t_newID;
+-(void)finishedDeletingStoryWithID:(NSString*) t_id didDelete:(BOOL) t_didDelete;
+-(void)didUpdateValuesForStory:(Story*) t_story;
+-(void)finishedDeletingImage:(imageObject*) t_imageObject;
+
 @end
 
 
 @interface TFDataCommunicator : NSObject
 
+
++(id)sharedCommunicator;
 
 //
 //  PROPERTIES
@@ -100,6 +107,8 @@ typedef NS_ENUM(NSInteger, serverResponseType) {
 -(void)addStoryToImage:(Story*) aStory imageObject:(imageObject*) theImage;
 -(void)removeStoryFromImage:(imageObject*) theImage withStoryID:(NSString*) storyID;
 -(void)pullStoriesListForPhoto:(NSString*) photo_id;
+-(void)deleteStoryWithID:(NSString*) story_id;
+-(void)updateStory:(Story*) story withUpdatedValues:(NSString*) values;
 
 //
 //  Users

@@ -28,6 +28,7 @@
 #import "ImageInformationDisplayer.h"
 #import "DateRange.h"
 #import <google-cast-sdk/GoogleCast.h>
+#import "TFSettings.h"
 
 
 @class imageInfoPagerVC;
