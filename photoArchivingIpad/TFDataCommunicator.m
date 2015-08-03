@@ -14,6 +14,9 @@
 #import <AWSRuntime/AWSRuntime.h>
 #import <AWSS3/AWSS3.h>
 #import "Story+Converters.h"
+#import "TFImageCollection.h"
+#import "TFImageCollection+Converters.h"
+#import "TFCollectionImageListItem.h"
 
 @interface TFDataCommunicator () <AmazonServiceRequestDelegate>
 {
@@ -33,7 +36,28 @@
 @property (nonatomic, strong) NSOperationQueue *dataOpQueue;
 @end
 
+static BOOL isValidResponseCode(NSUInteger responseCode)
+{
+    return (responseCode == 200 || responseCode == 201);
+}
 
+static NSString* const EC2_BASE_URL = @"http://ec2-52-25-109-217.us-west-2.compute.amazonaws.com";
+
+@implementation NSString (URLS)
+
++(NSString *)EC2CollectionsEndpoint
+{
+    return [NSString stringWithFormat:@"%@/photoarchiving/collections.php", EC2_BASE_URL];
+}
++(NSString *)EC2PhotosEndpoint
+{
+    return [NSString stringWithFormat:@"%@/photoarchiving/photos.php", EC2_BASE_URL];
+}
++(NSString *)EC2StoriesEndpoint
+{
+    return [NSString stringWithFormat:@"%@/photoarchiving/stories.php", EC2_BASE_URL];
+}
+@end
 @implementation TFDataCommunicator
 -(NSOperationQueue *)dataOpQueue
 {
@@ -94,35 +118,10 @@
         
     }
 }
-/*
- -(void)uploadPhoto:(UIImage *)photo withInformation:(NSDictionary *)information
-{
-    if (self.fileUpload == nil || (self.fileUpload.isFinished && !self.fileUpload.isPaused)) {
-        
-        NSFileManager *fm = [NSFileManager defaultManager];
-        
-        NSData *imageData = UIImageJPEGRepresentation(photo, 1.0);
-        
-        NSString *photoKey = [NSString stringWithFormat:@"%@_%@", information[keyTitle], information[keyDateUploaded]];
-        
-        S3PutObjectRequest *req = [[S3PutObjectRequest alloc] initWithKey:photoKey inBucket:[updatedConstants transferManagerBucket]];
-        req.data = imageData;
-        req.contentType = @"image/jpeg";
-        req.cannedACL = [S3CannedACL publicRead];
-        NSMutableDictionary *newDict = [NSMutableDictionary dictionaryWithDictionary:information];
-        
-        [newDict removeObjectForKey:keyImage];
-        _tempSaveDict = information;
-        
-        req.metadata = newDict;
-        self.fileUpload = [self.tm upload:req];
-    }
-}
-*/
 -(void)deletePhoto:(imageObject *)photo
 {
     if (photo.id) {
-       NSString *reqString = [NSString stringWithFormat:@"%@%@?photo_id=%@", [updatedConstants api_babbage_baseURL], api_babbage_photos_endpoint, photo.id];
+       NSString *reqString = [NSString stringWithFormat:@"%@?photo_id=%@", [NSString EC2PhotosEndpoint], photo.id];
         
         NSURL           *urlObject  = [NSURL URLWithString:reqString];
         
@@ -136,7 +135,7 @@
             
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
             
-            if (httpResponse.statusCode == 200) {
+            if (isValidResponseCode(httpResponse.statusCode)) {
                 
                 NSLog(@"Deleted");
                 
@@ -520,13 +519,9 @@
 
 -(void)getPhotosForUser:(NSString *)username
 {
-    
-//    NSString        *urlString  = [NSString stringWithFormat:@"%@%@?forUser=%@", (USELOCALHOST ? api_localhostBaseURL : [updatedConstants api_ec2_baseURL]), api_photosEndpoint, username];
     username = @"forsythetony";
     
-    NSString *babbage_urlString = [NSString stringWithFormat:@"%@%@?user_id=%@", [updatedConstants api_babbage_baseURL], api_babbage_photos_endpoint, username];
-    
-   // NSString *urlString = @"http://localhost:3000/photos?forUser=forsythetony";
+    NSString *babbage_urlString = [NSString stringWithFormat:@"%@?username=%@", [NSString EC2PhotosEndpoint], username];
     
     
     NSURL           *url        = [NSURL URLWithString:babbage_urlString];
@@ -539,7 +534,7 @@
         
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
         
-        if (httpResponse.statusCode == 201 && data ) {
+        if (isValidResponseCode(httpResponse.statusCode) && data ) {
             [self parsePhotosFromData:data];
         }
         
@@ -547,7 +542,7 @@
 }
 -(void)pullStoriesListForPhoto:(NSString *)photo_id
 {
-    NSString *babbage_urlString = [NSString stringWithFormat:@"%@%@?photo_id=%@", [updatedConstants api_babbage_baseURL], api_babbage_stories_endpoint, photo_id];
+    NSString *babbage_urlString = [NSString stringWithFormat:@"%@?photo_id=%@", [NSString EC2StoriesEndpoint], photo_id];
     
     NSURL           *url        = [NSURL URLWithString:babbage_urlString];
     NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:url];
@@ -853,7 +848,7 @@
 {
     NSDate *date = [photo dateTaken];
 
-    NSString *urlString = [NSString stringWithFormat:@"%@%@?photo_id=%@&date_taken=%@", [updatedConstants api_babbage_baseURL], api_babbage_photos_endpoint, photo.imageID, [date displayDateOfType:sDateTypeBabbageURL]];
+    NSString *urlString = [NSString stringWithFormat:@"%@?photo_id=%@&date_taken=%@",[NSString EC2PhotosEndpoint] ,photo.imageID, [date displayDateOfType:sDateTypeBabbageURL]];
     
     
     NSURL *urlObject = [NSURL URLWithString:urlString];
@@ -951,5 +946,93 @@
         
         
     }];
+}
+-(void)fetchAllCollections
+{
+    
+    NSString *babbage_urlString = [NSString EC2CollectionsEndpoint];
+
+    NSURL           *url        = [NSURL URLWithString:babbage_urlString];
+    NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:url];
+    req.HTTPMethod = @"GET";
+    
+    NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
+    
+    [NSURLConnection sendAsynchronousRequest:req queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        
+        if (httpResponse.statusCode == 201 && data ) {
+            
+            [self parseCollectionsFromData:data];
+        }
+        
+    }];
+}
+-(void)parseCollectionsFromData:(NSData*) t_data
+{
+    if (t_data) {
+        
+        NSError *error;
+        
+        NSArray *collections = [NSJSONSerialization JSONObjectWithData:t_data options:0 error:&error];
+        
+        if (!error) {
+            
+            NSMutableArray *coll_mut = [NSMutableArray new];
+            
+            for (NSDictionary *dict in collections) {
+                
+                TFImageCollection *coll = [TFImageCollection CollectionFromJSONDictionary:dict];
+                [coll populateImages];
+                [coll_mut addObject:coll];
+            }
+            
+            if ([self.delegate respondsToSelector:@selector(finishedFetchingCollections:)]) {
+                [self.delegate finishedFetchingCollections:[NSArray arrayWithArray:coll_mut]];
+            }
+        }
+        
+    }
+}
+-(void)fetchListOfCollectionImages
+{
+    NSString *babbage_urlString = [NSString stringWithFormat:@"%@%@", [updatedConstants api_babbage_baseURL], @"/collectionImages"];
+    
+    NSURL           *url        = [NSURL URLWithString:babbage_urlString];
+    NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:url];
+    req.HTTPMethod = @"GET";
+    
+    NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
+    
+    [NSURLConnection sendAsynchronousRequest:req queue:operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        
+        if (httpResponse.statusCode == 201 && data ) {
+            [self parseCollectionImageListFromData:data];
+        }
+        
+    }];
+}
+-(void)parseCollectionImageListFromData:(NSData*) t_data
+{
+    if (t_data) {
+        
+        NSError *err;
+        
+        NSArray *arr = [NSJSONSerialization JSONObjectWithData:t_data options:0 error:&err];
+        NSMutableArray *mut_arr = [NSMutableArray new];
+        
+        for (NSDictionary *dict in arr) {
+            TFCollectionImageListItem *listItem = [TFCollectionImageListItem CollectionImageListingWithDict:dict];
+            
+            [mut_arr addObject:listItem];
+        }
+        
+        if ([self.delegate respondsToSelector:@selector(finishedFetchingListOfCollectionImages:)]) {
+            [self.delegate finishedFetchingListOfCollectionImages:[NSArray arrayWithArray:mut_arr]];
+        }
+    }
 }
 @end

@@ -8,10 +8,18 @@
 
 #import "pictureFrame.h"
 #import "WorkspaceViewController.h"
+#import <Masonry/Masonry.h>
 
 #define CORNERRAD 4.0
 
+@interface pictureFrame () {
+    CGPoint oldCenter;
+}
 
+@property (nonatomic, assign) BOOL isAnimating;
+@property (nonatomic, strong) UITapGestureRecognizer *tapper;
+
+@end
 @implementation pictureFrame {
     
     NSArray *containerViews;
@@ -29,15 +37,21 @@
         
         picture.theImage.layer.cornerRadius     = CORNERRAD;
         picture.theImage.layer.masksToBounds    = YES;
+        picture.theImage.userInteractionEnabled = YES;
         picture.layer.cornerRadius              = CORNERRAD;
         picture.backgroundColor                 = [UIColor clearColor];
         
         picture.containerView.layer.cornerRadius    = CORNERRAD;
         picture.containerView.backgroundColor       = [UIColor clearColor];
         
+
+        picture.tapper = [[UITapGestureRecognizer alloc] initWithTarget:picture action:@selector(handleTapGesture:)];
+        [picture addGestureRecognizer:picture.tapper];
+        
         return picture;
         
-    }
+        
+        }
     else
         return nil;
 }
@@ -59,152 +73,164 @@
     float imageXChange = 20.0;
     float imageYChange = 20.0;
     
-    if (!_expanded || _expanded == NO) {
-        
-        
-        POPSpringAnimation *cornerChange = [POPSpringAnimation animation];
-        
-        
-        cornerChange.property   = [POPAnimatableProperty propertyWithName:kPOPLayerCornerRadius];
-        
-        cornerChange.toValue    = @(15.0);
-        
-        cornerChange.springBounciness   = generalSpringBounciness;
-        cornerChange.springSpeed        = generalSpringSpeed;
-        
-        
-        
-        
-        POPSpringAnimation *grow = [POPSpringAnimation animation];
-        
-        
-        grow.property   = [POPAnimatableProperty propertyWithName:kPOPLayerSize];
-        
-        grow.toValue    = [NSValue valueWithCGSize:CGSizeMake(400.0, 250.0)];
-        
-        grow.springBounciness   = generalSpringBounciness;
-        grow.springSpeed        = generalSpringSpeed;
-        
-        
-        
-        
-        POPSpringAnimation *imageMove = [POPSpringAnimation animation];
-        
-        
-        imageMove.property  = [POPAnimatableProperty propertyWithName:kPOPLayerTranslationXY];
-        
-        imageMove.toValue   = [NSValue valueWithCGPoint:CGPointMake(imageXChange, imageYChange)];
-        
-        imageMove.springBounciness  = generalSpringBounciness;
-        imageMove.springSpeed       = generalSpringSpeed;
-
-        
-        
-        
-        POPSpringAnimation *imageCorners = [POPSpringAnimation animation];
-        
-        
-        imageCorners.property   = [POPAnimatableProperty propertyWithName:kPOPLayerCornerRadius];
-        
-        imageCorners.toValue    = @(5.0);
-        
-        imageCorners.springBounciness   = generalSpringBounciness;
-        
-        imageCorners.name       = @"imageCorners";
-        imageCorners.delegate   = self;
-        
-        
-        [self.theImage.layer        pop_addAnimation:imageMove
-                                              forKey:@"moveImage"];
-        
-        [self.theImage.layer        pop_addAnimation:imageCorners
-                                              forKey:@"changeCorners"];
-        
-        [self.containerView.layer   pop_addAnimation:grow
-                                              forKey:@"layerGrow"];
-        
-        [self.containerView.layer   pop_addAnimation:cornerChange
-                                            forKey:@"cornerChange"];
-        
-        
-        _expanded = YES;
-        
+    if (!self.isAnimating) {
+        if (!_expanded || _expanded == NO) {
+            
+            oldCenter = self.theImage.center;
+            
+            POPSpringAnimation *cornerChange = [POPSpringAnimation animation];
+            POPSpringAnimation *colorChange = [POPSpringAnimation animationWithPropertyNamed:kPOPViewBackgroundColor];
+            
+            colorChange.toValue = [UIColor black75PercentColor];
+            
+            cornerChange.property   = [POPAnimatableProperty propertyWithName:kPOPLayerCornerRadius];
+            
+            cornerChange.toValue    = @(15.0);
+            
+            cornerChange.springBounciness   = generalSpringBounciness;
+            cornerChange.springSpeed        = generalSpringSpeed;
+            
+            
+            
+            
+            POPSpringAnimation *grow = [POPSpringAnimation animation];
+            
+            
+            grow.property   = [POPAnimatableProperty propertyWithName:kPOPViewSize];
+            
+            grow.toValue    = [NSValue valueWithCGSize:CGSizeMake(400.0, 250.0)];
+            
+            grow.springBounciness   = generalSpringBounciness;
+            grow.springSpeed        = generalSpringSpeed;
+            
+            [grow setCompletionBlock:^(POPAnimation *ani, BOOL yno) {
+                
+                [self removeGestureRecognizer:self.tapper];
+                [self.containerView addGestureRecognizer:self.tapper];
+            }];
+            
+            
+            POPSpringAnimation *imageMove = [POPSpringAnimation animation];
+            
+            
+            imageMove.property  = [POPAnimatableProperty propertyWithName:kPOPLayerTranslationXY];
+            
+            imageMove.toValue   = [NSValue valueWithCGPoint:CGPointMake(imageXChange, imageYChange)];
+            
+            imageMove.springBounciness  = generalSpringBounciness;
+            imageMove.springSpeed       = generalSpringSpeed;
+            
+            
+            
+            
+            POPSpringAnimation *imageCorners = [POPSpringAnimation animation];
+            
+            
+            imageCorners.property   = [POPAnimatableProperty propertyWithName:kPOPLayerCornerRadius];
+            
+            imageCorners.toValue    = @(5.0);
+            
+            imageCorners.springBounciness   = generalSpringBounciness;
+            
+            imageCorners.name       = @"imageCorners";
+            imageCorners.delegate   = self;
+            
+            
+            [self.theImage.layer        pop_addAnimation:imageMove
+                                                  forKey:@"moveImage"];
+            
+            [self.theImage.layer        pop_addAnimation:imageCorners
+                                                  forKey:@"changeCorners"];
+            
+            [self.containerView   pop_addAnimation:grow
+                                                  forKey:@"layerGrow"];
+            
+            [self.containerView.layer   pop_addAnimation:cornerChange
+                                                  forKey:@"cornerChange"];
+            [self.containerView          pop_addAnimation:colorChange
+                                                   forKey:@"colorChange"];
+            
+            _expanded = YES;
+            
+        }
+        else {
+            
+            [self removeContainerViewsForResize];
+            
+            
+            
+            
+            POPBasicAnimation *shrink = [POPBasicAnimation animation];
+            
+            
+            shrink.property = [POPAnimatableProperty propertyWithName:kPOPLayerSize];
+            
+            shrink.toValue  = [NSValue valueWithCGSize:CGSizeMake(70.0, 70.0)];
+            
+            shrink.duration = 0.5;
+            
+            
+            [self.containerView.layer pop_addAnimation:shrink
+                                                forKey:@"layerShrink"];
+            
+            
+            
+            
+            POPSpringAnimation *moveIn = [POPSpringAnimation animation];
+            
+            
+            moveIn.property = [POPAnimatableProperty propertyWithName:kPOPViewCenter];
+            
+            moveIn.toValue  = [NSValue valueWithCGPoint:oldCenter];
+            
+            moveIn.springBounciness     = fastSpringSpeed;
+            moveIn.springSpeed          = fastSpringSpeed;
+            
+            
+            [self.theImage pop_addAnimation:moveIn
+                                     forKey:@"imageResetXY"];
+            
+            [self.containerView pop_addAnimation:moveIn forKey:@"imageResetCenter"];
+            
+            
+            
+            POPSpringAnimation *imageCornerReset = [POPSpringAnimation animation];
+            
+            
+            imageCornerReset.property   = [POPAnimatableProperty propertyWithName:kPOPLayerCornerRadius];
+            
+            imageCornerReset.toValue    = @(CORNERRAD);
+            
+            imageCornerReset.springBounciness   = fastSpringBounce;
+            imageCornerReset.springSpeed        = fastSpringSpeed;
+            
+            
+            [self.theImage.layer pop_addAnimation:imageCornerReset
+                                           forKey:@"imgCornerReset"];
+            
+            
+            
+            
+            POPSpringAnimation *containerCornerReset = [POPSpringAnimation animation];
+            
+            
+            containerCornerReset.property   = [POPAnimatableProperty propertyWithName:kPOPLayerCornerRadius];
+            
+            containerCornerReset.toValue    = @(CORNERRAD);
+            
+            containerCornerReset.springBounciness   = fastSpringBounce;
+            containerCornerReset.springSpeed        = fastSpringSpeed;
+            
+            
+            [self.containerView.layer pop_addAnimation:containerCornerReset
+                                                forKey:@"containerCornerReset"];
+            
+            
+            _expanded = NO;
+            
+        }
     }
-    else {
-        
-        [self removeContainerViewsForResize];
-     
-        
-        
-        
-        POPBasicAnimation *shrink = [POPBasicAnimation animation];
-        
-        
-        shrink.property = [POPAnimatableProperty propertyWithName:kPOPLayerSize];
-        
-        shrink.toValue  = [NSValue valueWithCGSize:CGSizeMake(100.0, 100.0)];
     
-        shrink.duration = 0.5;
-        
-        
-        [self.containerView.layer pop_addAnimation:shrink
-                                            forKey:@"layerShrink"];
-        
-        
-        
-        
-        POPSpringAnimation *moveIn = [POPSpringAnimation animation];
-        
-        
-        moveIn.property = [POPAnimatableProperty propertyWithName:kPOPLayerTranslationXY];
-        
-        moveIn.toValue  = [NSValue valueWithCGPoint:CGPointMake(0.0  ,0.0)];
-        
-        moveIn.springBounciness     = fastSpringSpeed;
-        moveIn.springSpeed          = fastSpringSpeed;
-    
-        
-        [self.theImage.layer pop_addAnimation:moveIn
-                                       forKey:@"imageResetXY"];
-        
-        
-        
-        
-        POPSpringAnimation *imageCornerReset = [POPSpringAnimation animation];
-        
-        
-        imageCornerReset.property   = [POPAnimatableProperty propertyWithName:kPOPLayerCornerRadius];
-        
-        imageCornerReset.toValue    = @(CORNERRAD);
-        
-        imageCornerReset.springBounciness   = fastSpringBounce;
-        imageCornerReset.springSpeed        = fastSpringSpeed;
-        
-        
-        [self.theImage.layer pop_addAnimation:imageCornerReset
-                                       forKey:@"imgCornerReset"];
-        
-        
-        
-        
-        POPSpringAnimation *containerCornerReset = [POPSpringAnimation animation];
-        
-        
-        containerCornerReset.property   = [POPAnimatableProperty propertyWithName:kPOPLayerCornerRadius];
-        
-        containerCornerReset.toValue    = @(CORNERRAD);
-        
-        containerCornerReset.springBounciness   = fastSpringBounce;
-        containerCornerReset.springSpeed        = fastSpringSpeed;
-        
-        
-        [self.containerView.layer pop_addAnimation:containerCornerReset
-                                            forKey:@"containerCornerReset"];
-        
-        
-        _expanded = NO;
-        
-    }
     
 }
 
@@ -406,9 +432,9 @@
 }
 -(void)handleTapGesture:(id) sender
 {
-    
-    [self resize];
-
+    if ([self.delegate respondsToSelector:@selector(PictureFrameDidTap:)]) {
+        [self.delegate PictureFrameDidTap:self];
+    }
 }
 -(void)bounceInFromPoint:(CGFloat) startPoint toPoint:(CGFloat) endPoint
 {
@@ -436,11 +462,6 @@
 }
 -(void)updateImage
 {
-    
-    //FAKFontAwesome *picture = [FAKFontAwesome pictureOIconWithSize:30.0];
-
-    //UIImage *picImage       = [picture imageWithSize:CGSizeMake(30.0, 30.0)];
-    
     [self.theImage sd_setImageWithURL:[_imageObject thumbNailURL]];
     
 }
@@ -550,5 +571,29 @@
 {
     [self removeGestureRecognizer:panGest];
     panGest = nil;
+}
+-(BOOL)isAnimating
+{
+    NSArray *imageAni = [self.theImage.layer pop_animationKeys];
+    NSArray *imageAni2 = [self.theImage pop_animationKeys];
+    NSArray *containerAni = [self.containerView pop_animationKeys];
+    NSArray *containerAni2 = [self.containerView.layer pop_animationKeys];
+    
+    return (([self isArrayValid:imageAni]) || ([self isArrayValid:imageAni2]) || ([self isArrayValid:containerAni]) || ([self isArrayValid:containerAni2]));
+}
+-(BOOL)isArrayValid:(NSArray*) t_array
+{
+    if (t_array) {
+        if (t_array.count == 0) {
+            return NO;
+        }
+        else
+        {
+            return YES;
+        }
+    }
+    else{
+        return NO;
+    }
 }
 @end

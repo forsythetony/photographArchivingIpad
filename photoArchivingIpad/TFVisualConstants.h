@@ -15,12 +15,40 @@
 
 //  Textures
 +(instancetype)TFPaperTextureOne;
++(instancetype)TFCarbonTextureOne;
 
 @end
+
+
+@interface TFDefaults : NSObject
+
+//  Fonts
++ (NSString*)TFDefaultFontFamily;
+
+//  Basic View Properties
++(CGFloat)TFDefaultBorderWidth;
++(CGFloat)TFDefaultCornerRadius;
++(CGFloat)TFDefaultAlphaValue;
+
++(UIColor*)TFDefaultBackgroundColor;
++(UIColor*)TFDefaultBorderColor;
++(UIColor*)TFDefaultTextColor;
+
++(NSTextAlignment)TFDefaultTextAlignment;
++(CGFloat)TFDefaultFontSize;
+
++(NSString*)TFDefaultPlaceholderText;
++(NSString*)TFDefaultText;
+
++(UIBlurEffectStyle)TFDefaultBlurStyle;
+@end
+
 @interface TFVisualConstants : NSObject
 
 //  Fonts
 +(NSString*)TFFontFamilyOne;
++(NSString*)TFFontFamilyOneBold;
++(NSString*)TFFontFamilyOneMedium;
 
 @end
 

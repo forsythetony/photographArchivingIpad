@@ -9,6 +9,7 @@
 #import "ImageDisplayRecordingSliderView.h"
 #import <pop/POP.h>
 #import <Colours.h>
+#import <Masonry/Masonry.h>
 
 #define CORNERRADIUS 45.0
 
@@ -91,6 +92,7 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
     [self addSubview:recSliderLine];
     [self addSubview:recSlider];
     
+    
 }
 -(UIView*)createSliderLine
 {
@@ -140,12 +142,23 @@ CGPoint getNewOrigin( CGSize frameSize , CGSize viewSize)
     
     relLabel.text = @"Slide to Record";
     
-    relLabel.textAlignment = NSTextAlignmentLeft;
+    relLabel.textAlignment = NSTextAlignmentCenter;
     relLabel.alpha = 1.0;
     relLabel.textColor = [UIColor whiteColor];
     [sliderLineView addSubview:relLabel];
     recSliderLabel = relLabel;
     
+    [relLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        CGFloat topPad = 0.0;
+        CGFloat bottomPad = 0.0;
+        CGFloat leftPad = 0.0;
+        CGFloat rightPad = 0.0;
+        
+        make.top.equalTo(sliderLineView).with.offset(topPad);
+        make.bottom.equalTo(sliderLineView).with.offset(-bottomPad);
+        make.left.equalTo(sliderLineView).with.offset(leftPad);
+        make.right.equalTo(sliderLineView).with.offset(-rightPad);
+    }];
     
     sliderLineView.layer.cornerRadius = sliderLineHeight / 2.0;
     

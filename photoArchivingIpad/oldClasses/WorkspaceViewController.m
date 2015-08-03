@@ -19,6 +19,8 @@
 #import "TFPopOverBasicView.h"
 #import "TFChromecastManager.h"
 #import "TFImageDisplayer.h"
+#import "TFImageCollectionView.h"
+#import "TFCollectionTimelineViewController.h"
 
 
 #define TLWALLSPACING 100.0
@@ -57,7 +59,8 @@ NSString* const WORKSPACEVC_ANI_SHOW_RIGHT_PANEL = @"showrightpanelanimation";
     imageObjectDelegate,
 TFChromecastManagerDelegate,
 TFPopOverViewDelegate,
-TFImageDisplayerDelegate
+TFImageDisplayerDelegate,
+TFCollectionTimelineViewControllerDelegate
 >
 {
     
@@ -90,11 +93,13 @@ TFImageDisplayerDelegate
     
     UIView *buttonsContainerView;
     
-    NSTimer *moveScreenTimer;
+    NSTimer *moveScreenTimer, *panningTimer;
     
     ScrollTriggers scrollTrigger;
     
     pictureFrame *grabbedFrame;
+    TFImageCollectionView *grabbedCollView;
+    
     CGPoint newGrabbedCenter;
     
     BOOL finishedMoving;
@@ -146,8 +151,11 @@ TFImageDisplayerDelegate
     BOOL    isShowingRightPanel;
     
     TFPopOverBasicView  *rightPanel;
-}
+    
+    CGPoint transPoint;
 
+}
+@property (nonatomic, strong) NSMutableArray *collectionsList;
 @property GCKMediaControlChannel *mediaControlChannel;
 @property GCKApplicationMetadata *applicationMetadata;
 @property GCKDevice *selectedDevice;
@@ -164,7 +172,10 @@ TFImageDisplayerDelegate
 @synthesize timelineDateRange;
 
 #pragma mark Initialization Stuff -
-
+-(NSMutableArray *)collectionsList
+{
+    return TLManager.collectionsList;
+}
 -(void)variableSetup
 {
     triggerWidth = 60.0;
@@ -266,7 +277,10 @@ TFImageDisplayerDelegate
         [self createScrollView];
         //[self createAuxViews];
 
-        [mainDataCom getPhotosForUser:@"forsytheTony"];
+        [mainDataCom getPhotosForUser:@"forsythetony"];
+        [mainDataCom fetchAllCollections];
+//        [mainDataCom fetchListOfCollectionImages];
+        
         [self printFrameData];
         shouldLoadAgain = NO;
     }
@@ -331,7 +345,7 @@ TFImageDisplayerDelegate
 
     mainDataCom.delegate    = self;
     
-    [mainDataCom getUserWithUsername:@"forsythetony"];
+    //[mainDataCom getUserWithUsername:@"forsythetony"];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
@@ -349,6 +363,8 @@ TFImageDisplayerDelegate
     if (list.count > 0) {
         
         NSMutableArray *framez = [NSMutableArray new];
+        
+        NSArray *listz = list;
         
         for (NSDictionary* dict in list)
         {
@@ -929,19 +945,24 @@ TFImageDisplayerDelegate
 }
 */
 #pragma mark Gesture Recognizer Methods -
+-(void)doneLoadingCollections
+{
+    for (TFImageCollectionView *collView in self.collectionsList) {
+        
+        UIPanGestureRecognizer *panRec = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanFrom:)];
+        
+        [collView addGestureRecognizer:panRec];
+        
+        UITapGestureRecognizer *tapRec = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+        [collView addGestureRecognizer:tapRec];
+        
+    }
+}
 -(void)addGestureRecognizers
 {
     
     for (pictureFrame* theFrame in photoList)
-    {
-        
-//        UIPanGestureRecognizer *panRecog = [UIPanGestureRecognizer new];
-//        
-//        [panRecog addTarget:self
-//                     action:@selector(handlePanFrom:)];
-//        
-//        [theFrame addGestureRecognizer:panRecog];
-        
+    {        
         [theFrame addPanGestureRecognizerWithObject:self];
         
         
@@ -988,8 +1009,6 @@ TFImageDisplayerDelegate
 }
 -(void)handleImageSectionFrom:(id) sender
 {
-
-    
     largeImageViewer *largeViewer = [largeImageViewer createLargeViewerWithFrame:self.view.frame];
     
     largeViewer.delegate = self;
@@ -1006,147 +1025,231 @@ TFImageDisplayerDelegate
     
     [rec.view removeFromSuperview];
 }
+-(void)handleTimer
+{
+    [TLManager setTransPoint:transPoint];
+}
 -(void)handlePanFrom:(id) sender
 {
-    if (isDateUpdateLockOn)
-        return;
+    id senderView = [(UIPanGestureRecognizer*)sender view];
     
-    
-    [self.view bringSubviewToFront:[(UIPanGestureRecognizer*)sender view]];
-    
-    CGPoint translatedPoint = [(UIPanGestureRecognizer*)sender translationInView:mainScrollView];
-    
-    if ([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateBegan) {
+    if ([senderView isKindOfClass:[TFImageCollectionView class]]) {
         
-        firstX = [[sender view] center].x;
-        firstY = [[sender view] center].y;
+        [self.view bringSubviewToFront:[(UIPanGestureRecognizer*)sender view]];
         
-        grabbedFrame = (pictureFrame*)[sender view];
+        CGPoint tramsPoint = [(UIPanGestureRecognizer*)sender translationInView:mainScrollView];
         
-        [self drawLineFromFrame:grabbedFrame];
-        [self addDateUpdateLabelForFrame:grabbedFrame];
-        [self addDateUpdateDayLabelForFrame:grabbedFrame];
-    }
-    
-    translatedPoint = CGPointMake(firstX + translatedPoint.x, firstY + translatedPoint.y);
-    
-   // NSLog(@"\n\nOld point:\t%@\n", NSStringFromCGPoint(translatedPoint));
-
-    CGPoint somePoint = [self.view convertPoint:translatedPoint fromView:mainScrollView];
-
-    
-    NSLog(@"New point:\t%@\n", NSStringFromCGPoint(translatedPoint));
-    NSLog(@"Content Offset:\t%@\n", NSStringFromCGPoint(mainScrollView.contentOffset));
-    
-    
-    if (!finishedMoving) {
-        pictureFrame *newFrame = (pictureFrame*)[(UIPanGestureRecognizer*)sender view];
-        /*
-        CGFloat offsetter = 400.0;
-        
-        CGPoint contentOffset = mainScrollView.contentOffset;
-        if (somePoint.x >= 0 && somePoint.x <= 200.0) {
-            
-            
-            
-            if ((contentOffset.x - offsetter) >= 0.0) {
-                
-                [UIView animateWithDuration:1.0 animations:^{
-                    [mainScrollView setContentOffset:CGPointMake(contentOffset.x - offsetter, contentOffset.y)];
-                }];
-            }
-        }
-        else if (somePoint.x >= mainScrollView.frame.size.width - 200.0 && somePoint.x <= mainScrollView.frame.size.width)
+        if ([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateBegan)
         {
-            if ((contentOffset.x + offsetter) < mainScrollView.contentSize.width - mainScrollView.frame.size.width)
-            {
-                [UIView animateWithDuration:1.0 animations:^{
-                    [mainScrollView setContentOffset:CGPointMake(contentOffset.x + offsetter, contentOffset.y)];
-                }];
-                
-            }
+            
+            firstX = [[sender view] center].x;
+            firstY = [[sender view] center].y;
+            
+            grabbedCollView = (TFImageCollectionView*)[sender view];
         }
-        */
-        [[sender view] setCenter:translatedPoint];
-        [self updateDateLineWithFrame:newFrame];
-        [self updateDateUpdaterLabelWithFrame:newFrame];
-        [self updateDayLabelForFrame:newFrame];
-        ;
+        
+        tramsPoint = CGPointMake(firstX + tramsPoint.x, firstY + tramsPoint.y);
         
         
+        if (!finishedMoving)
+        {
+            [[sender view] setCenter:tramsPoint];
+            
+            
+            
+        }
+        
+        if ([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateEnded)
+        {
+            
+            CGFloat velocityX   = (([(UIPanGestureRecognizer*)sender velocityInView:self.view].x) / 1);
+            
+            CGFloat finalX      = tramsPoint.x;// + velocityX;
+            CGFloat finalY      = tramsPoint.y;// + (.35*[(UIPanGestureRecognizer*)sender velocityInView:self.view].y);
+            
+            if (UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation])) {
+                
+                if (finalX < 0) {
+                    
+                    //finalX = 0;
+                    
+                } else if (finalX > 768) {
+                    
+                    //finalX = 768;
+                }
+                
+                if (finalY < 0) {
+                    
+                    finalY = 0;
+                    
+                } else if (finalY > 1024) {
+                    
+                    finalY = 1024;
+                }
+                
+            } else {
+                
+                if (finalX < 0) {
+                    
+                    //finalX = 0;
+                    
+                } else if (finalX > 1024) {
+                    
+                    //finalX = 768;
+                }
+                
+                if (finalY < 0) {
+                    
+                    finalY = 0;
+                    
+                } else if (finalY > 768) {
+                    
+                    finalY = 1024;
+                }
+            }
+            
+            
+            
+            CGFloat animationDuration = (ABS(velocityX) * .0002) + .2;
+            
+            NSLog(@"\n\n\nColl Frame:\t%@\n\n", NSStringFromCGRect([sender view].frame));
+            [UIView beginAnimations:nil context:NULL];
+            [UIView setAnimationDuration:animationDuration];
+            [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+            [UIView setAnimationDelegate:self];
+            [[sender view] setCenter:CGPointMake(finalX, finalY)];
+            [UIView commitAnimations];
+        
+            
+            
+            grabbedCollView = nil;
+        }
     }
-    
-    [self findPointInView:translatedPoint];
-    
-    if ([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateEnded)
+    else
     {
+        if (isDateUpdateLockOn)
+            return;
         
-        CGFloat velocityX   = (([(UIPanGestureRecognizer*)sender velocityInView:self.view].x) / 1);
         
-        CGFloat finalX      = translatedPoint.x;// + velocityX;
-        CGFloat finalY      = translatedPoint.y;// + (.35*[(UIPanGestureRecognizer*)sender velocityInView:self.view].y);
+        [self.view bringSubviewToFront:[(UIPanGestureRecognizer*)sender view]];
         
-        if (UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation])) {
+        CGPoint translatedPoint = [(UIPanGestureRecognizer*)sender translationInView:mainScrollView];
+        
+        if ([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateBegan) {
+//            panningTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(handleTimer) userInfo:nil repeats:YES];
             
-            if (finalX < 0) {
-                
-                //finalX = 0;
-                
-            } else if (finalX > 768) {
-                
-                //finalX = 768;
-            }
+            TLManager.timelineScrollView = mainScrollView;
             
-            if (finalY < 0) {
-                
-                finalY = 0;
-                
-            } else if (finalY > 1024) {
-                
-                finalY = 1024;
-            }
+            firstX = [[sender view] center].x;
+            firstY = [[sender view] center].y;
             
-        } else {
+            grabbedFrame = (pictureFrame*)[sender view];
             
-            if (finalX < 0) {
-                
-                //finalX = 0;
-                
-            } else if (finalX > 1024) {
-                
-                //finalX = 768;
-            }
-            
-            if (finalY < 0) {
-                
-                finalY = 0;
-                
-            } else if (finalY > 768) {
-                
-                finalY = 1024;
-            }
+            [self drawLineFromFrame:grabbedFrame];
+            [self addDateUpdateLabelForFrame:grabbedFrame];
+            [self addDateUpdateDayLabelForFrame:grabbedFrame];
         }
         
+        translatedPoint = CGPointMake(firstX + translatedPoint.x, firstY + translatedPoint.y);
+        
+        CGPoint somePoint = [self.view convertPoint:translatedPoint fromView:mainScrollView];
         
         
-        CGFloat animationDuration = (ABS(velocityX) * .0002) + .2;
+        
+        NSLog(@"\n\n\nNew point:\t%@\n", NSStringFromCGPoint(somePoint));
+        NSLog(@"Content Offset:\t%@\n", NSStringFromCGPoint(mainScrollView.contentOffset));
         
         
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:animationDuration];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-        [UIView setAnimationDelegate:self];
-        [[sender view] setCenter:CGPointMake(finalX, finalY)];
-        [UIView commitAnimations];
+        if (!finishedMoving) {
+            pictureFrame *newFrame = (pictureFrame*)[(UIPanGestureRecognizer*)sender view];
+            
+            transPoint = translatedPoint;
+            
+            [[sender view] setCenter:translatedPoint];
+            [self updateDateLineWithFrame:newFrame];
+            [self updateDateUpdaterLabelWithFrame:newFrame];
+            [self updateDayLabelForFrame:newFrame];
+            
+            
+        }
         
-        pictureFrame *frame = (pictureFrame*)[sender view];
+        [self findPointInView:translatedPoint];
+    
         
-        [self updateDateForFrame:frame];
-        [self updateDayLabelForFrame:frame];
-        
-        isDateUpdateLockOn = YES;
-        grabbedFrame = nil;
+        if ([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateEnded)
+        {
+            
+//            [panningTimer invalidate];
+            CGFloat velocityX   = (([(UIPanGestureRecognizer*)sender velocityInView:self.view].x) / 1);
+            
+            CGFloat finalX      = translatedPoint.x;// + velocityX;
+            CGFloat finalY      = translatedPoint.y;// + (.35*[(UIPanGestureRecognizer*)sender velocityInView:self.view].y);
+            
+            if (UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation])) {
+                
+                if (finalX < 0) {
+                    
+                    //finalX = 0;
+                    
+                } else if (finalX > 768) {
+                    
+                    //finalX = 768;
+                }
+                
+                if (finalY < 0) {
+                    
+                    finalY = 0;
+                    
+                } else if (finalY > 1024) {
+                    
+                    finalY = 1024;
+                }
+                
+            } else {
+                
+                if (finalX < 0) {
+                    
+                    //finalX = 0;
+                    
+                } else if (finalX > 1024) {
+                    
+                    //finalX = 768;
+                }
+                
+                if (finalY < 0) {
+                    
+                    finalY = 0;
+                    
+                } else if (finalY > 768) {
+                    
+                    finalY = 1024;
+                }
+            }
+            
+            
+            
+            CGFloat animationDuration = (ABS(velocityX) * .0002) + .2;
+            
+            
+            [UIView beginAnimations:nil context:NULL];
+            [UIView setAnimationDuration:animationDuration];
+            [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+            [UIView setAnimationDelegate:self];
+            [[sender view] setCenter:CGPointMake(finalX, finalY)];
+            [UIView commitAnimations];
+            
+            pictureFrame *frame = (pictureFrame*)[sender view];
+            
+            [self updateDateForFrame:frame];
+            [self updateDayLabelForFrame:frame];
+            
+            [TLManager setTransPoint:transPoint withImage:frame.imageObject];
+            
+            isDateUpdateLockOn = YES;
+            grabbedFrame = nil;
+        }
     }
+    
     
 }
 
@@ -1162,28 +1265,46 @@ TFImageDisplayerDelegate
 -(void)handleDoubleTap:(UITapGestureRecognizer*) recognizer
 {
     
-    pictureFrame *frame = (pictureFrame*)[recognizer view];
-
-    [TLManager.TLView bringSubviewToFront:frame];
+    id recView = [recognizer view];
     
-    
-    imageObject *obj = frame.imageObject;
-    selectedImageObject = obj;
-    CGPoint centerInView = [self.view convertPoint:frame.center fromView:mainScrollView];
-    
-    if (!isShowingRightPanel) {
-        if (centerInView.x >= mainScrollView.frame.size.width - 300.0) {
+    if ([recView isKindOfClass:[TFImageCollectionView class]]) {
+        
+        TFCollectionTimelineViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"testing"];
+        
+        vc.collection = [(TFImageCollectionView*)recView collection];
+        
+        vc.delegate = self;
+        
+        [self presentViewController:vc animated:YES completion:^{
+            [vc animate];
+        }];
+    }
+    else
+    {
+        pictureFrame *frame = (pictureFrame*)[recognizer view];
+        
+        [TLManager.TLView bringSubviewToFront:frame];
+        
+        
+        imageObject *obj = frame.imageObject;
+        selectedImageObject = obj;
+        CGPoint centerInView = [self.view convertPoint:frame.center fromView:mainScrollView];
+        
+        if (!isShowingRightPanel) {
+            if (centerInView.x >= mainScrollView.frame.size.width - 300.0) {
+                
+                CGFloat offsetter = centerInView.x - (mainScrollView.frame.size.width - 300.0) + frame.frame.size.width;
+                
+                [UIView animateWithDuration:0.75 animations:^{
+                    [mainScrollView setContentOffset:CGPointMake(mainScrollView.contentOffset.x + offsetter, mainScrollView.contentOffset.y)];
+                }];
+            }
             
-            CGFloat offsetter = centerInView.x - (mainScrollView.frame.size.width - 300.0) + frame.frame.size.width;
-            
-            [UIView animateWithDuration:0.75 animations:^{
-                [mainScrollView setContentOffset:CGPointMake(mainScrollView.contentOffset.x + offsetter, mainScrollView.contentOffset.y)];
-            }];
         }
-
+        
+        [self setPanelImageObject:obj];
     }
     
-    [self setPanelImageObject:obj];
     
     
 }
@@ -1269,7 +1390,10 @@ TFImageDisplayerDelegate
     
 }
 #pragma mark - Delegate Methods
-
+-(void)finishedFetchingCollections:(NSArray *)t_collections
+{
+    [TLManager addCollectionsFromArray:t_collections];
+}
 #pragma mark Timeline Manager
 
 -(void)finishedUpdatedFrame:(pictureFrame *)frame withNewInformation:(NSDictionary *)info
@@ -2823,7 +2947,7 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
     incompleteTimer = nil;
     
     
-    if (statusCode == 200) {
+    if (statusCode == 200 || statusCode == 201) {
         
         
         [self performSelectorOnMainThread:@selector(changeToGreen) withObject:nil waitUntilDone:NO];
@@ -3032,6 +3156,23 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
 }
 -(void)TFImageDisplayerShouldDismiss:(TFImageDisplayer *)t_displayer
 {
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+-(void)shouldAddPanGestureRecognizerForCollectionView:(TFImageCollectionView *)t_collView
+{
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanFrom:)];
+    
+    [t_collView addGestureRecognizer:pan];
+}
+-(void)finishedFetchingListOfCollectionImages:(NSArray *)t_collectionImages
+{
+    
+}
+-(void)TFCollectionTimelineViewControllerDelegateDismiss
+{
+    
     [self dismissViewControllerAnimated:YES completion:^{
         
     }];

@@ -44,6 +44,7 @@ extern NSString * const APIUpdatePhotoDateWithID;
 
 extern NSString * const api_babbage_photos_endpoint;
 extern NSString * const api_babbage_stories_endpoint;
+extern NSString* const api_babbage_collections_endpoint;
 //
 //  API Package Keys
 //

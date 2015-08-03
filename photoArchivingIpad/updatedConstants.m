@@ -37,7 +37,7 @@ NSString * const api_cleanFlagValue = @"true";
 
 NSString * const respKeys_responseStatus = @"responseStatus";
 NSString * const respKeys_responseMessage = @"responseMessage";
-
+NSString* const api_babbage_collections_endpoint = @"/collections";
 
 //
 //  Babbage

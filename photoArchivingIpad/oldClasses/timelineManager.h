@@ -11,6 +11,9 @@
 #import "pictureFrame.h"
 #import "TFDataCommunicator.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "TFImageCollectionView.h"
+#import "TFImageCollection+Converters.h"
+
 
 @class timelineManager;
 
@@ -19,6 +22,8 @@
 @optional
 
 -(void)finishedUpdatedFrame:(pictureFrame*) frame withNewInformation:(NSDictionary*) info;
+-(void)shouldAddPanGestureRecognizerForCollectionView:(TFImageCollectionView*) t_collView;
+-(void)doneLoadingCollections;
 
 @end
 
@@ -31,6 +36,9 @@
 @property (strong, nonatomic) NSDate        *startDate;
 @property (strong, nonatomic) NSDate        *endDate;
 @property (strong, nonatomic) UIView        *TLView;
+@property (nonatomic, weak) UIScrollView  *timelineScrollView;
+
+@property (nonatomic, assign) CGPoint transPoint;
 
 @property (nonatomic, assign) NSTimeInterval pureStart;
 @property (nonatomic, assign) NSTimeInterval pureEnd;
@@ -45,6 +53,7 @@
 @property (nonatomic, strong) NSValue *lineCenter;
 
 @property (nonatomic, strong) NSArray  *savedYears;
+@property (nonatomic, strong) NSMutableArray *collectionsList;
 
 @property (nonatomic, weak) id <timelineManagerDelegate> delegate;
 
@@ -56,4 +65,6 @@
 -(void)setInitialPhotographs:(NSArray*) thePhotographs;
 -(NSDate*)createDateObjectFromPoint:(CGPoint) point;
 -(NSDate*)getNewDateForFrame:(pictureFrame*) Pframe;
+-(void)addCollectionsFromArray:(NSArray*) t_collections;
+-(void)setTransPoint:(CGPoint) t_trans withImage:(imageObject*) t_img;
 @end

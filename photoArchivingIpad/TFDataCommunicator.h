@@ -9,7 +9,6 @@
 #import "imageHandling.h"
 #import "NSDate+timelineStuff.h"
 #import "updatedConstants.h"
-
 #import "ImagePackage.h"
 
 typedef NS_ENUM(NSUInteger, photoType) {
@@ -50,6 +49,8 @@ typedef NS_ENUM(NSInteger, serverResponseType) {
 -(void)finishedDeletingStoryWithID:(NSString*) t_id didDelete:(BOOL) t_didDelete;
 -(void)didUpdateValuesForStory:(Story*) t_story;
 -(void)finishedDeletingImage:(imageObject*) t_imageObject;
+-(void)finishedFetchingCollections:(NSArray*) t_collections;
+-(void)finishedFetchingListOfCollectionImages:(NSArray*) t_collectionImages;
 
 @end
 
@@ -94,6 +95,13 @@ typedef NS_ENUM(NSInteger, serverResponseType) {
 -(void)updatePhoto:(ImagePackage*) photo;
 -(void)updatePhotoDateWithImagePackage:(ImagePackage*)photo;
 -(void)updateBabbagePhotoDateWithImagePackage:(ImagePackage*)photo;
+-(void)fetchListOfCollectionImages;
+
+
+//
+//  Collections
+//
+-(void)fetchAllCollections;
 
 //
 //  Audio
@@ -124,3 +132,10 @@ typedef NS_ENUM(NSInteger, serverResponseType) {
 
 
 @end
+
+@interface NSString (URLS)
++(NSString*)EC2CollectionsEndpoint;
++(NSString*)EC2PhotosEndpoint;
++(NSString*)EC2StoriesEndpoint;
+@end
+

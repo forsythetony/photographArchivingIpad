@@ -7,10 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2502E0511B6AB47100C2940B /* TFCollectionTimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502E0501B6AB47100C2940B /* TFCollectionTimelineViewController.m */; };
+		2502E0541B6ADB6100C2940B /* TFTimelineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502E0531B6ADB6100C2940B /* TFTimelineView.m */; };
+		2502E0571B6ADE3900C2940B /* TFTimelineDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502E0561B6ADE3900C2940B /* TFTimelineDate.m */; };
+		2502E05A1B6ADE4400C2940B /* TFTimelineDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502E0591B6ADE4400C2940B /* TFTimelineDataView.m */; };
+		2502E05E1B6B4F0F00C2940B /* TFCollectionViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502E05D1B6B4F0F00C2940B /* TFCollectionViewHeader.m */; };
+		2502E0631B6B4F6F00C2940B /* TFCounterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502E0621B6B4F6F00C2940B /* TFCounterView.m */; };
+		2502E0671B6B4FE900C2940B /* TFViewProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502E0661B6B4FE900C2940B /* TFViewProperties.m */; };
+		2502E06A1B6B538E00C2940B /* TFLabelProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502E0691B6B538E00C2940B /* TFLabelProperties.m */; };
+		2502E06E1B6B641F00C2940B /* TFTransparentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502E06D1B6B641F00C2940B /* TFTransparentView.m */; };
+		2502E0721B6B678D00C2940B /* TFDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502E0711B6B678D00C2940B /* TFDateView.m */; };
 		255E29E11B59D5590015F6BE /* TFSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E29E01B59D5590015F6BE /* TFSettings.m */; };
 		256B72521A6CE6E00079B12C /* AWSRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA625C211A6CD20C0037AE6A /* AWSRuntime.framework */; };
 		256B72531A6CE6F40079B12C /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA625C221A6CD20C0037AE6A /* AWSS3.framework */; };
 		257E59C51B6166BF00FD7568 /* TFImageDisplayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 257E59C41B6166BF00FD7568 /* TFImageDisplayer.m */; };
+		257E59C91B61857D00FD7568 /* TFImageCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 257E59C81B61857D00FD7568 /* TFImageCollectionView.m */; };
+		257E59CC1B61859A00FD7568 /* TFImageCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 257E59CB1B61859A00FD7568 /* TFImageCollection.m */; };
+		257E59D51B61AAE000FD7568 /* TFImageCollection+Converters.m in Sources */ = {isa = PBXBuildFile; fileRef = 257E59D41B61AAE000FD7568 /* TFImageCollection+Converters.m */; };
+		257E59D81B61B06400FD7568 /* imageObject+Converters.m in Sources */ = {isa = PBXBuildFile; fileRef = 257E59D71B61B06400FD7568 /* imageObject+Converters.m */; };
+		257E59DB1B61CDEA00FD7568 /* TFCollectionImageListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 257E59DA1B61CDEA00FD7568 /* TFCollectionImageListItem.m */; };
 		25C13DC31A6D386100EB83E2 /* PhotoUploadingViewControllerv2.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C13DC21A6D386100EB83E2 /* PhotoUploadingViewControllerv2.m */; };
 		25C13DD31A6D644500EB83E2 /* IQAlbumAssetsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C13DC61A6D644500EB83E2 /* IQAlbumAssetsViewController.m */; };
 		25C13DD41A6D644500EB83E2 /* IQAssetsAlbumViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C13DC91A6D644500EB83E2 /* IQAssetsAlbumViewCell.m */; };
@@ -188,10 +203,41 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2502E04F1B6AB47100C2940B /* TFCollectionTimelineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFCollectionTimelineViewController.h; sourceTree = "<group>"; };
+		2502E0501B6AB47100C2940B /* TFCollectionTimelineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFCollectionTimelineViewController.m; sourceTree = "<group>"; };
+		2502E0521B6ADB6100C2940B /* TFTimelineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFTimelineView.h; sourceTree = "<group>"; };
+		2502E0531B6ADB6100C2940B /* TFTimelineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFTimelineView.m; sourceTree = "<group>"; };
+		2502E0551B6ADE3900C2940B /* TFTimelineDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFTimelineDate.h; sourceTree = "<group>"; };
+		2502E0561B6ADE3900C2940B /* TFTimelineDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFTimelineDate.m; sourceTree = "<group>"; };
+		2502E0581B6ADE4400C2940B /* TFTimelineDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFTimelineDataView.h; sourceTree = "<group>"; };
+		2502E0591B6ADE4400C2940B /* TFTimelineDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFTimelineDataView.m; sourceTree = "<group>"; };
+		2502E05C1B6B4F0F00C2940B /* TFCollectionViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFCollectionViewHeader.h; sourceTree = "<group>"; };
+		2502E05D1B6B4F0F00C2940B /* TFCollectionViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFCollectionViewHeader.m; sourceTree = "<group>"; };
+		2502E0611B6B4F6F00C2940B /* TFCounterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFCounterView.h; sourceTree = "<group>"; };
+		2502E0621B6B4F6F00C2940B /* TFCounterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFCounterView.m; sourceTree = "<group>"; };
+		2502E0651B6B4FE900C2940B /* TFViewProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFViewProperties.h; sourceTree = "<group>"; };
+		2502E0661B6B4FE900C2940B /* TFViewProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFViewProperties.m; sourceTree = "<group>"; };
+		2502E0681B6B538E00C2940B /* TFLabelProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLabelProperties.h; sourceTree = "<group>"; };
+		2502E0691B6B538E00C2940B /* TFLabelProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLabelProperties.m; sourceTree = "<group>"; };
+		2502E06B1B6B577200C2940B /* TFProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFProperties.h; sourceTree = "<group>"; };
+		2502E06C1B6B641F00C2940B /* TFTransparentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFTransparentView.h; sourceTree = "<group>"; };
+		2502E06D1B6B641F00C2940B /* TFTransparentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFTransparentView.m; sourceTree = "<group>"; };
+		2502E0701B6B678D00C2940B /* TFDateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFDateView.h; sourceTree = "<group>"; };
+		2502E0711B6B678D00C2940B /* TFDateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFDateView.m; sourceTree = "<group>"; };
 		255E29DF1B59D5590015F6BE /* TFSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFSettings.h; sourceTree = "<group>"; };
 		255E29E01B59D5590015F6BE /* TFSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFSettings.m; sourceTree = "<group>"; };
 		257E59C31B6166BF00FD7568 /* TFImageDisplayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFImageDisplayer.h; sourceTree = "<group>"; };
 		257E59C41B6166BF00FD7568 /* TFImageDisplayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFImageDisplayer.m; sourceTree = "<group>"; };
+		257E59C71B61857D00FD7568 /* TFImageCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFImageCollectionView.h; sourceTree = "<group>"; };
+		257E59C81B61857D00FD7568 /* TFImageCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFImageCollectionView.m; sourceTree = "<group>"; };
+		257E59CA1B61859A00FD7568 /* TFImageCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFImageCollection.h; sourceTree = "<group>"; };
+		257E59CB1B61859A00FD7568 /* TFImageCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFImageCollection.m; sourceTree = "<group>"; };
+		257E59D31B61AAE000FD7568 /* TFImageCollection+Converters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TFImageCollection+Converters.h"; sourceTree = "<group>"; };
+		257E59D41B61AAE000FD7568 /* TFImageCollection+Converters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TFImageCollection+Converters.m"; sourceTree = "<group>"; };
+		257E59D61B61B06400FD7568 /* imageObject+Converters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "imageObject+Converters.h"; sourceTree = "<group>"; };
+		257E59D71B61B06400FD7568 /* imageObject+Converters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "imageObject+Converters.m"; sourceTree = "<group>"; };
+		257E59D91B61CDEA00FD7568 /* TFCollectionImageListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFCollectionImageListItem.h; sourceTree = "<group>"; };
+		257E59DA1B61CDEA00FD7568 /* TFCollectionImageListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFCollectionImageListItem.m; sourceTree = "<group>"; };
 		25C13DC11A6D386100EB83E2 /* PhotoUploadingViewControllerv2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoUploadingViewControllerv2.h; sourceTree = "<group>"; };
 		25C13DC21A6D386100EB83E2 /* PhotoUploadingViewControllerv2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoUploadingViewControllerv2.m; sourceTree = "<group>"; };
 		25C13DC51A6D644500EB83E2 /* IQAlbumAssetsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQAlbumAssetsViewController.h; sourceTree = "<group>"; };
@@ -510,6 +556,71 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2502E04E1B6AB45A00C2940B /* Collection Timeline */ = {
+			isa = PBXGroup;
+			children = (
+				2502E05B1B6B4EFF00C2940B /* Header */,
+				2502E04F1B6AB47100C2940B /* TFCollectionTimelineViewController.h */,
+				2502E0501B6AB47100C2940B /* TFCollectionTimelineViewController.m */,
+				2502E0521B6ADB6100C2940B /* TFTimelineView.h */,
+				2502E0531B6ADB6100C2940B /* TFTimelineView.m */,
+				2502E0551B6ADE3900C2940B /* TFTimelineDate.h */,
+				2502E0561B6ADE3900C2940B /* TFTimelineDate.m */,
+				2502E0581B6ADE4400C2940B /* TFTimelineDataView.h */,
+				2502E0591B6ADE4400C2940B /* TFTimelineDataView.m */,
+			);
+			name = "Collection Timeline";
+			sourceTree = "<group>";
+		};
+		2502E05B1B6B4EFF00C2940B /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				2502E06F1B6B678200C2940B /* Date View */,
+				2502E0601B6B4F5B00C2940B /* Counter View */,
+				2502E05F1B6B4F5300C2940B /* Main */,
+			);
+			name = Header;
+			sourceTree = "<group>";
+		};
+		2502E05F1B6B4F5300C2940B /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				2502E05C1B6B4F0F00C2940B /* TFCollectionViewHeader.h */,
+				2502E05D1B6B4F0F00C2940B /* TFCollectionViewHeader.m */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		2502E0601B6B4F5B00C2940B /* Counter View */ = {
+			isa = PBXGroup;
+			children = (
+				2502E0611B6B4F6F00C2940B /* TFCounterView.h */,
+				2502E0621B6B4F6F00C2940B /* TFCounterView.m */,
+			);
+			name = "Counter View";
+			sourceTree = "<group>";
+		};
+		2502E0641B6B4FCF00C2940B /* Aesthetics */ = {
+			isa = PBXGroup;
+			children = (
+				2502E0651B6B4FE900C2940B /* TFViewProperties.h */,
+				2502E0661B6B4FE900C2940B /* TFViewProperties.m */,
+				2502E0681B6B538E00C2940B /* TFLabelProperties.h */,
+				2502E0691B6B538E00C2940B /* TFLabelProperties.m */,
+				2502E06B1B6B577200C2940B /* TFProperties.h */,
+			);
+			name = Aesthetics;
+			sourceTree = "<group>";
+		};
+		2502E06F1B6B678200C2940B /* Date View */ = {
+			isa = PBXGroup;
+			children = (
+				2502E0701B6B678D00C2940B /* TFDateView.h */,
+				2502E0711B6B678D00C2940B /* TFDateView.m */,
+			);
+			name = "Date View";
+			sourceTree = "<group>";
+		};
 		255E29DE1B59D54A0015F6BE /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -517,6 +628,26 @@
 				255E29E01B59D5590015F6BE /* TFSettings.m */,
 			);
 			name = Settings;
+			sourceTree = "<group>";
+		};
+		255FCC091B6F947300F9045C /* Page View Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Page View Controller";
+			sourceTree = "<group>";
+		};
+		257E59C61B61856700FD7568 /* Collection Cell */ = {
+			isa = PBXGroup;
+			children = (
+				257E59C71B61857D00FD7568 /* TFImageCollectionView.h */,
+				257E59C81B61857D00FD7568 /* TFImageCollectionView.m */,
+				257E59CA1B61859A00FD7568 /* TFImageCollection.h */,
+				257E59D31B61AAE000FD7568 /* TFImageCollection+Converters.h */,
+				257E59D41B61AAE000FD7568 /* TFImageCollection+Converters.m */,
+				257E59CB1B61859A00FD7568 /* TFImageCollection.m */,
+			);
+			name = "Collection Cell";
 			sourceTree = "<group>";
 		};
 		25C13DC01A6D384000EB83E2 /* Photo Uploading */ = {
@@ -773,6 +904,7 @@
 		25DA19881B4CAC65008A708B /* PopOver */ = {
 			isa = PBXGroup;
 			children = (
+				255FCC091B6F947300F9045C /* Page View Controller */,
 				25DA198F1B4CB927008A708B /* Cells */,
 				25DA19891B4CAC82008A708B /* TFImagePopoverView.h */,
 				25DA198A1B4CAC82008A708B /* TFImagePopoverView.m */,
@@ -853,6 +985,8 @@
 				25DA19961B4CBAB1008A708B /* Story+Converters.m */,
 				BA7525D019A7F3AD007DD95E /* imageObject.h */,
 				BA7525D119A7F3AD007DD95E /* imageObject.m */,
+				257E59D61B61B06400FD7568 /* imageObject+Converters.h */,
+				257E59D71B61B06400FD7568 /* imageObject+Converters.m */,
 				BABF16B5195372A800FF01C0 /* ImagePackage.h */,
 				BABF16B6195372A800FF01C0 /* ImagePackage.m */,
 				BA4C4BC819ADCB46009C9C16 /* PAARecording.h */,
@@ -949,6 +1083,9 @@
 		BA67F1B1193666210056DD00 /* photoArchivingIpad */ = {
 			isa = PBXGroup;
 			children = (
+				2502E0641B6B4FCF00C2940B /* Aesthetics */,
+				2502E04E1B6AB45A00C2940B /* Collection Timeline */,
+				257E59C61B61856700FD7568 /* Collection Cell */,
 				255E29DE1B59D54A0015F6BE /* Settings */,
 				25DA19A01B4CEE68008A708B /* NSString+Helpers.h */,
 				25DA19A11B4CEE68008A708B /* NSString+Helpers.m */,
@@ -994,6 +1131,10 @@
 				BA4769C419B61B380030EBE3 /* TAStyler.m */,
 				25DA19A31B4CFA07008A708B /* TFVisualConstants.h */,
 				25DA19A41B4CFA07008A708B /* TFVisualConstants.m */,
+				257E59D91B61CDEA00FD7568 /* TFCollectionImageListItem.h */,
+				257E59DA1B61CDEA00FD7568 /* TFCollectionImageListItem.m */,
+				2502E06C1B6B641F00C2940B /* TFTransparentView.h */,
+				2502E06D1B6B641F00C2940B /* TFTransparentView.m */,
 			);
 			path = photoArchivingIpad;
 			sourceTree = "<group>";
@@ -1432,6 +1573,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				25C13DD41A6D644500EB83E2 /* IQAssetsAlbumViewCell.m in Sources */,
+				2502E0511B6AB47100C2940B /* TFCollectionTimelineViewController.m in Sources */,
 				BA0BE0B81943B3E40054F7C7 /* workspaceAuxView.m in Sources */,
 				255E29E11B59D5590015F6BE /* TFSettings.m in Sources */,
 				BA0F645719788101000588A8 /* PhotoUploadManager.m in Sources */,
@@ -1446,11 +1588,15 @@
 				BABF16B4195368FE00FF01C0 /* photoUploadingConstants.m in Sources */,
 				25C13E091A6D667100EB83E2 /* IQBottomContainerView.m in Sources */,
 				BABF1616195247FD00FF01C0 /* audioManagrer.m in Sources */,
+				2502E06E1B6B641F00C2940B /* TFTransparentView.m in Sources */,
 				BA4769DC19B67E590030EBE3 /* HTGCTextChannel.m in Sources */,
+				257E59DB1B61CDEA00FD7568 /* TFCollectionImageListItem.m in Sources */,
 				BA625C311A6CD7A50037AE6A /* ImageDisplay+testThingies.m in Sources */,
 				25C13DD51A6D644500EB83E2 /* IQAssetsCell.m in Sources */,
+				2502E05E1B6B4F0F00C2940B /* TFCollectionViewHeader.m in Sources */,
 				BA365AA719996992008E6975 /* StoryRecordingMeter.m in Sources */,
 				BA3299A61948BA430002EBFD /* TFPerson.m in Sources */,
+				2502E0571B6ADE3900C2940B /* TFTimelineDate.m in Sources */,
 				BA67F21F193BCC3A0056DD00 /* timelineManager.m in Sources */,
 				25C13E321A6D669100EB83E2 /* IQAudioPickerController.m in Sources */,
 				25C13DD71A6D644500EB83E2 /* IQCheckmarkView.m in Sources */,
@@ -1460,6 +1606,7 @@
 				257E59C51B6166BF00FD7568 /* TFImageDisplayer.m in Sources */,
 				BA67F211193670D60056DD00 /* timelineLabelView.m in Sources */,
 				25C13E041A6D667100EB83E2 /* IQMediaCaptureController.m in Sources */,
+				2502E0721B6B678D00C2940B /* TFDateView.m in Sources */,
 				25C13E0B1A6D667100EB83E2 /* IQMediaView.m in Sources */,
 				BABF16B7195372A800FF01C0 /* ImagePackage.m in Sources */,
 				BA6F5EC9194EBCE300E1E1FC /* attributesDictionaryConstants.m in Sources */,
@@ -1486,6 +1633,7 @@
 				BA365AAD19998DF9008E6975 /* UploadingButton.m in Sources */,
 				BA4C4BD219ADF553009C9C16 /* StoriesDisplayTableview.m in Sources */,
 				BA4769C219B5F0670030EBE3 /* TATriggerFrame.m in Sources */,
+				2502E0631B6B4F6F00C2940B /* TFCounterView.m in Sources */,
 				25C13E341A6D669100EB83E2 /* IQAudioPickerUtility.m in Sources */,
 				BA32997319489A730002EBFD /* landingPageViewController.m in Sources */,
 				BA625C321A6CD7A50037AE6A /* imageInfoPagerVC.m in Sources */,
@@ -1495,14 +1643,18 @@
 				25C13E0F1A6D667100EB83E2 /* IQ_PocketSVG.m in Sources */,
 				BA3299761948B91E0002EBFD /* showServerData.m in Sources */,
 				BA669456199A1C1300412313 /* Story+StoryHelpers.m in Sources */,
+				2502E06A1B6B538E00C2940B /* TFLabelProperties.m in Sources */,
 				BAD9F372199DABCF00107D3A /* StoryCreationForm.m in Sources */,
 				BA67F1BC193666210056DD00 /* AppDelegate.m in Sources */,
 				25DA198E1B4CAEEB008A708B /* TFPopOverBasicView.m in Sources */,
 				25C13E381A6D669100EB83E2 /* IQSongsListTableHeaderView.m in Sources */,
 				BA6F5ED1194EC66400E1E1FC /* UIColor+testingColors.m in Sources */,
+				2502E0541B6ADB6100C2940B /* TFTimelineView.m in Sources */,
+				257E59CC1B61859A00FD7568 /* TFImageCollection.m in Sources */,
 				BA9531B7194E4E2B005E0F10 /* imageInformationVC.m in Sources */,
 				25DA19A51B4CFA07008A708B /* TFVisualConstants.m in Sources */,
 				BA67F1B8193666210056DD00 /* main.m in Sources */,
+				257E59C91B61857D00FD7568 /* TFImageCollectionView.m in Sources */,
 				25C13E3B1A6D669100EB83E2 /* IQSongsCompilationsViewController.m in Sources */,
 				BA1194B61990B4F60032DEC6 /* PreviewView.m in Sources */,
 				BA7525D419A7F3AD007DD95E /* imageObject.m in Sources */,
@@ -1510,6 +1662,7 @@
 				BA4C4BD719ADF58D009C9C16 /* StoriesDisplayTableviewCellTableViewCell.m in Sources */,
 				BA6694341999CAFF00412313 /* DateRange.m in Sources */,
 				25C13E3E1A6D669100EB83E2 /* IQSongsListViewController.m in Sources */,
+				257E59D81B61B06400FD7568 /* imageObject+Converters.m in Sources */,
 				25C13E0A1A6D667100EB83E2 /* IQFeatureOverlay.m in Sources */,
 				BA67F209193667140056DD00 /* dummyDataProvider.m in Sources */,
 				25C13E0C1A6D667100EB83E2 /* IQPartitionBar.m in Sources */,
@@ -1517,6 +1670,7 @@
 				25C13E3F1A6D669100EB83E2 /* IQSongsPlaylistViewController.m in Sources */,
 				BA89B37F195B29E700DA0FCC /* imageInformationConstants.m in Sources */,
 				25C13DD31A6D644500EB83E2 /* IQAlbumAssetsViewController.m in Sources */,
+				2502E0671B6B4FE900C2940B /* TFViewProperties.m in Sources */,
 				25C13DD61A6D644500EB83E2 /* IQAssetsPickerShadowView.m in Sources */,
 				BA6F5EED194F192900E1E1FC /* UIImage+imageAdditions.m in Sources */,
 				25C13E081A6D667100EB83E2 /* IQFileManager.m in Sources */,
@@ -1525,6 +1679,8 @@
 				25DA198B1B4CAC82008A708B /* TFImagePopoverView.m in Sources */,
 				BA9531B0194E2E28005E0F10 /* pagerSocialVC.m in Sources */,
 				BA6F5EE3194EFE6F00E1E1FC /* largeImageViewer.m in Sources */,
+				2502E05A1B6ADE4400C2940B /* TFTimelineDataView.m in Sources */,
+				257E59D51B61AAE000FD7568 /* TFImageCollection+Converters.m in Sources */,
 				25C13E3C1A6D669100EB83E2 /* IQSongsComposersViewController.m in Sources */,
 				BA3299A51948BA430002EBFD /* TFDataCommunicator.m in Sources */,
 				25C13E061A6D667100EB83E2 /* IQAudioSession.m in Sources */,

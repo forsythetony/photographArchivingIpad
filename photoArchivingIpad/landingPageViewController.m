@@ -11,6 +11,7 @@
 #import "WorkspaceViewController.h"
 #import <FontAwesomeKit/FontAwesomeKit.h>
 #import <Masonry/Masonry.h>
+#import "TFCollectionTimelineViewController.h"
 
 NSString* const timelineSegue = @"showTimeline";
 

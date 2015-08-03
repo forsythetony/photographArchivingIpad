@@ -84,33 +84,36 @@ NSString* const TFPOPOVERBASICVIEW_CELL_REUSE_ID = @"cell";
 }
 -(void)setImg:(imageObject *)img
 {
-    [imgView_main sd_setImageWithURL:img.photoURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    if (img != _img) {
+        [imgView_main sd_setImageWithURL:img.photoURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+            POPSpringAnimation *ani = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+            
+            ani.fromValue = [NSValue valueWithCGSize:CGSizeZero];
+            
+            ani.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+            
+            
+            POPSpringAnimation *alphaAni = [POPSpringAnimation animationWithPropertyNamed:kPOPViewAlpha];
+            
+            alphaAni.toValue = @(1.0);
+            
+            [imgView_main pop_addAnimation:alphaAni forKey:@"alphaAni"];
+            [imgView_main.layer pop_addAnimation:ani forKey:@"scaleAni"];
+        }];
         
-        POPSpringAnimation *ani = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+        [imgView_background sd_setImageWithURL:img.thumbNailURL placeholderImage:[UIImage imageNamed:@"garden.JPG"]];
         
-        ani.fromValue = [NSValue valueWithCGSize:CGSizeZero];
+        img.delegate = self;
+        [img populateStories];
         
-        ani.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+        [self.chromeMan sendImage:img];
         
+        _img = img;
         
-        POPSpringAnimation *alphaAni = [POPSpringAnimation animationWithPropertyNamed:kPOPViewAlpha];
-        
-        alphaAni.toValue = @(1.0);
-        
-        [imgView_main pop_addAnimation:alphaAni forKey:@"alphaAni"];
-        [imgView_main.layer pop_addAnimation:ani forKey:@"scaleAni"];
-    }];
-        
-    [imgView_background sd_setImageWithURL:img.thumbNailURL placeholderImage:[UIImage imageNamed:@"garden.JPG"]];
+        NSLog(@"\nImage id: %@\n", img.id);
+    }
     
-    img.delegate = self;
-    [img populateStories];
-    
-    [self.chromeMan sendImage:img];
-    
-    _img = img;
-    
-    NSLog(@"\nImage id: %@\n", img.id);
 }
 -(void)hideThings
 {
@@ -234,7 +237,7 @@ NSString* const TFPOPOVERBASICVIEW_CELL_REUSE_ID = @"cell";
         make.left.equalTo(self);
         make.right.equalTo(self);
         make.top.equalTo(self);
-        make.height.mas_equalTo(frame_mainImageView.size.height);
+        make.bottom.equalTo(stories_tableview.mas_top).with.offset(-15.0);
     }];
     
     [stories_tableview mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -245,14 +248,15 @@ NSString* const TFPOPOVERBASICVIEW_CELL_REUSE_ID = @"cell";
         make.top.equalTo(imgView_main.mas_bottom).with.offset(padding_top);
         make.left.equalTo(self).with.offset(padding_horiz);
         make.right.equalTo(self).with.offset(-padding_horiz);
-        make.height.mas_equalTo(300.0);
+        make.height.mas_equalTo(250.0);
+        make.bottom.equalTo(sliderView.mas_top).with.offset(-10.0);
     }];
     
     [sliderView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(imgView_main);
-        make.right.equalTo(imgView_main);
-        make.top.equalTo(stories_tableview.mas_bottom).with.offset(5.0);
+        make.left.equalTo(imgView_main).with.offset(-20.0);
+        make.bottom.equalTo(self).with.offset(-10.0);
         make.height.mas_equalTo(frame_recordingButton.size.height);
+        make.width.mas_equalTo(200.0);
     }];
     
 }

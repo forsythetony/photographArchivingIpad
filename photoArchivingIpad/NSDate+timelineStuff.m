@@ -8,6 +8,69 @@
 
 #import "NSDate+timelineStuff.h"
 
+@implementation NSArray (HelperMen)
+
+-(NSArray *)insertObjectInSecondPosition:(id)t_object
+{
+    NSUInteger count = self.count;
+    NSMutableArray *arr = [NSMutableArray arrayWithArray:self];
+    
+    if (count == 0) {
+        
+        [arr addObject:t_object];
+        
+    }
+    else
+    {
+        [arr insertObject:t_object atIndex:1];
+    }
+    
+    return [NSArray arrayWithArray:arr];
+}
+-(NSArray *)insertObjectAtPenultimatePos:(id)t_object
+{
+    NSUInteger count = self.count;
+    NSMutableArray *arr = [NSMutableArray arrayWithArray:self];
+    
+    if (count == 0) {
+        
+        [arr addObject:t_object];
+        
+    }
+    else
+    {
+        [arr insertObject:t_object atIndex:count-2];
+    }
+    
+    return [NSArray arrayWithArray:arr];
+}
+-(NSArray *)insertObjectAtFirstPos:(id)t_object
+{
+    
+    NSMutableArray *arr = [NSMutableArray arrayWithArray:self];
+    
+    [arr insertObject:t_object atIndex:0];
+    
+    return [NSArray arrayWithArray:arr];
+}
+-(NSArray *)insertObjectAtLastPos:(id)t_object
+{
+    NSUInteger count = self.count;
+    NSMutableArray *arr = [NSMutableArray arrayWithArray:self];
+    
+    if (count == 0) {
+        
+        [arr addObject:t_object];
+        
+    }
+    else
+    {
+        [arr insertObject:t_object atIndex:count-1];
+    }
+    
+    return [NSArray arrayWithArray:arr];
+}
+@end
 @implementation NSDate (timelineStuff)
 
 +(NSDate *)referenceDate
@@ -194,6 +257,16 @@
         case sDateTypeDayOnly:
             dateFormat = @"d";
             break;
+            case sDateTypeMonthOnly:
+            dateFormat = @"MMMM";
+            break;
+            case sDateTypeYearAbbreviation:
+            dateFormat = @"yy";
+            break;
+            case sDateTypeMonthAbbreviation:
+            dateFormat = @"MMM";
+            break;
+            
         default:
             break;
     }
@@ -202,7 +275,13 @@
     
     [fm setDateFormat:dateFormat];
     
-    return [fm stringFromDate:self];
+    NSString *dateString = [fm stringFromDate:self];
+    
+    if (dateType == sDateTypeYearAbbreviation) {
+        dateString = [NSString stringWithFormat:@"'%@", dateString];
+    }
+    
+    return dateString;
     
 }
 -(NSNumber *)yearAsNumber
@@ -241,5 +320,124 @@
     
     return dayString;
 }
+-(NSDate *)nearestBeforeYear
+{
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    
+    NSDateComponents *comps = [gregorian components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:self];
+    
+    if (comps.day == 1 && comps.month == 1) {
+        comps.year -= 1;
+    }
+    
+    comps.month = 1;
+    comps.day = 1;
+    
+    return [gregorian dateFromComponents:comps];
+    
+}
+-(NSDate *)nearestNextYear
+{
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    
+    NSDateComponents *comps = [gregorian components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:self];
+    
+    
+    comps.year += 1;
+    comps.month = 1;
+    comps.day = 1;
+    
+    return [gregorian dateFromComponents:comps];
+}
++(NSArray *)getAllMonthDatesBetweenStart:(NSDate *)t_start finish:(NSDate *)t_finish
+{
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    
+    NSDate *tempDate = t_start;
+    
+    while (YES) {
+        
 
+        tempDate = [tempDate getNextMonth];
+        
+        
+        
+        if ([tempDate compare:t_finish] == NSOrderedDescending) {
+            break;
+        }
+        
+        [array addObject:tempDate];
+    }
+    
+    return [NSArray arrayWithArray:array];
+}
+-(NSDate *)getNextMonth
+{
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    
+    NSDateComponents *comps = [gregorian components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:self];
+    
+    if (comps.month + 1 == 13) {
+        comps.year += 1;
+        comps.month = 1;
+    }
+    else
+    {
+        comps.month += 1;
+    }
+    
+    comps.day = 1;
+    
+    return [gregorian dateFromComponents:comps];
+}
+-(BOOL)isBeginningOfYear
+{
+    BOOL    isBegin = NO;
+    
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    
+    NSDateComponents *comps = [gregorian components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:self];
+    
+    if (comps.month == 1) {
+        isBegin = YES;
+    }
+    
+    
+    return isBegin;
+}
+-(BOOL)isBeforeData:(NSDate *)t_date
+{
+    BOOL isBefore = NO;
+    
+    if ([self compare:t_date] == NSOrderedAscending) {
+        isBefore = YES;
+    }
+    
+    return isBefore;
+}
++(NSUInteger)yearsBetweenDateOne:(NSDate *)t_one andDateTwo:(NSDate *)t_two
+{
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    
+    NSDateComponents *comp_one = [gregorian components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:t_one];
+    
+    NSDateComponents *comp_two = [gregorian components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:t_two];
+    
+    
+    return (NSUInteger)labs((comp_one.year - comp_two.year));
+}
+-(BOOL)isOddMonth
+{
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    
+    NSDateComponents *comp_one = [gregorian components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:self];
+    
+    return (comp_one.month % 2 != 0);
+}
 @end

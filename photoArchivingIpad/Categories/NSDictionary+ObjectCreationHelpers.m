@@ -60,10 +60,10 @@ NSString * const KEYStories             = @"Stories";
 
 //  Other Information
 NSString * const KEYImageURL            = @"imageURL";
-NSString * const babbage_KEYImageURL    = @"large_url_a";
+NSString * const babbage_KEYImageURL    = @"large_url";
 
 NSString * const KEYThumbnailURL        = @"thumbnailURL";
-NSString * const babbage_KEYThumbnailURL    = @"thumbnail_url_a";
+NSString * const babbage_KEYThumbnailURL    = @"thumbnail_url";
 
 @implementation NSDictionary (ObjectCreationHelpers)
 
@@ -135,6 +135,7 @@ NSString * const babbage_KEYThumbnailURL    = @"thumbnail_url_a";
         }
         else
         {
+            
             newObject.isDateKnown = NO;
             newObject.date  = [NSDate dateWithv2String:(NSString*)dateString];
             newObject.confidence = [self objectForKey:babbage_KEYImageInformation_DateTaken_Confidence];
@@ -143,6 +144,7 @@ NSString * const babbage_KEYThumbnailURL    = @"thumbnail_url_a";
     }
     else
     {
+        
         newObject.isDateKnown = YES;
         newObject.date  = [NSDate dateWithv2String:(NSString*)dateString];
         newObject.confidence = [self objectForKey:babbage_KEYImageInformation_DateTaken_Confidence];
@@ -153,7 +155,6 @@ NSString * const babbage_KEYThumbnailURL    = @"thumbnail_url_a";
     newObject.photoURL = [NSURL URLWithString:self[babbage_KEYImageURL]];
     newObject.thumbNailURL = [NSURL URLWithString:self[babbage_KEYThumbnailURL]];
     
-//    newObject.stories = [self createStoriesArrayWithArray:self[KEYStories]];
     
     return newObject;
 }

@@ -69,7 +69,6 @@ UIActionSheetDelegate>
 @property (strong, nonatomic) DateRange *timelineDateRange;
 
 
-
 -(void)handlePanFrom:(id) sender;
 -(void)printFrameData;
 

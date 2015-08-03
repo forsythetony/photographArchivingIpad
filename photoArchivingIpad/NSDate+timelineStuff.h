@@ -17,7 +17,10 @@ typedef NS_ENUM(NSInteger, sDateType) {
     sDateTypeYearOnly,
     sdatetypeURL,
     sDateTypeBabbageURL,
-    sDateTypeDayOnly
+    sDateTypeDayOnly,
+    sDateTypeMonthOnly,
+    sDateTypeYearAbbreviation,
+    sDateTypeMonthAbbreviation
     
 };
 
@@ -27,6 +30,14 @@ typedef NS_ENUM(NSInteger, sDayType) {
     sDayTypeSuffix
 };
 
+@interface NSArray (HelperMen)
+
+-(NSArray*)insertObjectInSecondPosition:(id)    t_object;
+-(NSArray*)insertObjectAtPenultimatePos:(id)    t_object;
+-(NSArray*)insertObjectAtLastPos:(id)           t_object;
+-(NSArray*)insertObjectAtFirstPos:(id)          t_object;
+
+@end
 @interface NSDate (timelineStuff)
 
 +(NSDate*)referenceDate;
@@ -35,6 +46,9 @@ typedef NS_ENUM(NSInteger, sDayType) {
 +(NSDate*)dateWithTimeIntervalSinceUserReferencePoint:(NSTimeInterval) interval;
 +(NSDate *)dateWithv2String:(NSString *)v2String;
 
+-(NSDate*)nearestBeforeYear;
+-(NSDate*)nearestNextYear;
++(NSUInteger)yearsBetweenDateOne:(NSDate*) t_one andDateTwo:(NSDate*) t_two;
 -(NSTimeInterval)timeIntervalSinceBeginning;
 
 -(NSString*)displayDateOfType:(sDateType) dateType;
@@ -42,5 +56,12 @@ typedef NS_ENUM(NSInteger, sDayType) {
 -(NSNumber*)yearAsNumber;
 
 -(NSString*)dayFromDateWithType:(sDayType) type;
++(NSArray*)getAllMonthDatesBetweenStart:(NSDate*) t_start
+                                 finish:(NSDate*)   t_finish;
+-(NSDate*)getNextMonth;
+
+-(BOOL)isBeginningOfYear;
+-(BOOL)isBeforeData:(NSDate*) t_date;
+-(BOOL)isOddMonth;
 
 @end

@@ -18,8 +18,13 @@ typedef NS_ENUM(NSInteger, pLabelType) {
     pLabelTypeCategory
     
 };
+@protocol PictureFrameDelegate;
+
 
 @interface pictureFrame : UIView <POPAnimationDelegate>
+
+@property (nonatomic, weak) id<PictureFrameDelegate> delegate;
+
 
 @property (nonatomic, strong)   IBOutlet UIImageView    *theImage;
 @property (weak, nonatomic)     IBOutlet UIView         *containerView;
@@ -47,6 +52,13 @@ typedef NS_ENUM(NSInteger, pLabelType) {
 -(void)largeResize;
 
 -(void)stopAllTheGlowing;
+
+
+@end
+
+@protocol PictureFrameDelegate <NSObject>
+
+-(void)PictureFrameDidTap:(pictureFrame*) t_frame;
 
 
 @end

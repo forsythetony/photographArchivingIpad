@@ -9,12 +9,59 @@
 #import "timelineManager.h"
 #import <math.h>
 #import <POP.h>
+#import "TFDataCommunicator.h"
+
+
+
 
 #define HORIZONTALMOD 8.0
 #define DISTANCETHRESHOLD 50.0
 
+@interface timelineManager  () <TFCommunicatorDelegate>
+
+@property (nonatomic, strong) TFImageCollection *testCollection;
+@property (nonatomic, strong) NSMutableArray *collections;
+@property (nonatomic, strong) NSMutableArray *readyCollections;
+@property (nonatomic, strong) NSMutableArray *collectionImages;
+
+@end
 @implementation timelineManager
 
+-(NSMutableArray *)collectionImages
+{
+    if (!_collectionImages) {
+        _collectionImages = [NSMutableArray new];
+    }
+    
+    return _collectionImages;
+}
+-(NSMutableArray *)readyCollections
+{
+    if (!_readyCollections) {
+        _readyCollections = [NSMutableArray new];
+        
+        
+    }
+    
+    return _readyCollections;
+}
+-(NSMutableArray *)collections
+{
+    if (!_collections) {
+        _collections = [NSMutableArray new];
+    }
+    
+    return _collections;
+}
+-(TFImageCollection *)testCollection
+{
+    if (!_testCollection) {
+        _testCollection = [TFImageCollection new];
+        _testCollection.title = @"Test";
+    }
+    
+    return _testCollection;
+}
 -(NSNumber *)makeDuration
 {
     NSNumber        *duration;
@@ -112,10 +159,102 @@
     _xOffset    = offset;
     
 }
+-(void)testing_addCollectionView
+{
+//    TFImageCollectionView *collView = [[TFImageCollectionView alloc] initWithImageCollection:self.testCollection];
+//    
+//    //  Test Date
+//    
+//    NSDate *date = [NSDate dateWithYear:@(1905)];
+//    
+//    CGPoint mainPoint = [self createPointWithDate:date];
+//    
+//    [_TLView addSubview:collView];
+//    [self.collectionsList addObject:collView];
+//    
+//    [collView setCenter:mainPoint];
+}
+-(void)addCollectionsFromArray:(NSArray *)t_collections
+{
+    for (TFImageCollection *coll in t_collections) {
+        
+        [self createCollectionViewWithCollection:coll];
+
+        
+    }
+    
+    [self.delegate doneLoadingCollections];
+}
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([object isKindOfClass:[TFImageCollection class]]) {
+        
+        if ([keyPath isEqualToString:@"completedDownloadingImages"]) {
+            
+            BOOL newValue = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
+            
+            if (newValue) {
+                
+                TFImageCollection *coll = (TFImageCollection*)object;
+                
+                [self.collections removeObject:coll];
+                [self.readyCollections addObject:coll];
+                [self checkCounts];
+            }
+        }
+    }
+}
+-(void)checkCounts
+{
+    if (self.collections.count == 0 && self.readyCollections.count >= 1) {
+        [self createCollectionViews];
+    }
+}
+-(void)createCollectionViewWithCollection:(TFImageCollection*) t_coll
+{
+    [self.collections addObject:t_coll];
+    TFImageCollectionView *collView = [[TFImageCollectionView alloc] initWithImageCollection:t_coll];
+    [self.collectionsList addObject:collView];
+    
+    if ([self.delegate respondsToSelector:@selector(shouldAddPanGestureRecognizerForCollectionView:)]) {
+        [self.delegate shouldAddPanGestureRecognizerForCollectionView:collView];
+    }
+    
+    CGPoint centerPoint = [self createPointWithDate:collView.collection.approx_date];
+    
+    [_TLView addSubview:collView];
+    
+    collView.center = centerPoint;
+    
+}
+-(void)createCollectionViews
+{
+    [self.collectionsList removeAllObjects];
+    
+    for (TFImageCollection *coll in self.readyCollections) {
+        
+        TFImageCollectionView *collView = [[TFImageCollectionView alloc] initWithImageCollection:coll];
+        
+        if ([self.delegate respondsToSelector:@selector(shouldAddPanGestureRecognizerForCollectionView:)]) {
+            [self.delegate shouldAddPanGestureRecognizerForCollectionView:collView];
+        }
+        CGPoint centerPoint = [self createPointWithDate:collView.collection.approx_date];
+        
+        [_TLView addSubview:collView];
+        
+        collView.center = centerPoint;
+        
+        [self.collectionsList addObject:collView];
+    }
+    
+    [self.delegate doneLoadingCollections];
+}
 -(void)setInitialPhotographs:(NSArray *)thePhotographs
 {
     
     _theImages = thePhotographs;
+    
+    NSInteger i = 0;
     
     for(pictureFrame* theFrame in _theImages) {
         
@@ -152,10 +291,15 @@
             [theFrame pop_addAnimation:alphaAni forKey:@"alphaAni"];
         }];
         
+        if (i >= 0 && i < 1) {
+            [self.testCollection addImage:img];
+        }
         
+        i++;
         
     }
     
+    [self testing_addCollectionView];
 }
 -(NSDate *)getNewDateForFrame:(pictureFrame *)Pframe
 {
@@ -218,5 +362,27 @@
     float distance = fabsf(thePoint.y - linePoint.y);
     
     return distance;
+}
+-(NSMutableArray *)collectionsList
+{
+    if (!_collectionsList) {
+        _collectionsList = [NSMutableArray new];
+    }
+    
+    return _collectionsList;
+}
+-(void)setTransPoint:(CGPoint)t_trans withImage:(imageObject *)t_img
+{
+    for (TFImageCollectionView *collViews in self.collectionsList) {
+        
+        CGPoint translationPoint = [collViews convertPoint:t_trans fromView:_timelineScrollView];
+        
+        NSLog(@"\n\nColl Title:\t%@\nTrans Point:\t%@\nColl Bounds:\t%@\n\n", collViews.collection.title, NSStringFromCGPoint(translationPoint), NSStringFromCGRect(collViews.bounds));
+        
+        if ([collViews pointInside:translationPoint withEvent:nil]) {
+            [collViews.collection TFAddImage:t_img];
+        }
+        
+    }
 }
 @end
