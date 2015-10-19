@@ -38,6 +38,8 @@
 @property (strong, nonatomic) UIView        *TLView;
 @property (nonatomic, weak) UIScrollView  *timelineScrollView;
 
+@property (nonatomic, assign, readonly) BOOL isOverCollectionView;
+
 @property (nonatomic, assign) CGPoint transPoint;
 
 @property (nonatomic, assign) NSTimeInterval pureStart;
@@ -58,7 +60,6 @@
 @property (nonatomic, weak) id <timelineManagerDelegate> delegate;
 
 -(void)bringSubyearsToFront;
-
 -(NSNumber*)makeDuration;
 -(CGPoint)createPointWithDate:(NSDate*) date;
 -(void)setStartDate:(NSDate*) startDate andEndDate:(NSDate*) endDate andView:(UIView*) tlview andXOffsert:(float) offset;

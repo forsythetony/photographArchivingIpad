@@ -41,8 +41,17 @@
 }
 -(void)addImage:(imageObject *)t_image
 {
-    [self.delegate TFImageCollectionDidAddImageObject:t_image];
+    if ([self.delegate respondsToSelector:@selector(TFImageCollectionDidAddImageObject:)]) {
+        [self.delegate TFImageCollectionDidAddImageObject:t_image];
+    }
+    
     [self.images addObject:t_image];
+    [self sortImagesByDate];
+}
+-(void)sortImagesByDate
+{
+    NSSortDescriptor *sorter = [NSSortDescriptor sortDescriptorWithKey:@"pureDate" ascending:YES];
+    [self.images sortUsingDescriptors:@[sorter]];
 }
 -(imageObject *)firstImage
 {
@@ -50,27 +59,13 @@
 }
 -(NSUInteger)imageCount
 {
-    return [self.totalImages integerValue];
+    return self.images.count;
 }
 -(NSDate *)firstDate
 {
     NSDate *firstDate = nil;
     
-    for (imageObject *img in self.images) {
-        
-        NSDate *tempDate = img.date;
-        
-        if (!firstDate) {
-            firstDate = tempDate;
-        }
-        else
-        {
-            if ([tempDate isBeforeData:firstDate])
-            {
-                firstDate = tempDate;
-            }
-        }
-    }
+    firstDate = [(imageObject*)self.images.firstObject date];
     
     return firstDate;
 }
@@ -78,20 +73,7 @@
 {
     NSDate *lastDate = nil;
     
-    for (imageObject *img in self.images) {
-        
-        NSDate *temp = img.date;
-        
-        if (lastDate == nil) {
-            lastDate = temp;
-        }
-        else
-        {
-            if (![temp isBeforeData:lastDate]) {
-                lastDate = temp;
-            }
-        }
-    }
+    lastDate = [(imageObject*)self.images.lastObject date];
     
     return lastDate;
 }

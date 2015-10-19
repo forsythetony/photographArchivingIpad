@@ -10,6 +10,7 @@
 #import "imageObject.h"
 #import "imageObject+Converters.h"
 #import "TFDataCommunicator.h"
+#import "updatedConstants.h"
 
 
 static  NSString* const kJSON_COLLECTION_ID = @"collection_id";
@@ -80,13 +81,19 @@ static  NSString* const kJSON_COLLECTION_APPROX_DATE = @"approx_date";
     
     NSOperationQueue *op = [NSOperationQueue new];
     
+    __weak typeof(self) weakSelf = self;
+    
     [NSURLConnection sendAsynchronousRequest:req queue:op completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         
         NSHTTPURLResponse *resp = (NSHTTPURLResponse*)response;
         
         if (resp.statusCode == 201 || resp.statusCode == 200) {
             
-            [self addImage:t_img];
+            NSDictionary    *notificationDict = @{ @"image" : t_img, @"collection" : self};
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ADDED_IMAGE_TO_STORY object:weakSelf userInfo:notificationDict];
+            
+            [weakSelf addImage:t_img];
         }
     }];
     

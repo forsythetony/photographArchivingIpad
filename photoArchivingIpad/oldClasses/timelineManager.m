@@ -10,6 +10,7 @@
 #import <math.h>
 #import <POP.h>
 #import "TFDataCommunicator.h"
+#import "updatedConstants.h"
 
 
 
@@ -17,7 +18,9 @@
 #define HORIZONTALMOD 8.0
 #define DISTANCETHRESHOLD 50.0
 
-@interface timelineManager  () <TFCommunicatorDelegate>
+@interface timelineManager  () <TFCommunicatorDelegate> {
+    BOOL    b_isOnColl;
+}
 
 @property (nonatomic, strong) TFImageCollection *testCollection;
 @property (nonatomic, strong) NSMutableArray *collections;
@@ -27,6 +30,60 @@
 @end
 @implementation timelineManager
 
+-(instancetype)init
+{
+    if (self = [super init]) {
+        
+        [self setupListeners];
+        b_isOnColl = NO;
+    }
+    
+    return self;
+}
++(instancetype)new
+{
+    timelineManager *manager = [[timelineManager alloc] init];
+    
+    
+    
+    
+    
+    
+    return manager;
+}
+-(void)setupListeners
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleImageAddedToCollectionNotification:) name:NOTIFICATION_ADDED_IMAGE_TO_STORY object:nil];
+}
+-(void)handleImageAddedToCollectionNotification:(NSNotification*)   t_note
+{
+    imageObject *image = (imageObject*)[[t_note userInfo] objectForKey:@"image"];
+    TFImageCollection *collection = (TFImageCollection*)[[t_note userInfo] objectForKey:@"collection"];
+    
+    TFImageCollectionView *coll_view = [self TFFindImageCollViewForCollection:collection];
+    
+    if (coll_view) {
+        
+        [coll_view TFAddImageViewForImageObject:image];
+    }
+}
+-(TFImageCollectionView*)TFFindImageCollViewForCollection:(TFImageCollection*) t_coll
+{
+    TFImageCollectionView *coll_view = nil;
+    
+    for (TFImageCollectionView *collView in self.collectionsList) {
+        
+        if (collView.collection == t_coll) {
+            coll_view = collView;
+        }
+    }
+    
+    return coll_view;
+}
+-(void)TFRemoveImageFromTimeline:(imageObject*) t_image
+{
+    
+}
 -(NSMutableArray *)collectionImages
 {
     if (!_collectionImages) {
@@ -371,8 +428,28 @@
     
     return _collectionsList;
 }
+-(void)setTransPoint:(CGPoint)transPoint
+{
+    BOOL    isOn = NO;
+    
+    for (TFImageCollectionView *collViews in self.collectionsList) {
+        
+        CGPoint translationPoint = [collViews convertPoint:transPoint fromView:_timelineScrollView];
+        
+        NSLog(@"\n\nColl Title:\t%@\nTrans Point:\t%@\nColl Bounds:\t%@\n\n", collViews.collection.title, NSStringFromCGPoint(translationPoint), NSStringFromCGRect(collViews.bounds));
+        
+        if ([collViews pointInside:translationPoint withEvent:nil]) {
+            isOn = YES;
+        }
+        
+    }
+    
+    b_isOnColl = isOn;
+}
 -(void)setTransPoint:(CGPoint)t_trans withImage:(imageObject *)t_img
 {
+    BOOL    isOnCollection = NO;
+    
     for (TFImageCollectionView *collViews in self.collectionsList) {
         
         CGPoint translationPoint = [collViews convertPoint:t_trans fromView:_timelineScrollView];
@@ -380,9 +457,16 @@
         NSLog(@"\n\nColl Title:\t%@\nTrans Point:\t%@\nColl Bounds:\t%@\n\n", collViews.collection.title, NSStringFromCGPoint(translationPoint), NSStringFromCGRect(collViews.bounds));
         
         if ([collViews pointInside:translationPoint withEvent:nil]) {
-            [collViews.collection TFAddImage:t_img];
+            isOnCollection = YES;
+            [collViews addImageObject:t_img];
         }
         
     }
+    
+    b_isOnColl = isOnCollection;
+}
+-(BOOL)isOverCollectionView
+{
+    return b_isOnColl;
 }
 @end

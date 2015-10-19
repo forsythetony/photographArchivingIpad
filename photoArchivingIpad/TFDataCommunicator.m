@@ -41,7 +41,7 @@ static BOOL isValidResponseCode(NSUInteger responseCode)
     return (responseCode == 200 || responseCode == 201);
 }
 
-static NSString* const EC2_BASE_URL = @"http://ec2-52-25-109-217.us-west-2.compute.amazonaws.com";
+static NSString* const EC2_BASE_URL = @"http://52.11.175.22";
 
 @implementation NSString (URLS)
 
@@ -535,6 +535,7 @@ static NSString* const EC2_BASE_URL = @"http://ec2-52-25-109-217.us-west-2.compu
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
         
         if (isValidResponseCode(httpResponse.statusCode) && data ) {
+            
             [self parsePhotosFromData:data];
         }
         

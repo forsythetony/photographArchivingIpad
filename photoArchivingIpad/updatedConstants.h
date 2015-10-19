@@ -86,6 +86,12 @@ extern NSString * const jsonKeyStories_AudioLength_hours;
 
 
 //
+//  Notifications
+//
+extern NSString* const NOTIFICATION_ADDED_IMAGE_TO_STORY;
+
+
+//
 //  Response Status
 //
 extern NSString * const respKeys_responseStatus;

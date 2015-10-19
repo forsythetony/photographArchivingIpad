@@ -11,6 +11,7 @@
 //  Notification Stuff
 
 NSString * const notify_userDidReturn = @"userDidReturnTextfieldCustomNotification";
+NSString* const NOTIFICATION_ADDED_IMAGE_TO_STORY = @"notification_added_image_to_story";
 
 //
 //  S3 Stuff

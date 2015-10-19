@@ -153,4 +153,10 @@
     self.stories = [NSArray arrayWithArray:stories];
     
 }
+-(void)setDate:(NSDate *)date
+{
+    _date = date;
+    
+    _pureDate = @([date timeIntervalSinceBeginning]);
+}
 @end

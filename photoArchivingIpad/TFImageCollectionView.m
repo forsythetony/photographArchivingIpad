@@ -12,6 +12,7 @@
 #import "TFVisualConstants.h"
 #import <Colours/Colours.h>
 #import "updatedConstants.h"
+#import "TFDataCommunicator.h"
 
 #import <POP.h>
 
@@ -132,6 +133,21 @@ CGRect  getQuadrantOfRectangle(CGRect rect, NSInteger quad)
     }
     
     return quadrant;
+}
+static  CGRect findMiddleBoxOfFrame(CGRect originalRect)
+{
+    CGRect  newRect = originalRect;
+    
+    newRect.size.width *= 0.5;
+    newRect.size.height *= 0.5;
+    
+    CGFloat xDiff = originalRect.size.width - newRect.size.width;
+    CGFloat yDiff = originalRect.size.height - newRect.size.height;
+    
+    newRect.origin.x += xDiff;
+    newRect.origin.y += yDiff;
+    
+    return newRect;
 }
 CGRect reduceOriginalRectByFactor(CGRect originalRect, CGFloat factor)
 {
@@ -264,44 +280,7 @@ static CGRect halfOfBounds(CGRect bounds, BOOL topHalf)
     
     
     [container_title addSubview:lbl_title];
-//    
-//    switch (self.layoutStyle) {
-//        case TFImageCollectionViewLayoutStyleSingle:
-//        {
-//            [self layoutSingle];
-//        }
-//            break;
-//            
-//            case TFImageCollectionViewLayoutStyleSideBySide:
-//        {
-//            [self layoutDouble];
-//        }
-//            break;
-//            
-//            case TFImageCollectionViewLayoutStyleTrifecta:
-//        {
-//            [self layoutTriple];
-//        }
-//            break;
-//            
-//            case TFImageCollectionViewLayoutStyleQuadSymmetry:
-//        {
-//            [self layoutQuad];
-//        }
-//            break;
-//            
-//            case TFImageCollectionViewLayoutStyleCrazy:
-//        {
-//            [self layoutCrazy];
-//        }
-//            break;
-//            
-//        case TFImageCollectionViewLayoutStyleNone:
-//        default:
-//            break;
-//    }
-//    
-//    
+
     
     [container_title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(HEIGHT_TITLE_CONTAINER);
@@ -333,6 +312,46 @@ static CGRect halfOfBounds(CGRect bounds, BOOL topHalf)
         make.left.equalTo(container_title).with.offset(leftPad);
         make.right.equalTo(container_title).with.offset(-rightPad);
     }];
+}
+-(void)TFAddImageViewForImageObject:(imageObject *)t_image
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        CGRect  centerFrame = findMiddleBoxOfFrame(container_images.bounds);
+        
+        CGPoint centerPoint = [self findRandomPointInRect:centerFrame];
+        
+        CGSize  imageViewSize = [self imageSize];
+        
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, imageViewSize.width, imageViewSize.height)];
+        imageView.alpha = 0.0;
+        
+        [container_images addSubview:imageView];
+        
+        imageView.center = centerPoint;
+        
+        [self.imageViews addObject:imageView];
+        
+        [imageView sd_setImageWithURL:t_image.thumbNailURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+            if (!error) {
+                
+                imageView.image = image;
+                
+                POPSpringAnimation *alphaAni = [POPSpringAnimation animationWithPropertyNamed:kPOPViewAlpha];
+                alphaAni.toValue = @(1.0);
+                
+                POPSpringAnimation *sizeAni = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+                
+                sizeAni.fromValue = [NSValue valueWithCGSize:CGSizeZero];
+                sizeAni.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+                
+                [imageView pop_addAnimation:alphaAni forKey:@"alphaAni"];
+                [imageView.layer pop_addAnimation:sizeAni forKey:@"sizeAni"];
+            }
+        }];
+    });
+    
+    
 }
 -(void)TFImageCollectionDidAddImageObject:(imageObject *)t_obj
 {
@@ -374,15 +393,11 @@ static CGRect halfOfBounds(CGRect bounds, BOOL topHalf)
             }];
             
             [self.imageViews addObject:imgView];
-            
-            
-            
         }
     });
         
         
-            
-        
+     
     
 
 }
@@ -708,19 +723,28 @@ static CGRect halfOfBounds(CGRect bounds, BOOL topHalf)
 }
 -(void)addImageObject:(imageObject *)t_image
 {
-    NSString *urlString = [NSString stringWithFormat:@"%@%@?photo_id=%@&collection_id=%@", [updatedConstants api_babbage_baseURL], @"/collectionImages", t_image.id, self.collection.uuid];
+    NSString *urlString = [NSString stringWithFormat:@"%@?collection_id=%@&photo_id=%@", [NSString EC2CollectionsEndpoint], self.collection.uuid, t_image.id];
     
-    NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+    NSURL   *url = [NSURL URLWithString:urlString];
+    
+    NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:url];
     
     req.HTTPMethod = @"PUT";
     
-    [NSURLConnection sendAsynchronousRequest:req queue:[NSOperationQueue new] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+    NSOperationQueue *op = [NSOperationQueue new];
+    
+    [NSURLConnection sendAsynchronousRequest:req queue:op completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         
         NSHTTPURLResponse *resp = (NSHTTPURLResponse*)response;
         
-        if (resp.statusCode == 200 || resp.statusCode == 201) {
+        if (resp.statusCode == 201 || resp.statusCode == 200) {
             
-            NSLog(@"\n\nSuccess\n\n");
+            NSDictionary    *notificationDict = @{ @"image" : t_image, @"collection" : self.collection};
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ADDED_IMAGE_TO_STORY object:self userInfo:notificationDict];
+            
+            [self.collection addImage:t_image];
+
         }
     }];
 }

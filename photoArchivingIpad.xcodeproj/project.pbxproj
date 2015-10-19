@@ -18,6 +18,9 @@
 		2502E06E1B6B641F00C2940B /* TFTransparentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502E06D1B6B641F00C2940B /* TFTransparentView.m */; };
 		2502E0721B6B678D00C2940B /* TFDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502E0711B6B678D00C2940B /* TFDateView.m */; };
 		255E29E11B59D5590015F6BE /* TFSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E29E01B59D5590015F6BE /* TFSettings.m */; };
+		255FCC0C1B6F94BB00F9045C /* TFPopOverPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 255FCC0B1B6F94BB00F9045C /* TFPopOverPageViewController.m */; };
+		255FCC111B6F94E000F9045C /* TFImageInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 255FCC101B6F94E000F9045C /* TFImageInformationViewController.m */; };
+		255FCC151B6F94F700F9045C /* TFStoryCreationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 255FCC141B6F94F700F9045C /* TFStoryCreationViewController.m */; };
 		256B72521A6CE6E00079B12C /* AWSRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA625C211A6CD20C0037AE6A /* AWSRuntime.framework */; };
 		256B72531A6CE6F40079B12C /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA625C221A6CD20C0037AE6A /* AWSS3.framework */; };
 		257E59C51B6166BF00FD7568 /* TFImageDisplayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 257E59C41B6166BF00FD7568 /* TFImageDisplayer.m */; };
@@ -226,6 +229,12 @@
 		2502E0711B6B678D00C2940B /* TFDateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFDateView.m; sourceTree = "<group>"; };
 		255E29DF1B59D5590015F6BE /* TFSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFSettings.h; sourceTree = "<group>"; };
 		255E29E01B59D5590015F6BE /* TFSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFSettings.m; sourceTree = "<group>"; };
+		255FCC0A1B6F94BB00F9045C /* TFPopOverPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFPopOverPageViewController.h; sourceTree = "<group>"; };
+		255FCC0B1B6F94BB00F9045C /* TFPopOverPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFPopOverPageViewController.m; sourceTree = "<group>"; };
+		255FCC0F1B6F94E000F9045C /* TFImageInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFImageInformationViewController.h; sourceTree = "<group>"; };
+		255FCC101B6F94E000F9045C /* TFImageInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFImageInformationViewController.m; sourceTree = "<group>"; };
+		255FCC131B6F94F700F9045C /* TFStoryCreationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFStoryCreationViewController.h; sourceTree = "<group>"; };
+		255FCC141B6F94F700F9045C /* TFStoryCreationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFStoryCreationViewController.m; sourceTree = "<group>"; };
 		257E59C31B6166BF00FD7568 /* TFImageDisplayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFImageDisplayer.h; sourceTree = "<group>"; };
 		257E59C41B6166BF00FD7568 /* TFImageDisplayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFImageDisplayer.m; sourceTree = "<group>"; };
 		257E59C71B61857D00FD7568 /* TFImageCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFImageCollectionView.h; sourceTree = "<group>"; };
@@ -633,8 +642,30 @@
 		255FCC091B6F947300F9045C /* Page View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				255FCC0E1B6F94CA00F9045C /* Story Creation */,
+				255FCC0D1B6F94C400F9045C /* Image Information */,
+				255FCC0A1B6F94BB00F9045C /* TFPopOverPageViewController.h */,
+				255FCC0B1B6F94BB00F9045C /* TFPopOverPageViewController.m */,
 			);
 			name = "Page View Controller";
+			sourceTree = "<group>";
+		};
+		255FCC0D1B6F94C400F9045C /* Image Information */ = {
+			isa = PBXGroup;
+			children = (
+				255FCC0F1B6F94E000F9045C /* TFImageInformationViewController.h */,
+				255FCC101B6F94E000F9045C /* TFImageInformationViewController.m */,
+			);
+			name = "Image Information";
+			sourceTree = "<group>";
+		};
+		255FCC0E1B6F94CA00F9045C /* Story Creation */ = {
+			isa = PBXGroup;
+			children = (
+				255FCC131B6F94F700F9045C /* TFStoryCreationViewController.h */,
+				255FCC141B6F94F700F9045C /* TFStoryCreationViewController.m */,
+			);
+			name = "Story Creation";
 			sourceTree = "<group>";
 		};
 		257E59C61B61856700FD7568 /* Collection Cell */ = {
@@ -1625,6 +1656,7 @@
 				BA67F1C2193666210056DD00 /* ViewController.m in Sources */,
 				BA9531BB194E51BB005E0F10 /* socialInformationVC.m in Sources */,
 				BA9531AD194E2CC6005E0F10 /* pagerInformationVC.m in Sources */,
+				255FCC0C1B6F94BB00F9045C /* TFPopOverPageViewController.m in Sources */,
 				25DA19931B4CB940008A708B /* TFPopOverStoriesCell.m in Sources */,
 				BA4769AA19B3E8D70030EBE3 /* TADuration.m in Sources */,
 				BA89B383195B33B100DA0FCC /* datePickingThing.m in Sources */,
@@ -1670,6 +1702,7 @@
 				25C13E3F1A6D669100EB83E2 /* IQSongsPlaylistViewController.m in Sources */,
 				BA89B37F195B29E700DA0FCC /* imageInformationConstants.m in Sources */,
 				25C13DD31A6D644500EB83E2 /* IQAlbumAssetsViewController.m in Sources */,
+				255FCC151B6F94F700F9045C /* TFStoryCreationViewController.m in Sources */,
 				2502E0671B6B4FE900C2940B /* TFViewProperties.m in Sources */,
 				25C13DD61A6D644500EB83E2 /* IQAssetsPickerShadowView.m in Sources */,
 				BA6F5EED194F192900E1E1FC /* UIImage+imageAdditions.m in Sources */,
@@ -1686,6 +1719,7 @@
 				25C13E061A6D667100EB83E2 /* IQAudioSession.m in Sources */,
 				BA365A88199649B8008E6975 /* StoryCreationViewController.m in Sources */,
 				25C13E3D1A6D669100EB83E2 /* IQSongsGenreViewController.m in Sources */,
+				255FCC111B6F94E000F9045C /* TFImageInformationViewController.m in Sources */,
 				BA365A9319969545008E6975 /* StoryCellTableViewCell.m in Sources */,
 				25C13E0D1A6D667100EB83E2 /* IQPartitionView.m in Sources */,
 				BA66942C19999CA300412313 /* StoriesDisplayTable.m in Sources */,

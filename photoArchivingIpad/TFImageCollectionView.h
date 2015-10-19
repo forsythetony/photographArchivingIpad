@@ -15,6 +15,7 @@
 
 -(id)initWithImageCollection:(TFImageCollection*) t_collection;
 -(void)addImageObject:(imageObject*) t_image;
+-(void)TFAddImageViewForImageObject:(imageObject*) t_image;
 
 -(void)changeColor;
 

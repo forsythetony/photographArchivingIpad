@@ -21,6 +21,7 @@
 #import "TFImageDisplayer.h"
 #import "TFImageCollectionView.h"
 #import "TFCollectionTimelineViewController.h"
+#import "imageObject+Converters.h"
 
 
 #define TLWALLSPACING 100.0
@@ -163,6 +164,9 @@ TFCollectionTimelineViewControllerDelegate
 @property(nonatomic, strong) UIButton *chromecastButton;
 @property(nonatomic, strong) GCKDeviceManager *deviceManager;
 @property(nonatomic, readonly) GCKMediaInformation *mediaInformation;
+@property (nonatomic, assign) BOOL needsNewDateLines;
+
+@property (nonatomic, assign) BOOL showDateLine;
 
 @property (nonatomic, strong) TFChromecastManager *chromecastman;
 
@@ -432,7 +436,7 @@ TFCollectionTimelineViewControllerDelegate
              */
             
             
-            imageObject *newImage = [dict convertToBabbageImageObject];
+            imageObject *newImage = [imageObject ImageObjectFromDictionary:dict];
            
             
             pictureFrame *frame = [pictureFrame createFrame];
@@ -509,6 +513,8 @@ TFCollectionTimelineViewControllerDelegate
     [self printFrameData];
     
     self.view.autoresizesSubviews = YES;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleImageAddedToCollectionNotification:) name:NOTIFICATION_ADDED_IMAGE_TO_STORY object:nil];
 }
 
 -(void)handleStoryAddition:(id) sender
@@ -1136,7 +1142,7 @@ TFCollectionTimelineViewControllerDelegate
         CGPoint translatedPoint = [(UIPanGestureRecognizer*)sender translationInView:mainScrollView];
         
         if ([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateBegan) {
-//            panningTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(handleTimer) userInfo:nil repeats:YES];
+            panningTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(handleTimer) userInfo:nil repeats:YES];
             
             TLManager.timelineScrollView = mainScrollView;
             
@@ -1145,19 +1151,25 @@ TFCollectionTimelineViewControllerDelegate
             
             grabbedFrame = (pictureFrame*)[sender view];
             
-            [self drawLineFromFrame:grabbedFrame];
-            [self addDateUpdateLabelForFrame:grabbedFrame];
-            [self addDateUpdateDayLabelForFrame:grabbedFrame];
+            if (self.showDateLine) {
+                NSLog(@"\n\n\nShow date line:\t%@\nNeeds new:\t%@\n\n\n", [self boolString:self.showDateLine], [self boolString:self.needsNewDateLines]);
+                
+                
+                if (self.needsNewDateLines) {
+                    
+                    [self drawLineFromFrame:grabbedFrame];
+                    [self addDateUpdateLabelForFrame:grabbedFrame];
+                    [self addDateUpdateDayLabelForFrame:grabbedFrame];
+                }
+            }
+            else
+            {
+                [self tearDownDateLine];
+                [self tearDownDateUpdaterLabel];
+            }
         }
         
         translatedPoint = CGPointMake(firstX + translatedPoint.x, firstY + translatedPoint.y);
-        
-        CGPoint somePoint = [self.view convertPoint:translatedPoint fromView:mainScrollView];
-        
-        
-        
-        NSLog(@"\n\n\nNew point:\t%@\n", NSStringFromCGPoint(somePoint));
-        NSLog(@"Content Offset:\t%@\n", NSStringFromCGPoint(mainScrollView.contentOffset));
         
         
         if (!finishedMoving) {
@@ -1166,10 +1178,28 @@ TFCollectionTimelineViewControllerDelegate
             transPoint = translatedPoint;
             
             [[sender view] setCenter:translatedPoint];
-            [self updateDateLineWithFrame:newFrame];
-            [self updateDateUpdaterLabelWithFrame:newFrame];
-            [self updateDayLabelForFrame:newFrame];
+
+            NSLog(@"\n\n\nShow date line:\t%@\nNeeds new:\t%@\n\n\n", [self boolString:self.showDateLine], [self boolString:self.needsNewDateLines]);
             
+            if (self.showDateLine) {
+                
+                if (self.needsNewDateLines) {
+                    [self drawLineFromFrame:newFrame];
+                    [self addDateUpdateLabelForFrame:newFrame];
+                    [self addDateUpdateDayLabelForFrame:newFrame];
+                }
+                else
+                {
+                    [self updateDateLineWithFrame:newFrame];
+                    [self updateDateUpdaterLabelWithFrame:newFrame];
+                    [self updateDayLabelForFrame:newFrame];
+                }
+
+            }
+            else
+            {
+                [self tearItAllDown];
+            }
             
         }
         
@@ -1179,21 +1209,18 @@ TFCollectionTimelineViewControllerDelegate
         if ([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateEnded)
         {
             
-//            [panningTimer invalidate];
+            [panningTimer invalidate];
             CGFloat velocityX   = (([(UIPanGestureRecognizer*)sender velocityInView:self.view].x) / 1);
             
-            CGFloat finalX      = translatedPoint.x;// + velocityX;
-            CGFloat finalY      = translatedPoint.y;// + (.35*[(UIPanGestureRecognizer*)sender velocityInView:self.view].y);
+            CGFloat finalX      = translatedPoint.x;
+            CGFloat finalY      = translatedPoint.y;
             
             if (UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation])) {
                 
                 if (finalX < 0) {
                     
-                    //finalX = 0;
-                    
                 } else if (finalX > 768) {
                     
-                    //finalX = 768;
                 }
                 
                 if (finalY < 0) {
@@ -1209,11 +1236,9 @@ TFCollectionTimelineViewControllerDelegate
                 
                 if (finalX < 0) {
                     
-                    //finalX = 0;
                     
                 } else if (finalX > 1024) {
                     
-                    //finalX = 768;
                 }
                 
                 if (finalY < 0) {
@@ -1240,12 +1265,15 @@ TFCollectionTimelineViewControllerDelegate
             
             pictureFrame *frame = (pictureFrame*)[sender view];
             
-            [self updateDateForFrame:frame];
-            [self updateDayLabelForFrame:frame];
-            
-            [TLManager setTransPoint:transPoint withImage:frame.imageObject];
-            
-            isDateUpdateLockOn = YES;
+            if (self.showDateLine) {
+                [self updateDateForFrame:frame];
+                [self updateDayLabelForFrame:frame];
+                isDateUpdateLockOn = YES;
+            }else
+            {
+                [TLManager setTransPoint:transPoint withImage:frame.imageObject];
+            }
+
             grabbedFrame = nil;
         }
     }
@@ -3023,6 +3051,60 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
     return _chromecastman;
 }
 
+#pragma mark - Action Handlers
+
+#pragma mark Notifications
+-(void)handleImageAddedToCollectionNotification:(NSNotification*) t_note
+{
+    imageObject *image = (imageObject*)t_note.userInfo[@"image"];
+    TFImageCollection *collection = (TFImageCollection*)t_note.userInfo[@"collection"];
+    
+    if (image) {
+        [self TFRemoveImageFromTimeline:image];
+    }
+}
+-(void)TFRemoveImageFromTimeline:(imageObject*) t_image
+{
+    pictureFrame *frame = [self TFFindFrameForImage:t_image];
+    
+    if (frame) {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            POPSpringAnimation *sizeAni = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+            
+            sizeAni.toValue = [NSValue valueWithCGSize:CGSizeMake(0.0, 0.0)];
+            
+            [sizeAni setCompletionBlock:^(POPAnimation *ani, BOOL yesNo) {
+                [self TFRemoveFrameFromPhotos:frame];
+            }];
+            
+            [frame.layer pop_addAnimation:sizeAni forKey:@"frame_size_down_ani"];
+        });
+        
+    }
+}
+-(void)TFRemoveFrameFromPhotos:(pictureFrame*)  t_frame
+{
+    if ([photoList containsObject:t_frame]) {
+        NSMutableArray *photos_mutable = [NSMutableArray arrayWithArray:photoList];
+        [photos_mutable removeObject:t_frame];
+        photoList = [NSArray arrayWithArray:photos_mutable];
+        [t_frame removeFromSuperview];
+    }
+}
+-(pictureFrame*)TFFindFrameForImage:(imageObject*) t_image
+{
+    pictureFrame *frame = nil;
+    
+    
+    for (pictureFrame *frm in photoList) {
+        if (frm.imageObject == t_image) {
+            frame = frm;
+        }
+    }
+    
+    return frame;
+}
 #pragma mark - Panel
 
 #pragma mark Setup
@@ -3176,5 +3258,23 @@ didReceiveStatusForApplication:(GCKApplicationMetadata *)applicationMetadata {
     [self dismissViewControllerAnimated:YES completion:^{
         
     }];
+}
+-(BOOL)showDateLine
+{
+    if (TLManager) {
+        return !TLManager.isOverCollectionView;
+    }
+    else
+    {
+        return YES;
+    }
+}
+-(NSString*)boolString:(BOOL) t_bool
+{
+    return (t_bool ? @"true" : @"false");
+}
+-(BOOL)needsNewDateLines
+{
+    return (dateUpdaterDayLabel == nil || dateUpdaterLabel == nil || dateUpdaterLine == nil);
 }
 @end
